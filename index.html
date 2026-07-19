@@ -358,7 +358,7 @@
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-base">Montajes Creativos</h4>
-                                <p class="text-slate-400 text-sm">Adaptamos la técnica al design y concepto del evento.</p>
+                                <p class="text-slate-400 text-sm">Adaptamos la técnica al diseño y concepto del evento.</p>
                             </div>
                         </div>
                     </div>
@@ -507,10 +507,13 @@
                             <label for="mensaje" class="text-sm font-semibold text-slate-700">Detalles del proyecto</label>
                             <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
                         </div>
-                        <div class="flex items-start space-x-3 pt-2">
-                            <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="mt-1 h-4 w-4 rounded border-slate-300">
-                            <label for="privacidad" class="text-xs text-slate-500">Acepto la <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
+                        
+                        <!-- CONTENEDOR DE PRIVACIDAD CENTRADO MATEMÁTICAMENTE (GAP REAJUSTADO) -->
+                        <div class="flex items-center space-x-3 pt-2">
+                            <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
+                            <label for="privacidad" class="text-xs text-slate-500 cursor-pointer select-none">Acepto la <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
                         </div>
+                        
                         <button type="submit" id="submit-btn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg btn-shine">Enviar Solicitud</button>
                     </form>
                 </div>
@@ -532,7 +535,7 @@
 
 
     <!-- =========================================================================
-         SISTEMA LEGAL DE AVISO DE COOKIES OBLIGATORIO (NUEVO BANNER COMPLETO RGPD)
+         SISTEMA LEGAL DE AVISO DE COOKIES OBLIGATORIO
          ========================================================================= -->
     <div id="cookie-law-banner" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-[200] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
@@ -546,7 +549,6 @@
                 <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><i class="fa-solid fa-cookie-bite text-indigo-600"></i> Finalidades de la web y sus asociados</h5>
                 <p class="text-slate-500 text-xs">Analizar activamente las características del dispositivo para su correcta identificación técnica. Almacenar la información básica en un dispositivo y/o acceder a ella. Optimización de scripts estáticos (AOS Library, FontAwesome) e investigación de la experiencia de navegación para el desarrollo de futuros flujos sonoros y lumínicos.</p>
                 
-                <!-- Botones de Acción (Estilo fiel a vuestra marca y simetría limpia) -->
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 mt-4">
                     <div class="flex flex-wrap gap-3 w-full sm:w-auto justify-center sm:justify-start">
                         <button onclick="acceptAllCookies()" class="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center">Aceptar</button>
@@ -628,22 +630,19 @@
         </div>
     </div>
 
-    <!-- SCRIPTS INTERACTIVOS -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
 
-        // SISTEMA INTELIGENTE DE CONTROL DEL BANNER DE COOKIES (LOCALSTORAGE)
         window.addEventListener('DOMContentLoaded', () => {
-            // Revisa si el cliente ya aceptó o rechazó las cookies anteriormente
             const cookieDecision = localStorage.getItem('dreamscape_cookies_accepted');
             if (!cookieDecision) {
-                // Si no hay registro, muestra el banner forzando la interacción
                 const banner = document.getElementById('cookie-law-banner');
                 if (banner) {
                     banner.classList.remove('hidden');
                     banner.classList.add('flex');
-                    document.body.classList.add('overflow-hidden'); // Bloquea scroll hasta decidir
+                    document.body.classList.add('overflow-hidden');
                 }
             }
         });
@@ -663,7 +662,7 @@
             if (banner) {
                 banner.classList.remove('flex');
                 banner.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden'); // Desbloquea scroll
+                document.body.classList.remove('overflow-hidden');
             }
         }
 
@@ -676,7 +675,6 @@
             if(m) { 
                 m.classList.remove('flex'); 
                 m.classList.add('hidden'); 
-                // Liberar scroll solo si el banner de cookies tampoco está activo
                 if(document.getElementById('cookie-law-banner').classList.contains('hidden')) {
                     document.body.classList.remove('overflow-hidden'); 
                 }
