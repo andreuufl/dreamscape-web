@@ -218,7 +218,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PORFOLIO (SIMÉTRICA Y ALINEADA AL 100%) -->
+    <!-- SECCIÓN DE PORFOLIO (MÍNIMO 2 FOTOS POR APARTADO, SIMÉTRICAS Y FILTROS INTERACTIVOS CORREGIDOS) -->
     <section id="porfolio" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-16" data-aos="fade-up">
@@ -227,15 +227,18 @@
                 <p class="text-slate-600 text-lg">Una muestra de riders audiovisuales reales, montajes técnicos e instalaciones de iluminación de alta calidad.</p>
             </div>
 
+            <!-- Filtros de la Galería (Lógica corregida con identificadores seguros) -->
             <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button onclick="filterGallery('all')" class="filter-btn active bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-md cursor-pointer">Todos</button>
-                <button onclick="filterGallery('corp')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Corporativos</button>
-                <button onclick="filterGallery('congreso')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Congresos y Ferias</button>
-                <button onclick="filterGallery('boda')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Bodas y Gala</button>
+                <button id="btn-all" onclick="filterGallery('all')" class="filter-btn bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-md cursor-pointer">Todos</button>
+                <button id="btn-corp" onclick="filterGallery('corp')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Corporativos</button>
+                <button id="btn-congreso" onclick="filterGallery('congreso')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Congresos y Ferias</button>
+                <button id="btn-boda" onclick="filterGallery('boda')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Bodas y Gala</button>
             </div>
 
+            <!-- Rejilla estructurada totalmente matemática -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-hidden">
-                <!-- 1. Imagen Corp/Escenario -->
+                
+                <!-- [CORPORATIVOS 1] -->
                 <div class="gallery-item corp bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=800&auto=format&fit=crop" alt="Montaje de gala corporativa e iluminación" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -247,7 +250,7 @@
                     </div>
                 </div>
 
-                <!-- 2. Imagen Congreso Auditorio (ARREGLADA DE FORMA SIMÉTRICA Y HOVER ACTIVO) -->
+                <!-- [CONGRESOS 1] -->
                 <div class="gallery-item congreso bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" alt="Gran auditorio para congresos y simposios" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -259,7 +262,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Imagen Iluminación Pista -->
+                <!-- [BODAS Y GALA 1] -->
                 <div class="gallery-item boda bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=800&auto=format&fit=crop" alt="Control técnico de cabina y pista de baile iluminada" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -271,7 +274,7 @@
                     </div>
                 </div>
 
-                <!-- 4. Imagen Boda Cenador / Flores (ARREGLADA DE FORMA SIMÉTRICA Y HOVER ACTIVO) -->
+                <!-- [BODAS Y GALA 2] -->
                 <div class="gallery-item boda bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=800&auto=format&fit=crop" alt="Iluminación decorativa y carpas en bodas exclusivas de exterior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -283,7 +286,7 @@
                     </div>
                 </div>
 
-                <!-- 5. Imagen Corp Adicional -->
+                <!-- [CORPORATIVOS 2] -->
                 <div class="gallery-item corp bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=800&auto=format&fit=crop" alt="Estructura técnica de escenario corporativo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -295,7 +298,7 @@
                     </div>
                 </div>
 
-                <!-- 6. Imagen Congreso Recinto -->
+                <!-- [CONGRESOS 2] -->
                 <div class="gallery-item congreso bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden w-full h-full">
                         <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=800&auto=format&fit=crop" alt="Infraestructura técnica para ferias y stands de exposición" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -306,6 +309,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -391,13 +395,9 @@
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 card-perspective">
-                <!-- Artículo 1 -->
                 <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=800&auto=format&fit=crop" alt="Backstage de evento" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium text-sm">Leer artículo completo</span>
-                        </div>
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-indigo-600 uppercase tracking-wider">
@@ -411,20 +411,11 @@
                             Analizamos la logística, el diseño de iluminación y la realización de vídeo para un evento de dos días con más de 1000 asistentes.
                         </p>
                     </div>
-                    <div class="px-8 pb-8 mt-auto">
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-indigo-600 hover:text-indigo-700 gap-2 group-hover:gap-3 transition-all">
-                            Ver crónica <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
                 </article>
 
-                <!-- Artículo 2 -->
                 <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=800&auto=format&fit=crop" alt="Sonorización profesional" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium text-sm">Leer artículo completo</span>
-                        </div>
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
@@ -438,20 +429,11 @@
                             Cómo garantizar una experiencia de sonido inmersiva y nítida tanto para asistentes presenciales como remotos.
                         </p>
                     </div>
-                    <div class="px-8 pb-8 mt-auto">
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-emerald-600 hover:text-emerald-700 gap-2 group-hover:gap-3 transition-all">
-                            Leer más <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
                 </article>
 
-                <!-- Artículo 3 -->
                 <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800&auto=format&fit=crop" alt="Iluminación de boda" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                            <span class="text-white font-medium text-sm">Leer artículo completo</span>
-                        </div>
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-rose-600 uppercase tracking-wider">
@@ -464,11 +446,6 @@
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
                             Transformamos espacios ajardinados en escenarios de cuento de hadas mediante el uso estratégico de la luz y el color.
                         </p>
-                    </div>
-                    <div class="px-8 pb-8 mt-auto">
-                        <a href="#" class="inline-flex items-center text-sm font-bold text-rose-600 hover:text-rose-700 gap-2 group-hover:gap-3 transition-all">
-                            Ver inspiración <i class="fa-solid fa-arrow-right text-xs"></i>
-                        </a>
                     </div>
                 </article>
             </div>
@@ -596,7 +573,7 @@
         </div>
     </div>
 
-    <!-- MODALES LEGALES (UNIFICADAS AL 100%) -->
+    <!-- MODALES LEGALES -->
     <div id="modal-aviso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
             <h3 class="text-lg font-black border-b pb-2">Aviso Legal</h3>
@@ -612,7 +589,7 @@
         <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
             <h3 class="text-lg font-black border-b pb-2">Política de Privacidad</h3>
             <p><strong>Responsable legal del tratamiento:</strong> Dreamscape Events and Complete Productions, S.L. (NIF: B19859115), con dirección establecida en c/ Valencia, 76 (08759 Vallirana, Barcelona).</p>
-            <p>Tratamos los datos recogidos en el formulario técnico de requerimientos y canal de WhatsApp únicamente para gestionar propuestas personalizadas de eventos y logística técnica audiovisual corporativa. Canal seguro de ejercicio de derechos ARCO vía info@ap-events.es.</p>
+            <p>Tratamos los datos personales únicamente para gestionar propuestas personalizadas de eventos y logística técnica audiovisual corporativa. Canal seguro de ejercicio de derechos ARCO vía info@ap-events.es.</p>
             <button onclick="closeModal('modal-privacidad')" class="mt-2 bg-slate-800 text-white px-4 py-2 rounded-lg">Cerrar</button>
         </div>
     </div>
@@ -620,12 +597,12 @@
     <div id="modal-cookies" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
             <h3 class="text-lg font-black border-b pb-2">Política de Cookies</h3>
-            <p>Este sitio web gestionado formalmente por Dreamscape Events and Complete Productions, S.L. (Vallirana) utiliza únicamente cookies técnicas funcionales esenciales de sesión para la carga estática de elementos dinámicos (animaciones AOS, iconos FontAwesome, Google Fonts). No se realiza ningún tipo de rastreo perimetral comercial de terceros.</p>
+            <p>Este sitio web gestionado formalmente por Dreamscape Events and Complete Productions, S.L. (Vallirana) utiliza únicamente cookies técnicas funcionales esenciales de sesión para la carga estática de elementos dinámicos (animaciones AOS, iconos FontAwesome, Google Fonts). No se realiza ningún tipo de rastreo comercial perimetral ajeno.</p>
             <button onclick="closeModal('modal-cookies')" class="mt-2 bg-slate-800 text-white px-4 py-2 rounded-lg">Cerrar</button>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- SCRIPTS (INTERACTIVIDAD DE BOTONES CORREGIDA) -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
@@ -643,7 +620,28 @@
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
+        // LÓGICA DE FILTRADO CORREGIDA CON INTERCAMBIO ACTIVO DE CLASES DE COLOR
         function filterGallery(cat) {
+            // 1. Quitar los estilos de activo a TODOS los botones y ponerlos blancos
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-slate-700', 'shadow-sm');
+            });
+            
+            // 2. Aplicar el color azul brillante únicamente al botón seleccionado
+            let activeBtn;
+            if (cat === 'all') activeBtn = document.getElementById('btn-all');
+            else if (cat === 'corp') activeBtn = document.getElementById('btn-corp');
+            else if (cat === 'congreso') activeBtn = document.getElementById('btn-congreso');
+            else if (cat === 'boda') activeBtn = document.getElementById('btn-boda');
+            
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-slate-700', 'shadow-sm');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
+            }
+
+            // 3. Ejecutar el filtrado visual de las tarjetas
             const items = document.querySelectorAll('.gallery-item');
             items.forEach(i => {
                 if(cat === 'all') { i.style.display = 'block'; }
