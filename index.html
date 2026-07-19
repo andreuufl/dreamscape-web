@@ -508,7 +508,6 @@
                             <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
                         </div>
                         
-                        <!-- CONTENEDOR DE PRIVACIDAD CENTRADO MATEMÁTICAMENTE (GAP REAJUSTADO) -->
                         <div class="flex items-center space-x-3 pt-2">
                             <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
                             <label for="privacidad" class="text-xs text-slate-500 cursor-pointer select-none">Acepto la <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
@@ -521,14 +520,17 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (ACTUALIZADO CON LOS 6 ENLACES EN DOS COLUMNAS EQUILIBRADAS) -->
     <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-center md:text-left">
             <p>&copy; 2026 Dreamscape Events. Todos los derechos reservados. Cobertura en Barcelona | Madrid | Valencia.</p>
-            <div class="flex space-x-6">
+            <div class="grid grid-cols-2 sm:flex sm:space-x-6 gap-x-6 gap-y-2.5 justify-center font-medium">
                 <a href="javascript:void(0)" onclick="openModal('modal-aviso')" class="hover:text-white transition-colors">Aviso Legal</a>
                 <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="hover:text-white transition-colors">Privacidad</a>
                 <a href="javascript:void(0)" onclick="openModal('modal-cookies')" class="hover:text-white transition-colors">Cookies</a>
+                <a href="javascript:void(0)" onclick="openModal('modal-accesibilidad')" class="hover:text-white transition-colors">Accesibilidad</a>
+                <a href="javascript:void(0)" onclick="openModal('modal-terminos')" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                <a href="javascript:void(0)" onclick="openModal('modal-reembolso')" class="hover:text-white transition-colors">Política de Reembolso</a>
             </div>
         </div>
     </footer>
@@ -541,14 +543,10 @@
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
             <div class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed pr-1">
                 <h4 class="text-center text-slate-400 uppercase tracking-widest font-bold text-xs">Dreamscape Events Legal</h4>
-                
                 <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> podrá tratar identificadores asociados a tu dispositivo, así como información sociodemográfica a través de cookies propias que analizan el tráfico y el uso del sitio web con la finalidad de personalizar la interfaz técnica y el flujo de los contenidos multimedia escénicos. Para más información consulte nuestra <a href="javascript:void(0)" onclick="openModal('modal-cookies')" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a>.</p>
-                
                 <p>También recopilamos información sobre el uso que haces de nuestro sitio web para poder procesar de forma segura vuestras solicitudes técnicas de riders en el formulario o coordinar la comunicación directa vía WhatsApp. Al hacer clic en "Aceptar", aceptas su uso para las finalidades mencionadas anteriormente. En todo caso, puedes gestionar las cookies permitiendo o rechazando su instalación mediante los botones inferiores.</p>
-                
                 <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><i class="fa-solid fa-cookie-bite text-indigo-600"></i> Finalidades de la web y sus asociados</h5>
                 <p class="text-slate-500 text-xs">Analizar activamente las características del dispositivo para su correcta identificación técnica. Almacenar la información básica en un dispositivo y/o acceder a ella. Optimización de scripts estáticos (AOS Library, FontAwesome) e investigación de la experiencia de navegación para el desarrollo de futuros flujos sonoros y lumínicos.</p>
-                
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 mt-4">
                     <div class="flex flex-wrap gap-3 w-full sm:w-auto justify-center sm:justify-start">
                         <button onclick="acceptAllCookies()" class="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center">Aceptar</button>
@@ -601,36 +599,77 @@
         </div>
     </div>
 
-    <!-- MODALES LEGALES -->
+
+    <!-- =========================================================================
+         SISTEMA COMPLETO DE VENTANAS MODALES LEGALES (6 SECCIONES)
+         ========================================================================= -->
+
+    <!-- 1. MODAL: AVISO LEGAL -->
     <div id="modal-aviso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
-            <h3 class="text-lg font-black border-b pb-2">Aviso Legal</h3>
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-gavel text-indigo-600"></i> Aviso Legal</h3>
             <p><strong>Titular y Razón Social Legal:</strong> Dreamscape Events and Complete Productions, S.L.</p>
             <p><strong>NIF/CIF:</strong> B19859115</p>
             <p><strong>Domicilio Social:</strong> c/ Valencia, 76 - 08759 Vallirana (Barcelona), España.</p>
-            <p>Todo el contenido y código está sujeto a derechos de propiedad intelectual protegidos a favor de Dreamscape Events and Complete Productions, S.L.</p>
-            <button onclick="closeModal('modal-aviso')" class="mt-2 bg-slate-800 text-white px-4 py-2 rounded-lg">Cerrar</button>
+            <p>Todo el contenido, marcas escénicas, porfolio técnico y código fuente está sujeto a derechos de propiedad intelectual protegidos a favor de Dreamscape Events and Complete Productions, S.L.</p>
+            <button onclick="closeModal('modal-aviso')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
         </div>
     </div>
 
+    <!-- 2. MODAL: POLÍTICA DE PRIVACIDAD -->
     <div id="modal-privacidad" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
-            <h3 class="text-lg font-black border-b pb-2">Política de Privacidad</h3>
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-shield-halved text-indigo-600"></i> Política de Privacidad</h3>
             <p><strong>Responsable legal del tratamiento:</strong> Dreamscape Events and Complete Productions, S.L. (NIF: B19859115), con dirección establecida en c/ Valencia, 76 (08759 Vallirana, Barcelona).</p>
             <p>Tratamos los datos personales únicamente para gestionar propuestas personalizadas de eventos y logística técnica audiovisual corporativa. Canal seguro de ejercicio de derechos ARCO vía info@ap-events.es.</p>
-            <button onclick="closeModal('modal-privacidad')" class="mt-2 bg-slate-800 text-white px-4 py-2 rounded-lg">Cerrar</button>
+            <button onclick="closeModal('modal-privacidad')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
         </div>
     </div>
 
+    <!-- 3. MODAL: POLÍTICA DE COOKIES -->
     <div id="modal-cookies" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3">
-            <h3 class="text-lg font-black border-b pb-2">Política de Cookies</h3>
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-cookie-bite text-indigo-600"></i> Política de Cookies</h3>
             <p>Este sitio web gestionado formalmente por Dreamscape Events and Complete Productions, S.L. (Vallirana) utiliza únicamente cookies técnicas funcionales esenciales de sesión para la carga estática de elementos dinámicos (animaciones AOS, iconos FontAwesome, Google Fonts). No se realiza ningún tipo de rastreo comercial perimetral ajeno.</p>
-            <button onclick="closeModal('modal-cookies')" class="mt-2 bg-slate-800 text-white px-4 py-2 rounded-lg">Cerrar</button>
+            <button onclick="closeModal('modal-cookies')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+    <!-- 4. MODAL: DECLARACIÓN DE ACCESIBILIDAD (NUEVO) -->
+    <div id="modal-accesibilidad" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-universal-access text-indigo-600"></i> Declaración de Accesibilidad</h3>
+            <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> se ha comprometido a hacer accesible su sitio web de conformidad con el Real Decreto 1112/2018, de 7 de septiembre, sobre accesibilidad de los sitios web y aplicaciones para dispositivos móviles del sector público.</p>
+            <p>Este sitio web está diseñado con código estático adaptativo utilizando semántica HTML5 pura y la biblioteca Tailwind CSS, asegurando que los contrastes de color, el tamaño tipográfico y la navegación por teclado sean compatibles con los principales lectores de pantalla y herramientas de asistencia técnica.</p>
+            <button onclick="closeModal('modal-accesibilidad')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- 5. MODAL: TÉRMINOS Y CONDICIONES (NUEVO) -->
+    <div id="modal-terminos" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-file-contract text-indigo-600"></i> Términos y Condiciones</h3>
+            <p>Las presentes condiciones regulan la contratación de servicios técnicos de sonido, iluminación y vídeo ofrecidos por <strong>Dreamscape Events and Complete Productions, S.L.</strong></p>
+            <p>Cualquier reserva de equipamiento o rider técnico para eventos requiere la aceptación de un presupuesto formal vinculante y un contrato de arrendamiento de servicios de producción. Los plazos de montaje, pruebas de sonido, potencia eléctrica requerida perimetral y desmontaje logístico se estipularán de mutuo acuerdo según las características técnicas de cada recinto.</p>
+            <button onclick="closeModal('modal-terminos')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- 6. MODAL: POLÍTICA DE REEMBOLSO (NUEVO) -->
+    <div id="modal-reembolso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
+            <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-money-bill-transfer text-indigo-600"></i> Política de Reembolso</h3>
+            <p>Dada la naturaleza del sector de la producción integral de eventos y la reserva exclusiva de equipamiento técnico (rigging, mesas de mezcla digitales, robótica LED) por fecha, la política de cancelaciones de <strong>Dreamscape Events and Complete Productions, S.L.</strong> se rige bajo los siguientes criterios contractuales:</p>
+            <ul class="list-disc pl-5 space-y-1.5 text-slate-600">
+                <li>Las entregas a cuenta iniciales en concepto de reserva de fecha y bloque de material técnico no serán reembolsables en caso de cancelación unilateral por parte del cliente ajena a causas de fuerza mayor.</li>
+                <li>Si el evento se cancela o aplaza con previo aviso documentado debido a causas climáticas extremas o fuerza mayor demostrable, se ofrecerá la opción de reubicar los servicios técnicos en una nueva fecha según disponibilidad del stock logístico de la empresa.</li>
+            </ul>
+            <button onclick="closeModal('modal-reembolso')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
+        </div>
+    </div>
+
+
+    <!-- INTERACTIVIDAD CON JAVASCRIPT -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true });
@@ -680,8 +719,10 @@
                 }
             }
         }
+        
+        // Cierre automático extendido para las 6 modales legales y las de servicios
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-service-corporativo','modal-service-congresos','modal-service-bodas'];
+            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
