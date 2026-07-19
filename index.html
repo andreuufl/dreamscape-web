@@ -127,16 +127,13 @@
         </div>
     </header>
 
-    <!-- HERO SECTION (Con fondo real e impactante) -->
+    <!-- HERO SECTION -->
     <section id="inicio" class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-950 overflow-hidden min-h-screen flex items-center">
-        <!-- Imagen de gran escenario técnico en directo -->
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop" alt="Producción técnica espectacular en directo" class="w-full h-full object-cover object-center opacity-35">
-            <!-- Capa de degradado oscuro superior para lectura perfecta -->
             <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/85 to-indigo-950/75"></div>
         </div>
         
-        <!-- Destellos dinámicos de fondo -->
         <div class="absolute inset-0 opacity-20 z-10">
             <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px] animate-pulse"></div>
             <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px] animate-pulse" style="animation-delay: 1s;"></div>
@@ -170,16 +167,10 @@
                 </div>
             </div>
         </div>
-        
-        <a href="#servicios" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white/50 hover:text-white transition-colors animate-bounce hidden md:block">
-            <i class="fa-solid fa-angle-down text-2xl"></i>
-        </a>
     </section>
 
     <!-- SERVICIOS -->
     <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div class="absolute -left-32 top-1/2 -translate-y-1/2 w-64 h-64 bg-slate-100 rounded-full blur-3xl opacity-50"></div>
-        
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
                 <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Nuestras Especialidades</h2>
@@ -197,7 +188,7 @@
                     <p class="text-slate-600 text-base leading-relaxed flex-grow">
                         Presentaciones de producto, juntas, galas y aniversarios. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.
                     </p>
-                    <a href="#contacto" class="inline-flex items-center text-indigo-600 font-semibold mt-6 group-hover:gap-2 transition-all">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-corporativo')" class="inline-flex items-center text-indigo-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
                 </div>
 
                 <!-- Servicio 2 -->
@@ -209,7 +200,7 @@
                     <p class="text-slate-600 text-base leading-relaxed flex-grow">
                         Infraestructura audiovisual completa, escenarios, iluminación de sala, microfonía avanzada y soporte técnico *in situ* para garantizar un flujo perfecto.
                     </p>
-                    <a href="#contacto" class="inline-flex items-center text-emerald-600 font-semibold mt-6 group-hover:gap-2 transition-all">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="inline-flex items-center text-emerald-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
                 </div>
 
                 <!-- Servicio 3 -->
@@ -221,23 +212,21 @@
                     <p class="text-slate-600 text-base leading-relaxed flex-grow">
                         Creamos ambientes mágicos. Iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, montajes especiales y efectos visuales para tu día.
                     </p>
-                    <a href="#contacto" class="inline-flex items-center text-rose-600 font-semibold mt-6 group-hover:gap-2 transition-all">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-bodas')" class="inline-flex items-center text-rose-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN DE PORFOLIO / GALERÍA DE IMÁGENES -->
+    <!-- SECCIÓN DE PORFOLIO -->
     <section id="porfolio" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-16" data-aos="fade-up">
                 <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Casos de Éxito</h2>
                 <p class="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Montajes en Acción</p>
                 <p class="text-slate-600 text-lg">Una muestra de riders audiovisuales reales, montajes técnicos e instalaciones de iluminación de alta calidad.</p>
             </div>
 
-            <!-- Filtros de la Galería -->
             <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
                 <button onclick="filterGallery('all')" class="filter-btn active bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-md cursor-pointer">Todos</button>
                 <button onclick="filterGallery('corp')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Corporativos</button>
@@ -245,10 +234,8 @@
                 <button onclick="filterGallery('boda')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer">Bodas y Gala</button>
             </div>
 
-            <!-- Rejilla de Elementos (Grid de 6 imágenes de alta fiabilidad) -->
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-hidden">
-                
-                <!-- 1. Imagen Corp/Escenario -->
+                <!-- item 1 -->
                 <div class="gallery-item corp bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=80&w=800&auto=format&fit=crop" alt="Montaje de gala corporativa e iluminación" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -259,8 +246,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 2. Imagen Congreso Auditorio -->
+                <!-- item 2 -->
                 <div class="gallery-item congreso bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800&auto=format&fit=crop" alt="Gran auditorio para congresos y simposios" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -271,8 +257,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 3. Imagen Iluminación Pista -->
+                <!-- item 3 -->
                 <div class="gallery-item boda bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=80&w=800&auto=format&fit=crop" alt="Control técnico de cabina y pista de baile iluminada" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -283,8 +268,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 4. Imagen Corp Directo -->
+                <!-- item 4 -->
                 <div class="gallery-item corp bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=800&auto=format&fit=crop" alt="Estructura técnica de iluminación y escenario para evento corporativo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -295,8 +279,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 5. Imagen Congreso Ferias -->
+                <!-- item 5 -->
                 <div class="gallery-item congreso bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=800&auto=format&fit=crop" alt="Infraestructura técnica para ferias y stands de exposición" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -307,8 +290,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 6. Imagen Boda Carpa -->
+                <!-- item 6 -->
                 <div class="gallery-item boda bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden aspect-[4/3]">
                         <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=800&auto=format&fit=crop" alt="Iluminación decorativa y carpas en bodas exclusivas de exterior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -319,7 +301,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -396,7 +377,7 @@
         </div>
     </section>
     
-    <!-- SECCIÓN DE BLOG / CASOS DE ÉXITO -->
+    <!-- SECCIÓN DE BLOG -->
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
@@ -487,12 +468,6 @@
                     </div>
                 </article>
             </div>
-            
-            <div class="text-center mt-16" data-aos="fade-up">
-                <a href="#" class="inline-flex items-center bg-slate-100 hover:bg-slate-200 text-slate-800 px-8 py-3.5 rounded-full font-semibold text-base transition-all group border border-slate-200">
-                    Ver todos los artículos <i class="fa-solid fa-arrow-right ml-2.5 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
         </div>
     </section>
 
@@ -511,7 +486,6 @@
 
             <div class="grid md:grid-cols-12 gap-10 bg-white rounded-3xl p-10 sm:p-12 shadow-xl border border-slate-100" data-aos="flip-right" data-aos-duration="1000">
                 
-                <!-- Datos de contacto reales -->
                 <div class="md:col-span-5 space-y-10 order-2 md:order-1 mt-10 md:mt-0 pt-10 md:pt-0 border-t md:border-t-0 md:border-r border-slate-100 md:pr-10">
                     <h3 class="text-2xl font-bold text-slate-950">Información de Contacto</h3>
                     
@@ -526,7 +500,6 @@
                             </div>
                         </div>
                         
-                        <!-- Tarjeta de Teléfono con Acceso Directo a WhatsApp -->
                         <div class="flex items-center space-x-4 group">
                             <a href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20estoy%20interesado%20en%20recibir%20informaci%C3%B3n%20y%20presupuesto%20para%20un%20pr%C3%B3ximo%20evento." 
                                target="_blank" 
@@ -556,7 +529,6 @@
                         </div>
                     </div>
                     
-                    <!-- Enlace directo a Instagram -->
                     <div class="pt-6 border-t border-slate-100 space-y-4">
                         <p class="text-sm text-slate-600 font-medium">Síguenos para ver nuestros montajes:</p>
                         <div class="flex space-x-4 text-xl">
@@ -570,7 +542,6 @@
                 <!-- Formulario Inteligente Activo con Web3Forms -->
                 <div class="md:col-span-7 order-1 md:order-2" id="form-container">
                     <form id="dreamscape-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
-                        
                         <input type="hidden" name="access_key" value="755b52de-71b1-4719-8646-96acf95bad91">
                         <input type="hidden" name="from_name" value="Dreamscape Web Leads">
 
@@ -590,7 +561,7 @@
                             <select id="tipo-evento" name="Tipo_de_Evento" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50/50 text-slate-600 appearance-none">
                                 <option value="corporativo">Evento Corporativo / Empresa</option>
                                 <option value="congreso">Congreso o Conferencia</option>
-                                <option value="boda">Boda o Celebración Privada</option>
+                                <option value="boda">Bodas o Celebración Privada</option>
                                 <option value="otro">Otro tipo de producción técnica</option>
                             </select>
                         </div>
@@ -600,7 +571,6 @@
                             <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all bg-slate-50/50" placeholder="Cuéntanos brevemente qué tienes en mente: fecha aproximada, lugar, número de asistentes, si necesitas escenario, pantallas LED, iluminación espectacular, sonido para directo..."></textarea>
                         </div>
                         
-                        <!-- Checkbox Obligatorio con enlace interactivo a la modal -->
                         <div class="flex items-start space-x-3 pt-2">
                             <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="mt-1 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                             <label for="privacidad" class="text-xs text-slate-500 leading-normal cursor-pointer">Acepto la <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a> y consiento el tratamiento de mis datos para gestionar esta solicitud.</label>
@@ -616,7 +586,7 @@
         </div>
     </section>
 
-    <!-- FOOTER (Con enlaces activos a las modales legales) -->
+    <!-- FOOTER -->
     <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-12 gap-12 mb-12">
@@ -633,18 +603,15 @@
                             <li><a href="#servicios" class="hover:text-white transition-colors">Servicios</a></li>
                             <li><a href="#porfolio" class="hover:text-white transition-colors">Porfolio</a></li>
                             <li><a href="#filosofia" class="hover:text-white transition-colors">Filosofía</a></li>
-                            <li><a href="#blog" class="hover:text-white transition-colors">Blog</a></li>
                             <li><a href="#contacto" class="hover:text-white transition-colors">Contacto</a></li>
                         </ul>
                     </div>
                     <div class="space-y-4">
                         <h5 class="font-bold text-white uppercase text-xs tracking-widest">Servicios</h5>
                         <ul class="space-y-2.5 text-sm">
-                            <li><a href="#servicios" class="hover:text-white transition-colors">Corporativos</a></li>
-                            <li><a href="#servicios" class="hover:text-white transition-colors">Congresos</a></li>
-                            <li><a href="#servicios" class="hover:text-white transition-colors">Bodas</a></li>
-                            <li><a href="#servicios" class="hover:text-white transition-colors">Sonido Profesional</a></li>
-                            <li><a href="#servicios" class="hover:text-white transition-colors">Iluminación</a></li>
+                            <li><a href="javascript:void(0)" onclick="openModal('modal-service-corporativo')" class="hover:text-white transition-colors">Corporativos</a></li>
+                            <li><a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="hover:text-white transition-colors">Congresos</a></li>
+                            <li><a href="javascript:void(0)" onclick="openModal('modal-service-bodas')" class="hover:text-white transition-colors">Bodas</a></li>
                         </ul>
                     </div>
                     <div class="space-y-4 col-span-2 sm:col-span-1">
@@ -660,7 +627,6 @@
             
             <div class="pt-10 border-t border-slate-800 text-center text-xs text-slate-600 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p>&copy; 2026 Dreamscape Events. Todos los derechos reservados. Cobertura en Barcelona | Madrid | Valencia.</p>
-                <!-- Enlace directo a Instagram en el Footer -->
                 <div class="flex space-x-5 text-base">
                     <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#" class="text-slate-600 hover:text-white transition-colors"><i class="fa-brands fa-linkedin"></i></a>
@@ -672,10 +638,107 @@
 
 
     <!-- =========================================================================
-         VENTANAS MODALES EMERGENTES (SISTEMA LEGAL INTEGRADO RGPD / LSSI)
+         MODALES DE INFORMACIÓN DE SERVICIOS
          ========================================================================= -->
 
-    <!-- 1. MODAL: AVISO LEGAL (CON DIRECCIÓN FISCAL DE VALLIRANA ACTUALIZADA) -->
+    <!-- MODAL SERVICIO 1: EVENTOS CORPORATIVOS -->
+    <div id="modal-service-corporativo" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative shadow-2xl border border-slate-100 flex flex-col">
+            <button onclick="closeModal('modal-service-corporativo')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="space-y-5 text-slate-600 text-sm leading-relaxed pr-2">
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center border border-indigo-100">
+                        <i class="fa-solid fa-building-user text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-950">Eventos Corporativos</h3>
+                        <p class="text-indigo-600 font-semibold text-xs uppercase tracking-wider">Soluciones audiovisuales de alto impacto</p>
+                    </div>
+                </div>
+                <p>En <strong class="text-slate-900">Dreamscape Events</strong> transformamos las reuniones de empresa tradicionales en experiencias de comunicación inmersivas. Nos encargamos de toda la ingeniería escénica y la dirección de backstage de tus galas, aniversarios, juntas generales o lanzamientos de producto.</p>
+                
+                <h4 class="font-bold text-slate-950 pt-2 text-base flex items-center gap-2"><i class="fa-solid fa-layer-group text-indigo-500 text-sm"></i> ¿Qué incluye nuestro servicio integral?</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong class="text-slate-900">Sistemas de sonido premium:</strong> Microfonía avanzada (inalámbrica de mano, solapa y diadema ocultas) calibrada para una inteligibilidad de voz perfecta en sala y *streaming*.</li>
+                    <li><strong class="text-slate-900">Realización de vídeo en directo:</strong> Gestión multicanal, pantallas de proyección e integración total de contenidos multimedia corporativos.</li>
+                    <li><strong class="text-slate-900">Diseño lumínico espectacular:</strong> Iluminación de escenario dinámica combinada con luces de ambiente LED perimetrales adaptadas a la paleta de colores de tu marca.</li>
+                    <li><strong class="text-slate-900">Estructuras y Rigging:</strong> Montaje limpio de truss y escenarios homologados que garantizan un espacio diáfano y seguro.</li>
+                </ul>
+                <div class="bg-indigo-50/50 rounded-2xl p-5 border border-indigo-100/50 mt-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+                    <p class="text-xs text-slate-700 font-medium">¿Tienes un rider técnico corporativo o necesitas asesoramiento de espacio?</p>
+                    <a href="#contacto" onclick="closeModal('modal-service-corporativo')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md flex-shrink-0 text-center">Diseñar Evento</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SERVICIO 2: CONGRESOS Y FERIAS -->
+    <div id="modal-service-congresos" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative shadow-2xl border border-slate-100 flex flex-col">
+            <button onclick="closeModal('modal-service-congresos')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="space-y-5 text-slate-600 text-sm leading-relaxed pr-2">
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center border border-emerald-100">
+                        <i class="fa-solid fa-microphone-lines text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-950">Congresos y Ferias</h3>
+                        <p class="text-emerald-400 font-semibold text-xs uppercase tracking-wider">Logística e infraestructura técnica avanzada</p>
+                    </div>
+                </div>
+                <p>La complejidad logística de un congreso o feria exige una gestión profesional y cercana donde los fallos técnicos no tienen cabida. Diseñamos y ejecutamos toda la red técnica, distribución eléctrica y acometidas audiovisuales para auditorios múltiples o stands de exposición.</p>
+                
+                <h4 class="font-bold text-slate-950 pt-2 text-base flex items-center gap-2"><i class="fa-solid fa-bolt text-emerald-500 text-sm"></i> Capacidades de despliegue industrial</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong class="text-slate-900">Suministro Eléctrico Limpio:</strong> Planificación de cableado estructural, cuadros de distribución y acometidas trifásicas perimetrales que evitan caídas de tensión bruscas.</li>
+                    <li><strong class="text-slate-900">Microfonía avanzada de conferencias:</strong> Sistemas automáticos de debate, atriles sonorizados y soluciones de traducción simultánea multilingüe.</li>
+                    <li><strong class="text-slate-900">Iluminación uniforme de gran recinto:</strong> Iluminación técnica de stands y focos cenitales que aseguran una perfecta visibilidad ferial.</li>
+                    <li><strong class="text-slate-900">Soporte Técnico In Situ:</strong> Operadores de sonido, vídeo e iluminación permanentes durante todo el transcurso del certamen para dar respuesta inmediata.</li>
+                </ul>
+                <div class="bg-emerald-50/50 rounded-2xl p-5 border border-emerald-100/50 mt-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+                    <p class="text-xs text-slate-700 font-medium">Planificamos de forma meticulosa la distribución e ingeniería de tu espacio ferial.</p>
+                    <a href="#contacto" onclick="closeModal('modal-service-congresos')" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md flex-shrink-0 text-center">Planificar Espacio</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL SERVICIO 3: BODAS Y CELEBRACIONES -->
+    <div id="modal-service-bodas" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto p-8 relative shadow-2xl border border-slate-100 flex flex-col">
+            <button onclick="closeModal('modal-service-bodas')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            <div class="space-y-5 text-slate-600 text-sm leading-relaxed pr-2">
+                <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                    <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-xl flex items-center justify-center border border-rose-100">
+                        <i class="fa-solid fa-heart text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-950">Bodas y Celebraciones</h3>
+                        <p class="text-rose-400 font-semibold text-xs uppercase tracking-wider">Artesanos de experiencias memorables</p>
+                    </div>
+                </div>
+                <p>No vendemos paquetes genéricos cerrados, sino que actuamos como artesanos del diseño ambiental para crear momentos inolvidables. Convertimos jardines, masías, carpas o salones históricos en mundos mágicos controlados por luz y sonido.</p>
+                
+                <h4 class="font-bold text-slate-950 pt-2 text-base flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-rose-500 text-sm"></i> Magia ambiental con control técnico</h4>
+                <ul class="list-disc pl-5 space-y-2">
+                    <li><strong class="text-slate-900">Iluminación Arquitectónica y Guirnaldas:</strong> Proyectores autónomos LED a batería con protección IP65 para exterior que tiñen la vegetación de color de forma elegante y segura.</li>
+                    <li><strong class="text-slate-900">Sonorización invisible:</strong> Equipamiento sonoro distribuido de alta fidelidad, microfonía oculta e integrada para ceremonias emotivas donde cada palabra cuenta.</li>
+                    <li><strong class="text-slate-900">Pistas de baile espectaculares:</strong> Estructuras de soporte ligeras decoradas, robótica móvil inteligente de última generación y efectos DMX programados en vivo para la fiesta.</li>
+                </ul>
+                <div class="bg-rose-50/50 rounded-2xl p-5 border border-rose-100/50 mt-4 flex items-center justify-between gap-4 flex-col sm:flex-row">
+                    <p class="text-xs text-slate-700 font-medium">Buscamos ofrecerte la máxima tranquilidad para que solo te enfoques en disfrutar.</p>
+                    <a href="#contacto" onclick="closeModal('modal-service-bodas')" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all shadow-md flex-shrink-0 text-center">Reservar Fecha</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
+         VENTANAS MODALES EMERGENTES LEGALES (SISTEMA INTEGRADO RGPD / LSSI)
+         ========================================================================= -->
+
+    <!-- 1. MODAL: AVISO LEGAL -->
     <div id="modal-aviso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[80vh] overflow-y-auto p-8 relative shadow-2xl border border-slate-100 flex flex-col">
             <button onclick="closeModal('modal-aviso')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
@@ -684,8 +747,7 @@
                 <p class="font-bold text-slate-900">1. Datos Identificativos</p>
                 <p>En cumplimiento con el deber de información recogido en artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), a continuación se reflejan los siguientes datos:</p>
                 <ul class="list-disc pl-5 space-y-1">
-                    <li><strong class="text-slate-900">Titular de la web y marca comercial:</strong> Dreamscape Events and Complete Productions, S.L.</li>
-                    <li><strong class="text-slate-900">Razón Social Legal:</strong> Dreamscape Events and Complete Productions, S.L.</li>
+                    <li><strong class="text-slate-900">Titular de la web y razón social legal:</strong> Dreamscape Events and Complete Productions, S.L.</li>
                     <li><strong class="text-slate-900">NIF/CIF:</strong> B19859115</li>
                     <li><strong class="text-slate-900">Domicilio social:</strong> c/ Valencia, 76 - 08759 Vallirana (Barcelona), España.</li>
                     <li><strong class="text-slate-900">Correo electrónico de contacto:</strong> info@ap-events.es</li>
@@ -699,22 +761,22 @@
         </div>
     </div>
 
-    <!-- 2. MODAL: POLÍTICA DE PRIVACIDAD (ACTUALIZADA CON SEDE EN VALLIRANA) -->
+    <!-- 2. MODAL: POLÍTICA DE PRIVACIDAD -->
     <div id="modal-privacidad" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[80vh] overflow-y-auto p-8 relative shadow-2xl border border-slate-100 flex flex-col">
             <button onclick="closeModal('modal-privacidad')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             <div class="space-y-4 text-slate-600 text-sm leading-relaxed pr-2">
                 <h3 class="text-2xl font-black text-slate-950 border-b border-slate-100 pb-3 flex items-center gap-3"><i class="fa-solid fa-shield-halved text-indigo-600"></i> Política de Privacidad</h3>
                 <p class="font-bold text-slate-900">1. Responsable del Tratamiento de Datos</p>
-                <p>El responsable del tratamiento de los datos recabados en este sitio web es la sociedad de responsabilidad limitada <strong class="text-slate-900">Dreamscape Events and Complete Productions, S.L. (NIF: B19859115)</strong> para la marca conjunta <strong class="text-slate-900">Dreamscape Events and Complete Productions, S.L.</strong>, con domicilio social establecido en c/ Valencia, 76 (08759 Vallirana, Barcelona) y correo electrónico seguro <a href="mailto:info@ap-events.es" class="text-indigo-600 font-semibold">info@ap-events.es</a>.</p>
+                <p>El responsable del tratamiento de los datos recabados en este sitio web es la entidad <strong class="text-slate-900">Dreamscape Events and Complete Productions, S.L. (NIF: B19859115)</strong>, con domicilio social establecido en c/ Valencia, 76 (08759 Vallirana, Barcelona) y correo electrónico seguro <a href="mailto:info@ap-events.es" class="text-indigo-600 font-semibold">info@ap-events.es</a>.</p>
                 <p class="font-bold text-slate-900 pt-2">2. Finalidad del Tratamiento</p>
                 <p>Tratamos la información que nos facilitas a través del formulario técnico y del enlace de WhatsApp con la única finalidad de gestionar tus solicitudes de información, analizar las necesidades técnicas o de espacio de tus eventos y prepararte una propuesta y presupuesto personalizados sin compromiso. Los datos no se usarán para fines publicitarios masivos sin tu consentimiento explícito.</p>
                 <p class="font-bold text-slate-900 pt-2">3. Plazo de Conservación</p>
-                <p>Los datos personales proporcionados se conservarán durante el tiempo estrictamente necesario para gestionar vuestra solicitud o mientras dure la relación comercial y contractual de la producción audiovisual.</p>
+                <p>Los datos personales proporcionados se conservarán durante el tiempo estrictamente necesario para gestionar vuestra solicitud o mientras dure la relación comercial y de montaje técnico de la producción audiovisual.</p>
                 <p class="font-bold text-slate-900 pt-2">4. Legitimación y Destinatarios</p>
                 <p>La base legal es el consentimiento del usuario al marcar la casilla de validación. Te informamos de que nuestra web utiliza la plataforma segura <strong>Web3Forms</strong> únicamente como canal procesador técnico para el envío de los correos de leads, garantizando la confidencialidad.</p>
                 <p class="font-bold text-slate-900 pt-2">5. Tus Derechos</p>
-                <p>Tienes derecho a acceder a tus datos, rectificar la información inexacta o solicitar su supresión en cumplimiento con el RGPD enviando un simple correo electrónico indicando tu solicitud a: <a href="mailto:info@ap-events.es" class="text-indigo-600 font-semibold">info@ap-events.es</a>.</p>
+                <p>Tienes derecho a acceder a tus datos, rectificar la información inexacta o solicitar su supresión en cumplimiento estricto con el RGPD enviando un simple correo electrónico indicando tu solicitud a: <a href="mailto:info@ap-events.es" class="text-indigo-600 font-semibold">info@ap-events.es</a>.</p>
             </div>
         </div>
     </div>
@@ -725,7 +787,7 @@
             <button onclick="closeModal('modal-cookies')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 transition-colors w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
             <div class="space-y-4 text-slate-600 text-sm leading-relaxed pr-2">
                 <h3 class="text-2xl font-black text-slate-950 border-b border-slate-100 pb-3 flex items-center gap-3"><i class="fa-solid fa-cookie-bite text-indigo-600"></i> Política de Cookies</h3>
-                <p>Te informamos de que este sitio web gestionado por <strong class="text-slate-900">Dreamscape Events and Complete Productions, S.L. (Vallirana)</strong>, alojado de forma segura en la infraestructura estática de GitHub Pages, utiliza únicamente <strong>cookies técnicas, funcionales y esenciales</strong> de sesión.</p>
+                <p>Te informamos de que este sitio web gestionado formalmente por <strong class="text-slate-900">Dreamscape Events and Complete Productions, S.L. (Vallirana)</strong>, alojado de forma segura en la infraestructura estática de GitHub Pages, utiliza únicamente <strong>cookies técnicas, funcionales y esenciales</strong> de sesión.</p>
                 <p>Estas cookies son aquellas que resultan estrictamente necesarias para permitir la navegación básica por la web, la carga de iconos (FontAwesome), tipografías integradas (Google Fonts) y los scripts de interacción visual o animaciones (AOS Library).</p>
                 <p class="font-bold text-slate-900 pt-2">Uso de Cookies de Terceros:</p>
                 <p>Esta página web <strong>no utiliza cookies de seguimiento, rastreo publicitario comportamental ni analíticas complejas de terceros</strong> que almacenen información privada de los usuarios sin su conocimiento. Al tratarse de una landing puramente informativa, cumple con los estándares europeos de privacidad simplificada sin necesidad de instalar banners de cookies intrusivos y molestos que bloqueen la navegación.</p>
@@ -744,7 +806,7 @@
             mirror: false,
         });
 
-        // Funciones JavaScript para controlar las ventanas modales legales
+        // Funciones JavaScript universales para abrir y cerrar ventanas modales
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -754,7 +816,6 @@
             }
         }
 
-        // Cierra la ventana modal actual
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             if (modal) {
@@ -764,9 +825,9 @@
             }
         }
 
-        // Cierra la modal automáticamente si el usuario hace clic fuera de la caja blanca
+        // Cierra cualquier modal automáticamente si el usuario hace clic fuera de la caja blanca
         window.addEventListener('click', function(e) {
-            const modals = ['modal-aviso', 'modal-privacidad', 'modal-cookies'];
+            const modals = ['modal-aviso', 'modal-privacidad', 'modal-cookies', 'modal-service-corporativo', 'modal-service-congresos', 'modal-service-bodas'];
             modals.forEach(id => {
                 const modal = document.getElementById(id);
                 if (e.target === modal) {
