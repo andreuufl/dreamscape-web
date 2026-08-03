@@ -377,7 +377,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON SEPARACIÓN AMPLIA)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON TÍTULO SEPARADO)
          ========================================================================= -->
     <section id="simulador" class="py-32 md:py-44 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -386,10 +386,11 @@
         </div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- TÍTULO SEPARADO CORRECTAMENTE -->
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
-                <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">Herramienta Interactiva</span>
-                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Simulador de Rider & Presupuesto</h2>
-                <p class="text-slate-300 text-lg">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
+                <span class="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">Herramienta Interactiva</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-4">Simulador de Rider & Presupuesto</h2>
+                <p class="text-slate-300 text-lg mt-4">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
             </div>
 
             <!-- CONTENEDOR GRID CON IGUALACIÓN DE ALTURA (LG:FLEX) -->
@@ -1412,7 +1413,7 @@
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Tarima/Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
