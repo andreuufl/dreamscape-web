@@ -377,7 +377,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ICONOS DE VERIFICACIÓN)
+         SIMULADOR DE PRESUPUESTOS (CON INGENIERÍA ELÉCTRICA Y SELECTOR DE TARIMA)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -425,19 +425,29 @@
                             </div>
                         </div>
 
-                        <!-- Paso 3: Duración del Montaje -->
+                        <!-- NUEVO PASO PRO: Selector de Tarima / Escenario Modular -->
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Duración del Montaje / Evento</label>
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Configuración de Tarima / Escenario</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setStage('A ras de suelo (Sin tarima)', 0)" id="stage-0" class="sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">A ras de suelo</button>
+                                <button type="button" onclick="setStage('Tarima modular 20cm', 150)" id="stage-1" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarima 20cm (+150€)</button>
+                                <button type="button" onclick="setStage('Escenario 60cm con faldas M1', 300)" id="stage-2" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Escenario 60cm (+300€)</button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 4: Duración del Montaje -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Duración del Montaje / Evento</label>
                             <div class="grid grid-cols-3 gap-3">
                                 <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
-                                <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
+                                <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 days)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
                                 <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
                             </div>
                         </div>
 
-                        <!-- Paso 4: Horario de Montaje -->
+                        <!-- Paso 5: Horario de Montaje -->
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Horario de Acceso y Montaje</label>
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">5. Horario de Acceso y Montaje</label>
                             <div class="grid grid-cols-3 gap-2">
                                 <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
                                 <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
@@ -445,18 +455,18 @@
                             </div>
                         </div>
 
-                        <!-- Paso 5: Aforo / Asistentes -->
+                        <!-- Paso 6: Aforo / Asistentes -->
                         <div class="space-y-3">
                             <div class="flex justify-between text-sm">
-                                <span class="font-bold uppercase tracking-wider text-indigo-300">5. Asistentes (Informativo)</span>
+                                <span class="font-bold uppercase tracking-wider text-indigo-300">6. Asistentes (Informativo)</span>
                                 <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
                             </div>
                             <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                         </div>
 
-                        <!-- Paso 6: Requisitos Técnicos (Rider) CON SIMBOLITOS DE SELECCIÓN VISIBLES -->
+                        <!-- Paso 7: Requisitos Técnicos (Rider) -->
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">7. Requisitos Técnicos (Rider)</label>
                             <div class="space-y-3">
                                 <label id="box-sonido" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
@@ -513,6 +523,10 @@
                                 <span id="summary-venue" class="font-bold text-indigo-600">Interior / Salón</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Escenario:</span>
+                                <span id="summary-stage" class="font-bold text-slate-900">A ras de suelo</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
                                 <span class="text-slate-500">Duración:</span>
                                 <span id="summary-duration" class="font-bold text-slate-900">1 Jornada (Día único)</span>
                             </div>
@@ -525,8 +539,8 @@
                                 <span id="summary-attendees" class="font-bold text-slate-900">150 asistentes</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
-                                <span class="text-slate-500">Potencia estimada:</span>
-                                <span id="summary-power" class="font-bold text-amber-600">~0 kW (Monofásica)</span>
+                                <span class="text-slate-500">Requisito eléctrico (SLA):</span>
+                                <span id="summary-power" class="font-bold text-amber-600">~2 kW (Monofásica)</span>
                             </div>
                         </div>
 
@@ -1056,6 +1070,8 @@
         // Lógica del Simulador de Presupuestos
         let currentEventName = 'Corporativo';
         let currentVenueName = 'Interior / Salón';
+        let currentStageName = 'A ras de suelo (Sin tarima)';
+        let currentStageCost = 0;
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
         let currentSlotName = 'Mañana';
@@ -1115,6 +1131,21 @@
             calculateTotal();
         }
 
+        function setStage(stageName, stageCost) {
+            currentStageName = stageName;
+            currentStageCost = stageCost;
+
+            document.querySelectorAll('.sim-stage-btn').forEach(btn => {
+                btn.className = "sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
+            });
+
+            if(stageCost === 0) document.getElementById('stage-0').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageCost === 150) document.getElementById('stage-1').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageCost === 300) document.getElementById('stage-2').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+
+            calculateTotal();
+        }
+
         function setDuration(multiplier, durationName) {
             currentDurationMultiplier = multiplier;
             currentDurationName = durationName;
@@ -1124,8 +1155,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1151,7 +1182,7 @@
         }
 
         function calculateTotal() {
-            let total = 0;
+            let total = currentStageCost;
             let totalKw = 2;
 
             const sonidoChecked = document.getElementById('chk-sonido').checked;
@@ -1197,11 +1228,12 @@
 
             let powerRecommendation = `~${totalKw} kW (Monofásica)`;
             if (totalKw > 9) {
-                powerRecommendation = `~${totalKw} kW (Trifásica recomendada)`;
+                powerRecommendation = `~${totalKw} kW (Trifásica recomendada - SLA Pro)`;
             }
 
             document.getElementById('summary-type').innerText = currentEventName;
             document.getElementById('summary-venue').innerText = currentVenueName;
+            document.getElementById('summary-stage').innerText = currentStageName;
             document.getElementById('summary-duration').innerText = currentDurationName;
             document.getElementById('summary-slot').innerText = currentSlotName;
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
@@ -1220,7 +1252,7 @@
             if(document.getElementById('chk-rigging').checked) ridersText.push("Truss & Rigging");
             if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
             
-            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
+            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Tarima/Escenario: ${currentStageName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
             
             const messageBox = document.getElementById('mensaje');
             if (messageBox) {
@@ -1276,7 +1308,7 @@
 
             // 3. BLOQUE 1: PARÁMETROS DEL PROYECTO
             doc.setFillColor(248, 250, 252);
-            doc.roundedRect(15, 84, 180, 55, 3, 3, 'F');
+            doc.roundedRect(15, 84, 180, 62, 3, 3, 'F');
 
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229); // Indigo 600
@@ -1292,6 +1324,7 @@
             const generalData = [
                 `• Tipo de Evento: ${currentEventName}`,
                 `• Tipo de Recinto / Espacio: ${currentVenueName}`,
+                `• Configuración Escénica: ${currentStageName}`,
                 `• Duración del Montaje: ${currentDurationName}`,
                 `• Horario de Acceso y Carga: ${currentSlotName}`,
                 `• Aforo Orientativo: ${currentAttendees} asistentes`
@@ -1306,12 +1339,12 @@
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229);
             doc.setFontSize(11);
-            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 149);
+            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 155);
 
             doc.setFillColor(241, 245, 249);
-            doc.roundedRect(15, 156, 180, 50, 3, 3, 'F');
+            doc.roundedRect(15, 162, 180, 48, 3, 3, 'F');
 
-            startY = 166;
+            startY = 172;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             doc.setTextColor(51, 65, 85);
@@ -1335,35 +1368,35 @@
             const powerText = document.getElementById('summary-power').innerText;
             doc.setFont("helvetica", "bold");
             doc.setTextColor(15, 23, 42);
-            doc.text(`• Carga Eléctrica Estimada: `, 20, startY + 2);
+            doc.text(`• Carga Eléctrica Estimada (SLA): `, 20, startY + 2);
             doc.setFont("helvetica", "bold");
             doc.setTextColor(180, 83, 9); // Amber 600
-            doc.text(powerText, 72, startY + 2);
+            doc.text(powerText, 78, startY + 2);
 
             // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE
             doc.setFillColor(238, 242, 255); // Indigo 50
-            doc.roundedRect(15, 213, 180, 24, 3, 3, 'F');
+            doc.roundedRect(15, 218, 180, 22, 3, 3, 'F');
             doc.setTextColor(67, 56, 202); // Indigo 700
             doc.setFont("helvetica", "bold");
             doc.setFontSize(9);
-            doc.text("GARANTÍA DREAMSCAPE:", 20, 222);
+            doc.text("GARANTÍA DREAMSCAPE:", 20, 226);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(51, 65, 85);
-            doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 229);
-            doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 234);
+            doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 233);
+            doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 238);
 
             // 6. BLOQUE 3: TOTAL PRESUPUESTO
             doc.setFillColor(79, 70, 229); // Indigo 600
-            doc.roundedRect(15, 244, 180, 24, 3, 3, 'F');
+            doc.roundedRect(15, 246, 180, 22, 3, 3, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
-            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 259);
+            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 260);
 
             const finalPrice = document.getElementById('summary-price').innerText;
             doc.setFontSize(16);
-            doc.text(finalPrice, 150, 259);
+            doc.text(finalPrice, 150, 260);
 
             // 7. PIE DE PÁGINA LEGAL Y CORPORATIVO
             doc.setFontSize(8);
@@ -1379,7 +1412,7 @@
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
