@@ -329,7 +329,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON DATOS DE CONTACTO EN RESUMEN)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CONECTADO AL FORMULARIO)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -431,7 +431,7 @@
                     </div>
                 </div>
 
-                <!-- Resumen Limpio con Datos de Contacto -->
+                <!-- Resumen Limpio con Datos de Contacto y Botón de Volcado -->
                 <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" data-aos="fade-left">
                     <div class="border-b border-slate-100 pb-4 flex justify-between items-start">
                         <div>
@@ -478,13 +478,16 @@
                         <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
                     </div>
 
-                    <!-- Apartado de Contacto Rápido en el Resumen -->
-                    <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center space-y-2">
+                    <!-- Apartado de Contacto Rápido y Volcado al Formulario -->
+                    <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center space-y-3">
                         <span class="block text-xs font-bold uppercase tracking-wider text-indigo-900">¿Dudas o proyecto a medida?</span>
-                        <p class="text-xs text-indigo-700">Contáctanos ahora y te asesoramos al instante:</p>
+                        <p class="text-xs text-indigo-700">Contáctanos ahora directamente:</p>
                         <a href="mailto:info@ap-events.es" class="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-800 text-sm">
                             <i class="fa-solid fa-envelope"></i> info@ap-events.es
                         </a>
+                        <button type="button" onclick="transferToContactForm()" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Traspasar configuración al formulario
+                        </button>
                     </div>
 
                     <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
@@ -1011,7 +1014,7 @@
             });
 
             if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
+            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
 
             calculateTotal();
         }
@@ -1085,6 +1088,26 @@
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
             document.getElementById('summary-power').innerText = powerRecommendation;
             document.getElementById('summary-price').innerText = total.toLocaleString('es-ES') + ' €';
+        }
+
+        // Función para traspasar la configuración del simulador al formulario de contacto
+        function transferToContactForm() {
+            const price = document.getElementById('summary-price').innerText;
+            const power = document.getElementById('summary-power').innerText;
+            
+            let ridersText = [];
+            if(document.getElementById('chk-sonido').checked) ridersText.push("Sonido PA");
+            if(document.getElementById('chk-luz').checked) ridersText.push("Iluminación DMX");
+            if(document.getElementById('chk-rigging').checked) ridersText.push("Truss & Rigging");
+            if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
+            
+            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
+            
+            const messageBox = document.getElementById('mensaje');
+            if (messageBox) {
+                messageBox.value = summaryString;
+                document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
         // Generador de PDF Pro con jsPDF (Lista limpia + Logo / Branding corporativo)
