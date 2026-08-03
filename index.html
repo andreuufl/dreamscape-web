@@ -89,8 +89,14 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
 
+    <!-- AVISO SUPERIOR DE URGENCIA / TEMPORADA ALTA -->
+    <div class="bg-gradient-to-r from-indigo-900 via-indigo-600 to-emerald-600 text-white text-xs sm:text-sm py-2 px-4 text-center font-semibold fixed top-0 left-0 w-full z-[60] shadow-md flex items-center justify-center gap-2">
+        <i class="fa-solid fa-bolt-lightning text-amber-300 animate-bounce"></i>
+        <span>¡Aviso de Temporada Alta! Las agendas para eventos en Barcelona, Madrid y Valencia tienen alta ocupación. <a href="#simulador" class="underline hover:text-amber-200 ml-1 font-bold">Reserva tu fecha en el simulador</a>.</span>
+    </div>
+
     <!-- HEADER / NAVIGATION -->
-    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300 border-b border-slate-100">
+    <header class="fixed top-9 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300 border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
@@ -145,7 +151,7 @@
     </header>
 
     <!-- HERO SECTION -->
-    <section id="inicio" class="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-slate-950 overflow-hidden min-h-screen flex items-center">
+    <section id="inicio" class="relative pt-40 pb-20 md:pt-56 md:pb-32 bg-slate-950 overflow-hidden min-h-screen flex items-center">
         <div class="absolute inset-0 z-0">
             <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2070&auto=format&fit=crop" alt="Producción técnica espectacular en directo" class="w-full h-full object-cover object-center opacity-35">
             <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/85 to-indigo-950/75"></div>
@@ -1118,8 +1124,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
