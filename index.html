@@ -327,7 +327,7 @@
     </section>
 
     <!-- =========================================================================
-         NUEVA SECCIÓN: SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CORREGIDO BASE 0€)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -344,14 +344,14 @@
 
             <div class="grid lg:grid-cols-12 gap-8 items-start">
                 <!-- Opciones de Configuración -->
-                <div class="lg:col-span-7 bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/15 space-y-8" data-aos="fade-right">
+                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl" data-aos="fade-right">
                     <!-- Paso 1: Tipo de Evento -->
                     <div class="space-y-3">
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setEventType('Corporativo', 600)" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer">Corporativo</button>
-                            <button type="button" onclick="setEventType('Congreso / Feria', 800)" id="type-cong" class="sim-type-btn bg-white/5 text-slate-300 hover:bg-white/10 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/10 transition-all cursor-pointer">Congreso</button>
-                            <button type="button" onclick="setEventType('Boda / Gala', 700)" id="type-boda" class="sim-type-btn bg-white/5 text-slate-300 hover:bg-white/10 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/10 transition-all cursor-pointer">Boda / Gala</button>
+                            <button type="button" onclick="setEventType('Corporativo', 600)" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
+                            <button type="button" onclick="setEventType('Congreso / Feria', 800)" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
+                            <button type="button" onclick="setEventType('Boda / Gala', 700)" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
                         </div>
                     </div>
 
@@ -368,28 +368,28 @@
                     <div class="space-y-3">
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Requisitos Técnicos (Rider)</label>
                         <div class="space-y-3">
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400 transition-all cursor-pointer">
+                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-sonido" checked onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                    <input type="checkbox" id="chk-sonido" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Sonido Profesional PA & Microfonía Inalámbrica</span>
                                 </div>
-                                <span class="text-xs text-indigo-300 font-semibold">+ Base</span>
+                                <span class="text-xs text-indigo-300 font-semibold">+ 300€</span>
                             </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400 transition-all cursor-pointer">
+                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-luz" checked onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                    <input type="checkbox" id="chk-luz" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Iluminación Arquitectónica & Robótica DMX</span>
                                 </div>
                                 <span class="text-xs text-indigo-300 font-semibold">+ 450€</span>
                             </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400 transition-all cursor-pointer">
+                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
                                     <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
                                 </div>
                                 <span class="text-xs text-indigo-300 font-semibold">+ 600€</span>
                             </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-indigo-400 transition-all cursor-pointer">
+                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
                                     <input type="checkbox" id="chk-video" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Pantalla LED / Vídeo en Directo & Técnico In Situ</span>
@@ -433,7 +433,7 @@
                             <span class="block text-xs text-slate-500 uppercase font-bold">Estimación Orientativa</span>
                             <span class="text-xs text-slate-400">IVA no incluido</span>
                         </div>
-                        <span id="summary-price" class="text-3xl font-black text-indigo-600">1.350 €</span>
+                        <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
                     </div>
 
                     <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
@@ -928,23 +928,21 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos
+        // Lógica del Simulador de Presupuestos (Base 0€ inicial)
         let currentEventName = 'Corporativo';
-        let currentEventBasePrice = 600;
         let currentAttendees = 150;
 
-        function setEventType(name, price) {
+        function setEventType(name) {
             currentEventName = name;
-            currentEventBasePrice = price;
             
             document.querySelectorAll('.sim-type-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white');
-                btn.classList.add('bg-white/5', 'border-white/10', 'text-slate-300');
+                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
             });
             
-            if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer";
-            if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer";
-            if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer";
+            if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -956,14 +954,8 @@
         }
 
         function calculateTotal() {
-            let total = currentEventBasePrice;
+            let total = 0;
             let servicesListHtml = '';
-
-            // Aforo extra
-            let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
-            total += attendeeExtra;
-
-            servicesListHtml += `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600"></i> ${currentEventName} (Base logístrica)</li>`;
 
             if(document.getElementById('chk-sonido').checked) {
                 total += 300;
@@ -982,6 +974,16 @@
                 servicesListHtml += `<li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-600"></i> Pantalla LED & Vídeo (+900€)</li>`;
             }
 
+            // Si hay servicios seleccionados, aplicamos el factor de escala por aforo
+            if (total > 0) {
+                let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
+                total += attendeeExtra;
+            }
+
+            if (servicesListHtml === '') {
+                servicesListHtml = `<li class="text-slate-400 italic">Ningún servicio seleccionado</li>`;
+            }
+
             document.getElementById('summary-type').innerText = currentEventName;
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
             document.getElementById('summary-services').innerHTML = servicesListHtml;
@@ -994,7 +996,7 @@
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
-        // Inicializar cálculo al cargar
+        // Inicializar cálculo al cargar (por defecto desmarcado todo -> 0€)
         window.addEventListener('DOMContentLoaded', () => {
             calculateTotal();
 
