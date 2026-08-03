@@ -371,7 +371,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON SELECTOR DE FECHA & URGENCIA)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -389,6 +389,16 @@
             <div class="grid lg:grid-cols-12 gap-8 items-start">
                 <!-- Opciones de Configuración -->
                 <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl" data-aos="fade-right">
+                    
+                    <!-- NUEVO PASO: Selector de Fecha y Disponibilidad en Tiempo Real -->
+                    <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10">
+                        <div class="flex justify-between items-center">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
+                            <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
+                        </div>
+                        <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer">
+                    </div>
+
                     <!-- Paso 1: Tipo de Evento -->
                     <div class="space-y-3">
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
@@ -481,6 +491,10 @@
                     </div>
 
                     <div class="space-y-3 text-sm">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
+                            <span class="text-slate-500">Fecha prevista:</span>
+                            <span id="summary-date" class="font-bold text-indigo-600">Por seleccionar</span>
+                        </div>
                         <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Tipo de evento:</span>
                             <span id="summary-type" class="font-bold text-slate-900">Corporativo</span>
@@ -1037,6 +1051,35 @@
         let currentDurationName = '1 Jornada (Día único)';
         let currentSlotName = 'Mañana';
         let currentAttendees = 150;
+        let currentEventDate = '';
+
+        // Validación de Disponibilidad de Fecha en tiempo real
+        function checkDateAvailability() {
+            const dateInput = document.getElementById('event-date');
+            const badge = document.getElementById('date-urgency-badge');
+            const summaryDate = document.getElementById('summary-date');
+
+            if (!dateInput.value) {
+                currentEventDate = 'Por seleccionar';
+                if (summaryDate) summaryDate.innerText = currentEventDate;
+                return;
+            }
+
+            currentEventDate = dateInput.value;
+            if (summaryDate) summaryDate.innerText = currentEventDate;
+
+            // Simulación inteligente de urgencia según el día (Viernes o Sábado = Alta demanda)
+            const selectedDate = new Date(dateInput.value);
+            const dayOfWeek = selectedDate.getDay(); // 5 = Viernes, 6 = Sábado
+
+            if (dayOfWeek === 5 || dayOfWeek === 6) {
+                badge.className = "bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold animate-pulse";
+                badge.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> ¡Alta demanda en fin de semana!';
+            } else {
+                badge.className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold";
+                badge.innerHTML = '<i class="fa-solid fa-check mr-1"></i> Fecha disponible';
+            }
+        }
 
         function setEventType(name) {
             currentEventName = name;
@@ -1074,8 +1117,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1145,7 +1188,7 @@
             if(document.getElementById('chk-rigging').checked) ridersText.push("Truss & Rigging");
             if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
             
-            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
+            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
             
             const messageBox = document.getElementById('mensaje');
             if (messageBox) {
@@ -1154,14 +1197,14 @@
             }
         }
 
-        // Generador de PDF Pro con jsPDF (Propuesta Técnica Dreamscape Events)
+        // Generador de PDF Pro con jsPDF (Propuesta Técnica Dreamscape Events - Súper Currada)
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Cabecera Corporativa con Bloque Oscuro y Branding
+            // Cabecera Corporativa con Bloque Oscuro de Gran Impacto
             doc.setFillColor(15, 23, 42); // Slate 950
-            doc.rect(0, 0, 210, 42, 'F');
+            doc.rect(0, 0, 210, 48, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
@@ -1172,28 +1215,31 @@
             doc.setFont("helvetica", "normal");
             doc.setTextColor(148, 163, 184); // Slate 400
             doc.text("PROPUESTA TÉCNICA E INTEGRAL DE EVENTOS", 15, 30);
-            doc.text("Email: info@ap-events.es | Tel: 613 08 98 94", 125, 30);
+            doc.text("www.dreamscape-events.es | info@ap-events.es", 15, 37);
+            doc.text("Tel: 613 08 98 94 | Cobertura: BCN | MAD | VLC", 125, 37);
 
-            // Título del Documento
+            // Título y Fecha de Emisión
             doc.setTextColor(15, 23, 42);
-            doc.setFontSize(15);
+            doc.setFontSize(16);
             doc.setFont("helvetica", "bold");
-            doc.text("DOCUMENTO DE PROPUESTA TÉCNICA", 15, 58);
+            doc.text("DOCUMENTO DE PROPUESTA TÉCNICA", 15, 62);
 
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(100, 116, 139);
-            doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 65);
+            doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 69);
+            doc.text("Fecha del evento: " + (currentEventDate !== '' ? currentEventDate : 'Pendiente de definir'), 125, 69);
 
             // Bloque 1: Parámetros del Proyecto
             doc.setFillColor(248, 250, 252);
-            doc.roundedRect(15, 75, 180, 52, 3, 3, 'F');
+            doc.roundedRect(15, 78, 180, 52, 3, 3, 'F');
 
             doc.setFont("helvetica", "bold");
-            doc.setTextColor(15, 23, 42);
-            doc.text("1. Parámetros del Proyecto:", 20, 85);
+            doc.setTextColor(79, 70, 229); // Indigo 600
+            doc.setFontSize(11);
+            doc.text("1. PARÁMETROS DEL PROYECTO", 20, 88);
 
-            let startY = 93;
+            let startY = 96;
             const lineHeight = 7;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
@@ -1214,21 +1260,23 @@
 
             // Bloque 2: Requisitos Técnicos / Rider
             doc.setFont("helvetica", "bold");
-            doc.setTextColor(15, 23, 42);
-            doc.text("2. Desglose de Requisitos Técnicos (Rider):", 15, 142);
+            doc.setTextColor(79, 70, 229);
+            doc.setFontSize(11);
+            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 142);
 
             doc.setFillColor(241, 245, 249);
-            doc.roundedRect(15, 150, 180, 45, 3, 3, 'F');
+            doc.roundedRect(15, 149, 180, 48, 3, 3, 'F');
 
-            startY = 160;
+            startY = 159;
             doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
             doc.setTextColor(51, 65, 85);
 
             let selectedRiders = [];
-            if(document.getElementById('chk-sonido').checked) selectedRiders.push("• Sonido Profesional PA & Microfonía Inalámbrica");
-            if(document.getElementById('chk-luz').checked) selectedRiders.push("• Iluminación Arquitectónica & Robótica DMX");
-            if(document.getElementById('chk-rigging').checked) selectedRiders.push("• Estructuras de Truss & Rigging Escénico");
-            if(document.getElementById('chk-video').checked) selectedRiders.push("• Pantalla LED / Vídeo en Directo & Técnico In Situ");
+            if(document.getElementById('chk-sonido').checked) selectedRiders.push("• Sonido Profesional PA & Microfonía Inalámbrica (+300€)");
+            if(document.getElementById('chk-luz').checked) selectedRiders.push("• Iluminación Arquitectónica & Robótica DMX (+450€)");
+            if(document.getElementById('chk-rigging').checked) selectedRiders.push("• Estructuras de Truss & Rigging Escénico (+500€)");
+            if(document.getElementById('chk-video').checked) selectedRiders.push("• Pantalla LED / Vídeo en Directo & Técnico In Situ (+900€)");
 
             if(selectedRiders.length === 0) {
                 selectedRiders.push("• Ningún servicio adicional seleccionado en el rider.");
@@ -1242,39 +1290,41 @@
             // Potencia
             const powerText = document.getElementById('summary-power').innerText;
             doc.setFont("helvetica", "bold");
-            doc.text(`• Requisito Eléctrico Estimado: `, 15, 207);
+            doc.setTextColor(15, 23, 42);
+            doc.text(`• Requisito Eléctrico Estimado: `, 15, 210);
             doc.setFont("helvetica", "normal");
-            doc.text(powerText, 72, 207);
+            doc.setTextColor(180, 83, 9); // Amber 600
+            doc.text(powerText, 72, 210);
 
             // Bloque 3: Total Presupuesto
             doc.setFillColor(79, 70, 229); // Indigo 600
-            doc.roundedRect(15, 218, 180, 24, 3, 3, 'F');
+            doc.roundedRect(15, 222, 180, 25, 3, 3, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
-            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 233);
+            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 237);
 
             const finalPrice = document.getElementById('summary-price').innerText;
-            doc.setFontSize(15);
-            doc.text(finalPrice, 155, 233);
+            doc.setFontSize(16);
+            doc.text(finalPrice, 150, 237);
 
             // Pie de página legal y contacto directo
             doc.setFontSize(8);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(100, 116, 139);
-            doc.text("¿Necesitas confirmar tu proyecto? Contáctanos en info@ap-events.es o al 613 08 98 94.", 15, 268);
+            doc.text("¿Necesitas confirmar tu fecha y proyecto? Contáctanos en info@ap-events.es o al 613 08 98 94.", 15, 268);
             doc.text("Dreamscape Events and Complete Productions, S.L. - NIF: B19859115 | Cobertura: Barcelona | Madrid | Valencia", 15, 275);
-            doc.text("Propuesta técnica orientativa sujeta a confirmación definitiva en recinto.", 15, 281);
+            doc.text("Propuesta técnica orientativa sujeta a confirmación definitiva de disponibilidad en recinto.", 15, 281);
 
-            // Descargar el PDF con el nombre personalizado solicitado
+            // Descargar el PDF con el nombre profesional
             doc.save("Propuesta_Tecnica_Dreamscape_Events.pdf");
         }
 
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
