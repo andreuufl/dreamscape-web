@@ -527,7 +527,7 @@
                         <div class="pt-2 space-y-2">
                             <!-- Botón Descargar PDF Pro -->
                             <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Resumen en PDF Pro
+                                <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Propuesta Técnica
                             </button>
 
                             <!-- Botón Traspasar al formulario -->
@@ -1154,12 +1154,12 @@
             }
         }
 
-        // Generador de PDF Pro con jsPDF (Lista limpia + Logo / Branding corporativo)
+        // Generador de PDF Pro con jsPDF (Propuesta Técnica Dreamscape Events)
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Cabecera Corporativa con Logo simulado en bloque superior
+            // Cabecera Corporativa con Bloque Oscuro y Branding
             doc.setFillColor(15, 23, 42); // Slate 950
             doc.rect(0, 0, 210, 42, 'F');
 
@@ -1171,21 +1171,21 @@
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(148, 163, 184); // Slate 400
-            doc.text("PRODUCCIÓN TÉCNICA E INTEGRAL DE EVENTOS", 15, 30);
+            doc.text("PROPUESTA TÉCNICA E INTEGRAL DE EVENTOS", 15, 30);
             doc.text("Email: info@ap-events.es | Tel: 613 08 98 94", 125, 30);
 
             // Título del Documento
             doc.setTextColor(15, 23, 42);
             doc.setFontSize(15);
             doc.setFont("helvetica", "bold");
-            doc.text("RESUMEN DE ESTIMACIÓN TÉCNICA", 15, 58);
+            doc.text("DOCUMENTO DE PROPUESTA TÉCNICA", 15, 58);
 
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(100, 116, 139);
             doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 65);
 
-            // Bloque 1: Parámetros del Proyecto (Lista)
+            // Bloque 1: Parámetros del Proyecto
             doc.setFillColor(248, 250, 252);
             doc.roundedRect(15, 75, 180, 52, 3, 3, 'F');
 
@@ -1212,7 +1212,7 @@
                 startY += lineHeight;
             });
 
-            // Bloque 2: Requisitos Técnicos / Rider (Lista)
+            // Bloque 2: Requisitos Técnicos / Rider
             doc.setFont("helvetica", "bold");
             doc.setTextColor(15, 23, 42);
             doc.text("2. Desglose de Requisitos Técnicos (Rider):", 15, 142);
@@ -1265,10 +1265,10 @@
             doc.setTextColor(100, 116, 139);
             doc.text("¿Necesitas confirmar tu proyecto? Contáctanos en info@ap-events.es o al 613 08 98 94.", 15, 268);
             doc.text("Dreamscape Events and Complete Productions, S.L. - NIF: B19859115 | Cobertura: Barcelona | Madrid | Valencia", 15, 275);
-            doc.text("Presupuesto orientativo sujeto a confirmación técnica definitiva en recinto.", 15, 281);
+            doc.text("Propuesta técnica orientativa sujeta a confirmación definitiva en recinto.", 15, 281);
 
-            // Descargar el PDF
-            doc.save("Presupuesto_Dreamscape_Events.pdf");
+            // Descargar el PDF con el nombre personalizado solicitado
+            doc.save("Propuesta_Tecnica_Dreamscape_Events.pdf");
         }
 
         function sendWhatsAppSimulation() {
