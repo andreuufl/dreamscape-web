@@ -327,7 +327,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON SELECTOR DE DURACIÓN)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (TRUSS FIJO)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -355,13 +355,13 @@
                         </div>
                     </div>
 
-                    <!-- Paso 2: Duración del Montaje (NUEVO) -->
+                    <!-- Paso 2: Duración del Montaje -->
                     <div class="space-y-3">
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Duración del Montaje / Evento</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
                             <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
-                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ days / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
                         </div>
                     </div>
 
@@ -397,7 +397,7 @@
                                     <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
                                 </div>
-                                <span class="text-xs text-indigo-300 font-semibold">+ 600€</span>
+                                <span class="text-xs text-amber-300 font-semibold">500€ (Fijo)</span>
                             </label>
                             <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
@@ -878,7 +878,7 @@
             
             <p><strong>Reclamaciones:</strong> Cualquier reclamación relativa a la prestación del servicio deberá comunicarse por escrito en un plazo máximo de 48 horas desde la finalización del mismo. Transcurrido dicho plazo, el servicio se considerará aceptado de conformidad.</p>
             
-            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de access, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
+            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
             
             <p><strong>Confidencialidad:</strong> Ambas partes se comprometen a mantener la confidencialidad sobre la información técnica, comercial o contractual a la que tengan acceso como consecuencia de la relación profesional, no pudiendo divulgarla a terceros sin autorización expresa, salvo obligación legal.</p>
             
@@ -940,7 +940,7 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos (Con duración y mini-rider)
+        // Lógica del Simulador de Presupuestos (Truss fijo y aforo modular)
         let currentEventName = 'Corporativo';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
@@ -984,11 +984,12 @@
         }
 
         function calculateTotal() {
-            let total = 0;
+            let scalableTotal = 0;
+            let fixedTotal = 0;
             let miniRiderHtml = '';
 
             if(document.getElementById('chk-sonido').checked) {
-                total += 300;
+                scalableTotal += 300;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-volume-high text-xs"></i></div>
@@ -996,23 +997,24 @@
                     </div>`;
             }
             if(document.getElementById('chk-luz').checked) {
-                total += 450;
+                scalableTotal += 450;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-lightbulb text-xs"></i></div>
                         <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Iluminación DMX</span><span class="block text-[10px] text-slate-500">Robótica & Focos</span></div>
                     </div>`;
             }
+            // RIGGING / TRUSS (PRECIO FIJO INDEPENDIENTE DEL AFORO)
             if(document.getElementById('chk-rigging').checked) {
-                total += 600;
+                fixedTotal += 500; // Precio fijo razonable
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-layer-group text-xs"></i></div>
-                        <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Truss & Rigging</span><span class="block text-[10px] text-slate-500">Estructura Escénica</span></div>
+                        <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Truss & Rigging</span><span class="block text-[10px] text-slate-500">Estructura Fija</span></div>
                     </div>`;
             }
             if(document.getElementById('chk-video').checked) {
-                total += 900;
+                scalableTotal += 900;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-tv text-xs"></i></div>
@@ -1020,12 +1022,15 @@
                     </div>`;
             }
 
-            if (total > 0) {
+            // Aplicar escalado por aforo solo a la parte scalableTotal
+            if (scalableTotal > 0) {
                 let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
-                total += attendeeExtra;
-                // Aplicar multiplicador de duración
-                total = Math.round(total * currentDurationMultiplier);
+                scalableTotal += attendeeExtra;
+                scalableTotal = Math.round(scalableTotal * currentDurationMultiplier);
             }
+
+            // El total final es la suma de la parte escalable (multiplicada por duración) + el fijo del truss (que no escala por aforo)
+            let total = scalableTotal + fixedTotal;
 
             if (miniRiderHtml === '') {
                 miniRiderHtml = `<div class="col-span-2 text-center py-3 text-xs text-slate-400 italic bg-slate-50 rounded-xl border border-slate-100">Ningún componente técnico seleccionado en el rider</div>`;
@@ -1117,7 +1122,7 @@
             }
 
             const items = document.querySelectorAll('.gallery-item');
-            items.forEach(i => {
+            items.items.forEach(i => {
                 if(cat === 'all') { i.style.display = 'block'; }
                 else { i.style.display = i.classList.contains(cat) ? 'block' : 'none'; }
             });
