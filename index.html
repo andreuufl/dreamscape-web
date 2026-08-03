@@ -377,7 +377,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON TÍTULO SEPARADO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (SIN HORARIO)
          ========================================================================= -->
     <section id="simulador" class="py-32 md:py-44 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -447,28 +447,18 @@
                             </div>
                         </div>
 
-                        <!-- Paso 5: Horario de Montaje -->
-                        <div class="space-y-3">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">5. Horario de Acceso y Montaje</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
-                                <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
-                                <button type="button" onclick="setSlot('Nocturno / Madrugada')" id="slot-n" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Nocturno</button>
-                            </div>
-                        </div>
-
-                        <!-- Paso 6: Aforo / Asistentes -->
+                        <!-- Paso 5: Aforo / Asistentes -->
                         <div class="space-y-3">
                             <div class="flex justify-between text-sm">
-                                <span class="font-bold uppercase tracking-wider text-indigo-300">6. Asistentes (Informativo)</span>
+                                <span class="font-bold uppercase tracking-wider text-indigo-300">5. Asistentes (Informativo)</span>
                                 <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
                             </div>
                             <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                         </div>
 
-                        <!-- Paso 7: Requisitos Técnicos (Rider) -->
+                        <!-- Paso 6: Requisitos Técnicos (Rider) -->
                         <div class="space-y-3">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">7. Requisitos Técnicos (Rider)</label>
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
                             <div class="space-y-3">
                                 <label id="box-sonido" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
@@ -531,10 +521,6 @@
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
                                 <span class="text-slate-500">Duración:</span>
                                 <span id="summary-duration" class="font-bold text-slate-900">1 Jornada (Día único)</span>
-                            </div>
-                            <div class="flex justify-between py-1.5 border-b border-slate-100">
-                                <span class="text-slate-500">Montaje:</span>
-                                <span id="summary-slot" class="font-bold text-slate-900">Mañana</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
                                 <span class="text-slate-500">Aforo orientativo:</span>
@@ -1075,7 +1061,6 @@
         let currentStageName = 'Sin tarima';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
-        let currentSlotName = 'Mañana';
         let currentAttendees = 150;
         let currentEventDate = '';
 
@@ -1156,22 +1141,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-
-            calculateTotal();
-        }
-
-        function setSlot(slotName) {
-            currentSlotName = slotName;
-
-            document.querySelectorAll('.sim-slot-btn').forEach(btn => {
-                btn.className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
-            });
-
-            if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1236,7 +1207,6 @@
             document.getElementById('summary-venue').innerText = currentVenueName;
             document.getElementById('summary-stage').innerText = currentStageName;
             document.getElementById('summary-duration').innerText = currentDurationName;
-            document.getElementById('summary-slot').innerText = currentSlotName;
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
             document.getElementById('summary-power').innerText = powerRecommendation;
             document.getElementById('summary-price').innerText = total.toLocaleString('es-ES') + ' €';
@@ -1253,7 +1223,7 @@
             if(document.getElementById('chk-rigging').checked) ridersText.push("Truss & Rigging");
             if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
             
-            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Tarima/Escenario: ${currentStageName}\n- Duración: ${currentDurationName}\n- Montaje: ${currentSlotName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
+            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Tarima/Escenario: ${currentStageName}\n- Duración: ${currentDurationName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
             
             const messageBox = document.getElementById('mensaje');
             if (messageBox) {
@@ -1279,7 +1249,6 @@
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(148, 163, 184); // Slate 400
-            doc.text("PROPUESTA TÉCNICA E INTEGRAL DE PRODUCCIÓN", 15, 30);
             doc.text("www.eventsandproductionsap.com  |  info@ap-events.es  |  Tel: 613 08 98 94", 15, 38);
 
             // Sello o indicador de documento oficial
@@ -1309,7 +1278,7 @@
 
             // 3. BLOQUE 1: PARÁMETROS DEL PROYECTO
             doc.setFillColor(248, 250, 252);
-            doc.roundedRect(15, 84, 180, 62, 3, 3, 'F');
+            doc.roundedRect(15, 84, 180, 55, 3, 3, 'F');
 
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229); // Indigo 600
@@ -1327,7 +1296,6 @@
                 `• Tipo de Recinto / Espacio: ${currentVenueName}`,
                 `• Configuración Escénica: ${currentStageName}`,
                 `• Duración del Montaje: ${currentDurationName}`,
-                `• Horario de Acceso y Carga: ${currentSlotName}`,
                 `• Aforo Orientativo: ${currentAttendees} asistentes`
             ];
 
@@ -1340,12 +1308,12 @@
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229);
             doc.setFontSize(11);
-            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 155);
+            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 149);
 
             doc.setFillColor(241, 245, 249);
-            doc.roundedRect(15, 162, 180, 48, 3, 3, 'F');
+            doc.roundedRect(15, 156, 180, 50, 3, 3, 'F');
 
-            startY = 172;
+            startY = 166;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             doc.setTextColor(51, 65, 85);
@@ -1376,28 +1344,28 @@
 
             // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE
             doc.setFillColor(238, 242, 255); // Indigo 50
-            doc.roundedRect(15, 218, 180, 22, 3, 3, 'F');
+            doc.roundedRect(15, 213, 180, 24, 3, 3, 'F');
             doc.setTextColor(67, 56, 202); // Indigo 700
             doc.setFont("helvetica", "bold");
             doc.setFontSize(9);
-            doc.text("GARANTÍA DREAMSCAPE:", 20, 226);
+            doc.text("GARANTÍA DREAMSCAPE:", 20, 222);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(51, 65, 85);
-            doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 233);
-            doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 238);
+            doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 229);
+            doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 234);
 
             // 6. BLOQUE 3: TOTAL PRESUPUESTO
             doc.setFillColor(79, 70, 229); // Indigo 600
-            doc.roundedRect(15, 246, 180, 22, 3, 3, 'F');
+            doc.roundedRect(15, 244, 180, 24, 3, 3, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
-            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 260);
+            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 259);
 
             const finalPrice = document.getElementById('summary-price').innerText;
             doc.setFontSize(16);
-            doc.text(finalPrice, 150, 260);
+            doc.text(finalPrice, 150, 259);
 
             // 7. PIE DE PÁGINA LEGAL Y CORPORATIVO
             doc.setFontSize(8);
@@ -1413,7 +1381,7 @@
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Tarima/Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Tarima/Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Asistentes: ${currentAttendees}%0A- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
