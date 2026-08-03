@@ -525,7 +525,7 @@
                         
                         <!-- BOTONES DE ACCIÓN AGRUPADOS ABAJO -->
                         <div class="pt-2 space-y-2">
-                            <!-- Botón Descargar PDF Pro -->
+                            <!-- Botón Descargar Propuesta Técnica -->
                             <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Propuesta Técnica
                             </button>
@@ -1074,8 +1074,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
