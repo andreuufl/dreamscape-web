@@ -1138,8 +1138,8 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1204,7 +1204,7 @@
             }
         }
 
-        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL (SIN TÉCNICO EN GARANTÍA)
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL (CON DOMINIO CORRECTO)
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1222,7 +1222,7 @@
             doc.setFont("helvetica", "normal");
             doc.setTextColor(148, 163, 184); // Slate 400
             doc.text("PROPUESTA TÉCNICA E INTEGRAL DE PRODUCCIÓN", 15, 30);
-            doc.text("www.dreamscape-events.es  |  info@ap-events.es  |  Tel: 613 08 98 94", 15, 38);
+            doc.text("www.eventsandproductionsap.com  |  info@ap-events.es  |  Tel: 613 08 98 94", 15, 38);
 
             // Sello o indicador de documento oficial
             doc.setFillColor(79, 70, 229);
