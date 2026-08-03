@@ -397,13 +397,13 @@
                 <!-- Opciones de Configuración -->
                 <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-aos="fade-right">
                     <div class="space-y-8">
-                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real (CENTRADÍSIMO EN MÓVIL) -->
-                        <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10 w-full max-w-full">
+                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real (CENTRADÍSIMO Y CORREGIDO EN MÓVIL) -->
+                        <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10 w-full">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                 <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
                                 <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
                             </div>
-                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer block box-border">
+                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer block box-border appearance-none">
                         </div>
 
                         <!-- Paso 1: Tipo de Evento -->
@@ -1110,7 +1110,7 @@
             });
 
             if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1124,8 +1124,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1138,8 +1138,8 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
