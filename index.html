@@ -371,7 +371,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON SELECTOR DE FECHA & URGENCIA)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -390,7 +390,7 @@
                 <!-- Opciones de Configuración -->
                 <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl" data-aos="fade-right">
                     
-                    <!-- NUEVO PASO: Selector de Fecha y Disponibilidad en Tiempo Real -->
+                    <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
                     <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10">
                         <div class="flex justify-between items-center">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
@@ -1068,9 +1068,8 @@
             currentEventDate = dateInput.value;
             if (summaryDate) summaryDate.innerText = currentEventDate;
 
-            // Simulación inteligente de urgencia según el día (Viernes o Sábado = Alta demanda)
             const selectedDate = new Date(dateInput.value);
-            const dayOfWeek = selectedDate.getDay(); // 5 = Viernes, 6 = Sábado
+            const dayOfWeek = selectedDate.getDay();
 
             if (dayOfWeek === 5 || dayOfWeek === 6) {
                 badge.className = "bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold animate-pulse";
@@ -1197,49 +1196,61 @@
             }
         }
 
-        // Generador de PDF Pro con jsPDF (Propuesta Técnica Dreamscape Events - Súper Currada)
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Cabecera Corporativa con Bloque Oscuro de Gran Impacto
+            // 1. BANNER SUPERIOR OSCURO (CORPORATE HEADER)
             doc.setFillColor(15, 23, 42); // Slate 950
-            doc.rect(0, 0, 210, 48, 'F');
+            doc.rect(0, 0, 210, 50, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
-            doc.setFontSize(22);
+            doc.setFontSize(24);
             doc.text("DREAMSCAPE EVENTS", 15, 22);
 
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(148, 163, 184); // Slate 400
-            doc.text("PROPUESTA TÉCNICA E INTEGRAL DE EVENTOS", 15, 30);
-            doc.text("www.dreamscape-events.es | info@ap-events.es", 15, 37);
-            doc.text("Tel: 613 08 98 94 | Cobertura: BCN | MAD | VLC", 125, 37);
+            doc.text("PROPUESTA TÉCNICA E INTEGRAL DE PRODUCCIÓN", 15, 30);
+            doc.text("www.dreamscape-events.es  |  info@ap-events.es  |  Tel: 613 08 98 94", 15, 38);
 
-            // Título y Fecha de Emisión
+            // Sello o indicador de documento oficial
+            doc.setFillColor(79, 70, 229);
+            doc.roundedRect(150, 15, 45, 12, 2, 2, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(8);
+            doc.text("DOSSIER OFICIAL", 157, 22);
+
+            // 2. TÍTULO DEL DOCUMENTO Y METADATOS
             doc.setTextColor(15, 23, 42);
             doc.setFontSize(16);
             doc.setFont("helvetica", "bold");
-            doc.text("DOCUMENTO DE PROPUESTA TÉCNICA", 15, 62);
+            doc.text("PROPUESTA TÉCNICA Y ESTIMACIÓN DE RIDER", 15, 64);
 
             doc.setFontSize(9);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(100, 116, 139);
-            doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 69);
-            doc.text("Fecha del evento: " + (currentEventDate !== '' ? currentEventDate : 'Pendiente de definir'), 125, 69);
+            doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 71);
+            doc.text("Fecha prevista del evento: " + (currentEventDate !== '' ? currentEventDate : 'A definir con el cliente'), 115, 71);
 
-            // Bloque 1: Parámetros del Proyecto
+            // Línea divisoria elegante
+            doc.setDrawColor(226, 232, 240);
+            doc.setLineWidth(0.5);
+            doc.line(15, 76, 195, 76);
+
+            // 3. BLOQUE 1: PARÁMETROS DEL PROYECTO
             doc.setFillColor(248, 250, 252);
-            doc.roundedRect(15, 78, 180, 52, 3, 3, 'F');
+            doc.roundedRect(15, 84, 180, 55, 3, 3, 'F');
 
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229); // Indigo 600
             doc.setFontSize(11);
-            doc.text("1. PARÁMETROS DEL PROYECTO", 20, 88);
+            doc.text("1. PARÁMETROS Y ALCANCE DEL PROYECTO", 20, 94);
 
-            let startY = 96;
+            let startY = 103;
             const lineHeight = 7;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
@@ -1247,9 +1258,9 @@
 
             const generalData = [
                 `• Tipo de Evento: ${currentEventName}`,
-                `• Tipo de Recinto: ${currentVenueName}`,
+                `• Tipo de Recinto / Espacio: ${currentVenueName}`,
                 `• Duración del Montaje: ${currentDurationName}`,
-                `• Horario de Acceso: ${currentSlotName}`,
+                `• Horario de Acceso y Carga: ${currentSlotName}`,
                 `• Aforo Orientativo: ${currentAttendees} asistentes`
             ];
 
@@ -1258,28 +1269,28 @@
                 startY += lineHeight;
             });
 
-            // Bloque 2: Requisitos Técnicos / Rider
+            // 4. BLOQUE 2: DESGLOSE TÉCNICO (RIDER)
             doc.setFont("helvetica", "bold");
             doc.setTextColor(79, 70, 229);
             doc.setFontSize(11);
-            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 142);
+            doc.text("2. DESGLOSE DE REQUISITOS TÉCNICOS (RIDER)", 15, 149);
 
             doc.setFillColor(241, 245, 249);
-            doc.roundedRect(15, 149, 180, 48, 3, 3, 'F');
+            doc.roundedRect(15, 156, 180, 50, 3, 3, 'F');
 
-            startY = 159;
+            startY = 166;
             doc.setFont("helvetica", "normal");
             doc.setFontSize(10);
             doc.setTextColor(51, 65, 85);
 
             let selectedRiders = [];
-            if(document.getElementById('chk-sonido').checked) selectedRiders.push("• Sonido Profesional PA & Microfonía Inalámbrica (+300€)");
-            if(document.getElementById('chk-luz').checked) selectedRiders.push("• Iluminación Arquitectónica & Robótica DMX (+450€)");
-            if(document.getElementById('chk-rigging').checked) selectedRiders.push("• Estructuras de Truss & Rigging Escénico (+500€)");
-            if(document.getElementById('chk-video').checked) selectedRiders.push("• Pantalla LED / Vídeo en Directo & Técnico In Situ (+900€)");
+            if(document.getElementById('chk-sonido').checked) selectedRiders.push("• Sonido Profesional PA & Microfonía Inalámbrica Avanzada");
+            if(document.getElementById('chk-luz').checked) selectedRiders.push("• Iluminación Arquitectónica & Robótica DMX Programada");
+            if(document.getElementById('chk-rigging').checked) selectedRiders.push("• Estructuras de Truss & Rigging Escénico Certificado");
+            if(document.getElementById('chk-video').checked) selectedRiders.push("• Pantalla LED / Vídeo en Directo con Técnico In Situ");
 
             if(selectedRiders.length === 0) {
-                selectedRiders.push("• Ningún servicio adicional seleccionado en el rider.");
+                selectedRiders.push("• Configuración base sin elementos adicionales de rider seleccionados.");
             }
 
             selectedRiders.forEach(item => {
@@ -1287,35 +1298,46 @@
                 startY += lineHeight;
             });
 
-            // Potencia
+            // Potencia eléctrica estimada con estilo técnico pro
             const powerText = document.getElementById('summary-power').innerText;
             doc.setFont("helvetica", "bold");
             doc.setTextColor(15, 23, 42);
-            doc.text(`• Requisito Eléctrico Estimado: `, 15, 210);
-            doc.setFont("helvetica", "normal");
+            doc.text(`• Carga Eléctrica Estimada: `, 20, startY + 2);
+            doc.setFont("helvetica", "bold");
             doc.setTextColor(180, 83, 9); // Amber 600
-            doc.text(powerText, 72, 210);
+            doc.text(powerText, 72, startY + 2);
 
-            // Bloque 3: Total Presupuesto
+            // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE
+            doc.setFillColor(238, 242, 255); // Indigo 50
+            doc.roundedRect(15, 213, 180, 24, 3, 3, 'F');
+            doc.setTextColor(67, 56, 202); // Indigo 700
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(9);
+            doc.text("GARANTÍA DREAMSCAPE:", 20, 222);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(51, 65, 85);
+            doc.text("Incluye retén técnico in situ, equipamiento redundante de respaldo y montajes estéticos", 20, 229);
+            doc.text("con ocultación absoluta de cableado para garantizar la excelencia en directo.", 20, 234);
+
+            // 6. BLOQUE 3: TOTAL PRESUPUESTO
             doc.setFillColor(79, 70, 229); // Indigo 600
-            doc.roundedRect(15, 222, 180, 25, 3, 3, 'F');
+            doc.roundedRect(15, 244, 180, 24, 3, 3, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
-            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 237);
+            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 259);
 
             const finalPrice = document.getElementById('summary-price').innerText;
             doc.setFontSize(16);
-            doc.text(finalPrice, 150, 237);
+            doc.text(finalPrice, 150, 259);
 
-            // Pie de página legal y contacto directo
+            // 7. PIE DE PÁGINA LEGAL Y CORPORATIVO
             doc.setFontSize(8);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(100, 116, 139);
-            doc.text("¿Necesitas confirmar tu fecha y proyecto? Contáctanos en info@ap-events.es o al 613 08 98 94.", 15, 268);
-            doc.text("Dreamscape Events and Complete Productions, S.L. - NIF: B19859115 | Cobertura: Barcelona | Madrid | Valencia", 15, 275);
-            doc.text("Propuesta técnica orientativa sujeta a confirmación definitiva de disponibilidad en recinto.", 15, 281);
+            doc.text("Dreamscape Events and Complete Productions, S.L.  |  NIF: B19859115  |  Cobertura: Barcelona, Madrid, Valencia", 15, 278);
+            doc.text("Este documento es una propuesta técnica orientativa sujeta a validación final de accesos y recinto.", 15, 283);
 
             // Descargar el PDF con el nombre profesional
             doc.save("Propuesta_Tecnica_Dreamscape_Events.pdf");
