@@ -327,7 +327,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (TRUSS FIJO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (TRUSS ESCALA CON DURACIÓN)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -361,7 +361,7 @@
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
                             <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
-                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ days / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
                         </div>
                     </div>
 
@@ -397,7 +397,7 @@
                                     <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                     <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
                                 </div>
-                                <span class="text-xs text-amber-300 font-semibold">500€ (Fijo)</span>
+                                <span class="text-xs text-amber-300 font-semibold">+ 500€ (Fijo x Duración)</span>
                             </label>
                             <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
@@ -940,7 +940,7 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos (Truss fijo y aforo modular)
+        // Lógica del Simulador de Presupuestos (Truss fijo escalable por duración, aforo modular para el resto)
         let currentEventName = 'Corporativo';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
@@ -985,7 +985,7 @@
 
         function calculateTotal() {
             let scalableTotal = 0;
-            let fixedTotal = 0;
+            let trussTotal = 0;
             let miniRiderHtml = '';
 
             if(document.getElementById('chk-sonido').checked) {
@@ -1004,13 +1004,13 @@
                         <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Iluminación DMX</span><span class="block text-[10px] text-slate-500">Robótica & Focos</span></div>
                     </div>`;
             }
-            // RIGGING / TRUSS (PRECIO FIJO INDEPENDIENTE DEL AFORO)
+            // TRUSS / RIGGING (FIJO DE 500€ MULTIPLICADO POR LA DURACIÓN, INDEPENDIENTE DEL AFORO)
             if(document.getElementById('chk-rigging').checked) {
-                fixedTotal += 500; // Precio fijo razonable
+                trussTotal = Math.round(500 * currentDurationMultiplier);
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-layer-group text-xs"></i></div>
-                        <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Truss & Rigging</span><span class="block text-[10px] text-slate-500">Estructura Fija</span></div>
+                        <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Truss & Rigging</span><span class="block text-[10px] text-slate-500">Estructura Escénica</span></div>
                     </div>`;
             }
             if(document.getElementById('chk-video').checked) {
@@ -1022,15 +1022,15 @@
                     </div>`;
             }
 
-            // Aplicar escalado por aforo solo a la parte scalableTotal
+            // Escalar sonido/luz/vídeo por aforo y duración
             if (scalableTotal > 0) {
                 let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
                 scalableTotal += attendeeExtra;
                 scalableTotal = Math.round(scalableTotal * currentDurationMultiplier);
             }
 
-            // El total final es la suma de la parte escalable (multiplicada por duración) + el fijo del truss (que no escala por aforo)
-            let total = scalableTotal + fixedTotal;
+            // Total final = parte escalable por aforo + truss fijo escalado por duración
+            let total = scalableTotal + trussTotal;
 
             if (miniRiderHtml === '') {
                 miniRiderHtml = `<div class="col-span-2 text-center py-3 text-xs text-slate-400 italic bg-slate-50 rounded-xl border border-slate-100">Ningún componente técnico seleccionado en el rider</div>`;
@@ -1122,7 +1122,7 @@
             }
 
             const items = document.querySelectorAll('.gallery-item');
-            items.items.forEach(i => {
+            items.forEach(i => {
                 if(cat === 'all') { i.style.display = 'block'; }
                 else { i.style.display = i.classList.contains(cat) ? 'block' : 'none'; }
             });
