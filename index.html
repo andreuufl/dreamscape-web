@@ -377,20 +377,20 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON TARIMA AUTOMÁTICA)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ESPACIADO SUPERIOR AJUSTADO)
          ========================================================================= -->
-    <section id="simulador" class="py-32 md:py-44 bg-indigo-950 text-white relative overflow-hidden">
+    <section id="simulador" class="py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
             <div class="absolute top-10 left-10 w-96 h-96 bg-indigo-500 rounded-full blur-[128px]"></div>
             <div class="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500 rounded-full blur-[128px]"></div>
         </div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- TÍTULO SEPARADO CORRECTAMENTE -->
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
-                <span class="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">Herramienta Interactiva</span>
-                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-4">Simulador de Rider & Presupuesto</h2>
-                <p class="text-slate-300 text-lg mt-4">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
+            <!-- TÍTULO CON ESPACIADO EQUILIBRADO -->
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-aos="fade-up">
+                <span class="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">Herramienta Interactiva</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-2">Simulador de Rider & Presupuesto</h2>
+                <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
             </div>
 
             <!-- CONTENEDOR GRID CON IGUALACIÓN DE ALTURA (LG:FLEX) -->
@@ -426,7 +426,7 @@
                             </div>
                         </div>
 
-                        <!-- Configuración de Tarima / Escenario (CON AUTOMATIZACIÓN DE ESCENOGRAFÍA) -->
+                        <!-- Configuración de Tarima / Escenario (INFORMATIVO SIN SOBRECOSTES) -->
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Configuración de Tarima / Escenario</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1126,22 +1126,18 @@
 
             if(stageName === 'Sin tarima') {
                 document.getElementById('stage-0').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                // Desmarcar automáticamente la escenografía si se elige sin tarima
                 document.getElementById('chk-rigging').checked = false;
             }
             if(stageName === 'A ras de suelo') {
                 document.getElementById('stage-1').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                // Seleccionar automáticamente escenografía
                 document.getElementById('chk-rigging').checked = true;
             }
             if(stageName === 'A 20 o 40cm') {
                 document.getElementById('stage-2').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                // Seleccionar automáticamente escenografía
                 document.getElementById('chk-rigging').checked = true;
             }
             if(stageName === '60cm o más') {
                 document.getElementById('stage-3').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                // Seleccionar automáticamente escenografía
                 document.getElementById('chk-rigging').checked = true;
             }
 
