@@ -377,7 +377,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ALTURAS IGUALADAS)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ALTURAS IGUALADAS Y CHECKBOXES AZULES)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -397,7 +397,7 @@
                 <!-- Opciones de Configuración -->
                 <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-aos="fade-right">
                     <div class="space-y-8">
-                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real (CENTRADÍSIMO Y CORREGIDO EN MÓVIL) -->
+                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
                         <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10 w-full">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                 <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
@@ -454,32 +454,32 @@
                             <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                         </div>
 
-                        <!-- Paso 6: Requisitos Técnicos (Rider) -->
+                        <!-- Paso 6: Requisitos Técnicos (Rider) con cambio de color dinámico -->
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
                             <div class="space-y-3">
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                <label id="box-sonido" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-sonido" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Sonido Profesional PA & Microfonía Inalámbrica</span>
                                     </div>
                                     <span class="text-xs text-indigo-300 font-semibold">+ 300€</span>
                                 </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                <label id="box-luz" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-luz" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Iluminación Arquitectónica & Robótica DMX</span>
                                     </div>
                                     <span class="text-xs text-indigo-300 font-semibold">+ 450€</span>
                                 </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                <label id="box-rigging" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
                                     </div>
                                     <span class="text-xs text-amber-300 font-semibold">+ 500€ (Fijo x Duración)</span>
                                 </label>
-                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                <label id="box-video" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-video" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Pantalla LED / Vídeo en Directo & Técnico In Situ</span>
@@ -1110,7 +1110,7 @@
             });
 
             if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer shadow-md";
+            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1124,8 +1124,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1138,8 +1138,8 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1154,20 +1154,46 @@
             let total = 0;
             let totalKw = 2;
 
-            if(document.getElementById('chk-sonido').checked) {
+            const sonidoChecked = document.getElementById('chk-sonido').checked;
+            const luzChecked = document.getElementById('chk-luz').checked;
+            const riggingChecked = document.getElementById('chk-rigging').checked;
+            const videoChecked = document.getElementById('chk-video').checked;
+
+            // Actualizar colores de selección de los cuadros de requisitos técnicos
+            const boxSonido = document.getElementById('box-sonido');
+            const boxLuz = document.getElementById('box-luz');
+            const boxRigging = document.getElementById('box-rigging');
+            const boxVideo = document.getElementById('box-video');
+
+            if (sonidoChecked) {
+                boxSonido.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
                 total += Math.round(300 * currentDurationMultiplier);
                 totalKw += 4.5;
+            } else {
+                boxSonido.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
             }
-            if(document.getElementById('chk-luz').checked) {
+
+            if (luzChecked) {
+                boxLuz.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
                 total += Math.round(450 * currentDurationMultiplier);
                 totalKw += 5.0;
+            } else {
+                boxLuz.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
             }
-            if(document.getElementById('chk-rigging').checked) {
+
+            if (riggingChecked) {
+                boxRigging.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
                 total += Math.round(500 * currentDurationMultiplier);
+            } else {
+                boxRigging.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
             }
-            if(document.getElementById('chk-video').checked) {
+
+            if (videoChecked) {
+                boxVideo.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
                 total += Math.round(900 * currentDurationMultiplier);
                 totalKw += 6.5;
+            } else {
+                boxVideo.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
             }
 
             let powerRecommendation = `~${totalKw} kW (Monofásica)`;
@@ -1204,7 +1230,7 @@
             }
         }
 
-        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL (CON DOMINIO CORRECTO)
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1315,7 +1341,7 @@
             doc.setTextColor(180, 83, 9); // Amber 600
             doc.text(powerText, 72, startY + 2);
 
-            // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE (SIN TÉCNICO)
+            // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE
             doc.setFillColor(238, 242, 255); // Indigo 50
             doc.roundedRect(15, 213, 180, 24, 3, 3, 'F');
             doc.setTextColor(67, 56, 202); // Indigo 700
