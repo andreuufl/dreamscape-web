@@ -328,9 +328,7 @@
         </div>
     </section>
 
-    <!-- =========================================================================
-         SECCIÓN NUEVA: SELLO DE GARANTÍA Y SLA TÉCNICO (SLA & CONFIANZA PRO)
-         ========================================================================= -->
+    <!-- SELLO DE GARANTÍA Y SLA TÉCNICO -->
     <section class="py-16 bg-white border-y border-slate-100 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
@@ -396,8 +394,8 @@
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="setEventType('Corporativo')" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
-                            <button type="button" onclick="setEventType('Congreso / Feria')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
-                            <button type="button" onclick="setEventType('Boda / Gala')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
+                            <button type="button" onclick="setEventType('Congreso / Feria')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
+                            <button type="button" onclick="setEventType('Boda / Gala')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
                         </div>
                     </div>
 
@@ -406,7 +404,7 @@
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
                         <div class="grid grid-cols-2 gap-3">
                             <button type="button" onclick="setVenue('Interior / Salón')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
-                            <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
+                            <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
                         </div>
                     </div>
 
@@ -415,8 +413,8 @@
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Duración del Montaje / Evento</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
-                            <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
-                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                            <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
+                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
                         </div>
                     </div>
 
@@ -425,8 +423,8 @@
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Horario de Acceso y Montaje</label>
                         <div class="grid grid-cols-3 gap-2">
                             <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
-                            <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
-                            <button type="button" onclick="setSlot('Nocturno / Madrugada')" id="slot-n" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Nocturno</button>
+                            <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
+                            <button type="button" onclick="setSlot('Nocturno / Madrugada')" id="slot-n" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Nocturno</button>
                         </div>
                     </div>
 
@@ -475,16 +473,11 @@
                     </div>
                 </div>
 
-                <!-- Resumen Limpio con Datos de Contacto y Botón de Volcado -->
+                <!-- Resumen Limpio con Todos los Botones Agrupados Abajo -->
                 <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" data-aos="fade-left">
-                    <div class="border-b border-slate-100 pb-4 flex justify-between items-start">
-                        <div>
-                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
-                            <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
-                        </div>
-                        <button onclick="downloadProfessionalPDF()" class="bg-slate-950 hover:bg-indigo-600 text-white p-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm" title="Descargar PDF Pro">
-                            <i class="fa-solid fa-file-pdf text-sm"><span>PDF Pro</span></i>
-                        </button>
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
+                        <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
                     </div>
 
                     <div class="space-y-3 text-sm">
@@ -522,22 +515,33 @@
                         <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
                     </div>
 
-                    <!-- Apartado de Contacto Rápido y Volcado al Formulario -->
+                    <!-- Apartado de Contacto Rápido y Botones de Acción Agrupados -->
                     <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center space-y-3">
                         <span class="block text-xs font-bold uppercase tracking-wider text-indigo-900">¿Dudas o proyecto a medida?</span>
                         <p class="text-xs text-indigo-700">Contáctanos ahora directamente:</p>
                         <a href="mailto:info@ap-events.es" class="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-800 text-sm">
                             <i class="fa-solid fa-envelope"></i> info@ap-events.es
                         </a>
-                        <button type="button" onclick="transferToContactForm()" class="w-full mt-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i> Traspasar configuración al formulario
-                        </button>
-                    </div>
+                        
+                        <!-- BOTONES DE ACCIÓN AGRUPADOS ABAJO -->
+                        <div class="pt-2 space-y-2">
+                            <!-- Botón Descargar PDF Pro -->
+                            <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Resumen en PDF Pro
+                            </button>
 
-                    <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
-                        <i class="fa-brands fa-whatsapp text-xl"></i> Contáctanos ahora por WhatsApp
-                    </a>
-                    <p class="text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad.</p>
+                            <!-- Botón Traspasar al formulario -->
+                            <button type="button" onclick="transferToContactForm()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane text-sm"></i> Traspasar configuración al formulario
+                            </button>
+
+                            <!-- Botón WhatsApp -->
+                            <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Contáctanos ahora por WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp o el formulario con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad.</p>
                 </div>
             </div>
         </div>
@@ -964,7 +968,7 @@
             
             <p><strong>Reclamaciones:</strong> Cualquier reclamación relativa a la prestación del servicio deberá comunicarse por escrito en un plazo máximo de 48 horas desde la finalización del mismo. Transcurrido dicho plazo, el servicio se considerará aceptado de conformidad.</p>
             
-            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
+            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. El datos no serán cedidos a terceros salvo obligación legal.</p>
             
             <p><strong>Confidencialidad:</strong> Ambas partes se comprometen a mantener la confidencialidad sobre la información técnica, comercial o contractual a la que tengan acceso como consecuencia de la relación profesional, no pudiendo divulgarla a terceros sin autorización expresa, salvo obligación legal.</p>
             
@@ -1356,7 +1360,7 @@
 
     <!-- Chatbase AI Assistant Script con animación aplicada -->
     <script>
-    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="fs1m6mhrbVMf-Fm4ju8VF";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="fs1m6mhrbVMf-Fm4ju8VF";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="completekker"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
 </body>
 </html>
