@@ -425,13 +425,14 @@
                             </div>
                         </div>
 
-                        <!-- Configuración de Tarima / Escenario Modular -->
+                        <!-- Configuración de Tarima / Escenario (INFORMATIVO SIN SOBRECOSTES) -->
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Configuración de Tarima / Escenario</label>
-                            <div class="grid grid-cols-3 gap-2">
-                                <button type="button" onclick="setStage('A ras de suelo (Sin tarima)', 0)" id="stage-0" class="sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">A ras de suelo</button>
-                                <button type="button" onclick="setStage('Tarima modular 20cm', 150)" id="stage-1" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarima 20cm (+150€)</button>
-                                <button type="button" onclick="setStage('Escenario 60cm con faldas M1', 300)" id="stage-2" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Escenario 60cm (+300€)</button>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                <button type="button" onclick="setStage('Sin tarima')" id="stage-0" class="sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Sin tarima</button>
+                                <button type="button" onclick="setStage('A ras de suelo')" id="stage-1" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A ras de suelo</button>
+                                <button type="button" onclick="setStage('A 20 o 40cm')" id="stage-2" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A 20 a 40cm</button>
+                                <button type="button" onclick="setStage('60cm o más')" id="stage-3" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">60cm o más</button>
                             </div>
                         </div>
 
@@ -524,7 +525,7 @@
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
                                 <span class="text-slate-500">Escenario:</span>
-                                <span id="summary-stage" class="font-bold text-slate-900">A ras de suelo</span>
+                                <span id="summary-stage" class="font-bold text-slate-900">Sin tarima</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-100">
                                 <span class="text-slate-500">Duración:</span>
@@ -1070,8 +1071,7 @@
         // Lógica del Simulador de Presupuestos
         let currentEventName = 'Corporativo';
         let currentVenueName = 'Interior / Salón';
-        let currentStageName = 'A ras de suelo (Sin tarima)';
-        let currentStageCost = 0;
+        let currentStageName = 'Sin tarima';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
         let currentSlotName = 'Mañana';
@@ -1131,17 +1131,17 @@
             calculateTotal();
         }
 
-        function setStage(stageName, stageCost) {
+        function setStage(stageName) {
             currentStageName = stageName;
-            currentStageCost = stageCost;
 
             document.querySelectorAll('.sim-stage-btn').forEach(btn => {
-                btn.className = "sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
+                btn.className = "sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
             });
 
-            if(stageCost === 0) document.getElementById('stage-0').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(stageCost === 150) document.getElementById('stage-1').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(stageCost === 300) document.getElementById('stage-2').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-3 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageName === 'Sin tarima') document.getElementById('stage-0').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageName === 'A ras de suelo') document.getElementById('stage-1').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageName === 'A 20 o 40cm') document.getElementById('stage-2').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(stageName === '60cm o más') document.getElementById('stage-3').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1169,8 +1169,8 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
+            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1182,7 +1182,7 @@
         }
 
         function calculateTotal() {
-            let total = currentStageCost;
+            let total = 0;
             let totalKw = 2;
 
             const sonidoChecked = document.getElementById('chk-sonido').checked;
