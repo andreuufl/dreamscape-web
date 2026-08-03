@@ -1244,7 +1244,7 @@
             }
         }
 
-        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL CON LINK EN DOSSIER OFICIAL
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1263,13 +1263,15 @@
             doc.setTextColor(148, 163, 184); // Slate 400
             doc.text("www.eventsandproductionsap.com  |  info@ap-events.es  |  Tel: 613 08 98 94", 15, 38);
 
-            // Sello o indicador de documento oficial
+            // Botón / Cuadrado interactivo con enlace web al Dossier de Canva
             doc.setFillColor(79, 70, 229);
             doc.roundedRect(150, 15, 45, 12, 2, 2, 'F');
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(8);
             doc.text("DOSSIER OFICIAL", 157, 22);
+            // Añadir enlace clicable sobre el rectángulo azul
+            doc.link(150, 15, 45, 12, { url: 'https://www.canva.com/design/DAHPMjNXFKs/PwQA5sTbB76s6Mi_Be8S4w/view?utm_content=DAHPMjNXFKs&utm_campaign=designshare&utm_medium=link&utm_source=viewer' });
 
             // 2. TÍTULO DEL DOCUMENTO Y METADATOS
             doc.setTextColor(15, 23, 42);
