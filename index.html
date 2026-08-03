@@ -241,7 +241,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PORFOLIO (GALERÍA AVANZADA FILTRABLE POR TIPO DE RECINTO) -->
+    <!-- SECCIÓN DE PORFOLIO -->
     <section id="porfolio" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-16" data-aos="fade-up">
@@ -377,7 +377,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ALTURAS IGUALADAS)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ICONOS DE VERIFICACIÓN)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -454,7 +454,7 @@
                             <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                         </div>
 
-                        <!-- Paso 6: Requisitos Técnicos (Rider) -->
+                        <!-- Paso 6: Requisitos Técnicos (Rider) CON SIMBOLITOS DE SELECCIÓN VISIBLES -->
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
                             <div class="space-y-3">
@@ -1124,8 +1124,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -1138,7 +1138,7 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
             if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
@@ -1229,7 +1229,7 @@
             }
         }
 
-        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL (CON DOMINIO CORRECTO)
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
