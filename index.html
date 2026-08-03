@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS - Animate On Scroll Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- jsPDF Library para generar PDFs profesionales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     
     <style>
         /* Subrayado animado en el menú */
@@ -75,27 +77,6 @@
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.6); }
             50% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(79, 70, 229, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
-        }
-
-        /* Estilo específico para la impresión limpia del PDF del simulador */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            #simulador-resumen-card, #simulador-resumen-card * {
-                visibility: visible;
-            }
-            #simulador-resumen-card {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                box-shadow: none !important;
-                border: none !important;
-            }
-            .no-print {
-                display: none !important;
-            }
         }
         
         [data-aos] {
@@ -348,7 +329,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ACTUALIZADO SIN ZONA NI PLANO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON GENERADOR DE PDF PRO)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -365,7 +346,7 @@
 
             <div class="grid lg:grid-cols-12 gap-8 items-start">
                 <!-- Opciones de Configuración -->
-                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl no-print" data-aos="fade-right">
+                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl" data-aos="fade-right">
                     <!-- Paso 1: Tipo de Evento -->
                     <div class="space-y-3">
                         <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
@@ -451,14 +432,14 @@
                 </div>
 
                 <!-- Resumen Limpio -->
-                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" id="simulador-resumen-card" data-aos="fade-left">
+                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" data-aos="fade-left">
                     <div class="border-b border-slate-100 pb-4 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
                             <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
                         </div>
-                        <button onclick="downloadPDF()" class="no-print bg-slate-950 hover:bg-indigo-600 text-white p-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm" title="Descargar PDF">
-                            <i class="fa-solid fa-file-pdf text-sm"><span>PDF</span></i>
+                        <button onclick="downloadProfessionalPDF()" class="bg-slate-950 hover:bg-indigo-600 text-white p-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-sm" title="Descargar PDF Pro">
+                            <i class="fa-solid fa-file-pdf text-sm"><span>PDF Pro</span></i>
                         </button>
                     </div>
 
@@ -497,10 +478,10 @@
                         <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
                     </div>
 
-                    <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="no-print block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
+                    <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-2xl shadow-lg transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
                         <i class="fa-brands fa-whatsapp text-xl"></i> Enviar Configuración por WhatsApp
                     </a>
-                    <p class="no-print text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad y presupuesto cerrado.</p>
+                    <p class="text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad y presupuesto cerrado.</p>
                 </div>
             </div>
         </div>
@@ -989,7 +970,7 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos (Actualizada sin zona ni plano)
+        // Lógica del Simulador de Presupuestos
         let currentEventName = 'Corporativo';
         let currentVenueName = 'Interior / Salón';
         let currentDurationMultiplier = 1;
@@ -1065,25 +1046,21 @@
 
         function calculateTotal() {
             let total = 0;
-            let totalKw = 2; // Base de consumo de iluminación de sala / auxiliares
+            let totalKw = 2;
 
             if(document.getElementById('chk-sonido').checked) {
-                let sonidoPrice = Math.round(300 * currentDurationMultiplier);
-                total += sonidoPrice;
+                total += Math.round(300 * currentDurationMultiplier);
                 totalKw += 4.5;
             }
             if(document.getElementById('chk-luz').checked) {
-                let luzPrice = Math.round(450 * currentDurationMultiplier);
-                total += luzPrice;
+                total += Math.round(450 * currentDurationMultiplier);
                 totalKw += 5.0;
             }
             if(document.getElementById('chk-rigging').checked) {
-                let trussPrice = Math.round(500 * currentDurationMultiplier);
-                total += trussPrice;
+                total += Math.round(500 * currentDurationMultiplier);
             }
             if(document.getElementById('chk-video').checked) {
-                let videoPrice = Math.round(900 * currentDurationMultiplier);
-                total += videoPrice;
+                total += Math.round(900 * currentDurationMultiplier);
                 totalKw += 6.5;
             }
 
@@ -1101,8 +1078,121 @@
             document.getElementById('summary-price').innerText = total.toLocaleString('es-ES') + ' €';
         }
 
-        function downloadPDF() {
-            window.print();
+        // Generador de PDF Pro con jsPDF (Estilo factura/presupuesto técnico limpio con lista y logo corporativo)
+        function downloadProfessionalPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Cabecera Corporativa
+            doc.setFillColor(15, 23, 42); // Fondo oscuro elegante (Slate 950)
+            doc.rect(0, 0, 210, 40, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.text("DREAMSCAPE EVENTS", 15, 22);
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(148, 163, 184); // Slate 400
+            doc.text("PRODUCCIÓN TÉCNICA E INTEGRAL DE EVENTOS", 15, 29);
+            doc.text("Barcelona | Madrid | Valencia", 155, 29);
+
+            // Título del Documento
+            doc.setTextColor(15, 23, 42);
+            doc.setFontSize(16);
+            doc.setFont("helvetica", "bold");
+            doc.text("RESUMEN DE ESTIMACIÓN TÉCNICA", 15, 55);
+
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(100, 116, 139);
+            doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 62);
+
+            // Datos Generales en Formato Lista
+            doc.setFillColor(248, 250, 252);
+            doc.roundedRect(15, 72, 180, 50, 3, 3, 'F');
+
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(15, 23, 42);
+            doc.text("Parámetros del Proyecto:", 20, 82);
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.setTextColor(51, 65, 85);
+
+            let startY = 90;
+            const lineHeight = 7;
+
+            const generalData = [
+                `• Tipo de Evento: ${currentEventName}`,
+                `• Tipo de Recinto: ${currentVenueName}`,
+                `• Duración del Montaje: ${currentDurationName}`,
+                `• Horario de Acceso: ${currentSlotName}`,
+                `• Aforo Orientativo: ${currentAttendees} asistentes`
+            ];
+
+            generalData.forEach(item => {
+                doc.text(item, 20, startY);
+                startY += lineHeight;
+            });
+
+            // Requisitos Técnicos Seleccionados (Rider)
+            doc.setFont("helvetica", "bold");
+            doc.setTextColor(15, 23, 42);
+            doc.text("Desglose de Requisitos Técnicos (Rider):", 15, 135);
+
+            doc.setFillColor(241, 245, 249);
+            doc.roundedRect(15, 142, 180, 45, 3, 3, 'F');
+
+            startY = 152;
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(51, 65, 85);
+
+            let selectedRiders = [];
+            if(document.getElementById('chk-sonido').checked) selectedRiders.push("• Sonido Profesional PA & Microfonía Inalámbrica");
+            if(document.getElementById('chk-luz').checked) selectedRiders.push("• Iluminación Arquitectónica & Robótica DMX");
+            if(document.getElementById('chk-rigging').checked) selectedRiders.push("• Estructuras de Truss & Rigging Escénico");
+            if(document.getElementById('chk-video').checked) selectedRiders.push("• Pantalla LED / Vídeo en Directo & Técnico In Situ");
+
+            if(selectedRiders.length === 0) {
+                selectedRiders.push("• Ningún servicio adicional seleccionado en el rider.");
+            }
+
+            selectedRiders.forEach(item => {
+                doc.text(item, 20, startY);
+                startY += lineHeight;
+            });
+
+            // Potencia Estimada
+            const powerText = document.getElementById('summary-power').innerText;
+            doc.setFont("helvetica", "bold");
+            doc.text(`Requisito Eléctrico Estimado: `, 15, 198);
+            doc.setFont("helvetica", "normal");
+            doc.text(powerText, 70, 198);
+
+            // Total Presupuesto Estimado
+            doc.setFillColor(79, 70, 229); // Indigo 600
+            doc.roundedRect(15, 210, 180, 25, 3, 3, 'F');
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 226);
+
+            const finalPrice = document.getElementById('summary-price').innerText;
+            doc.setFontSize(16);
+            doc.text(finalPrice, 155, 226);
+
+            // Pie de página legal
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(148, 163, 184);
+            doc.text("Dreamscape Events and Complete Productions, S.L. - NIF: B19859115", 15, 275);
+            doc.text("Presupuesto orientativo sujeto a confirmación técnica definitiva en recinto.", 15, 280);
+
+            // Descargar el PDF
+            doc.save("Presupuesto_Dreamscape_Events.pdf");
         }
 
         function sendWhatsAppSimulation() {
