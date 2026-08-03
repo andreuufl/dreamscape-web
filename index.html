@@ -371,7 +371,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON ALTURAS IGUALADAS)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -386,176 +386,179 @@
                 <p class="text-slate-300 text-lg">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
             </div>
 
-            <div class="grid lg:grid-cols-12 gap-8 items-start">
+            <!-- CONTENEDOR GRID CON IGUALACIÓN DE ALTURA (LG:FLEX) -->
+            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
                 <!-- Opciones de Configuración -->
-                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl" data-aos="fade-right">
-                    
-                    <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
-                    <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10">
-                        <div class="flex justify-between items-center">
-                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
-                            <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
+                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-aos="fade-right">
+                    <div class="space-y-8">
+                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
+                        <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10">
+                            <div class="flex justify-between items-center">
+                                <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
+                                <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
+                            </div>
+                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer">
                         </div>
-                        <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer">
-                    </div>
 
-                    <!-- Paso 1: Tipo de Evento -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setEventType('Corporativo')" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
-                            <button type="button" onclick="setEventType('Congreso / Feria')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
-                            <button type="button" onclick="setEventType('Boda / Gala')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
-                        </div>
-                    </div>
-
-                    <!-- Paso 2: Tipo de Recinto -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button type="button" onclick="setVenue('Interior / Salón')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
-                            <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
-                        </div>
-                    </div>
-
-                    <!-- Paso 3: Duración del Montaje -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Duración del Montaje / Evento</label>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
-                            <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
-                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
-                        </div>
-                    </div>
-
-                    <!-- Paso 4: Horario de Montaje -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Horario de Acceso y Montaje</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
-                            <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
-                            <button type="button" onclick="setSlot('Nocturno / Madrugada')" id="slot-n" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Nocturno</button>
-                        </div>
-                    </div>
-
-                    <!-- Paso 5: Aforo / Asistentes -->
-                    <div class="space-y-3">
-                        <div class="flex justify-between text-sm">
-                            <span class="font-bold uppercase tracking-wider text-indigo-300">5. Asistentes (Informativo)</span>
-                            <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
-                        </div>
-                        <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
-                    </div>
-
-                    <!-- Paso 6: Requisitos Técnicos (Rider) -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
+                        <!-- Paso 1: Tipo de Evento -->
                         <div class="space-y-3">
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
-                                <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-sonido" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                                    <span class="text-sm font-medium">Sonido Profesional PA & Microfonía Inalámbrica</span>
-                                </div>
-                                <span class="text-xs text-indigo-300 font-semibold">+ 300€</span>
-                            </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
-                                <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-luz" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                                    <span class="text-sm font-medium">Iluminación Arquitectónica & Robótica DMX</span>
-                                </div>
-                                <span class="text-xs text-indigo-300 font-semibold">+ 450€</span>
-                            </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
-                                <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                                    <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
-                                </div>
-                                <span class="text-xs text-amber-300 font-semibold">+ 500€ (Fijo x Duración)</span>
-                            </label>
-                            <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
-                                <div class="flex items-center space-x-3">
-                                    <input type="checkbox" id="chk-video" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
-                                    <span class="text-sm font-medium">Pantalla LED / Vídeo en Directo & Técnico In Situ</span>
-                                </div>
-                                <span class="text-xs text-indigo-300 font-semibold">+ 900€</span>
-                            </label>
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <button type="button" onclick="setEventType('Corporativo')" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
+                                <button type="button" onclick="setEventType('Congreso / Feria')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
+                                <button type="button" onclick="setEventType('Boda / Gala')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 2: Tipo de Recinto -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" onclick="setVenue('Interior / Salón')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
+                                <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 3: Duración del Montaje -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Duración del Montaje / Evento</label>
+                            <div class="grid grid-cols-3 gap-3">
+                                <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
+                                <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
+                                <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 4: Horario de Montaje -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Horario de Acceso y Montaje</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
+                                <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
+                                <button type="button" onclick="setSlot('Nocturno / Madrugada')" id="slot-n" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Nocturno</button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 5: Aforo / Asistentes -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="font-bold uppercase tracking-wider text-indigo-300">5. Asistentes (Informativo)</span>
+                                <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
+                            </div>
+                            <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
+                        </div>
+
+                        <!-- Paso 6: Requisitos Técnicos (Rider) -->
+                        <div class="space-y-3">
+                            <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
+                            <div class="space-y-3">
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-sonido" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                        <span class="text-sm font-medium">Sonido Profesional PA & Microfonía Inalámbrica</span>
+                                    </div>
+                                    <span class="text-xs text-indigo-300 font-semibold">+ 300€</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-luz" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                        <span class="text-sm font-medium">Iluminación Arquitectónica & Robótica DMX</span>
+                                    </div>
+                                    <span class="text-xs text-indigo-300 font-semibold">+ 450€</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                        <span class="text-sm font-medium">Estructuras de Truss & Rigging Escénico</span>
+                                    </div>
+                                    <span class="text-xs text-amber-300 font-semibold">+ 500€ (Fijo x Duración)</span>
+                                </label>
+                                <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
+                                    <div class="flex items-center space-x-3">
+                                        <input type="checkbox" id="chk-video" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
+                                        <span class="text-sm font-medium">Pantalla LED / Vídeo en Directo & Técnico In Situ</span>
+                                    </div>
+                                    <span class="text-xs text-indigo-300 font-semibold">+ 900€</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Resumen Limpio con Todos los Botones Agrupados Abajo -->
-                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" data-aos="fade-left">
-                    <div class="border-b border-slate-100 pb-4">
-                        <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
-                        <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
+                <!-- Resumen Limpio con Altura Igualada (Flex Col justify-between) -->
+                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6 flex flex-col justify-between" data-aos="fade-left">
+                    <div class="space-y-6">
+                        <div class="border-b border-slate-100 pb-4">
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
+                            <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
+                        </div>
+
+                        <div class="space-y-3 text-sm">
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Fecha prevista:</span>
+                                <span id="summary-date" class="font-bold text-indigo-600">Por seleccionar</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Tipo de evento:</span>
+                                <span id="summary-type" class="font-bold text-slate-900">Corporativo</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Recinto:</span>
+                                <span id="summary-venue" class="font-bold text-indigo-600">Interior / Salón</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Duración:</span>
+                                <span id="summary-duration" class="font-bold text-slate-900">1 Jornada (Día único)</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Montaje:</span>
+                                <span id="summary-slot" class="font-bold text-slate-900">Mañana</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Aforo orientativo:</span>
+                                <span id="summary-attendees" class="font-bold text-slate-900">150 asistentes</span>
+                            </div>
+                            <div class="flex justify-between py-1.5 border-b border-slate-100">
+                                <span class="text-slate-500">Potencia estimada:</span>
+                                <span id="summary-power" class="font-bold text-amber-600">~0 kW (Monofásica)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-between">
+                            <div>
+                                <span class="block text-xs text-slate-500 uppercase font-bold">Estimación Orientativa</span>
+                                <span class="text-xs text-slate-400">IVA no incluido</span>
+                            </div>
+                            <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
+                        </div>
                     </div>
 
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Fecha prevista:</span>
-                            <span id="summary-date" class="font-bold text-indigo-600">Por seleccionar</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Tipo de evento:</span>
-                            <span id="summary-type" class="font-bold text-slate-900">Corporativo</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Recinto:</span>
-                            <span id="summary-venue" class="font-bold text-indigo-600">Interior / Salón</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Duración:</span>
-                            <span id="summary-duration" class="font-bold text-slate-900">1 Jornada (Día único)</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Montaje:</span>
-                            <span id="summary-slot" class="font-bold text-slate-900">Mañana</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Aforo orientativo:</span>
-                            <span id="summary-attendees" class="font-bold text-slate-900">150 asistentes</span>
-                        </div>
-                        <div class="flex justify-between py-1.5 border-b border-slate-100">
-                            <span class="text-slate-500">Potencia estimada:</span>
-                            <span id="summary-power" class="font-bold text-amber-600">~0 kW (Monofásica)</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-between">
-                        <div>
-                            <span class="block text-xs text-slate-500 uppercase font-bold">Estimación Orientativa</span>
-                            <span class="text-xs text-slate-400">IVA no incluido</span>
-                        </div>
-                        <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
-                    </div>
-
-                    <!-- Apartado de Contacto Rápido y Botones de Acción Agrupados -->
-                    <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center space-y-3">
-                        <span class="block text-xs font-bold uppercase tracking-wider text-indigo-900">¿Dudas o proyecto a medida?</span>
-                        <p class="text-xs text-indigo-700">Contáctanos ahora directamente:</p>
-                        <a href="mailto:info@ap-events.es" class="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-800 text-sm">
-                            <i class="fa-solid fa-envelope"></i> info@ap-events.es
-                        </a>
-                        
-                        <!-- BOTONES DE ACCIÓN AGRUPADOS ABAJO -->
-                        <div class="pt-2 space-y-2">
-                            <!-- Botón Descargar Propuesta Técnica -->
-                            <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Propuesta Técnica
-                            </button>
-
-                            <!-- Botón Traspasar al formulario -->
-                            <button type="button" onclick="transferToContactForm()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-paper-plane text-sm"></i> Traspasar configuración al formulario
-                            </button>
-
-                            <!-- Botón WhatsApp -->
-                            <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
-                                <i class="fa-brands fa-whatsapp text-lg"></i> Contáctanos ahora por WhatsApp
+                    <!-- Apartado de Contacto Rápido y Botones de Acción Agrupados Abajo -->
+                    <div class="space-y-4 pt-4 border-t border-slate-100">
+                        <div class="bg-indigo-50 rounded-2xl p-4 border border-indigo-100 text-center space-y-3">
+                            <span class="block text-xs font-bold uppercase tracking-wider text-indigo-900">¿Dudas o proyecto a medida?</span>
+                            <p class="text-xs text-indigo-700">Contáctanos ahora directamente:</p>
+                            <a href="mailto:info@ap-events.es" class="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-800 text-sm">
+                                <i class="fa-solid fa-envelope"></i> info@ap-events.es
                             </a>
+                            
+                            <!-- BOTONES DE ACCIÓN AGRUPADOS -->
+                            <div class="pt-2 space-y-2">
+                                <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-file-pdf text-sm text-rose-400"></i> Descargar Propuesta Técnica
+                                </button>
+
+                                <button type="button" onclick="transferToContactForm()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-paper-plane text-sm"></i> Traspasar configuración al formulario
+                                </button>
+
+                                <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i> Contáctanos ahora por WhatsApp
+                                </a>
+                            </div>
                         </div>
+                        <p class="text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp o el formulario con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad.</p>
                     </div>
-                    <p class="text-[11px] text-center text-slate-400">Al pulsar se abrirá WhatsApp o el formulario con el resumen exacto para que nuestro equipo técnico te confirme disponibilidad.</p>
                 </div>
             </div>
         </div>
@@ -1053,7 +1056,6 @@
         let currentAttendees = 150;
         let currentEventDate = '';
 
-        // Validación de Disponibilidad de Fecha en tiempo real
         function checkDateAvailability() {
             const dateInput = document.getElementById('event-date');
             const badge = document.getElementById('date-urgency-badge');
