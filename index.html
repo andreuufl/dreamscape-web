@@ -329,6 +329,50 @@
     </section>
 
     <!-- =========================================================================
+         SECCIÓN NUEVA: SELLO DE GARANTÍA Y SLA TÉCNICO (SLA & CONFIANZA PRO)
+         ========================================================================= -->
+    <section class="py-16 bg-white border-y border-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Excelencia Operativa</span>
+                <h3 class="text-2xl md:text-3xl font-black text-slate-950 mt-1">Garantía y Estándares Dreamscape</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Garantía 1 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 border border-indigo-100">
+                        <i class="fa-solid fa-headset text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-950 text-base mb-1">Retén Técnico In Situ</h4>
+                        <p class="text-slate-600 text-xs leading-relaxed">Personal especializado presente durante todo el evento para garantizar cero incidencias en directo.</p>
+                    </div>
+                </div>
+                <!-- Garantía 2 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 border border-emerald-100">
+                        <i class="fa-solid fa-shield-cat text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-950 text-base mb-1">Equipos Redundantes</h4>
+                        <p class="text-slate-600 text-xs leading-relaxed">Sistemas duplicados y material de respaldo crítico preparado para cualquier eventualidad.</p>
+                    </div>
+                </div>
+                <!-- Garantía 3 -->
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 border border-amber-100">
+                        <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-950 text-base mb-1">Montajes Escénicos Limpios</h4>
+                        <p class="text-slate-600 text-xs leading-relaxed">Ocultación milimétrica de cableado y acabados estéticos de máxima gama para eventos exigentes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================================
          SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
@@ -994,8 +1038,7 @@
             currentEventName = name;
             
             document.querySelectorAll('.sim-type-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
+                btn.className = "sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
             });
             
             if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
@@ -1009,8 +1052,7 @@
             currentVenueName = venueName;
 
             document.querySelectorAll('.sim-venue-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
+                btn.className = "sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
             });
 
             if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
@@ -1024,8 +1066,7 @@
             currentDurationName = durationName;
 
             document.querySelectorAll('.sim-dur-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
+                btn.className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
@@ -1039,8 +1080,7 @@
             currentSlotName = slotName;
 
             document.querySelectorAll('.sim-slot-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
+                btn.className = "sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
