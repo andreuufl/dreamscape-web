@@ -327,7 +327,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (TRUSS ESCALA CON DURACIÓN)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (AFORO INVARIABLE EN PRECIO)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -365,10 +365,10 @@
                         </div>
                     </div>
 
-                    <!-- Paso 3: Aforo / Asistentes -->
+                    <!-- Paso 3: Aforo / Asistentes (Invariable en precio) -->
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
-                            <span class="font-bold uppercase tracking-wider text-indigo-300">3. Asistentes Estimados</span>
+                            <span class="font-bold uppercase tracking-wider text-indigo-300">3. Asistentes (Informativo)</span>
                             <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
                         </div>
                         <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
@@ -427,7 +427,7 @@
                             <span id="summary-duration" class="font-bold text-indigo-600">1 Jornada (Día único)</span>
                         </div>
                         <div class="flex justify-between py-2 border-b border-slate-100">
-                            <span class="text-slate-500">Aforo calculado:</span>
+                            <span class="text-slate-500">Aforo orientativo:</span>
                             <span id="summary-attendees" class="font-bold text-slate-900">150 asistentes</span>
                         </div>
                         
@@ -940,7 +940,7 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos (Truss fijo escalable por duración, aforo modular para el resto)
+        // Lógica del Simulador de Presupuestos (Aforo invariable en precio)
         let currentEventName = 'Corporativo';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
@@ -980,16 +980,17 @@
         function updateAttendees(val) {
             currentAttendees = val;
             document.getElementById('attendees-val').innerText = val + ' personas';
+            // El aforo ya NO modifica el precio, solo actualiza el texto informativo
             calculateTotal();
         }
 
         function calculateTotal() {
-            let scalableTotal = 0;
-            let trussTotal = 0;
+            let total = 0;
             let miniRiderHtml = '';
 
             if(document.getElementById('chk-sonido').checked) {
-                scalableTotal += 300;
+                let sonidoPrice = Math.round(300 * currentDurationMultiplier);
+                total += sonidoPrice;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-volume-high text-xs"></i></div>
@@ -997,16 +998,17 @@
                     </div>`;
             }
             if(document.getElementById('chk-luz').checked) {
-                scalableTotal += 450;
+                let luzPrice = Math.round(450 * currentDurationMultiplier);
+                total += luzPrice;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-lightbulb text-xs"></i></div>
                         <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Iluminación DMX</span><span class="block text-[10px] text-slate-500">Robótica & Focos</span></div>
                     </div>`;
             }
-            // TRUSS / RIGGING (FIJO DE 500€ MULTIPLICADO POR LA DURACIÓN, INDEPENDIENTE DEL AFORO)
             if(document.getElementById('chk-rigging').checked) {
-                trussTotal = Math.round(500 * currentDurationMultiplier);
+                let trussPrice = Math.round(500 * currentDurationMultiplier);
+                total += trussPrice;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-layer-group text-xs"></i></div>
@@ -1014,23 +1016,14 @@
                     </div>`;
             }
             if(document.getElementById('chk-video').checked) {
-                scalableTotal += 900;
+                let videoPrice = Math.round(900 * currentDurationMultiplier);
+                total += videoPrice;
                 miniRiderHtml += `
                     <div class="bg-slate-50 border border-slate-100 p-2.5 rounded-xl flex items-center space-x-2.5">
                         <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-tv text-xs"></i></div>
                         <div class="overflow-hidden"><span class="block text-[11px] font-bold text-slate-900 truncate">Pantalla LED</span><span class="block text-[10px] text-slate-500">Vídeo & Switcher</span></div>
                     </div>`;
             }
-
-            // Escalar sonido/luz/vídeo por aforo y duración
-            if (scalableTotal > 0) {
-                let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
-                scalableTotal += attendeeExtra;
-                scalableTotal = Math.round(scalableTotal * currentDurationMultiplier);
-            }
-
-            // Total final = parte escalable por aforo + truss fijo escalado por duración
-            let total = scalableTotal + trussTotal;
 
             if (miniRiderHtml === '') {
                 miniRiderHtml = `<div class="col-span-2 text-center py-3 text-xs text-slate-400 italic bg-slate-50 rounded-xl border border-slate-100">Ningún componente técnico seleccionado en el rider</div>`;
@@ -1045,7 +1038,7 @@
 
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Duración: ${currentDurationName}%0A- Asistentes: ${currentAttendees}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Duración: ${currentDurationName}%0A- Aforo orientativo: ${currentAttendees}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
