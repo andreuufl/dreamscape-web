@@ -1090,61 +1090,58 @@
             }
         }
 
-        function setEventType(name) {
+        function setEventType(name, btnId) {
             currentEventName = name;
             
             document.querySelectorAll('.sim-type-btn').forEach(btn => {
                 btn.className = "sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
             });
             
-            if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            const activeBtn = document.getElementById(btnId);
+            if(activeBtn) {
+                activeBtn.className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            }
 
             calculateTotal();
         }
 
-        function setVenue(venueName) {
+        function setVenue(venueName, btnId) {
             currentVenueName = venueName;
 
             document.querySelectorAll('.sim-venue-btn').forEach(btn => {
                 btn.className = "sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
             });
 
-            if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            const activeBtn = document.getElementById(btnId);
+            if(activeBtn) {
+                activeBtn.className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            }
 
             calculateTotal();
         }
 
-        function setStage(stageName) {
+        function setStage(stageName, btnId) {
             currentStageName = stageName;
 
             document.querySelectorAll('.sim-stage-btn').forEach(btn => {
                 btn.className = "sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
             });
 
+            const activeBtn = document.getElementById(btnId);
+            if(activeBtn) {
+                activeBtn.className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            }
+
             if(stageName === 'Sin tarima') {
-                document.getElementById('stage-0').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
                 document.getElementById('chk-rigging').checked = false;
-            }
-            if(stageName === 'A ras de suelo') {
-                document.getElementById('stage-1').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                document.getElementById('chk-rigging').checked = true;
-            }
-            if(stageName === 'A 20 o 40cm') {
-                document.getElementById('stage-2').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-                document.getElementById('chk-rigging').checked = true;
-            }
-            if(stageName === '60cm o más') {
-                document.getElementById('stage-3').className = "sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            } else {
                 document.getElementById('chk-rigging').checked = true;
             }
 
             calculateTotal();
         }
 
-        function setDuration(multiplier, durationName) {
+        function setDuration(multiplier, durationName, btnId) {
             currentDurationMultiplier = multiplier;
             currentDurationName = durationName;
 
@@ -1152,9 +1149,10 @@
                 btn.className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
             });
 
-            if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            const activeBtn = document.getElementById(btnId);
+            if(activeBtn) {
+                activeBtn.className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            }
 
             calculateTotal();
         }
@@ -1399,8 +1397,40 @@
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
-        // Inicializar cálculo al cargar
+        // Inicializar cálculo al cargar y asegurar asignación de eventos en botones del DOM
         window.addEventListener('DOMContentLoaded', () => {
+            // Asignar eventos a los botones de Tipo de Evento
+            const btnCorp = document.getElementById('type-corp');
+            const btnCong = document.getElementById('type-cong');
+            const btnBoda = document.getElementById('type-boda');
+            if(btnCorp) btnCorp.onclick = () => setEventType('Corporativo', 'type-corp');
+            if(btnCong) btnCong.onclick = () => setEventType('Congreso / Feria', 'type-cong');
+            if(btnBoda) btnBoda.onclick = () => setEventType('Boda / Gala', 'type-boda');
+
+            // Asignar eventos a los botones de Recinto
+            const btnInt = document.getElementById('venue-int');
+            const btnExt = document.getElementById('venue-ext');
+            if(btnInt) btnInt.onclick = () => setVenue('Interior / Salón', 'venue-int');
+            if(btnExt) btnExt.onclick = () => setVenue('Exterior / Finca / Jardín', 'venue-ext');
+
+            // Asignar eventos a los botones de Escenario / Tarima
+            const btnSt0 = document.getElementById('stage-0');
+            const btnSt1 = document.getElementById('stage-1');
+            const btnSt2 = document.getElementById('stage-2');
+            const btnSt3 = document.getElementById('stage-3');
+            if(btnSt0) btnSt0.onclick = () => setStage('Sin tarima', 'stage-0');
+            if(btnSt1) btnSt1.onclick = () => setStage('A ras de suelo', 'stage-1');
+            if(btnSt2) btnSt2.onclick = () => setStage('A 20 o 40cm', 'stage-2');
+            if(btnSt3) btnSt3.onclick = () => setStage('60cm o más', 'stage-3');
+
+            // Asignar eventos a los botones de Duración
+            const btnDur1 = document.getElementById('dur-1');
+            const btnDur2 = document.getElementById('dur-2');
+            const btnDur3 = document.getElementById('dur-3');
+            if(btnDur1) btnDur1.onclick = () => setDuration(1, '1 Jornada (Día único)', 'dur-1');
+            if(btnDur2) btnDur2.onclick = () => setDuration(1.8, 'Fin de Semana (2 days)', 'dur-2');
+            if(btnDur3) btnDur3.onclick = () => setDuration(2.5, 'Multi-día (3+ días / Feria)', 'dur-3');
+
             calculateTotal();
 
             const cookieDecision = localStorage.getItem('dreamscape_cookies_accepted');
