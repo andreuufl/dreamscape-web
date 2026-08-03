@@ -1198,7 +1198,7 @@
             }
         }
 
-        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL
+        // GENERADOR DE PROPUESTA TÉCNICA EN PDF SÚPER CURRADO Y PROFESIONAL (SIN TÉCNICO EN GARANTÍA)
         function downloadProfessionalPDF() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -1309,7 +1309,7 @@
             doc.setTextColor(180, 83, 9); // Amber 600
             doc.text(powerText, 72, startY + 2);
 
-            // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE
+            // 5. BLOQUE DE CALIDAD Y GARANTÍAS DREAMSCAPE (SIN TÉCNICO)
             doc.setFillColor(238, 242, 255); // Indigo 50
             doc.roundedRect(15, 213, 180, 24, 3, 3, 'F');
             doc.setTextColor(67, 56, 202); // Indigo 700
@@ -1318,8 +1318,8 @@
             doc.text("GARANTÍA DREAMSCAPE:", 20, 222);
             doc.setFont("helvetica", "normal");
             doc.setTextColor(51, 65, 85);
-            doc.text("Incluye retén técnico in situ, equipamiento redundante de respaldo y montajes estéticos", 20, 229);
-            doc.text("con ocultación absoluta de cableado para garantizar la excelencia en directo.", 20, 234);
+            doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 229);
+            doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 234);
 
             // 6. BLOQUE 3: TOTAL PRESUPUESTO
             doc.setFillColor(79, 70, 229); // Indigo 600
