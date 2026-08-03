@@ -391,13 +391,13 @@
                 <!-- Opciones de Configuración -->
                 <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-aos="fade-right">
                     <div class="space-y-8">
-                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
-                        <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10">
-                            <div class="flex justify-between items-center">
+                        <!-- Selector de Fecha y Disponibilidad en Tiempo Real (CENTRADÍSIMO EN MÓVIL) -->
+                        <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10 w-full max-w-full">
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                 <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
                                 <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
                             </div>
-                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer">
+                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer block box-border">
                         </div>
 
                         <!-- Paso 1: Tipo de Evento -->
