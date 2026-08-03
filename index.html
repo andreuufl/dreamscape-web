@@ -327,7 +327,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON MINI-RIDER VISUAL DE ICONOS)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON SELECTOR DE DURACIÓN)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -355,18 +355,28 @@
                         </div>
                     </div>
 
-                    <!-- Paso 2: Aforo / Asistentes -->
+                    <!-- Paso 2: Duración del Montaje (NUEVO) -->
+                    <div class="space-y-3">
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Duración del Montaje / Evento</label>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
+                            <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
+                            <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3: Aforo / Asistentes -->
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
-                            <span class="font-bold uppercase tracking-wider text-indigo-300">2. Asistentes Estimados</span>
+                            <span class="font-bold uppercase tracking-wider text-indigo-300">3. Asistentes Estimados</span>
                             <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
                         </div>
                         <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                     </div>
 
-                    <!-- Paso 3: Servicios Técnicos Opcionales -->
+                    <!-- Paso 4: Requisitos Técnicos (Rider) -->
                     <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Requisitos Técnicos (Rider)</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Requisitos Técnicos (Rider)</label>
                         <div class="space-y-3">
                             <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
@@ -411,6 +421,10 @@
                         <div class="flex justify-between py-2 border-b border-slate-100">
                             <span class="text-slate-500">Tipo de evento:</span>
                             <span id="summary-type" class="font-bold text-slate-900">Corporativo</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-slate-100">
+                            <span class="text-slate-500">Duración:</span>
+                            <span id="summary-duration" class="font-bold text-indigo-600">1 Jornada (Día único)</span>
                         </div>
                         <div class="flex justify-between py-2 border-b border-slate-100">
                             <span class="text-slate-500">Aforo calculado:</span>
@@ -864,7 +878,7 @@
             
             <p><strong>Reclamaciones:</strong> Cualquier reclamación relativa a la prestación del servicio deberá comunicarse por escrito en un plazo máximo de 48 horas desde la finalización del mismo. Transcurrido dicho plazo, el servicio se considerará aceptado de conformidad.</p>
             
-            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
+            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de access, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
             
             <p><strong>Confidencialidad:</strong> Ambas partes se comprometen a mantener la confidencialidad sobre la información técnica, comercial o contractual a la que tengan acceso como consecuencia de la relación profesional, no pudiendo divulgarla a terceros sin autorización expresa, salvo obligación legal.</p>
             
@@ -926,8 +940,10 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos con Mini-Rider de Iconos Visuales
+        // Lógica del Simulador de Presupuestos (Con duración y mini-rider)
         let currentEventName = 'Corporativo';
+        let currentDurationMultiplier = 1;
+        let currentDurationName = '1 Jornada (Día único)';
         let currentAttendees = 150;
 
         function setEventType(name) {
@@ -941,6 +957,22 @@
             if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
             if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
             if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+
+            calculateTotal();
+        }
+
+        function setDuration(multiplier, durationName) {
+            currentDurationMultiplier = multiplier;
+            currentDurationName = durationName;
+
+            document.querySelectorAll('.sim-dur-btn').forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
+            });
+
+            if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
 
             calculateTotal();
         }
@@ -991,6 +1023,8 @@
             if (total > 0) {
                 let attendeeExtra = Math.floor(currentAttendees / 100) * 75;
                 total += attendeeExtra;
+                // Aplicar multiplicador de duración
+                total = Math.round(total * currentDurationMultiplier);
             }
 
             if (miniRiderHtml === '') {
@@ -998,6 +1032,7 @@
             }
 
             document.getElementById('summary-type').innerText = currentEventName;
+            document.getElementById('summary-duration').innerText = currentDurationName;
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
             document.getElementById('mini-rider-icons').innerHTML = miniRiderHtml;
             document.getElementById('summary-price').innerText = total.toLocaleString('es-ES') + ' €';
@@ -1005,7 +1040,7 @@
 
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Asistentes: ${currentAttendees}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Duración: ${currentDurationName}%0A- Asistentes: ${currentAttendees}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
