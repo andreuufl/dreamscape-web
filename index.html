@@ -348,7 +348,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CON POTENCIA kW Y DESCARGA PDF)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ACTUALIZADO SIN ZONA NI PLANO)
          ========================================================================= -->
     <section id="simulador" class="py-24 md:py-32 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -376,28 +376,18 @@
                         </div>
                     </div>
 
-                    <!-- Paso 2: Zona / Despliegue -->
+                    <!-- Paso 2: Tipo de Recinto -->
                     <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Zona de Despliegue (Cobertura)</label>
-                        <div class="grid grid-cols-3 gap-2">
-                            <button type="button" onclick="setZone('Barcelona y Cercanías')" id="zone-bcn" class="sim-zone-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Bcn / Cercanías</button>
-                            <button type="button" onclick="setZone('Cataluña / Resto')" id="zone-cat" class="sim-zone-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Cataluña</button>
-                            <button type="button" onclick="setZone('Madrid / Valencia')" id="zone-mad" class="sim-zone-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Madrid / Valencia</button>
-                        </div>
-                    </div>
-
-                    <!-- Paso 3: Tipo de Recinto -->
-                    <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Tipo de Recinto / Espacio</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
                         <div class="grid grid-cols-2 gap-3">
                             <button type="button" onclick="setVenue('Interior / Salón')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
                             <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
                         </div>
                     </div>
 
-                    <!-- Paso 4: Duración del Montaje -->
+                    <!-- Paso 3: Duración del Montaje -->
                     <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Duración del Montaje / Evento</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Duración del Montaje / Evento</label>
                         <div class="grid grid-cols-3 gap-3">
                             <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
                             <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 días)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
@@ -405,9 +395,9 @@
                         </div>
                     </div>
 
-                    <!-- Paso 5: Horario de Montaje -->
+                    <!-- Paso 4: Horario de Montaje -->
                     <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">5. Horario de Acceso y Montaje</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Horario de Acceso y Montaje</label>
                         <div class="grid grid-cols-3 gap-2">
                             <button type="button" onclick="setSlot('Mañana')" id="slot-m" class="sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Mañana</button>
                             <button type="button" onclick="setSlot('Tarde')" id="slot-t" class="sim-slot-btn bg-white/10 text-slate-300 hover:bg-white/20 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Tarde</button>
@@ -415,18 +405,18 @@
                         </div>
                     </div>
 
-                    <!-- Paso 6: Aforo / Asistentes -->
+                    <!-- Paso 5: Aforo / Asistentes -->
                     <div class="space-y-3">
                         <div class="flex justify-between text-sm">
-                            <span class="font-bold uppercase tracking-wider text-indigo-300">6. Asistentes (Informativo)</span>
+                            <span class="font-bold uppercase tracking-wider text-indigo-300">5. Asistentes (Informativo)</span>
                             <span id="attendees-val" class="font-bold text-emerald-400">150 personas</span>
                         </div>
                         <input type="range" id="attendees-range" min="30" max="1000" step="10" value="150" oninput="updateAttendees(this.value)" class="w-full accent-indigo-500 cursor-pointer bg-slate-800 rounded-lg h-2">
                     </div>
 
-                    <!-- Paso 7: Requisitos Técnicos (Rider) -->
+                    <!-- Paso 6: Requisitos Técnicos (Rider) -->
                     <div class="space-y-3">
-                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">7. Requisitos Técnicos (Rider)</label>
+                        <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">6. Requisitos Técnicos (Rider)</label>
                         <div class="space-y-3">
                             <label class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                 <div class="flex items-center space-x-3">
@@ -460,7 +450,7 @@
                     </div>
                 </div>
 
-                <!-- Resumen y Configurador Gráfico de Escenario -->
+                <!-- Resumen Limpio -->
                 <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6" id="simulador-resumen-card" data-aos="fade-left">
                     <div class="border-b border-slate-100 pb-4 flex justify-between items-start">
                         <div>
@@ -473,65 +463,29 @@
                     </div>
 
                     <div class="space-y-3 text-sm">
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Tipo de evento:</span>
                             <span id="summary-type" class="font-bold text-slate-900">Corporativo</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
-                            <span class="text-slate-500">Zona de cobertura:</span>
-                            <span id="summary-zone" class="font-bold text-slate-900">Barcelona y Cercanías</span>
-                        </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Recinto:</span>
                             <span id="summary-venue" class="font-bold text-indigo-600">Interior / Salón</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Duración:</span>
                             <span id="summary-duration" class="font-bold text-slate-900">1 Jornada (Día único)</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Montaje:</span>
                             <span id="summary-slot" class="font-bold text-slate-900">Mañana</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Aforo orientativo:</span>
                             <span id="summary-attendees" class="font-bold text-slate-900">150 asistentes</span>
                         </div>
-                        <div class="flex justify-between py-1 border-b border-slate-100">
+                        <div class="flex justify-between py-1.5 border-b border-slate-100">
                             <span class="text-slate-500">Potencia estimada:</span>
                             <span id="summary-power" class="font-bold text-amber-600">~0 kW (Monofásica)</span>
-                        </div>
-                        
-                        <!-- CONFIGURADOR GRÁFICO DE ESCENARIO EN VIVO -->
-                        <div class="pt-2 no-print">
-                            <span class="text-xs text-slate-400 uppercase font-bold tracking-wider">Plano de Escenario Activo:</span>
-                            <div class="w-full h-32 bg-slate-950 rounded-2xl mt-3 p-3 relative flex flex-col justify-between overflow-hidden border border-slate-800 shadow-inner">
-                                <!-- Fondo / Pantalla LED -->
-                                <div id="schematic-video" class="w-full h-8 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] font-bold flex items-center justify-center gap-2 transition-all opacity-20">
-                                    <i class="fa-solid fa-tv"><span>Pantalla LED de Fondo</span></i>
-                                </div>
-
-                                <!-- Centro / Escenario -->
-                                <div class="flex justify-between items-center px-4">
-                                    <!-- Sonido Izquierda -->
-                                    <div id="schematic-sound-l" class="w-7 h-7 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs flex items-center justify-center transition-all opacity-20" title="PA L">
-                                        <i class="fa-solid fa-volume-high"></i>
-                                    </div>
-                                    <!-- Truss / Estructura Central -->
-                                    <div id="schematic-truss" class="w-16 h-5 rounded-md bg-amber-500/20 border border-amber-500/40 text-amber-300 text-[9px] font-semibold flex items-center justify-center transition-all opacity-20">
-                                        Truss Estructural
-                                    </div>
-                                    <!-- Sonido Derecha -->
-                                    <div id="schematic-sound-r" class="w-7 h-7 rounded-lg bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 text-xs flex items-center justify-center transition-all opacity-20" title="PA R">
-                                        <i class="fa-solid fa-volume-high"></i>
-                                    </div>
-                                </div>
-
-                                <!-- Frente / Iluminación DMX -->
-                                <div id="schematic-light" class="w-full h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold flex items-center justify-center gap-2 transition-all opacity-20">
-                                    <i class="fa-solid fa-lightbulb"><span>Robótica DMX & Focos Perimetrales</span></i>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -1035,9 +989,8 @@
             });
         }
 
-        // Lógica del Simulador de Presupuestos (Con potencia kW y descarga PDF)
+        // Lógica del Simulador de Presupuestos (Actualizada sin zona ni plano)
         let currentEventName = 'Corporativo';
-        let currentZoneName = 'Barcelona y Cercanías';
         let currentVenueName = 'Interior / Salón';
         let currentDurationMultiplier = 1;
         let currentDurationName = '1 Jornada (Día único)';
@@ -1053,23 +1006,8 @@
             });
             
             if(name === 'Corporativo') document.getElementById('type-corp').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-
-            calculateTotal();
-        }
-
-        function setZone(zoneName) {
-            currentZoneName = zoneName;
-
-            document.querySelectorAll('.sim-zone-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'border-indigo-500', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white/10', 'border-white/15', 'text-slate-300');
-            });
-
-            if(zoneName === 'Barcelona y Cercanías') document.getElementById('zone-bcn').className = "sim-zone-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(zoneName === 'Cataluña / Resto') document.getElementById('zone-cat').className = "sim-zone-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(zoneName === 'Madrid / Valencia') document.getElementById('zone-mad').className = "sim-zone-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(name === 'Congreso / Feria') document.getElementById('type-cong').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
+            if(name === 'Boda / Gala') document.getElementById('type-boda').className = "sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
 
             calculateTotal();
         }
@@ -1083,7 +1021,7 @@
             });
 
             if(venueName === 'Interior / Salón') document.getElementById('venue-int').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(venueName === 'Exterior / Finca / Jardín') document.getElementById('venue-ext').className = "sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer";
 
             calculateTotal();
         }
@@ -1098,8 +1036,8 @@
             });
 
             if(multiplier === 1) document.getElementById('dur-1').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
-            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer shadow-md";
+            if(multiplier === 1.8) document.getElementById('dur-2').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
+            if(multiplier === 2.5) document.getElementById('dur-3').className = "sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
 
             calculateTotal();
         }
@@ -1113,8 +1051,8 @@
             });
 
             if(slotName === 'Mañana') document.getElementById('slot-m').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
-            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md";
+            if(slotName === 'Tarde') document.getElementById('slot-t').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
+            if(slotName === 'Nocturno / Madrugada') document.getElementById('slot-n').className = "sim-slot-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer";
 
             calculateTotal();
         }
@@ -1129,58 +1067,32 @@
             let total = 0;
             let totalKw = 2; // Base de consumo de iluminación de sala / auxiliares
 
-            // Elementos esquemáticos
-            const soundL = document.getElementById('schematic-sound-l');
-            const soundR = document.getElementById('schematic-sound-r');
-            const light = document.getElementById('schematic-light');
-            const truss = document.getElementById('schematic-truss');
-            const video = document.getElementById('schematic-video');
-
             if(document.getElementById('chk-sonido').checked) {
                 let sonidoPrice = Math.round(300 * currentDurationMultiplier);
                 total += sonidoPrice;
-                totalKw += 4.5; // ~4.5 kW para PA y etapas
-                soundL.classList.remove('opacity-20'); soundL.classList.add('opacity-100');
-                soundR.classList.remove('opacity-20'); soundR.classList.add('opacity-100');
-            } else {
-                soundL.classList.remove('opacity-100'); soundL.classList.add('opacity-20');
-                soundR.classList.remove('opacity-100'); soundR.classList.add('opacity-20');
+                totalKw += 4.5;
             }
-
             if(document.getElementById('chk-luz').checked) {
                 let luzPrice = Math.round(450 * currentDurationMultiplier);
                 total += luzPrice;
-                totalKw += 5.0; // ~5 kW para robótica y focos LED
-                light.classList.remove('opacity-20'); light.classList.add('opacity-100');
-            } else {
-                light.classList.remove('opacity-100'); light.classList.add('opacity-20');
+                totalKw += 5.0;
             }
-
             if(document.getElementById('chk-rigging').checked) {
                 let trussPrice = Math.round(500 * currentDurationMultiplier);
                 total += trussPrice;
-                truss.classList.remove('opacity-20'); truss.classList.add('opacity-100');
-            } else {
-                truss.classList.remove('opacity-100'); truss.classList.add('opacity-20');
             }
-
             if(document.getElementById('chk-video').checked) {
                 let videoPrice = Math.round(900 * currentDurationMultiplier);
                 total += videoPrice;
-                totalKw += 6.5; // ~6.5 kW para pantalla LED y procesadores
-                video.classList.remove('opacity-20'); video.classList.add('opacity-100');
-            } else {
-                video.classList.remove('opacity-100'); video.classList.add('opacity-20');
+                totalKw += 6.5;
             }
 
-            // Recomendación de acometida según kW
             let powerRecommendation = `~${totalKw} kW (Monofásica)`;
             if (totalKw > 9) {
                 powerRecommendation = `~${totalKw} kW (Trifásica recomendada)`;
             }
 
             document.getElementById('summary-type').innerText = currentEventName;
-            document.getElementById('summary-zone').innerText = currentZoneName;
             document.getElementById('summary-venue').innerText = currentVenueName;
             document.getElementById('summary-duration').innerText = currentDurationName;
             document.getElementById('summary-slot').innerText = currentSlotName;
@@ -1196,7 +1108,7 @@
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Zona: ${currentZoneName}%0A- Recinto: ${currentVenueName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
+            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Duración: ${currentDurationName}%0A- Horario montaje: ${currentSlotName}%0A- Aforo orientativo: ${currentAttendees}%0A- Potencia estimada: ${power}%0A- Estimación orientativa: ${price}%0A¿Podemos revisarlo?`;
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
