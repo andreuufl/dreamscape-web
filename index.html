@@ -382,7 +382,7 @@
         </div>
     </section>
     
-    <!-- SECCIÓN DE BLOG -->
+    <!-- SECCIÓN DE BLOG (ACTUALIZADA: SIN FECHAS Y CON CLIC PARA ABRIR MODAL) -->
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
@@ -392,17 +392,17 @@
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 card-perspective">
-                <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="100">
+                <!-- Blog 1 -->
+                <article onclick="openModal('modal-blog-1')" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=800&auto=format&fit=crop" alt="Backstage de evento" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-indigo-600 uppercase tracking-wider">
                             <span class="bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">Producción Integral</span>
-                            <span class="text-slate-400 font-normal">Mayo 2026</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">
-                            <a href="#">Detrás de las cámaras: Despliegue técnico para la Gala Penguin 2026</a>
+                            Detrás de las cámaras: Despliegue técnico para la Gala Penguin 2026
                         </h3>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
                             Analizamos la logística, el diseño de iluminación y la realización de vídeo para un evento de dos días con más de 1000 asistentes.
@@ -410,17 +410,17 @@
                     </div>
                 </article>
 
-                <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="200">
+                <!-- Blog 2 -->
+                <article onclick="openModal('modal-blog-2')" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=800&auto=format&fit=crop" alt="Sonorización profesional" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-emerald-600 uppercase tracking-wider">
                             <span class="bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">Innovación</span>
-                            <span class="text-slate-400 font-normal">Abril 2026</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">
-                            <a href="#">Tendencias en Audio Profesional para Congresos Híbridos</a>
+                            Tendencias en Audio Profesional para Congresos Híbridos
                         </h3>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
                             Cómo garantizar una experiencia de sonido inmersiva y nítida tanto para asistentes presenciales como remotos.
@@ -428,17 +428,17 @@
                     </div>
                 </article>
 
-                <article class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="300">
+                <!-- Blog 3 -->
+                <article onclick="openModal('modal-blog-3')" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=800&auto=format&fit=crop" alt="Iluminación de boda" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <div class="flex items-center space-x-3 text-xs font-semibold text-rose-600 uppercase tracking-wider">
                             <span class="bg-rose-50 px-3 py-1 rounded-full border border-rose-100">Diseño Ambiental</span>
-                            <span class="text-slate-400 font-normal">Junio 2026</span>
                         </div>
                         <h3 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-rose-600 transition-colors line-clamp-2">
-                            <a href="#">El poder de la Iluminación Arquitectónica en Bodas de Exterior</a>
+                            El poder de la Iluminación Arquitectónica en Bodas de Exterior
                         </h3>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">
                             Transformamos espacios ajardinados en escenarios de cuento de hadas mediante el uso estratégico de la luz y el color.
@@ -611,6 +611,58 @@
 
 
     <!-- =========================================================================
+         MODALES DE LOS 3 BLOGS (CONTENIDO COMPLETO)
+         ========================================================================= -->
+    <!-- Modal Blog 1 -->
+    <div id="modal-blog-1" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
+            <div class="w-full h-64 relative overflow-hidden flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8 sm:p-10 space-y-4 text-slate-700 text-sm leading-relaxed">
+                <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full border border-indigo-100 text-xs font-bold uppercase tracking-wider">Producción Integral</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-950">Detrás de las cámaras: Despliegue técnico para la Gala Penguin</h3>
+                <p>En este artículo exploramos el desglose logístico y la ingeniería audiovisual requerida para llevar a cabo con absoluto éxito un despliegue técnico de gran formato. Desde la recepción de cargas y cálculo de potencias en cuadros eléctricos trifásicos hasta el control en directo de iluminación y vídeo mediante consolas redundantes.</p>
+                <p>La complejidad de un evento corporativo de esta magnitud exige una planificación milimétrica: la distribución acústica mediante sistemas PA orientados, la ocultación absoluta de cableados y la supervisión constante por parte de nuestros técnicos especialistas garantizan cero margen de error en el directo.</p>
+                <button onclick="closeModal('modal-blog-1')" class="mt-6 bg-slate-950 text-white px-6 py-2.5 rounded-xl font-bold cursor-pointer text-xs uppercase tracking-wider">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Blog 2 -->
+    <div id="modal-blog-2" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
+            <div class="w-full h-64 relative overflow-hidden flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8 sm:p-10 space-y-4 text-slate-700 text-sm leading-relaxed">
+                <span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100 text-xs font-bold uppercase tracking-wider">Innovación</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-950">Tendencias en Audio Profesional para Congresos Híbridos</h3>
+                <p>Los congresos actuales demandan una versatilidad técnica inigualable. La integración de sistemas de audio que solventen con nitidez tanto la asistencia presencial en auditorios complejos como la transmisión simultánea para ponentes remotos es hoy una prioridad absoluta.</p>
+                <p>En Dreamscape implementamos microfonía digital blindada contra interferencias perimetrales, mesas de mezcla de alta gama y procesadores de retardo de línea que aseguran una inteligibilidad de la palabra perfecta en cada rincón de la sala, evitando ecos y realimentaciones indeseadas.</p>
+                <button onclick="closeModal('modal-blog-2')" class="mt-6 bg-slate-950 text-white px-6 py-2.5 rounded-xl font-bold cursor-pointer text-xs uppercase tracking-wider">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Blog 3 -->
+    <div id="modal-blog-3" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
+            <div class="w-full h-64 relative overflow-hidden flex-shrink-0">
+                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8 sm:p-10 space-y-4 text-slate-700 text-sm leading-relaxed">
+                <span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full border border-rose-100 text-xs font-bold uppercase tracking-wider">Diseño Ambiental</span>
+                <h3 class="text-2xl sm:text-3xl font-black text-slate-950">El poder de la Iluminación Arquitectónica en Bodas de Exterior</h3>
+                <p>Transformar fincas históricas y espacios ajardinados en escenarios de alta gama requiere un estudio riguroso de la luz y el color. El uso de proyectores LED autónomos perimetrales con protección IP65 permite bañar fachadas y árboles con total seguridad frente a la intemperie.</p>
+                <p>Mediante cielos estrellados con guirnaldas micro-LED y sutiles tonalidades cálidas, logramos crear atmósferas envolventes y de ensueño, cuidando cada detalle estético y ocultando por completo el cableado para que la magia del entorno brille con luz propia.</p>
+                <button onclick="closeModal('modal-blog-3')" class="mt-6 bg-slate-950 text-white px-6 py-2.5 rounded-xl font-bold cursor-pointer text-xs uppercase tracking-wider">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- =========================================================================
          VENTANAS MODALES LEGALES
          ========================================================================= -->
     <div id="modal-aviso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
@@ -648,7 +700,6 @@
         </div>
     </div>
 
-    <!-- MODAL TÉRMINOS Y CONDICIONES (ACTUALIZADO CON TODO EL TEXTO REQUERIDO) -->
     <div id="modal-terminos" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-3xl w-full p-8 overflow-y-auto max-h-[85vh] text-xs space-y-4 shadow-2xl text-slate-700 leading-relaxed">
             <h3 class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-file-contract text-indigo-600"></i> Términos y Condiciones</h3>
@@ -763,7 +814,7 @@
         }
         
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas'];
+            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
