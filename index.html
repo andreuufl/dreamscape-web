@@ -55,15 +55,21 @@
             transition: all 0.7s ease-in-out;
         }
 
-        /* Forzar alto contraste y visibilidad del icono de calendario en PC y Móvil */
+        /* Alto contraste y visibilidad total del icono de calendario en PC y Móvil */
         input[type="date"] {
             color-scheme: dark;
+            background-color: #0f172a !important;
+            border: 2px solid #818cf8 !important;
+            color: #ffffff !important;
+            font-weight: 600;
         }
         input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1) brightness(2);
+            filter: invert(1) brightness(2.5);
             cursor: pointer;
             opacity: 1;
-            padding: 4px;
+            padding: 6px;
+            background-color: rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
         }
 
         /* Perspectiva para tarjetas 3D ligeras */
@@ -388,7 +394,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ESPACIADO SUPERIOR AJUSTADO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CAMPO DE FECHA DESTACADO)
          ========================================================================= -->
     <section id="simulador" class="py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -415,7 +421,7 @@
                                 <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">Fecha Prevista del Evento</label>
                                 <span id="date-urgency-badge" class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold">Fecha disponible</span>
                             </div>
-                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500 text-sm cursor-pointer block box-border appearance-none">
+                            <input type="date" id="event-date" onchange="checkDateAvailability()" class="w-full px-4 py-3.5 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 text-sm cursor-pointer block box-border appearance-none shadow-inner">
                         </div>
 
                         <!-- Paso 1: Tipo de Evento -->
