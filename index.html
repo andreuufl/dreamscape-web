@@ -55,6 +55,13 @@
             transition: all 0.7s ease-in-out;
         }
 
+        /* Forzar que el icono del calendario del input date se vea en blanco brillante */
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1) brightness(2);
+            cursor: pointer;
+            opacity: 1;
+        }
+
         /* Perspectiva para tarjetas 3D ligeras */
         .card-perspective {
             perspective: 1000px;
@@ -221,7 +228,7 @@
                     </div>
                     <h3 class="text-2xl font-bold mb-4 text-slate-950">Congresos y Ferias</h3>
                     <p class="text-slate-600 text-base leading-relaxed flex-grow">
-                        Infraestructura audiovisual completa, escenarios, iluminación de sala, microfonía avanzada y soporte técnico *in situ* para garantizar un flujo perfecto.
+                        Infraestructura audiovisual completa, escenarios, iluminación de sala, microfonía avanzada y soporte técnico <strong>in situ</strong> para garantizar un flujo perfecto.
                     </p>
                     <a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="inline-flex items-center text-emerald-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm"></i></a>
                 </div>
@@ -377,7 +384,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ESPACIADO SUPERIOR AJUSTADO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CALENDARIO EN BLANCO)
          ========================================================================= -->
     <section id="simulador" class="py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
@@ -411,9 +418,9 @@
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">1. Selecciona el Tipo de Evento</label>
                             <div class="grid grid-cols-3 gap-3">
-                                <button type="button" onclick="setEventType('Corporativo')" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
-                                <button type="button" onclick="setEventType('Congreso / Feria')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
-                                <button type="button" onclick="setEventType('Boda / Gala')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
+                                <button type="button" onclick="setEventType('Corporativo', 'type-corp')" id="type-corp" class="sim-type-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md">Corporativo</button>
+                                <button type="button" onclick="setEventType('Congreso / Feria', 'type-cong')" id="type-cong" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Congreso</button>
+                                <button type="button" onclick="setEventType('Boda / Gala', 'type-boda')" id="type-boda" class="sim-type-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer">Boda / Gala</button>
                             </div>
                         </div>
 
@@ -421,8 +428,8 @@
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
                             <div class="grid grid-cols-2 gap-3">
-                                <button type="button" onclick="setVenue('Interior / Salón')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
-                                <button type="button" onclick="setVenue('Exterior / Finca / Jardín')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
+                                <button type="button" onclick="setVenue('Interior / Salón', 'venue-int')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2"></i> Interior / Salón</button>
+                                <button type="button" onclick="setVenue('Exterior / Finca / Jardín', 'venue-ext')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2"></i> Exterior / Finca</button>
                             </div>
                         </div>
 
@@ -430,10 +437,10 @@
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">3. Configuración de Tarima / Escenario</label>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                <button type="button" onclick="setStage('Sin tarima')" id="stage-0" class="sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Sin tarima</button>
-                                <button type="button" onclick="setStage('A ras de suelo')" id="stage-1" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A ras de suelo</button>
-                                <button type="button" onclick="setStage('A 20 o 40cm')" id="stage-2" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A 20 a 40cm</button>
-                                <button type="button" onclick="setStage('60cm o más')" id="stage-3" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">60cm o más</button>
+                                <button type="button" onclick="setStage('Sin tarima', 'stage-0')" id="stage-0" class="sim-stage-btn bg-indigo-600 text-white font-semibold py-2.5 px-2 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">Sin tarima</button>
+                                <button type="button" onclick="setStage('A ras de suelo', 'stage-1')" id="stage-1" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A ras de suelo</button>
+                                <button type="button" onclick="setStage('A 20 o 40cm', 'stage-2')" id="stage-2" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">A 20 a 40cm</button>
+                                <button type="button" onclick="setStage('60cm o más', 'stage-3')" id="stage-3" class="sim-stage-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-2.5 px-2 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">60cm o más</button>
                             </div>
                         </div>
 
@@ -441,9 +448,9 @@
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">4. Duración del Montaje / Evento</label>
                             <div class="grid grid-cols-3 gap-3">
-                                <button type="button" onclick="setDuration(1, '1 Jornada (Día único)')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
-                                <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 days)')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
-                                <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
+                                <button type="button" onclick="setDuration(1, '1 Jornada (Día único)', 'dur-1')" id="dur-1" class="sim-dur-btn bg-indigo-600 text-white font-semibold py-3 px-3 rounded-xl text-xs border border-indigo-500 transition-all cursor-pointer shadow-md">1 Jornada</button>
+                                <button type="button" onclick="setDuration(1.8, 'Fin de Semana (2 days)', 'dur-2')" id="dur-2" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Fin de Semana</button>
+                                <button type="button" onclick="setDuration(2.5, 'Multi-día (3+ días / Feria)', 'dur-3')" id="dur-3" class="sim-dur-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-3 rounded-xl text-xs border border-white/15 transition-all cursor-pointer">Multi-día</button>
                             </div>
                         </div>
 
@@ -1399,38 +1406,6 @@
 
         // Inicializar cálculo al cargar y asegurar asignación de eventos en botones del DOM
         window.addEventListener('DOMContentLoaded', () => {
-            // Asignar eventos a los botones de Tipo de Evento
-            const btnCorp = document.getElementById('type-corp');
-            const btnCong = document.getElementById('type-cong');
-            const btnBoda = document.getElementById('type-boda');
-            if(btnCorp) btnCorp.onclick = () => setEventType('Corporativo', 'type-corp');
-            if(btnCong) btnCong.onclick = () => setEventType('Congreso / Feria', 'type-cong');
-            if(btnBoda) btnBoda.onclick = () => setEventType('Boda / Gala', 'type-boda');
-
-            // Asignar eventos a los botones de Recinto
-            const btnInt = document.getElementById('venue-int');
-            const btnExt = document.getElementById('venue-ext');
-            if(btnInt) btnInt.onclick = () => setVenue('Interior / Salón', 'venue-int');
-            if(btnExt) btnExt.onclick = () => setVenue('Exterior / Finca / Jardín', 'venue-ext');
-
-            // Asignar eventos a los botones de Escenario / Tarima
-            const btnSt0 = document.getElementById('stage-0');
-            const btnSt1 = document.getElementById('stage-1');
-            const btnSt2 = document.getElementById('stage-2');
-            const btnSt3 = document.getElementById('stage-3');
-            if(btnSt0) btnSt0.onclick = () => setStage('Sin tarima', 'stage-0');
-            if(btnSt1) btnSt1.onclick = () => setStage('A ras de suelo', 'stage-1');
-            if(btnSt2) btnSt2.onclick = () => setStage('A 20 o 40cm', 'stage-2');
-            if(btnSt3) btnSt3.onclick = () => setStage('60cm o más', 'stage-3');
-
-            // Asignar eventos a los botones de Duración
-            const btnDur1 = document.getElementById('dur-1');
-            const btnDur2 = document.getElementById('dur-2');
-            const btnDur3 = document.getElementById('dur-3');
-            if(btnDur1) btnDur1.onclick = () => setDuration(1, '1 Jornada (Día único)', 'dur-1');
-            if(btnDur2) btnDur2.onclick = () => setDuration(1.8, 'Fin de Semana (2 days)', 'dur-2');
-            if(btnDur3) btnDur3.onclick = () => setDuration(2.5, 'Multi-día (3+ días / Feria)', 'dur-3');
-
             calculateTotal();
 
             const cookieDecision = localStorage.getItem('dreamscape_cookies_accepted');
