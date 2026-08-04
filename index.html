@@ -55,11 +55,15 @@
             transition: all 0.7s ease-in-out;
         }
 
-        /* Forzar que el icono del calendario del input date se vea en blanco brillante */
+        /* Forzar alto contraste y visibilidad del icono de calendario en PC y Móvil */
+        input[type="date"] {
+            color-scheme: dark;
+        }
         input[type="date"]::-webkit-calendar-picker-indicator {
             filter: invert(1) brightness(2);
             cursor: pointer;
             opacity: 1;
+            padding: 4px;
         }
 
         /* Perspectiva para tarjetas 3D ligeras */
@@ -384,7 +388,7 @@
     </section>
 
     <!-- =========================================================================
-         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CALENDARIO EN BLANCO)
+         SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (ESPACIADO SUPERIOR AJUSTADO)
          ========================================================================= -->
     <section id="simulador" class="py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
