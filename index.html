@@ -577,7 +577,8 @@
                                     <i class="fa-solid fa-paper-plane text-sm"></i> Traspasar configuración al formulario
                                 </button>
 
-                                <a href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
+                                <!-- BOTÓN DE WHATSAPP DINÁMICO ACTUALIZADO -->
+                                <a id="whatsapp-config-btn" href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
                                     <i class="fa-brands fa-whatsapp text-lg"></i> Contáctanos ahora por WhatsApp
                                 </a>
                             </div>
@@ -1285,7 +1286,6 @@
             doc.setFont("helvetica", "bold");
             doc.setFontSize(8);
             doc.text("DOSSIER OFICIAL", 157, 22);
-            // Añadir enlace clicable sobre el rectángulo azul
             doc.link(150, 15, 45, 12, { url: 'https://www.canva.com/design/DAHPMjNXFKs/PwQA5sTbB76s6Mi_Be8S4w/view?utm_content=DAHPMjNXFKs&utm_campaign=designshare&utm_medium=link&utm_source=viewer' });
 
             // 2. TÍTULO DEL DOCUMENTO Y METADATOS
@@ -1300,7 +1300,6 @@
             doc.text("Fecha de emisión: " + new Date().toLocaleDateString('es-ES'), 15, 71);
             doc.text("Fecha prevista del evento: " + (currentEventDate !== '' ? currentEventDate : 'A definir con el cliente'), 115, 71);
 
-            // Línea divisoria elegante
             doc.setDrawColor(226, 232, 240);
             doc.setLineWidth(0.5);
             doc.line(15, 76, 195, 76);
@@ -1362,7 +1361,6 @@
                 startY += lineHeight;
             });
 
-            // Potencia eléctrica estimada con estilo técnico pro
             const powerText = document.getElementById('summary-power').innerText;
             doc.setFont("helvetica", "bold");
             doc.setTextColor(15, 23, 42);
@@ -1403,14 +1401,33 @@
             doc.text("Dreamscape Events and Complete Productions, S.L.  |  NIF: B19859115  |  Cobertura: Barcelona, Madrid, Valencia", 15, 278);
             doc.text("Este documento es una propuesta técnica orientativa sujeta a validación final de accesos y recinto.", 15, 283);
 
-            // Descargar el PDF con el nombre profesional
             doc.save("Propuesta_Tecnica_Dreamscape_Events.pdf");
         }
 
         function sendWhatsAppSimulation() {
             const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
-            const text = `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar un presupuesto formal con esta configuración:%0A- Fecha prevista: ${currentEventDate}%0A- Tipo: ${currentEventName}%0A- Recinto: ${currentVenueName}%0A- Tarima/Escenario: ${currentStageName}%0A- Duración: ${currentDurationName}%0A- Asistentes: ${currentAttendees}%0A- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}\n¿Podemos revisarlo?`;
+            
+            let ridersText = [];
+            if(document.getElementById('chk-sonido').checked) ridersText.push("Sonido PA");
+            if(document.getElementById('chk-luz').checked) ridersText.push("Iluminación DMX");
+            if(document.getElementById('chk-rigging').checked) ridersText.push("Escenografía & Estructuras");
+            if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
+
+            const text = encodeURIComponent(
+                `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar disponibilidad con esta configuración:\n\n` +
+                `- Fecha prevista: ${currentEventDate}\n` +
+                `- Tipo: ${currentEventName}\n` +
+                `- Recinto: ${currentVenueName}\n` +
+                `- Tarima/Escenario: ${currentStageName}\n` +
+                `- Duración: ${currentDurationName}\n` +
+                `- Asistentes: ${currentAttendees}\n` +
+                `- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n` +
+                `- Potencia estimada: ${power}\n` +
+                `- Estimación orientativa: ${price}\n\n` +
+                `¿Podemos confirmarlo?`
+            );
+            
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
         }
 
