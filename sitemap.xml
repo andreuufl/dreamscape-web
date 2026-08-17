@@ -6,6 +6,21 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.eventsandproductionsap.com/servicio-barcelona.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/servicio-madrid.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/servicio-valencia.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.eventsandproductionsap.com/blog-gala-penguin.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
