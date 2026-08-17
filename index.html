@@ -486,6 +486,73 @@
         </div>
     </section>
 
+    <!-- CARRUSEL DE FOTOS REALES -->
+    <section id="galeria-real" class="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto space-y-4 mb-14" data-aos="fade-up">
+                <h2 class="text-xs font-bold tracking-widest text-indigo-400 uppercase">Momentos Reales</h2>
+                <p class="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">Directo de nuestros eventos</p>
+                <p class="text-slate-400 text-lg">Fotografías reales de producciones de Dreamscape Events, sin retoques ni imágenes de stock.</p>
+            </div>
+
+            <div class="relative" data-aos="fade-up" data-aos-delay="100">
+                <!-- Carrusel -->
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-white/10">
+                    <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-1-gala.jpg" alt="Gala corporativa con montaje escénico" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Gala corporativa</span>
+                        </div>
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-2-congreso.jpg" alt="Congreso YPO Global Leadership Conference" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Congreso corporativo</span>
+                        </div>
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-3-candlelight.jpg" alt="Concierto Candlelight con velas en iglesia" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Concierto con velas</span>
+                        </div>
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-4-nocturno.jpg" alt="Evento nocturno con velas en patio histórico" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Evento nocturno</span>
+                        </div>
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-5-velas.jpg" alt="Espacio decorado con velas para evento" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Diseño ambiental</span>
+                        </div>
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[4/5] sm:aspect-[16/10]">
+                            <img src="portfolio-6-terraza.jpg" alt="Terraza con equipo de sonido JBL y vistas a Barcelona" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Sonorización de terraza</span>
+                        </div>
+                    </div>
+
+                    <!-- Flechas -->
+                    <button type="button" onclick="carouselMove(-1)" aria-label="Foto anterior" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-slate-900 flex items-center justify-center shadow-lg transition-all">
+                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" onclick="carouselMove(1)" aria-label="Foto siguiente" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-slate-900 flex items-center justify-center shadow-lg transition-all">
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <!-- Puntos de navegación -->
+                <div id="carousel-dots" class="flex items-center justify-center gap-2 mt-6">
+                    <button type="button" onclick="carouselGoTo(0)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-indigo-500 transition-all" aria-label="Ir a la foto 1"></button>
+                    <button type="button" onclick="carouselGoTo(1)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Ir a la foto 2"></button>
+                    <button type="button" onclick="carouselGoTo(2)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Ir a la foto 3"></button>
+                    <button type="button" onclick="carouselGoTo(3)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Ir a la foto 4"></button>
+                    <button type="button" onclick="carouselGoTo(4)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Ir a la foto 5"></button>
+                    <button type="button" onclick="carouselGoTo(5)" class="carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 transition-all" aria-label="Ir a la foto 6"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- SELLO DE GARANTÍA Y SLA TÉCNICO -->
     <section class="py-16 bg-white border-y border-slate-100 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1754,6 +1821,55 @@
                 if (m && !m.classList.contains('hidden')) closeModal(id);
             });
         });
+
+        // ===== CARRUSEL DE FOTOS REALES =====
+        let carouselIndex = 0;
+        const carouselTotal = 6;
+
+        function carouselUpdate() {
+            const track = document.getElementById('carousel-track');
+            if (!track) return;
+            track.style.transform = `translateX(-${carouselIndex * 100}%)`;
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                if (i === carouselIndex) {
+                    dot.classList.remove('bg-white/30');
+                    dot.classList.add('bg-indigo-500');
+                } else {
+                    dot.classList.remove('bg-indigo-500');
+                    dot.classList.add('bg-white/30');
+                }
+            });
+        }
+
+        function carouselMove(direction) {
+            carouselIndex = (carouselIndex + direction + carouselTotal) % carouselTotal;
+            carouselUpdate();
+        }
+
+        function carouselGoTo(index) {
+            carouselIndex = index;
+            carouselUpdate();
+        }
+
+        // Deslizar con el dedo en móvil
+        (function() {
+            const track = document.getElementById('carousel-track');
+            if (!track) return;
+            let startX = 0;
+            track.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', (e) => {
+                const diff = e.changedTouches[0].clientX - startX;
+                if (Math.abs(diff) > 40) carouselMove(diff < 0 ? 1 : -1);
+            }, { passive: true });
+        })();
+
+        // Avance automático cada 6 segundos, se detiene si el usuario interactúa
+        let carouselAutoplay = setInterval(() => carouselMove(1), 6000);
+        const carouselSection = document.getElementById('galeria-real');
+        if (carouselSection) {
+            carouselSection.addEventListener('click', () => clearInterval(carouselAutoplay));
+            carouselSection.addEventListener('touchstart', () => clearInterval(carouselAutoplay), { passive: true });
+        }
 
         function filterGallery(cat) {
             const buttons = document.querySelectorAll('.filter-btn');
