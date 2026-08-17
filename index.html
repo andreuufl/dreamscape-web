@@ -189,6 +189,16 @@
             50% { transform: scale(1.06); box-shadow: 0 0 0 12px rgba(79, 70, 229, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
         }
+
+        /* Animación de pulso flotante para el botón de WhatsApp (abajo-izquierda, distinta a la del chat) */
+        #whatsapp-float-btn {
+            animation: waPulseBubble 2.8s infinite ease-in-out;
+        }
+        @keyframes waPulseBubble {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.55); }
+            70% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
         
         [data-aos] {
             pointer-events: none;
@@ -1687,6 +1697,11 @@
             }
         }
     </script>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP (abajo-izquierda, para no chocar con el chat de IA de abajo-derecha) -->
+    <a id="whatsapp-float-btn" href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20estoy%20interesado%20en%20recibir%20informaci%C3%B3n%20y%20presupuesto%20para%20un%20pr%C3%B3ximo%20evento." target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp" class="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-xl transition-all hover:scale-105">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
 
     <!-- Chatbase AI Assistant Script con animación aplicada -->
     <script>
