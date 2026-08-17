@@ -56,6 +56,40 @@
     }
     </script>
 
+    <!-- Schema.org: Preguntas Frecuentes (FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Trabajáis fuera de Barcelona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, tenemos cobertura habitual en Barcelona, Madrid y Valencia. Contáctanos para consultar disponibilidad en otras zonas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Con cuánta antelación hay que reservar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recomendamos contactar al menos 2-3 meses antes, especialmente en temporada alta (primavera-verano), aunque podemos gestionar solicitudes con menos margen según disponibilidad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo saber el presupuesto orientativo antes de contactar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, tenemos un simulador online en nuestra web donde puedes configurar tu evento y ver una estimación al instante."
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Rendimiento: conexión anticipada a los dominios externos usados -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
@@ -182,6 +216,7 @@
                     <a href="#porfolio" class="text-slate-700 nav-link py-1">Porfolio</a>
                     <a href="#simulador" class="text-slate-700 nav-link py-1">Simulador</a>
                     <a href="#filosofia" class="text-slate-700 nav-link py-1">Filosofía</a>
+                    <a href="#faq" class="text-slate-700 nav-link py-1">FAQ</a>
                     <a href="#blog" class="text-slate-700 nav-link py-1">Blog</a>
                     <a href="#contacto" class="text-slate-700 nav-link py-1">Contacto</a>
                 </nav>
@@ -210,6 +245,7 @@
                 <a href="#porfolio" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Porfolio</a>
                 <a href="#simulador" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Simulador</a>
                 <a href="#filosofia" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Filosofía</a>
+                <a href="#faq" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">FAQ</a>
                 <a href="#blog" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Blog</a>
                 <a href="#contacto" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Contacto</a>
                 <a href="#contacto" class="mobile-link block text-center bg-indigo-600 text-white px-4 py-3 rounded-xl font-semibold shadow-md btn-shine mt-4">
@@ -707,6 +743,52 @@
                         <span class="block text-5xl font-black text-white">100%</span>
                         <span class="block font-bold text-lg text-slate-100">Clientes Satisfechos</span>
                         <span class="block text-sm text-slate-400">Nuestro compromiso con la excelencia es total.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
+    <section id="faq" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-aos="fade-up">
+                <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">¿Tienes dudas?</h2>
+                <p class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas Frecuentes</p>
+                <p class="text-slate-600 text-lg">Resolvemos las dudas más habituales antes de que contactes con nosotros.</p>
+            </div>
+
+            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+                <!-- Pregunta 1 -->
+                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
+                        <span class="text-lg font-bold text-slate-950 pr-4">¿Trabajáis fuera de Barcelona?</span>
+                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-slate-600 leading-relaxed">Sí, tenemos cobertura habitual en Barcelona, Madrid y Valencia. Contáctanos para consultar disponibilidad en otras zonas.</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 2 -->
+                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
+                        <span class="text-lg font-bold text-slate-950 pr-4">¿Con cuánta antelación hay que reservar?</span>
+                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-slate-600 leading-relaxed">Recomendamos contactar al menos 2-3 meses antes, especialmente en temporada alta (primavera-verano), aunque podemos gestionar solicitudes con menos margen según disponibilidad.</p>
+                    </div>
+                </div>
+
+                <!-- Pregunta 3 -->
+                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                    <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
+                        <span class="text-lg font-bold text-slate-950 pr-4">¿Puedo saber el presupuesto orientativo antes de contactar?</span>
+                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="px-6 pb-6 text-slate-600 leading-relaxed">Sí, tenemos un <a href="#simulador" class="text-indigo-600 font-semibold hover:underline">simulador online</a> en nuestra web donde puedes configurar tu evento y ver una estimación al instante.</p>
                     </div>
                 </div>
             </div>
@@ -1554,6 +1636,23 @@
                 if(cat === 'all') { i.style.display = 'block'; }
                 else { i.style.display = i.classList.contains(cat) ? 'block' : 'none'; }
             });
+        }
+
+        // Acordeón de Preguntas Frecuentes (FAQ)
+        function toggleFaq(btn) {
+            const item = btn.closest('.faq-item');
+            const answer = item.querySelector('.faq-answer');
+            const icon = btn.querySelector('i');
+            const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+
+            // Cierra las demás preguntas abiertas (comportamiento tipo acordeón)
+            document.querySelectorAll('.faq-answer').forEach(a => { a.style.maxHeight = '0px'; });
+            document.querySelectorAll('.faq-item i.fa-chevron-down').forEach(i => { i.style.transform = 'rotate(0deg)'; });
+
+            if (!isOpen) {
+                answer.style.maxHeight = answer.scrollHeight + 'px';
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
     </script>
 
