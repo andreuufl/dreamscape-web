@@ -499,34 +499,64 @@
                 <!-- Carrusel -->
                 <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-900 border border-white/10">
                     <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(0)">
                             <img src="portfolio-1-gala.jpg" alt="Gala corporativa con montaje escénico" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Gala corporativa</span>
                         </div>
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(1)">
                             <img src="portfolio-2-congreso.jpg" alt="Congreso YPO Global Leadership Conference" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Congreso corporativo</span>
                         </div>
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(2)">
                             <img src="portfolio-3-candlelight.jpg" alt="Concierto Candlelight con velas en iglesia" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Concierto con velas</span>
                         </div>
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(3)">
                             <img src="portfolio-4-nocturno.jpg" alt="Evento nocturno con velas en patio histórico" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Evento nocturno</span>
                         </div>
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(4)">
                             <img src="portfolio-5-velas.jpg" alt="Espacio decorado con velas para evento" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Diseño ambiental</span>
                         </div>
-                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5]">
+                        <div class="carousel-slide flex-shrink-0 w-full relative aspect-[3/4] sm:aspect-[4/5] cursor-pointer group/photo" onclick="openPhotoLightbox(5)">
                             <img src="portfolio-6-terraza.jpg" alt="Terraza con equipo de sonido JBL y vistas a Barcelona" class="w-full h-full object-contain" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/20">
+                                <span class="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                                    <i class="fa-solid fa-magnifying-glass-plus text-slate-900" aria-hidden="true"></i>
+                                </span>
+                            </div>
                             <span class="absolute bottom-5 left-6 text-white font-bold text-lg">Sonorización de terraza</span>
                         </div>
                     </div>
@@ -552,6 +582,27 @@
             </div>
         </div>
     </section>
+
+    <!-- LIGHTBOX: foto ampliada + descripción -->
+    <div id="modal-photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
+        <button type="button" onclick="closeModal('modal-photo-lightbox')" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
+            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+        </button>
+        <button type="button" onclick="carouselMove(-1); openPhotoLightbox(carouselIndex)" aria-label="Foto anterior" class="hidden sm:flex absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white items-center justify-center transition-all z-10">
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button type="button" onclick="carouselMove(1); openPhotoLightbox(carouselIndex)" aria-label="Foto siguiente" class="hidden sm:flex absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white items-center justify-center transition-all z-10">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+
+        <div class="max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
+            <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl">
+            <div class="mt-6 text-center max-w-2xl px-4">
+                <h3 id="lightbox-title" class="text-white font-bold text-xl mb-2"></h3>
+                <p id="lightbox-desc" class="text-slate-300 text-sm leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
 
     <!-- SELLO DE GARANTÍA Y SLA TÉCNICO -->
     <section class="py-16 bg-white border-y border-slate-100 relative">
@@ -1808,14 +1859,14 @@
         }
         
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas'];
+            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
         // Accesibilidad: cerrar cualquier modal abierto (o el banner de cookies) con la tecla Escape
         window.addEventListener('keydown', function(e) {
             if (e.key !== 'Escape') return;
-            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3'];
+            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox'];
             allModals.forEach(id => {
                 const m = document.getElementById(id);
                 if (m && !m.classList.contains('hidden')) closeModal(id);
@@ -1869,6 +1920,52 @@
         if (carouselSection) {
             carouselSection.addEventListener('click', () => clearInterval(carouselAutoplay));
             carouselSection.addEventListener('touchstart', () => clearInterval(carouselAutoplay), { passive: true });
+        }
+
+        // ===== LIGHTBOX: foto ampliada + descripción =====
+        const photoData = [
+            {
+                src: "portfolio-1-gala.jpg",
+                title: "Gala corporativa",
+                desc: "Montaje escénico completo para una gala corporativa en un salón histórico: sonido, iluminación arquitectónica y pantalla de proyección integrados en un espacio de gran carga decorativa, con mesas y detalles para los asistentes."
+            },
+            {
+                src: "portfolio-2-congreso.jpg",
+                title: "Congreso corporativo",
+                desc: "Producción técnica para un congreso de liderazgo empresarial: escenografía modular con estructuras de gran formato, iluminación de color y pantalla central, pensada para un auditorio con aforo amplio."
+            },
+            {
+                src: "portfolio-3-candlelight.jpg",
+                title: "Concierto con velas",
+                desc: "Concierto de cámara ambientado con cientos de velas en un espacio religioso de gran altura, combinando sonorización cuidada para música en directo con un diseño de iluminación cálido y atmosférico."
+            },
+            {
+                src: "portfolio-4-nocturno.jpg",
+                title: "Evento nocturno",
+                desc: "Vista aérea de un evento nocturno en un patio histórico, con instalación de velas formando un recorrido y una zona central para los asistentes, iluminado con líneas de luz que marcan los accesos."
+            },
+            {
+                src: "portfolio-5-velas.jpg",
+                title: "Diseño ambiental",
+                desc: "Diseño ambiental con velas para una sala con altar y obra pictórica, creando una atmósfera cálida e íntima antes del inicio del evento, con el equipo técnico integrado de forma discreta."
+            },
+            {
+                src: "portfolio-6-terraza.jpg",
+                title: "Sonorización de terraza",
+                desc: "Montaje de sonido profesional en una terraza con vistas a Barcelona: altavoces column array a ambos lados de una tarima elevada, preparado para ceremonia o actuación en directo al aire libre."
+            }
+        ];
+
+        function openPhotoLightbox(index) {
+            const data = photoData[index];
+            if (!data) return;
+            carouselIndex = index;
+            document.getElementById('lightbox-img').src = data.src;
+            document.getElementById('lightbox-img').alt = data.title;
+            document.getElementById('lightbox-title').textContent = data.title;
+            document.getElementById('lightbox-desc').textContent = data.desc;
+            openModal('modal-photo-lightbox');
+            clearInterval(carouselAutoplay);
         }
 
         function filterGallery(cat) {
