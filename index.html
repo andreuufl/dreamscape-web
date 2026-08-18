@@ -463,15 +463,20 @@
                     </div>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Concierto con velas</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openPhotoLightbox(3)">
-                    <img src="portfolio-6-terraza.jpg" alt="Terraza con equipo de sonido JBL y vistas a Barcelona" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox3()">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-fashionweek-poster.jpg">
+                        <source src="portfolio-video-fashionweek.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-magnifying-glass-plus text-slate-900 text-sm" aria-hidden="true"></i>
+                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Sonorización de terraza</span>
+                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
+                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                    </span>
+                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">080 Barcelona Fashion Week</span>
                 </div>
             </div>
         </div>
@@ -525,6 +530,21 @@
             <div class="mt-6 text-center max-w-2xl px-4">
                 <h3 id="video-lightbox-title-2" class="text-white font-bold text-xl mb-2">Fiesta en directo</h3>
                 <p class="text-slate-300 text-sm leading-relaxed">Pista de baile en plena celebración: iluminación robótica, bolas de espejos y efectos sincronizados para llevar la fiesta al siguiente nivel una vez cae la noche.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-video-lightbox-3" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title-3" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
+        <button type="button" onclick="closeVideoLightbox3()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
+            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+        </button>
+        <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
+            <video id="lightbox-video-3" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop playsinline poster="portfolio-video-fashionweek-poster.jpg">
+                <source src="portfolio-video-fashionweek.mp4" type="video/mp4">
+            </video>
+            <div class="mt-6 text-center max-w-2xl px-4">
+                <h3 id="video-lightbox-title-3" class="text-white font-bold text-xl mb-2">080 Barcelona Fashion Week</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Montaje de photocall y escenario de marca para la 35ª edición de 080 Barcelona Fashion Week, con backdrop de patrocinadores e infraestructura técnica lista para el desfile.</p>
             </div>
         </div>
     </div>
@@ -1788,18 +1808,22 @@
                     const video2 = document.getElementById('lightbox-video-2');
                     if (video2) video2.pause();
                 }
+                if (id === 'modal-video-lightbox-3') {
+                    const video3 = document.getElementById('lightbox-video-3');
+                    if (video3) video3.pause();
+                }
             }
         }
         
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2'];
+            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
         // Accesibilidad: cerrar cualquier modal abierto (o el banner de cookies) con la tecla Escape
         window.addEventListener('keydown', function(e) {
             if (e.key !== 'Escape') return;
-            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2'];
+            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3'];
             allModals.forEach(id => {
                 const m = document.getElementById(id);
                 if (m && !m.classList.contains('hidden')) closeModal(id);
@@ -1808,7 +1832,7 @@
 
         // ===== GALERÍA REAL: índice de la foto actualmente abierta en el lightbox =====
         let currentPhotoIndex = 0;
-        const photoTotal = 4;
+        const photoTotal = 3;
 
         // ===== LIGHTBOX: foto ampliada + descripción =====
         const photoData = [
@@ -1826,11 +1850,6 @@
                 src: "portfolio-3-candlelight.jpg",
                 title: "Concierto con velas",
                 desc: "Concierto de cámara ambientado con cientos de velas en un espacio religioso de gran altura, combinando sonorización cuidada para música en directo con un diseño de iluminación cálido y atmosférico."
-            },
-            {
-                src: "portfolio-6-terraza.jpg",
-                title: "Sonorización de terraza",
-                desc: "Montaje de sonido profesional en una terraza con vistas a Barcelona: altavoces column array a ambos lados de una tarima elevada, preparado para ceremonia o actuación en directo al aire libre."
             }
         ];
 
@@ -1873,6 +1892,18 @@
             const video2 = document.getElementById('lightbox-video-2');
             if (video2) video2.pause();
             closeModal('modal-video-lightbox-2');
+        }
+
+        function openVideoLightbox3() {
+            openModal('modal-video-lightbox-3');
+            const video3 = document.getElementById('lightbox-video-3');
+            if (video3) { video3.currentTime = 0; video3.play(); }
+        }
+
+        function closeVideoLightbox3() {
+            const video3 = document.getElementById('lightbox-video-3');
+            if (video3) video3.pause();
+            closeModal('modal-video-lightbox-3');
         }
 
         // Acordeón de Preguntas Frecuentes (FAQ)
