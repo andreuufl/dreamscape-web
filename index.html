@@ -459,16 +459,6 @@
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Evento nocturno</span>
                 </div>
                 <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openPhotoLightbox(4)">
-                    <img src="portfolio-5-velas.jpg" alt="Espacio decorado con velas para evento" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-magnifying-glass-plus text-slate-900 text-sm" aria-hidden="true"></i>
-                        </span>
-                    </div>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Diseño ambiental</span>
-                </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openPhotoLightbox(5)">
                     <img src="portfolio-6-terraza.jpg" alt="Terraza con equipo de sonido JBL y vistas a Barcelona" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
@@ -1794,7 +1784,7 @@
 
         // ===== GALERÍA REAL: índice de la foto actualmente abierta en el lightbox =====
         let currentPhotoIndex = 0;
-        const photoTotal = 6;
+        const photoTotal = 5;
 
         // ===== LIGHTBOX: foto ampliada + descripción =====
         const photoData = [
@@ -1817,11 +1807,6 @@
                 src: "portfolio-4-nocturno.jpg",
                 title: "Evento nocturno",
                 desc: "Vista aérea de un evento nocturno en un patio histórico, con instalación de velas formando un recorrido y una zona central para los asistentes, iluminado con líneas de luz que marcan los accesos."
-            },
-            {
-                src: "portfolio-5-velas.jpg",
-                title: "Diseño ambiental",
-                desc: "Diseño ambiental con velas para una sala con altar y obra pictórica, creando una atmósfera cálida e íntima antes del inicio del evento, con el equipo técnico integrado de forma discreta."
             },
             {
                 src: "portfolio-6-terraza.jpg",
