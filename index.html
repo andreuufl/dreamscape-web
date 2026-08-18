@@ -393,109 +393,31 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PORFOLIO -->
-    <section id="porfolio" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Casos de Éxito</h2>
-                <p class="text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">Montajes por Tipo de Recinto</p>
-                <p class="text-slate-600 text-lg">Filtra nuestra galería según el espacio de tu evento: salones corporativos, auditorios o fincas y jardines exclusivos.</p>
-            </div>
-
-            <!-- Filtros Avanzados de Recinto -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button id="btn-all" onclick="filterGallery('all')" class="filter-btn bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-md cursor-pointer">Todos los espacios</button>
-                <button id="btn-salon" onclick="filterGallery('salon')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer"><i class="fa-solid fa-building mr-1.5 text-indigo-600" aria-hidden="true"></i> Salones & Hoteles</button>
-                <button id="btn-auditorio" onclick="filterGallery('auditorio')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer"><i class="fa-solid fa-microphone mr-1.5 text-emerald-600" aria-hidden="true"></i> Auditorios & Congresos</button>
-                <button id="btn-finca" onclick="filterGallery('finca')" class="filter-btn bg-white text-slate-700 hover:bg-slate-100 font-semibold px-6 py-2.5 rounded-full text-sm transition-all shadow-sm cursor-pointer"><i class="fa-solid fa-tree mr-1.5 text-rose-600" aria-hidden="true"></i> Fincas & Exteriores</button>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-hidden">
-                <!-- 1. Salones & Hoteles -->
-                <div class="gallery-item salon bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?q=75&w=600&auto=format&fit=crop" alt="Salón corporativo de hotel" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-1">Salón de Hotel & Gala</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Diseño Escénico Corporativo</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Montaje a gran escala de estructuras de truss, iluminación perimetral y control DMX en salón interior.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Auditorios & Congresos -->
-                <div class="gallery-item auditorio bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=75&w=600&auto=format&fit=crop" alt="Gran auditorio para congresos" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Auditorio & Convenciones</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Congreso Anual de Tecnología</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Sonorización distribuida de alta inteligibilidad y microfonía digital para ponencias simultáneas en auditorio.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Fincas & Exteriores -->
-                <div class="gallery-item finca bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=75&w=600&auto=format&fit=crop" alt="Finca y jardín para bodas exclusivas" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-1">Finca & Jardín Privado</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Boda Exclusiva al Aire Libre</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Iluminación ambiental con proyectores IP65 autónomos y sonido ambiental oculto integrado en la naturaleza.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. Fincas & Exteriores -->
-                <div class="gallery-item finca bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="100">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=75&w=600&auto=format&fit=crop" alt="Carpas y eventos en exteriores" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-1">Carpas & Espacios Abiertos</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Iluminación Perimetral de Carpa</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Instalación de guirnaldas micro-LED cálidas y refuerzo sonoro resistente a intemperie para eventos singulares.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Salones & Hoteles -->
-                <div class="gallery-item salon bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="200">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=75&w=600&auto=format&fit=crop" alt="Gala corporativa en salón" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-1">Salón de Convenciones</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Gala de Premios Empresariales</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Rigging estructural ligero y focos móviles robóticos enfocados a la entrega de reconocimientos.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. Auditorios & Congresos -->
-                <div class="gallery-item auditorio bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 group relative transition-all duration-500 hover:-translate-y-2 hover:shadow-xl aspect-[4/3]" data-aos="fade-up" data-aos-delay="300">
-                    <div class="relative overflow-hidden w-full h-full">
-                        <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=75&w=600&auto=format&fit=crop" alt="Recinto ferial y stands" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-6">
-                            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-1">Recinto Ferial & Stands</span>
-                            <h4 class="text-lg font-bold text-white mb-2">Feria Sectorial & Infraestructura</h4>
-                            <p class="text-slate-300 text-xs line-clamp-2">Distribución de acometidas eléctricas trifásicas de alta seguridad y cuadros de protección para expositores.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CARRUSEL DE FOTOS REALES -->
-    <section id="galeria-real" class="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
+    <section id="porfolio" class="py-24 md:py-32 bg-slate-950 relative overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-2xl mx-auto space-y-4 mb-14" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-400 uppercase">Momentos Reales</h2>
-                <p class="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">Directo de nuestros eventos</p>
-                <p class="text-slate-400 text-lg">Fotografías reales de producciones de Dreamscape Events, sin retoques ni imágenes de stock.</p>
+                <h2 class="text-xs font-bold tracking-widest text-indigo-400 uppercase">Así lo vivimos</h2>
+                <p class="text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">Bodas, galas y congresos que hemos hecho realidad</p>
+                <p class="text-slate-400 text-lg">Sin bancos de imágenes ni postureo: esto es lo que vive nuestro equipo cada fin de semana.</p>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-aos="fade-up" data-aos-delay="100">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox()">
+                    <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-poster.jpg">
+                        <source src="portfolio-video-jardin.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
+                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
+                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
+                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                    </span>
+                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Boda en jardín</span>
+                </div>
                 <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openPhotoLightbox(0)">
                     <img src="portfolio-1-gala.jpg" alt="Gala corporativa con montaje escénico" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
@@ -577,6 +499,22 @@
             <div class="mt-6 text-center max-w-2xl px-4">
                 <h3 id="lightbox-title" class="text-white font-bold text-xl mb-2"></h3>
                 <p id="lightbox-desc" class="text-slate-300 text-sm leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX DE VÍDEO -->
+    <div id="modal-video-lightbox" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
+        <button type="button" onclick="closeVideoLightbox()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
+            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+        </button>
+        <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
+            <video id="lightbox-video" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop playsinline poster="portfolio-video-poster.jpg">
+                <source src="portfolio-video-jardin.mp4" type="video/mp4">
+            </video>
+            <div class="mt-6 text-center max-w-2xl px-4">
+                <h3 id="video-lightbox-title" class="text-white font-bold text-xl mb-2">Boda en jardín</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Sonorización ambiental para una ceremonia al aire libre: altavoces discretamente integrados entre los setos, listos para acompañar la ceremonia y la música en directo.</p>
             </div>
         </div>
     </div>
@@ -1832,18 +1770,22 @@
                 if(document.getElementById('cookie-law-banner').classList.contains('hidden')) {
                     document.body.classList.remove('overflow-hidden'); 
                 }
+                if (id === 'modal-video-lightbox') {
+                    const video = document.getElementById('lightbox-video');
+                    if (video) video.pause();
+                }
             }
         }
         
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox'];
+            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox','modal-video-lightbox'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
         // Accesibilidad: cerrar cualquier modal abierto (o el banner de cookies) con la tecla Escape
         window.addEventListener('keydown', function(e) {
             if (e.key !== 'Escape') return;
-            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox'];
+            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox','modal-video-lightbox'];
             allModals.forEach(id => {
                 const m = document.getElementById(id);
                 if (m && !m.classList.contains('hidden')) closeModal(id);
@@ -1904,29 +1846,17 @@
             openPhotoLightbox(currentPhotoIndex);
         }
 
-        function filterGallery(cat) {
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md');
-                btn.classList.add('bg-white', 'text-slate-700', 'shadow-sm');
-            });
-            
-            let activeBtn;
-            if (cat === 'all') activeBtn = document.getElementById('btn-all');
-            else if (cat === 'salon') activeBtn = document.getElementById('btn-salon');
-            else if (cat === 'auditorio') activeBtn = document.getElementById('btn-auditorio');
-            else if (cat === 'finca') activeBtn = document.getElementById('btn-finca');
-            
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-white', 'text-slate-700', 'shadow-sm');
-                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md');
-            }
+        // ===== LIGHTBOX DE VÍDEO =====
+        function openVideoLightbox() {
+            openModal('modal-video-lightbox');
+            const video = document.getElementById('lightbox-video');
+            if (video) { video.currentTime = 0; video.play(); }
+        }
 
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(i => {
-                if(cat === 'all') { i.style.display = 'block'; }
-                else { i.style.display = i.classList.contains(cat) ? 'block' : 'none'; }
-            });
+        function closeVideoLightbox() {
+            const video = document.getElementById('lightbox-video');
+            if (video) video.pause();
+            closeModal('modal-video-lightbox');
         }
 
         // Acordeón de Preguntas Frecuentes (FAQ)
