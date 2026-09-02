@@ -65,7 +65,6 @@
         {"@type": "City", "name": "Valencia"},
         {"@type": "Country", "name": "España"}
       ],
-      "priceRange": "€€",
       "knowsAbout": ["Montaje de escenarios", "Alquiler de equipos audiovisuales", "Sonido profesional para eventos", "Iluminación arquitectónica y DMX", "Estructuras y tarimas para eventos", "Pantallas LED y vídeo en directo"],
       "sameAs": [
         "https://www.instagram.com/dreamscape_events_sl",
@@ -98,10 +97,10 @@
         },
         {
           "@type": "Question",
-          "name": "¿Puedo saber el presupuesto orientativo antes de contactar?",
+          "name": "¿Puedo saber el presupuesto antes de contactar?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sí, tenemos un simulador online en nuestra web donde puedes configurar tu evento y ver una estimación al instante."
+            "text": "Tenemos un simulador online donde puedes configurar los detalles técnicos de tu evento y enviárnoslo directamente. Con esa información os preparamos un presupuesto personalizado sin compromiso."
           }
         }
       ]
@@ -331,7 +330,7 @@
                     </p>
                     <div class="pt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a href="#simulador" class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-full font-bold text-base transition-all shadow-xl shadow-indigo-950/50 text-center btn-shine">
-                            Calcular Presupuesto Online
+                            Solicitar Presupuesto Online
                         </a>
                         <a href="#servicios" class="bg-white/5 hover:bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-semibold text-base transition-all text-center backdrop-blur-sm group">
                             Ver qué hacemos <i class="fa-solid fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i>
@@ -638,7 +637,7 @@
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-aos="fade-up">
                 <span class="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">Herramienta Interactiva</span>
                 <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-2">Simulador de Rider & Presupuesto</h2>
-                <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y obtén una estimación orientativa lista para consultar con nuestro equipo.</p>
+                <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y envíanos la configuración para recibir un presupuesto personalizado.</p>
             </div>
 
             <!-- CONTENEDOR GRID CON IGUALACIÓN DE ALTURA (LG:FLEX) -->
@@ -713,28 +712,24 @@
                                         <input type="checkbox" id="chk-sonido" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Sonido Profesional PA & Microfonía Inalámbrica</span>
                                     </div>
-                                    <span class="text-xs text-indigo-300 font-semibold">+ 300€</span>
                                 </label>
                                 <label id="box-luz" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-luz" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Iluminación Arquitectónica & Robótica DMX</span>
                                     </div>
-                                    <span class="text-xs text-indigo-300 font-semibold">+ 450€</span>
                                 </label>
                                 <label id="box-rigging" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-rigging" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Escenografía & Estructuras</span>
                                     </div>
-                                    <span class="text-xs text-amber-300 font-semibold">+ 500€ (Fijo x Duración)</span>
                                 </label>
                                 <label id="box-video" class="flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer">
                                     <div class="flex items-center space-x-3">
                                         <input type="checkbox" id="chk-video" onchange="calculateTotal()" class="h-5 w-5 rounded border-slate-700 text-indigo-600 focus:ring-indigo-500 cursor-pointer">
                                         <span class="text-sm font-medium">Pantalla LED / Vídeo en Directo & Técnico In Situ</span>
                                     </div>
-                                    <span class="text-xs text-indigo-300 font-semibold">+ 900€</span>
                                 </label>
                             </div>
                         </div>
@@ -745,7 +740,7 @@
                 <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6 flex flex-col justify-between" data-aos="fade-left">
                     <div class="space-y-6">
                         <div class="border-b border-slate-100 pb-4">
-                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Estimación</span>
+                            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Resumen</span>
                             <h3 class="text-2xl font-black text-slate-950 mt-1">Resumen Técnico</h3>
                         </div>
 
@@ -780,12 +775,14 @@
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center justify-between">
-                            <div>
-                                <span class="block text-xs text-slate-500 uppercase font-bold">Estimación Orientativa</span>
-                                <span class="text-xs text-slate-600">IVA no incluido</span>
+                        <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-paper-plane text-sm"></i>
                             </div>
-                            <span id="summary-price" class="text-3xl font-black text-indigo-600">0 €</span>
+                            <div>
+                                <span class="block text-sm font-bold text-slate-900">Configuración lista para enviar</span>
+                                <span class="text-xs text-slate-500">Nuestro equipo os prepara un presupuesto a medida con esta información.</span>
+                            </div>
                         </div>
                     </div>
 
@@ -927,11 +924,11 @@
                 <!-- Pregunta 3 -->
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
-                        <span class="text-lg font-bold text-slate-950 pr-4">¿Puedo saber el presupuesto orientativo antes de contactar?</span>
+                        <span class="text-lg font-bold text-slate-950 pr-4">¿Puedo saber el presupuesto antes de contactar?</span>
                         <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
-                        <p class="px-6 pb-6 text-slate-600 leading-relaxed">Sí, tenemos un <a href="#simulador" class="text-indigo-600 font-semibold hover:underline">simulador online</a> en nuestra web donde puedes configurar tu evento y ver una estimación al instante.</p>
+                        <p class="px-6 pb-6 text-slate-600 leading-relaxed">Tenemos un <a href="#simulador" class="text-indigo-600 font-semibold hover:underline">simulador online</a> donde puedes configurar los detalles técnicos de tu evento y enviárnoslo directamente. Con esa información os preparamos un presupuesto personalizado sin compromiso.</p>
                     </div>
                 </div>
             </div>
@@ -1505,7 +1502,6 @@
         }
 
         function calculateTotal() {
-            let total = 0;
             let totalKw = 2;
 
             const sonidoChecked = document.getElementById('chk-sonido').checked;
@@ -1520,7 +1516,6 @@
 
             if (sonidoChecked) {
                 boxSonido.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
-                total += Math.round(300 * currentDurationMultiplier);
                 totalKw += 4.5;
             } else {
                 boxSonido.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
@@ -1528,7 +1523,6 @@
 
             if (luzChecked) {
                 boxLuz.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
-                total += Math.round(450 * currentDurationMultiplier);
                 totalKw += 5.0;
             } else {
                 boxLuz.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
@@ -1536,14 +1530,12 @@
 
             if (riggingChecked) {
                 boxRigging.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
-                total += Math.round(500 * currentDurationMultiplier);
             } else {
                 boxRigging.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
             }
 
             if (videoChecked) {
                 boxVideo.className = "flex items-center justify-between p-4 rounded-2xl bg-indigo-600/30 border border-indigo-400 text-white transition-all cursor-pointer shadow-md";
-                total += Math.round(900 * currentDurationMultiplier);
                 totalKw += 6.5;
             } else {
                 boxVideo.className = "flex items-center justify-between p-4 rounded-2xl bg-white/10 border border-white/15 hover:border-indigo-400 transition-all cursor-pointer";
@@ -1560,12 +1552,10 @@
             document.getElementById('summary-duration').innerText = currentDurationName;
             document.getElementById('summary-attendees').innerText = currentAttendees + ' asistentes';
             document.getElementById('summary-power').innerText = powerRecommendation;
-            document.getElementById('summary-price').innerText = total.toLocaleString('es-ES') + ' €';
         }
 
         // Función para traspasar la configuración del simulador al formulario de contacto
         function transferToContactForm() {
-            const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
             
             let ridersText = [];
@@ -1574,7 +1564,7 @@
             if(document.getElementById('chk-rigging').checked) ridersText.push("Escenografía & Estructuras");
             if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
             
-            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Tarima/Escenario: ${currentStageName}\n- Duración: ${currentDurationName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}\n- Estimación orientativa: ${price}`;
+            const summaryString = `Hola, me interesa presupuestar el siguiente evento simulado:\n- Fecha prevista: ${currentEventDate}\n- Tipo: ${currentEventName}\n- Recinto: ${currentVenueName}\n- Tarima/Escenario: ${currentStageName}\n- Duración: ${currentDurationName}\n- Asistentes: ${currentAttendees}\n- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n- Potencia estimada: ${power}`;
             
             const messageBox = document.getElementById('mensaje');
             if (messageBox) {
@@ -1717,18 +1707,18 @@
             doc.text("Incluye equipamiento redundante de respaldo y montajes estéticos con ocultación", 20, 229);
             doc.text("absoluta de cableado para garantizar la excelencia visual y operativa en directo.", 20, 234);
 
-            // 6. BLOQUE 3: TOTAL PRESUPUESTO
+            // 6. BLOQUE 3: PRÓXIMOS PASOS (sin precio, se envía a Dreamscape para presupuesto)
             doc.setFillColor(79, 70, 229); // Indigo 600
             doc.roundedRect(15, 244, 180, 24, 3, 3, 'F');
 
             doc.setTextColor(255, 255, 255);
             doc.setFont("helvetica", "bold");
             doc.setFontSize(11);
-            doc.text("ESTIMACIÓN ORIENTATIVA TOTAL:", 22, 259);
-
-            const finalPrice = document.getElementById('summary-price').innerText;
-            doc.setFontSize(16);
-            doc.text(finalPrice, 150, 259);
+            doc.text("PRÓXIMO PASO:", 22, 254);
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(9);
+            doc.text("Envía esta propuesta a info@ap-events.es o por WhatsApp para recibir tu", 22, 261);
+            doc.text("presupuesto personalizado sin compromiso.", 22, 266);
 
             // 7. PIE DE PÁGINA LEGAL Y CORPORATIVO
             doc.setFontSize(8);
@@ -1741,7 +1731,6 @@
         }
 
         function sendWhatsAppSimulation() {
-            const price = document.getElementById('summary-price').innerText;
             const power = document.getElementById('summary-power').innerText;
             
             let ridersText = [];
@@ -1751,7 +1740,7 @@
             if(document.getElementById('chk-video').checked) ridersText.push("Pantalla LED");
 
             const text = encodeURIComponent(
-                `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar disponibilidad con esta configuración:\n\n` +
+                `¡Hola Dreamscape Events! He usado el simulador de vuestra web y quiero solicitar presupuesto con esta configuración:\n\n` +
                 `- Fecha prevista: ${currentEventDate}\n` +
                 `- Tipo: ${currentEventName}\n` +
                 `- Recinto: ${currentVenueName}\n` +
@@ -1759,9 +1748,8 @@
                 `- Duración: ${currentDurationName}\n` +
                 `- Asistentes: ${currentAttendees}\n` +
                 `- Rider técnico: ${ridersText.join(', ') || 'Ninguno'}\n` +
-                `- Potencia estimada: ${power}\n` +
-                `- Estimación orientativa: ${price}\n\n` +
-                `¿Podemos confirmarlo?`
+                `- Potencia estimada: ${power}\n\n` +
+                `¿Podéis pasarme un presupuesto?`
             );
             
             window.open(`https://wa.me/34613089894?text=${text}`, '_blank');
