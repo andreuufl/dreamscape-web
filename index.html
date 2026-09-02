@@ -286,6 +286,54 @@
             .hero-reveal-1, .hero-reveal-2, .hero-reveal-3 { animation: none; }
         }
 
+        /* ===== EFECTOS INMERSIVOS DE SCROLL (estilo Apple) ===== */
+
+        /* Vídeo del hero: se aplica zoom progresivo por JS, aquí solo la transición base */
+        #hero-video {
+            transform-origin: center center;
+            will-change: transform;
+        }
+
+        /* Imágenes con zoom progresivo al entrar en pantalla durante el scroll */
+        [data-scroll-zoom] {
+            will-change: transform, opacity;
+            transform: scale(1.25);
+            opacity: 0;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-scroll-zoom] { transform: none !important; opacity: 1 !important; }
+            #hero-video { transform: none !important; }
+        }
+
+        /* Tarjeta con inclinación 3D que sigue al cursor */
+        .tilt-card {
+            transform-style: preserve-3d;
+            perspective: 1200px;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+        }
+        .tilt-card img {
+            transition: transform 0.6s var(--ease-apple);
+        }
+        .tilt-card:hover img {
+            transform: scale(1.08) !important;
+        }
+
+        /* Elementos que aparecen con un desvanecimiento + desplazamiento suave al hacer scroll */
+        [data-scroll-fade] {
+            will-change: transform, opacity;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s var(--ease-apple), transform 1s var(--ease-apple);
+        }
+        [data-scroll-fade].is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-scroll-fade] { opacity: 1 !important; transform: none !important; }
+        }
+
         /* Animación de pulso flotante para la burbuja de IA de Chatbase */
         #chatbase-bubble-button {
             animation: aiPulseBubble 2.5s infinite ease-in-out !important;
@@ -393,14 +441,14 @@
 
     <!-- HERO SECTION: vídeo real a pantalla completa -->
     <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
-        <div class="absolute inset-0 z-0">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-90" poster="portfolio-video-candlelight-poster.jpg">
+        <div id="hero-video-wrap" class="absolute inset-0 z-0">
+            <video id="hero-video" autoplay muted loop playsinline class="w-full h-full object-cover opacity-90" poster="portfolio-video-candlelight-poster.jpg">
                 <source src="portfolio-video-candlelight.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/70"></div>
         </div>
 
-        <div class="relative max-w-4xl mx-auto px-6 text-center z-20">
+        <div id="hero-text" class="relative max-w-4xl mx-auto px-6 text-center z-20">
             <h1 class="hero-reveal-1 text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">
                 Cada evento,<br>una experiencia inolvidable
             </h1>
@@ -449,25 +497,25 @@
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
             <!-- Servicio 1: Corporativo -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
-                <div class="order-2 md:order-1">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div class="order-2 md:order-1" data-aos="fade-right">
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.</p>
                     <a href="javascript:void(0)" onclick="openModal('modal-service-corporativo')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
                         Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
-                    <img src="servicio-corporativo.jpg" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
+                    <img src="servicio-corporativo.jpg" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
                 </div>
             </div>
 
             <!-- Servicio 2: Congresos -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
-                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
-                    <img src="servicio-congresos.jpg" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
+                    <img src="servicio-congresos.jpg" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
                 </div>
-                <div>
+                <div data-aos="fade-left">
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala y microfonía avanzada, con soporte técnico en todo momento para un flujo perfecto.</p>
                     <a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
@@ -477,16 +525,16 @@
             </div>
 
             <!-- Servicio 3: Bodas -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
-                <div class="order-2 md:order-1">
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+                <div class="order-2 md:order-1" data-aos="fade-right">
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
                     <a href="javascript:void(0)" onclick="openModal('modal-service-bodas')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
                         Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
-                    <img src="servicio-bodas.jpg" alt="Salón de gala para boda" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
+                    <img src="servicio-bodas.jpg" alt="Salón de gala para boda" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
                 </div>
             </div>
         </div>
@@ -707,7 +755,7 @@
     <!-- SELLO DE GARANTÍA Y SLA TÉCNICO -->
     <section class="py-20 bg-[#F5F5F7] relative">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-14">
+            <div class="text-center max-w-2xl mx-auto mb-14" data-scroll-fade>
                 <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Garantía y estándares Dreamscape</h3>
             </div>
             <div class="grid md:grid-cols-3 gap-10 md:gap-8">
@@ -1531,6 +1579,102 @@
             }
             updateHeader();
             window.addEventListener('scroll', updateHeader, { passive: true });
+        })();
+
+        // ===== EFECTOS INMERSIVOS DE SCROLL (estilo Apple) =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return; // Respetamos la preferencia de accesibilidad del usuario
+
+            const heroSection = document.getElementById('inicio');
+            const heroVideo = document.getElementById('hero-video');
+            const heroText = document.getElementById('hero-text');
+            const zoomEls = Array.from(document.querySelectorAll('[data-scroll-zoom]'));
+            let ticking = false;
+
+            function updateScrollFX() {
+                const vh = window.innerHeight;
+
+                // 1. Zoom progresivo del vídeo del hero + desplazamiento del texto (efecto parallax)
+                if (heroSection && heroVideo) {
+                    const heroRect = heroSection.getBoundingClientRect();
+                    // scrolled: 0 al inicio, crece a medida que el hero sale de pantalla por arriba
+                    const scrolled = Math.min(Math.max(-heroRect.top, 0), vh);
+                    const progress = scrolled / vh; // 0 -> 1
+                    const scale = 1 + progress * 0.25; // hasta un 25% de zoom
+                    heroVideo.style.transform = `scale(${scale})`;
+                    if (heroText) {
+                        heroText.style.transform = `translateY(${progress * 80}px)`;
+                        heroText.style.opacity = String(Math.max(1 - progress * 1.6, 0));
+                    }
+                }
+
+                // 2. Zoom de salida de las imágenes de Servicios al entrar en pantalla
+                zoomEls.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    // progreso: 0 cuando el elemento entra por abajo, 1 cuando llega a 2/3 de la pantalla
+                    const raw = (vh - rect.top) / (vh * 0.75);
+                    const progress = Math.min(Math.max(raw, 0), 1);
+                    const scale = 1.25 - (0.25 * progress);
+                    el.style.transform = `scale(${scale})`;
+                    el.style.opacity = String(progress);
+                });
+
+                ticking = false;
+            }
+
+            function onScroll() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateScrollFX);
+                    ticking = true;
+                }
+            }
+
+            updateScrollFX();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+        })();
+
+        // ===== TARJETAS CON INCLINACIÓN 3D QUE SIGUE AL CURSOR (estilo Apple) =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            if (window.matchMedia('(hover: none)').matches) return; // sin efecto en pantallas táctiles
+
+            document.querySelectorAll('.tilt-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
+                    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        })();
+
+        // ===== APARICIÓN SUAVE AL HACER SCROLL (IntersectionObserver) =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const fadeEls = document.querySelectorAll('[data-scroll-fade]');
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                fadeEls.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+            fadeEls.forEach(el => observer.observe(el));
         })();
 
         // Control del Menú Móvil
