@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada | Dreamscape Events</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+        .float-slow { animation: floatSlow 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center overflow-hidden relative">
+    <div class="absolute inset-0 opacity-20 pointer-events-none">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px]"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px]"></div>
+    </div>
+
+    <div class="relative max-w-lg mx-auto px-6 text-center z-10">
+        <div class="float-slow w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-slate-900 flex items-center justify-center mx-auto mb-8">
+            <i class="fa-solid fa-lightbulb text-2xl text-white/90" aria-hidden="true"></i>
+        </div>
+        <p class="text-indigo-400 font-semibold text-sm mb-3">Error 404</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">Esta página se ha desmontado</h1>
+        <p class="text-slate-400 text-lg leading-relaxed mb-10">Parece que el enlace que buscabas ya no está en pie. Volvamos al escenario principal.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="index.html" class="bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center transition-transform hover:scale-105">
+                Volver al inicio
+            </a>
+            <a href="index.html#contacto" class="bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center transition-all">
+                Contactar con nosotros
+            </a>
+        </div>
+    </div>
+</body>
+</html>
