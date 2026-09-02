@@ -294,11 +294,17 @@
             will-change: transform;
         }
 
-        /* Imágenes con zoom progresivo al entrar en pantalla durante el scroll */
+        /* Imágenes con zoom de entrada al hacer scroll: SIEMPRE visibles por defecto;
+           la clase .is-visible (añadida de forma fiable por IntersectionObserver) añade el efecto de zoom */
         [data-scroll-zoom] {
             will-change: transform, opacity;
-            transform: scale(1.25);
-            opacity: 0;
+            transform: scale(1.15);
+            opacity: 1;
+            transition: transform 1.1s var(--ease-apple), opacity 1.1s var(--ease-apple);
+        }
+        [data-scroll-zoom].is-visible {
+            transform: scale(1);
+            opacity: 1;
         }
         @media (prefers-reduced-motion: reduce) {
             [data-scroll-zoom] { transform: none !important; opacity: 1 !important; }
@@ -1589,13 +1595,12 @@
             const heroSection = document.getElementById('inicio');
             const heroVideo = document.getElementById('hero-video');
             const heroText = document.getElementById('hero-text');
-            const zoomEls = Array.from(document.querySelectorAll('[data-scroll-zoom]'));
             let ticking = false;
 
             function updateScrollFX() {
                 const vh = window.innerHeight;
 
-                // 1. Zoom progresivo del vídeo del hero + desplazamiento del texto (efecto parallax)
+                // Zoom progresivo del vídeo del hero + desplazamiento del texto (efecto parallax)
                 if (heroSection && heroVideo) {
                     const heroRect = heroSection.getBoundingClientRect();
                     // scrolled: 0 al inicio, crece a medida que el hero sale de pantalla por arriba
@@ -1608,17 +1613,6 @@
                         heroText.style.opacity = String(Math.max(1 - progress * 1.6, 0));
                     }
                 }
-
-                // 2. Zoom de salida de las imágenes de Servicios al entrar en pantalla
-                zoomEls.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    // progreso: 0 cuando el elemento entra por abajo, 1 cuando llega a 2/3 de la pantalla
-                    const raw = (vh - rect.top) / (vh * 0.75);
-                    const progress = Math.min(Math.max(raw, 0), 1);
-                    const scale = 1.25 - (0.25 * progress);
-                    el.style.transform = `scale(${scale})`;
-                    el.style.opacity = String(progress);
-                });
 
                 ticking = false;
             }
@@ -1661,7 +1655,9 @@
         // ===== APARICIÓN SUAVE AL HACER SCROLL (IntersectionObserver) =====
         (function() {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const fadeEls = document.querySelectorAll('[data-scroll-fade]');
+            // Unificamos data-scroll-fade y data-scroll-zoom: ambos son SIEMPRE visibles por CSS
+            // por defecto; este observer solo añade la clase que dispara el efecto de entrada.
+            const fadeEls = document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]');
             if (reduceMotion || !('IntersectionObserver' in window)) {
                 fadeEls.forEach(el => el.classList.add('is-visible'));
                 return;
@@ -1675,6 +1671,12 @@
                 });
             }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
             fadeEls.forEach(el => observer.observe(el));
+
+            // Red de seguridad: si por lo que sea el observer no llega a disparar
+            // (pestaña en segundo plano, fallo puntual, etc.), forzamos visibilidad a los 2.5s
+            setTimeout(() => {
+                fadeEls.forEach(el => el.classList.add('is-visible'));
+            }, 2500);
         })();
 
         // Control del Menú Móvil
