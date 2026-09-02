@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Cabeceras de seguridad (lo máximo posible sin servidor propio; GitHub Pages no permite
+         cabeceras HTTP reales como X-Frame-Options o Permissions-Policy — solo lo que cabe en meta tags).
+         Comprobado contra los dominios externos reales que usa esta página. Si algo deja de funcionar
+         tras subir esto (el chat o Analytics, sobre todo), avisa y lo ajustamos. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://*.chatbase.co; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://*.google-analytics.com https://www.googletagmanager.com; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co; frame-src https://*.chatbase.co; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
     <title>Montaje de Escenarios y Equipos Audiovisuales | Dreamscape Events</title>
 
     <!-- SEO: Meta Description -->
@@ -1318,29 +1326,33 @@
                 <div class="md:col-span-7" id="form-container">
                     <form id="dreamscape-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-6">
                         <input type="hidden" name="access_key" value="755b52de-71b1-4719-8646-96acf95bad91">
+
+                        <!-- Campo trampa contra bots: invisible para personas, los bots automáticos suelen rellenar
+                             todos los campos que encuentran. Web3Forms rechaza el envío si llega marcado. -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
                         
                         <!-- Fila 1: Nombre y Teléfono -->
                         <div class="grid sm:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label for="nombre" class="text-sm font-semibold text-slate-700">Nombre / Empresa</label>
-                                <input type="text" id="nombre" name="Nombre_Empresa" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. Juan Pérez">
+                                <input type="text" id="nombre" name="Nombre_Empresa" required minlength="2" maxlength="100" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. Juan Pérez">
                             </div>
                             <div class="space-y-2">
                                 <label for="telefono" class="text-sm font-semibold text-slate-700">Teléfono de contacto</label>
-                                <input type="tel" id="telefono" name="Telefono_Contacto" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. 600 000 000">
+                                <input type="tel" id="telefono" name="Telefono_Contacto" required pattern="[0-9+\s()-]{9,20}" maxlength="20" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. 600 000 000">
                             </div>
                         </div>
 
                         <!-- Fila 2: Correo Electrónico -->
                         <div class="space-y-2">
                             <label for="email" class="text-sm font-semibold text-slate-700">Correo Electrónico</label>
-                            <input type="email" id="email" name="Email_Contacto" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="ejemplo@correo.com">
+                            <input type="email" id="email" name="Email_Contacto" required maxlength="120" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="ejemplo@correo.com">
                         </div>
 
                         <!-- Fila 3: Detalles del proyecto -->
                         <div class="space-y-2">
                             <label for="mensaje" class="text-sm font-semibold text-slate-700">Detalles del proyecto</label>
-                            <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
+                            <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required minlength="10" maxlength="3000" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
                         </div>
                         
                         <div class="flex items-center space-x-3 pt-2">
