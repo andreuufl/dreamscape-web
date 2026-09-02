@@ -325,6 +325,16 @@
             transform: scale(1.08) !important;
         }
 
+        /* Botones magnéticos: se desplazan sutilmente hacia el cursor */
+        .magnetic-btn {
+            will-change: transform;
+        }
+
+        /* Barra de progreso de lectura */
+        #scroll-progress {
+            transition: width 0.1s linear;
+        }
+
         /* Elementos que aparecen con un desvanecimiento + desplazamiento suave al hacer scroll */
         [data-scroll-fade] {
             will-change: transform, opacity;
@@ -373,6 +383,9 @@
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
 
     <!-- HEADER / NAVIGATION -->
+    <!-- Barra de progreso de lectura -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-indigo-500 to-emerald-400 z-[60]" style="width: 0%;"></div>
+
     <header id="site-header" class="header-transparent fixed top-0 left-0 w-full z-50 border-b border-transparent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -404,7 +417,7 @@
                     <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Dreamscape Events" class="logo-text-dark text-slate-500 hover:text-indigo-600 transition-colors text-base flex-shrink-0">
                         <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
                     </a>
-                    <a href="#contacto" class="btn-apple bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0">
+                    <a href="#contacto" class="btn-apple magnetic-btn bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0">
                         Solicitar Presupuesto
                     </a>
                 </div>
@@ -462,10 +475,10 @@
                 Montaje de escenarios, sonido e iluminación para bodas, congresos y eventos corporativos en toda España.
             </p>
             <div class="hero-reveal-3 mt-11 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#simulador" class="btn-apple bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center">
+                <a href="#simulador" class="btn-apple magnetic-btn bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center">
                     Solicitar presupuesto
                 </a>
-                <a href="#porfolio" class="btn-apple bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center backdrop-blur-sm">
+                <a href="#porfolio" class="btn-apple magnetic-btn bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center backdrop-blur-sm">
                     Ver nuestro trabajo
                 </a>
             </div>
@@ -473,12 +486,12 @@
             <!-- Fila de credibilidad -->
             <div class="hero-reveal-3 mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-white/70">
                 <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-bold text-white">15K+</span>
+                    <span class="text-2xl font-bold text-white"><span data-count-to="15" data-suffix="K+">0</span></span>
                     <span class="text-sm">m² transformados</span>
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-white/20"></div>
                 <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-bold text-white">100%</span>
+                    <span class="text-2xl font-bold text-white"><span data-count-to="100" data-suffix="%">0</span></span>
                     <span class="text-sm">clientes satisfechos</span>
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-white/20"></div>
@@ -572,7 +585,7 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-aos="fade-up" data-aos-delay="100">
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 0ms;" onclick="openVideoLightbox()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-poster.jpg">
                         <source src="portfolio-video-jardin.mp4" type="video/mp4">
                     </video>
@@ -587,7 +600,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Boda en jardín</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox2()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 90ms;" onclick="openVideoLightbox2()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-fiesta-poster.jpg">
                         <source src="portfolio-video-fiesta.mp4" type="video/mp4">
                     </video>
@@ -602,7 +615,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Fiesta en directo</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox5()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 180ms;" onclick="openVideoLightbox5()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-candlelight-poster.jpg">
                         <source src="portfolio-video-candlelight.mp4" type="video/mp4">
                     </video>
@@ -617,7 +630,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Gala corporativa</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openPhotoLightbox(0)">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 270ms;" onclick="openPhotoLightbox(0)">
                     <img src="portfolio-2-congreso.jpg" alt="Congreso YPO Global Leadership Conference" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
@@ -627,7 +640,7 @@
                     </div>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Congreso corporativo</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox4()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 360ms;" onclick="openVideoLightbox4()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-hotelpalace-poster.jpg">
                         <source src="portfolio-video-hotelpalace.mp4" type="video/mp4">
                     </video>
@@ -642,7 +655,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Salón de gala</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" onclick="openVideoLightbox3()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 450ms;" onclick="openVideoLightbox3()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline poster="portfolio-video-fashionweek-poster.jpg">
                         <source src="portfolio-video-fashionweek.mp4" type="video/mp4">
                     </video>
@@ -1648,6 +1661,77 @@
                 });
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                });
+            });
+        })();
+
+        // ===== BARRA DE PROGRESO DE LECTURA =====
+        (function() {
+            const bar = document.getElementById('scroll-progress');
+            if (!bar) return;
+            function updateProgress() {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                bar.style.width = pct + '%';
+            }
+            updateProgress();
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', updateProgress, { passive: true });
+        })();
+
+        // ===== CONTADORES ANIMADOS (cifras del hero) =====
+        (function() {
+            const counters = document.querySelectorAll('[data-count-to]');
+            if (!counters.length) return;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function animateCounter(el) {
+                const target = parseInt(el.getAttribute('data-count-to'), 10);
+                const suffix = el.getAttribute('data-suffix') || '';
+                if (reduceMotion) { el.textContent = target + suffix; return; }
+                const duration = 1400;
+                const startTime = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
+                    // easeOutExpo, para que arranque rápido y frene suave (como Apple)
+                    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                    el.textContent = Math.round(eased * target) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            if (!('IntersectionObserver' in window)) {
+                counters.forEach(animateCounter);
+            } else {
+                const counterObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateCounter(entry.target);
+                            counterObserver.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                counters.forEach(el => counterObserver.observe(el));
+            }
+        })();
+
+        // ===== BOTONES MAGNÉTICOS (se desplazan sutilmente hacia el cursor) =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            if (window.matchMedia('(hover: none)').matches) return; // sin efecto en pantallas táctiles
+
+            document.querySelectorAll('.magnetic-btn').forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    btn.style.transform = `translate(${x * 0.25}px, ${y * 0.4}px) scale(1.03)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0) scale(1)';
                 });
             });
         })();
