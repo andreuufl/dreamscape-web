@@ -394,10 +394,10 @@
 
     <!-- PANTALLA DE CARGA: se desvanece en cuanto la página termina de cargar -->
     <div id="loading-screen" class="fixed inset-0 z-[200] bg-slate-950 flex items-center justify-center transition-opacity duration-700">
-        <div class="flex flex-col items-center gap-4">
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-slate-900 flex items-center justify-center animate-pulse">
-                <span class="text-white font-bold text-xl">D</span>
-            </div>
+        <div class="flex flex-col items-center gap-6">
+            <p class="animate-pulse text-xl sm:text-2xl font-bold tracking-tight text-white">
+                DREAMSCAPE <span class="text-indigo-400">EVENTS</span>
+            </p>
             <div class="w-32 h-[2px] bg-white/10 rounded-full overflow-hidden">
                 <div id="loading-bar" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 rounded-full" style="width: 0%;"></div>
             </div>
@@ -826,8 +826,8 @@
             <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-5 border border-indigo-100">
                 <i class="fa-solid fa-calculator text-2xl" aria-hidden="true"></i>
             </div>
-            <h3 id="exit-intent-title" class="text-2xl font-bold text-slate-950 mb-3">¿Ya te vas?</h3>
-            <p class="text-slate-600 leading-relaxed mb-7">Antes de irte, prueba nuestro simulador: en menos de un minuto configuras tu evento y nos lo envías para recibir un presupuesto personalizado.</p>
+            <h3 id="exit-intent-title" class="text-2xl font-bold text-slate-950 mb-3">¿Sigues ahí?</h3>
+            <p class="text-slate-600 leading-relaxed mb-7">Aprovecha para probar nuestro simulador: en menos de un minuto configuras tu evento y nos lo envías para recibir un presupuesto personalizado.</p>
             <a href="#simulador" onclick="closeModal('modal-exit-intent')" class="btn-apple inline-block w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3.5 rounded-full font-semibold">
                 Probar el simulador
             </a>
@@ -1847,22 +1847,32 @@
             });
         })();
 
-        // ===== EXIT-INTENT: aviso amistoso una única vez por sesión, solo en escritorio =====
+        // ===== AVISO POR INACTIVIDAD: aparece si pasan 5 minutos sin ningún clic, una única vez por sesión =====
         (function() {
-            if (window.matchMedia('(hover: none)').matches) return; // no aplica en táctil/móvil
             if (sessionStorage.getItem('dreamscape_exit_shown')) return;
 
-            let armed = false;
-            setTimeout(() => { armed = true; }, 8000); // no molestar en los primeros segundos de visita
+            const INACTIVITY_MS = 5 * 60 * 1000; // 5 minutos
+            let inactivityTimer = null;
 
-            document.addEventListener('mouseleave', (e) => {
-                if (!armed) return;
-                if (e.clientY > 0) return; // solo cuando el cursor sale por arriba (hacia la barra del navegador)
+            function showInactivityModal() {
                 const modal = document.getElementById('modal-exit-intent');
-                if (!modal || !modal.classList.contains('hidden')) return;
+                if (!modal || !modal.classList.contains('hidden')) return; // ya abierto, no duplicar
                 sessionStorage.setItem('dreamscape_exit_shown', '1');
                 openModal('modal-exit-intent');
-            });
+                document.removeEventListener('click', resetInactivityTimer);
+            }
+
+            function resetInactivityTimer() {
+                if (sessionStorage.getItem('dreamscape_exit_shown')) {
+                    document.removeEventListener('click', resetInactivityTimer);
+                    return;
+                }
+                clearTimeout(inactivityTimer);
+                inactivityTimer = setTimeout(showInactivityModal, INACTIVITY_MS);
+            }
+
+            resetInactivityTimer(); // arranca el contador nada más cargar la página
+            document.addEventListener('click', resetInactivityTimer);
         })();
 
         // ===== APARICIÓN SUAVE AL HACER SCROLL (IntersectionObserver) =====
