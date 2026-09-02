@@ -149,6 +149,10 @@
 
     <!-- Favicon / Logo en la pestaña del navegador -->
     <link rel="icon" type="image/jpeg" href="./New%20Logo%20Dreamscape%20.JPG">
+    <!-- Tipografía: Inter (la alternativa web más cercana a SF Pro) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome para Iconos -->
@@ -158,6 +162,19 @@
     <!-- jsPDF se carga bajo demanda (ver downloadProfessionalPDF) para no bloquear la carga inicial -->
     
     <style>
+        :root {
+            --ease-apple: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-feature-settings: 'ss01' 1, 'cv11' 1;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .font-display {
+            letter-spacing: -0.03em;
+        }
+
         /* Subrayado animado en el menú */
         .nav-link {
             position: relative;
@@ -170,10 +187,29 @@
             bottom: -4px;
             left: 0;
             background-color: #4f46e5;
-            transition: width 0.3s ease;
+            transition: width 0.4s var(--ease-apple);
         }
         .nav-link:hover::after {
             width: 100%;
+        }
+
+        /* Cabecera: transición de transparente a sólida al hacer scroll */
+        #site-header {
+            transition: background-color 0.5s var(--ease-apple), backdrop-filter 0.5s var(--ease-apple), border-color 0.5s var(--ease-apple);
+        }
+        #site-header.header-solid {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom-color: rgba(0,0,0,0.06);
+        }
+        #site-header.header-transparent {
+            background-color: transparent;
+            border-bottom-color: transparent;
+        }
+        #site-header.header-transparent .nav-link,
+        #site-header.header-transparent .logo-text-dark {
+            color: rgba(255,255,255,0.92);
         }
 
         /* Efecto de brillo deslizante en botones */
@@ -195,6 +231,17 @@
         .btn-shine:hover::after {
             left: 110%;
             transition: all 0.7s ease-in-out;
+        }
+
+        /* Botones estilo Apple: escala sutil, sin desplazamiento */
+        .btn-apple {
+            transition: transform 0.4s var(--ease-apple), background-color 0.3s ease, box-shadow 0.4s var(--ease-apple);
+        }
+        .btn-apple:hover {
+            transform: scale(1.03);
+        }
+        .btn-apple:active {
+            transform: scale(0.98);
         }
 
         /* Alto contraste y visibilidad total del icono de calendario en PC y Móvil */
@@ -219,12 +266,24 @@
             perspective: 1000px;
         }
         .card-hover-3d {
-            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.4s ease, display 0.4s allow-discrete;
+            transition: transform 0.5s var(--ease-apple), box-shadow 0.5s var(--ease-apple), opacity 0.4s ease, display 0.4s allow-discrete;
             transform-style: preserve-3d;
         }
         .card-perspective:hover .card-hover-3d {
             transform: translateY(-10px) rotateX(2deg) rotateY(1deg);
             box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.15);
+        }
+
+        /* Hero: entrada única orquestada al cargar la página (no en cada scroll) */
+        @keyframes heroReveal {
+            from { opacity: 0; transform: translateY(24px) scale(0.98); filter: blur(6px); }
+            to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+        }
+        .hero-reveal-1 { animation: heroReveal 1.1s var(--ease-apple) 0.1s both; }
+        .hero-reveal-2 { animation: heroReveal 1.1s var(--ease-apple) 0.35s both; }
+        .hero-reveal-3 { animation: heroReveal 1.1s var(--ease-apple) 0.55s both; }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-reveal-1, .hero-reveal-2, .hero-reveal-3 { animation: none; }
         }
 
         /* Animación de pulso flotante para la burbuja de IA de Chatbase */
@@ -250,29 +309,30 @@
         
         [data-aos] {
             pointer-events: none;
+            transition-timing-function: var(--ease-apple) !important;
         }
         .aos-animate {
             pointer-events: auto;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased overflow-x-hidden">
+<body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
 
     <!-- HEADER / NAVIGATION -->
-    <header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 transition-all duration-300 border-b border-slate-100">
+    <header id="site-header" class="header-transparent fixed top-0 left-0 w-full z-50 border-b border-transparent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="text-2xl font-bold tracking-wider text-slate-900 group">
-                        DREAMSCAPE <span class="text-indigo-600 group-hover:text-emerald-500 transition-colors">EVENTS</span>
+                    <a href="#" class="text-lg font-bold tracking-tight logo-text-dark text-slate-900 group">
+                        DREAMSCAPE <span class="text-indigo-500 group-hover:opacity-80 transition-opacity">EVENTS</span>
                     </a>
                 </div>
                 
                 <!-- Desktop Nav -->
-                <nav class="hidden xl:flex space-x-5 2xl:space-x-7 font-medium">
-                    <a href="#inicio" class="text-slate-700 nav-link py-1 whitespace-nowrap">Inicio</a>
-                    <a href="#servicios" class="text-slate-700 nav-link py-1 whitespace-nowrap">Servicios</a>
+                <nav class="hidden xl:flex space-x-5 2xl:space-x-7 font-medium text-sm">
+                    <a href="#inicio" class="logo-text-dark text-slate-700 nav-link py-1 whitespace-nowrap">Inicio</a>
+                    <a href="#servicios" class="logo-text-dark text-slate-700 nav-link py-1 whitespace-nowrap">Servicios</a>
                     <a href="#porfolio" class="text-slate-700 nav-link py-1 whitespace-nowrap">Porfolio</a>
                     <a href="#simulador" class="text-slate-700 nav-link py-1 whitespace-nowrap">Simulador</a>
                     <a href="#filosofia" class="text-slate-700 nav-link py-1 whitespace-nowrap">Filosofía</a>
@@ -283,22 +343,22 @@
 
                 <!-- CTA Desktop -->
                 <div class="hidden xl:flex items-center gap-3 flex-shrink-0">
-                    <a href="destination-weddings-spain.html" class="text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors border border-slate-200 rounded-full px-3 py-1.5 whitespace-nowrap" hreflang="en" lang="en">🇬🇧 EN</a>
-                    <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dreamscape Events" class="text-slate-500 hover:text-indigo-600 transition-colors text-lg flex-shrink-0">
+                    <a href="destination-weddings-spain.html" class="logo-text-dark text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors border border-slate-200 rounded-full px-3 py-1.5 whitespace-nowrap" hreflang="en" lang="en">🇬🇧 EN</a>
+                    <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dreamscape Events" class="logo-text-dark text-slate-500 hover:text-indigo-600 transition-colors text-base flex-shrink-0">
                         <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                     </a>
-                    <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Dreamscape Events" class="text-slate-500 hover:text-indigo-600 transition-colors text-lg flex-shrink-0">
+                    <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Dreamscape Events" class="logo-text-dark text-slate-500 hover:text-indigo-600 transition-colors text-base flex-shrink-0">
                         <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
                     </a>
-                    <a href="#contacto" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-indigo-100 btn-shine whitespace-nowrap flex-shrink-0">
+                    <a href="#contacto" class="btn-apple bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0">
                         Solicitar Presupuesto
                     </a>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="xl:hidden flex items-center">
-                    <button type="button" id="mobile-menu-btn" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg hover:bg-slate-100 cursor-pointer" aria-label="Abrir menú">
-                        <i class="fa-solid fa-bars text-2xl" id="menu-icon" aria-hidden="true"></i>
+                    <button type="button" id="mobile-menu-btn" class="logo-text-dark text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg cursor-pointer" aria-label="Abrir menú">
+                        <i class="fa-solid fa-bars text-xl" id="menu-icon" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
@@ -331,110 +391,102 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="inicio" class="relative pt-32 pb-20 md:pt-40 md:pb-32 bg-slate-950 overflow-hidden min-h-screen flex items-center">
+    <!-- HERO SECTION: vídeo real a pantalla completa -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=70&w=1920&auto=format&fit=crop" alt="Producción técnica espectacular en directo" class="w-full h-full object-cover object-center opacity-35" fetchpriority="high" decoding="async">
-            <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950/85 to-indigo-950/75"></div>
+            <video autoplay muted loop playsinline class="w-full h-full object-cover opacity-90" poster="portfolio-video-candlelight-poster.jpg">
+                <source src="portfolio-video-candlelight.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/70"></div>
         </div>
-        
-        <div class="absolute inset-0 opacity-20 z-10">
-            <div class="absolute -top-40 -right-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px] animate-pulse"></div>
-            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px] animate-pulse" style="animation-delay: 1s;"></div>
-        </div>
-        
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left z-20">
-            <div class="grid md:grid-cols-12 gap-12 items-center">
-                <div class="md:col-span-8 space-y-6" data-aos="fade-right" data-aos-duration="1000">
-                    <span class="inline-flex items-center bg-indigo-500/10 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider gap-2">
-                        <span class="relative flex h-2 w-2">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
-                        </span>
-                        Producción Técnica e Integral de Eventos
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-tight">
-                        Convertimos tu visión <br>
-                        <span class="bg-gradient-to-r from-indigo-400 via-emerald-400 to-indigo-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-text-gradient">en un evento inolvidable</span>
-                    </h1>
-                    <p class="text-lg md:text-xl text-slate-200 max-w-3xl">
-                        Expertos en montaje de escenarios y alquiler de equipos audiovisuales: sonido, iluminación espectacular y gestión técnica integral. Cobertura profesional para tus proyectos corporativos, congresos y celebraciones exclusivas.
-                    </p>
-                    <div class="pt-6 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#simulador" class="bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-full font-bold text-base transition-all shadow-xl shadow-indigo-950/50 text-center btn-shine">
-                            Solicitar Presupuesto Online
-                        </a>
-                        <a href="#servicios" class="bg-white/5 hover:bg-white/10 text-white border border-white/20 px-10 py-4 rounded-full font-semibold text-base transition-all text-center backdrop-blur-sm group">
-                            Ver qué hacemos <i class="fa-solid fa-arrow-down ml-2 group-hover:translate-y-1 transition-transform" aria-hidden="true"></i>
-                        </a>
-                    </div>
 
-                    <!-- Fila de credibilidad -->
-                    <div class="pt-8 flex flex-wrap items-center justify-center md:justify-start gap-x-10 gap-y-4">
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-black text-white">15K+</span>
-                            <span class="text-sm text-slate-300">m² transformados</span>
-                        </div>
-                        <div class="hidden sm:block w-px h-8 bg-white/15"></div>
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-3xl font-black text-white">100%</span>
-                            <span class="text-sm text-slate-300">clientes satisfechos</span>
-                        </div>
-                        <div class="hidden sm:block w-px h-8 bg-white/15"></div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-map-location-dot text-2xl text-indigo-400" aria-hidden="true"></i>
-                            <span class="text-sm font-bold text-white">Cobertura en toda España</span>
-                        </div>
-                    </div>
+        <div class="relative max-w-4xl mx-auto px-6 text-center z-20">
+            <h1 class="hero-reveal-1 text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">
+                Cada evento,<br>una experiencia inolvidable
+            </h1>
+            <p class="hero-reveal-2 mt-7 text-lg md:text-2xl text-white/80 max-w-2xl mx-auto font-normal leading-relaxed">
+                Montaje de escenarios, sonido e iluminación para bodas, congresos y eventos corporativos en toda España.
+            </p>
+            <div class="hero-reveal-3 mt-11 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#simulador" class="btn-apple bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center">
+                    Solicitar presupuesto
+                </a>
+                <a href="#porfolio" class="btn-apple bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center backdrop-blur-sm">
+                    Ver nuestro trabajo
+                </a>
+            </div>
+
+            <!-- Fila de credibilidad -->
+            <div class="hero-reveal-3 mt-16 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 text-white/70">
+                <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-bold text-white">15K+</span>
+                    <span class="text-sm">m² transformados</span>
+                </div>
+                <div class="hidden sm:block w-px h-6 bg-white/20"></div>
+                <div class="flex items-baseline gap-2">
+                    <span class="text-2xl font-bold text-white">100%</span>
+                    <span class="text-sm">clientes satisfechos</span>
+                </div>
+                <div class="hidden sm:block w-px h-6 bg-white/20"></div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-map-location-dot text-indigo-400" aria-hidden="true"></i>
+                    <span class="text-sm font-medium text-white">Cobertura en toda España</span>
                 </div>
             </div>
+        </div>
+
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+            <i class="fa-solid fa-chevron-down text-white/50" aria-hidden="true"></i>
         </div>
     </section>
 
     <!-- SERVICIOS -->
     <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Nuestras Especialidades</h2>
-                <p class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones 360&deg; para cada tipo de evento</p>
-                <p class="text-slate-600 text-lg md:text-xl">Desde el montaje de escenarios hasta el alquiler de equipos audiovisuales completos: combinamos creatividad, tecnología punta y una gestión integral meticulosa para superar tus expectativas.</p>
+        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-aos="fade-up">
+            <h2 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
+            <p class="text-slate-500 text-lg md:text-xl mt-6">Montaje de escenarios y alquiler de equipos audiovisuales, con técnico especializado en cada proyecto.</p>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
+            <!-- Servicio 1: Corporativo -->
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.</p>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-corporativo')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
+                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
+                    <img src="portfolio-video-fashionweek-poster.jpg" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                </div>
             </div>
 
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 card-perspective">
-                <!-- Servicio 1 -->
-                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 mb-8 border border-indigo-100 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-building-user text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-950">Eventos Corporativos</h3>
-                    <p class="text-slate-600 text-base leading-relaxed flex-grow">
-                        Presentaciones de producto, juntas, galas y aniversarios. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.
-                    </p>
-                    <a href="javascript:void(0)" onclick="openModal('modal-service-corporativo')" class="inline-flex items-center text-indigo-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i></a>
+            <!-- Servicio 2: Congresos -->
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
+                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
+                    <img src="portfolio-2-congreso.jpg" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
-
-                <!-- Servicio 2 -->
-                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-emerald-600 mb-8 border border-emerald-100 group-hover:scale-110 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-microphone-lines text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-950">Congresos y Ferias</h3>
-                    <p class="text-slate-600 text-base leading-relaxed flex-grow">
-                        Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala, microfonía avanzada y soporte técnico <strong>in situ</strong> para garantizar un flujo perfecto.
-                    </p>
-                    <a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="inline-flex items-center text-emerald-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i></a>
+                <div>
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala y microfonía avanzada, con soporte técnico en todo momento para un flujo perfecto.</p>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-congresos')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
+                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                    </a>
                 </div>
+            </div>
 
-                <!-- Servicio 3 -->
-                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-sm card-hover-3d flex flex-col group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-600 mb-8 border border-rose-100 group-hover:scale-110 group-hover:bg-rose-600 group-hover:text-white transition-all duration-300">
-                        <i class="fa-solid fa-heart text-2xl" aria-hidden="true"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-slate-950">Bodas y Celebraciones</h3>
-                    <p class="text-slate-600 text-base leading-relaxed flex-grow">
-                        Creamos ambientes mágicos. Iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, montajes especiales y efectos visuales para tu día.
-                    </p>
-                    <a href="javascript:void(0)" onclick="openModal('modal-service-bodas')" class="inline-flex items-center text-rose-600 font-semibold mt-6 group-hover:gap-2 transition-all cursor-pointer">Saber más <i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i></a>
+            <!-- Servicio 3: Bodas -->
+            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center" data-aos="fade-up">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
+                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
+                    <a href="javascript:void(0)" onclick="openModal('modal-service-bodas')" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all cursor-pointer">
+                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
+                    <img src="portfolio-video-hotelpalace-poster.jpg" alt="Salón de gala para boda" class="w-full h-full object-cover" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -449,10 +501,9 @@
         </div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center space-y-3 mb-10" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-400 uppercase">Así lo vivimos</h2>
-                <p class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">Bodas, fiestas y congresos que hemos hecho realidad</p>
-                <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">Cada evento es distinto. Esto es lo que nos hace volver a por más.</p>
+            <div class="text-center space-y-4 mb-10" data-aos="fade-up">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Así lo vivimos</h2>
+                <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">Bodas, fiestas y congresos que hemos hecho realidad — cada evento es distinto, y eso es lo que nos hace volver a por más.</p>
                 <div class="flex items-center justify-center gap-6 sm:gap-8 pt-2 text-slate-300">
                     <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold">
                         <i class="fa-solid fa-heart text-rose-400" aria-hidden="true"></i> Bodas
@@ -654,42 +705,29 @@
     </div>
 
     <!-- SELLO DE GARANTÍA Y SLA TÉCNICO -->
-    <section class="py-16 bg-white border-y border-slate-100 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Excelencia Operativa</span>
-                <h3 class="text-2xl md:text-3xl font-black text-slate-950 mt-1">Garantía y Estándares Dreamscape</h3>
+    <section class="py-20 bg-[#F5F5F7] relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">Garantía y estándares Dreamscape</h3>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-10 md:gap-8">
                 <!-- Garantía 1 -->
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center flex-shrink-0 border border-indigo-100">
-                        <i class="fa-solid fa-headset text-lg" aria-hidden="true"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-950 text-base mb-1">Retén Técnico In Situ</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed">Personal especializado presente durante todo el evento para garantizar cero incidencias en directo.</p>
-                    </div>
+                <div class="text-center md:text-left">
+                    <i class="fa-solid fa-headset text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                    <h4 class="font-semibold text-slate-900 text-lg mb-2">Retén técnico in situ</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Personal especializado presente durante todo el evento para garantizar cero incidencias en directo.</p>
                 </div>
                 <!-- Garantía 2 -->
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                        <i class="fa-solid fa-shield-cat text-lg" aria-hidden="true"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-950 text-base mb-1">Equipos Redundantes</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed">Sistemas duplicados y material de respaldo crítico preparado para cualquier eventualidad.</p>
-                    </div>
+                <div class="text-center md:text-left">
+                    <i class="fa-solid fa-shield-cat text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                    <h4 class="font-semibold text-slate-900 text-lg mb-2">Equipos redundantes</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Sistemas duplicados y material de respaldo crítico preparado para cualquier eventualidad.</p>
                 </div>
                 <!-- Garantía 3 -->
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex items-start space-x-4">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0 border border-amber-100">
-                        <i class="fa-solid fa-wand-magic-sparkles text-lg" aria-hidden="true"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-slate-950 text-base mb-1">Montajes Escénicos Limpios</h4>
-                        <p class="text-slate-600 text-xs leading-relaxed">Ocultación milimétrica de cableado y acabados estéticos de máxima gama para eventos exigentes.</p>
-                    </div>
+                <div class="text-center md:text-left">
+                    <i class="fa-solid fa-wand-magic-sparkles text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                    <h4 class="font-semibold text-slate-900 text-lg mb-2">Montajes escénicos limpios</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed">Ocultación milimétrica de cableado y acabados estéticos de máxima gama para eventos exigentes.</p>
                 </div>
             </div>
         </div>
@@ -707,8 +745,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- TÍTULO CON ESPACIADO EQUILIBRADO -->
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-aos="fade-up">
-                <span class="inline-block bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4">Herramienta Interactiva</span>
-                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight mt-2">Simulador de Rider & Presupuesto</h2>
+                <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Simulador de rider y presupuesto</h2>
                 <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y envíanos la configuración para recibir un presupuesto personalizado.</p>
             </div>
 
@@ -897,7 +934,6 @@
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
                 <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-aos="fade-right">
-                    <span class="text-xs font-bold tracking-widest text-emerald-400 uppercase">Nuestra Promesa</span>
                     <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Tu tranquilidad es nuestro principal éxito</h2>
                     <p class="text-slate-300 text-lg leading-relaxed">
                         Entendemos la responsabilidad que supone cada evento. Nuestro enfoque se basa en una planificación meticulosa y una ejecución técnica impecable para que tú solo tengas que preocuparte de disfrutar y atender a tus invitados. Nos convertimos en tu socio tecnológico y logístico de confianza.
@@ -965,8 +1001,7 @@
     <section id="faq" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">¿Tienes dudas?</h2>
-                <p class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas Frecuentes</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas frecuentes</h2>
                 <p class="text-slate-600 text-lg">Resolvemos las dudas más habituales antes de que contactes con nosotros.</p>
             </div>
 
@@ -1055,8 +1090,7 @@
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
-                <h2 class="text-xs font-bold tracking-widest text-indigo-600 uppercase">Actualidad y Proyectos</h2>
-                <p class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Historias y Backstage</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Historias y backstage</h2>
                 <p class="text-slate-600 text-lg md:text-xl">Descubre cómo trabajamos, las últimas tendencias en eventos y casos de éxito reales de producciones Dreamscape.</p>
             </div>
 
@@ -1480,7 +1514,24 @@
     <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true });
+        AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
+
+        // Cabecera: transparente sobre el vídeo del hero, sólida con desenfoque al hacer scroll
+        (function() {
+            const header = document.getElementById('site-header');
+            if (!header) return;
+            function updateHeader() {
+                if (window.scrollY > 60) {
+                    header.classList.remove('header-transparent');
+                    header.classList.add('header-solid');
+                } else {
+                    header.classList.remove('header-solid');
+                    header.classList.add('header-transparent');
+                }
+            }
+            updateHeader();
+            window.addEventListener('scroll', updateHeader, { passive: true });
+        })();
 
         // Control del Menú Móvil
         const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -1490,12 +1541,15 @@
         if (mobileBtn && mobileMenu) {
             mobileBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
+                const headerEl = document.getElementById('site-header');
                 if (mobileMenu.classList.contains('hidden')) {
                     menuIcon.classList.remove('fa-xmark');
                     menuIcon.classList.add('fa-bars');
                 } else {
                     menuIcon.classList.remove('fa-bars');
                     menuIcon.classList.add('fa-xmark');
+                    // Al abrir el menú móvil, forzamos la cabecera sólida para que se lea bien
+                    if (headerEl) { headerEl.classList.remove('header-transparent'); headerEl.classList.add('header-solid'); }
                 }
             });
 
