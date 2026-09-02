@@ -155,9 +155,8 @@
     <link rel="dns-prefetch" href="https://www.chatbase.co">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-    <!-- Favicon personalizado (monograma de marca en SVG, escalable a cualquier tamaño) -->
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="alternate icon" href="./New%20Logo%20Dreamscape%20.JPG">
+    <!-- Favicon: recorte de la "A" del logo real de Dreamscape, la única parte legible a tamaño de pestaña -->
+    <link rel="icon" type="image/png" href="./favicon.png">
     <link rel="apple-touch-icon" href="./New%20Logo%20Dreamscape%20.JPG">
     <!-- Tipografía: Inter (la alternativa web más cercana a SF Pro) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -395,9 +394,7 @@
     <!-- PANTALLA DE CARGA: se desvanece en cuanto la página termina de cargar -->
     <div id="loading-screen" class="fixed inset-0 z-[200] bg-slate-950 flex items-center justify-center transition-opacity duration-700">
         <div class="flex flex-col items-center gap-6">
-            <p class="animate-pulse text-xl sm:text-2xl font-bold tracking-tight text-white">
-                DREAMSCAPE <span class="text-indigo-400">EVENTS</span>
-            </p>
+            <img src="loading-logo.png" alt="Dreamscape Events" class="animate-pulse w-56 sm:w-64 h-auto rounded-2xl shadow-2xl">
             <div class="w-32 h-[2px] bg-white/10 rounded-full overflow-hidden">
                 <div id="loading-bar" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 rounded-full" style="width: 0%;"></div>
             </div>
