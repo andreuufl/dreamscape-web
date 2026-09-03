@@ -1852,6 +1852,32 @@
             window.addEventListener('resize', onScroll, { passive: true });
         })();
 
+        // ===== NAVEGACIÓN INTERNA SIN MODIFICAR LA URL =====
+        // Al hacer clic en cualquier enlace #sección, hacemos scroll suave nosotros mismos
+        // y evitamos que el navegador añada el "#sección" a la barra de direcciones.
+        (function() {
+            document.querySelectorAll('a[href^="#"]').forEach(link => {
+                const targetId = link.getAttribute('href').slice(1);
+                if (!targetId) return; // ignoramos href="#" sueltos (sin destino)
+                link.addEventListener('click', (e) => {
+                    const target = document.getElementById(targetId);
+                    if (!target) return;
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // Si se llega a la página con un hash en la URL (p.ej. desde un enlace externo
+            // a index.html#blog), hacemos scroll a esa sección y limpiamos la URL igualmente.
+            if (window.location.hash) {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    setTimeout(() => target.scrollIntoView({ block: 'start' }), 50);
+                }
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+        })();
+
         // ===== BARRA DE PROGRESO DE LECTURA =====
         (function() {
             const bar = document.getElementById('scroll-progress');
