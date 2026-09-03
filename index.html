@@ -477,7 +477,7 @@
         </div>
 
         <!-- Mobile Nav Menu -->
-        <div class="xl:hidden bg-white border-b border-slate-100 overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] max-h-0 opacity-0" id="mobile-menu">
+        <div class="xl:hidden bg-white border-b border-slate-100 overflow-y-auto transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] max-h-0 opacity-0" id="mobile-menu" style="max-height: 0;">
             <div class="px-4 pt-2 pb-6 space-y-3 shadow-xl">
                 <a href="#inicio" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Inicio</a>
                 <a href="#servicios" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Servicios</a>
@@ -1905,27 +1905,42 @@
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
+        let mobileMenuOpen = false;
 
         function openMobileMenu() {
+            const headerEl = document.getElementById('site-header');
+            const headerHeight = headerEl ? headerEl.offsetHeight : 64;
+            // Altura real disponible (toda la pantalla menos la cabecera), con margen de seguridad
+            mobileMenu.style.maxHeight = `calc(100vh - ${headerHeight}px - 8px)`;
             mobileMenu.classList.remove('max-h-0', 'opacity-0');
-            mobileMenu.classList.add('max-h-[600px]', 'opacity-100');
+            mobileMenu.classList.add('opacity-100');
             menuIcon.classList.remove('fa-bars');
             menuIcon.classList.add('fa-xmark');
-            const headerEl = document.getElementById('site-header');
+            mobileMenuOpen = true;
             // Al abrir el menú móvil, forzamos la cabecera sólida para que se lea bien
             if (headerEl) { headerEl.classList.remove('header-transparent'); headerEl.classList.add('header-solid'); }
+            // Ocultamos temporalmente los botones flotantes (WhatsApp / chat IA) para que no se superpongan al menú
+            const waBtn = document.getElementById('whatsapp-float-btn');
+            const chatBubble = document.getElementById('chatbase-bubble-button');
+            if (waBtn) waBtn.style.display = 'none';
+            if (chatBubble) chatBubble.style.display = 'none';
         }
         function closeMobileMenu() {
+            mobileMenu.style.maxHeight = '0px';
             mobileMenu.classList.add('max-h-0', 'opacity-0');
-            mobileMenu.classList.remove('max-h-[600px]', 'opacity-100');
+            mobileMenu.classList.remove('opacity-100');
             menuIcon.classList.remove('fa-xmark');
             menuIcon.classList.add('fa-bars');
+            mobileMenuOpen = false;
+            const waBtn = document.getElementById('whatsapp-float-btn');
+            const chatBubble = document.getElementById('chatbase-bubble-button');
+            if (waBtn) waBtn.style.display = '';
+            if (chatBubble) chatBubble.style.display = '';
         }
 
         if (mobileBtn && mobileMenu) {
             mobileBtn.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.contains('max-h-[600px]');
-                isOpen ? closeMobileMenu() : openMobileMenu();
+                mobileMenuOpen ? closeMobileMenu() : openMobileMenu();
             });
 
             const mobileLinks = document.querySelectorAll('.mobile-link');
