@@ -344,6 +344,60 @@
             transition: width 0.1s linear;
         }
 
+        /* Cursor personalizado: círculo que sigue al ratón y cambia según lo que sobrevuela */
+        @media (hover: hover) and (pointer: fine) {
+            body.custom-cursor-active, body.custom-cursor-active a, body.custom-cursor-active button {
+                cursor: none;
+            }
+        }
+        #custom-cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: rgba(79, 70, 229, 0.9);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.25s var(--ease-apple), height 0.25s var(--ease-apple), background-color 0.25s ease, opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: white;
+            white-space: nowrap;
+            opacity: 0;
+        }
+        #custom-cursor.cursor-visible { opacity: 1; }
+        #custom-cursor.cursor-link { width: 48px; height: 48px; background: rgba(79, 70, 229, 0.15); border: 1.5px solid rgba(79, 70, 229, 0.5); backdrop-filter: blur(2px); }
+        #custom-cursor.cursor-view { width: 64px; height: 64px; background: rgba(15, 23, 42, 0.85); }
+
+        /* Punto activo del indicador de sección */
+        #section-dots a.dot-active {
+            background: #4f46e5;
+            transform: scale(1.6);
+        }
+
+        /* Máscara de revelado tipo cortina en las fotos grandes de Servicios */
+        .curtain-wrap { position: relative; }
+        .curtain {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #4f46e5, #0f172a);
+            transform-origin: left center;
+            transform: scaleX(1);
+            transition: transform 1s var(--ease-apple);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .curtain-wrap.is-revealed .curtain {
+            transform: scaleX(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .curtain { transform: scaleX(0) !important; }
+        }
+
         /* Efecto "linterna": foco de luz que sigue al cursor en secciones oscuras */
         .spotlight-section {
             isolation: isolate;
@@ -406,6 +460,37 @@
     </style>
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
+
+    <!-- Cursor personalizado (solo en dispositivos con ratón real) -->
+    <div id="custom-cursor" aria-hidden="true"></div>
+
+    <!-- Indicador de sección lateral (solo en pantallas grandes) -->
+    <nav id="section-dots" aria-label="Navegación rápida por secciones" class="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
+        <a href="#inicio" data-dot="inicio" aria-label="Ir a Inicio" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Inicio</span>
+        </a>
+        <a href="#servicios" data-dot="servicios" aria-label="Ir a Servicios" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Servicios</span>
+        </a>
+        <a href="#porfolio" data-dot="porfolio" aria-label="Ir a Porfolio" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Porfolio</span>
+        </a>
+        <a href="#simulador" data-dot="simulador" aria-label="Ir a Simulador" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Simulador</span>
+        </a>
+        <a href="#filosofia" data-dot="filosofia" aria-label="Ir a Filosofía" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Filosofía</span>
+        </a>
+        <a href="#faq" data-dot="faq" aria-label="Ir a FAQ" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">FAQ</span>
+        </a>
+        <a href="#blog" data-dot="blog" aria-label="Ir a Blog" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Blog</span>
+        </a>
+        <a href="#contacto" data-dot="contacto" aria-label="Ir a Contacto" class="group relative w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-indigo-400 transition-all duration-300">
+            <span class="absolute right-5 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-medium px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Contacto</span>
+        </a>
+    </nav>
 
     <!-- PANTALLA DE CARGA: se desvanece en cuanto la página termina de cargar -->
     <div id="loading-screen" class="fixed inset-0 z-[200] bg-slate-950 flex items-center justify-center transition-opacity duration-700">
@@ -586,15 +671,17 @@
                         Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
-                    <img src="servicio-corporativo.jpg?v=2" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
+                    <img src="servicio-corporativo.jpg?v=2" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="curtain"></div>
                 </div>
             </div>
 
             <!-- Servicio 2: Congresos -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
-                    <img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
+                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
+                    <img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="curtain"></div>
                 </div>
                 <div data-aos="fade-left">
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
@@ -614,8 +701,9 @@
                         Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
                     </a>
                 </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card">
-                    <img src="servicio-bodas.jpg?v=3" alt="Técnico de sonido Dreamscape Events en una boda" class="w-full h-full object-cover" loading="lazy" decoding="async" data-scroll-zoom>
+                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
+                    <img src="servicio-bodas.jpg?v=3" alt="Técnico de sonido Dreamscape Events en una boda" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                    <div class="curtain"></div>
                 </div>
             </div>
         </div>
@@ -1657,6 +1745,119 @@
                     card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
             });
+        })();
+
+        // ===== CURSOR PERSONALIZADO: círculo que sigue al ratón y cambia según lo que sobrevuela =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; // solo con ratón real
+
+            const cursor = document.getElementById('custom-cursor');
+            if (!cursor) return;
+            document.body.classList.add('custom-cursor-active');
+
+            let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursor.classList.add('cursor-visible');
+            });
+            document.addEventListener('mouseleave', () => cursor.classList.remove('cursor-visible'));
+
+            function tick() {
+                // Suavizado (lerp) para que el cursor "persiga" al ratón con un pequeño retraso elegante
+                curX += (mouseX - curX) * 0.18;
+                curY += (mouseY - curY) * 0.18;
+                cursor.style.left = curX + 'px';
+                cursor.style.top = curY + 'px';
+                requestAnimationFrame(tick);
+            }
+            tick();
+
+            // Cambia de forma según el elemento sobrevolado
+            document.querySelectorAll('a, button, .tilt-card, input, textarea').forEach(el => {
+                const isGallery = el.closest('#porfolio') && el.hasAttribute('onclick');
+                el.addEventListener('mouseenter', () => {
+                    if (isGallery) {
+                        cursor.classList.add('cursor-view');
+                        cursor.textContent = 'Ver';
+                    } else {
+                        cursor.classList.add('cursor-link');
+                    }
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-link', 'cursor-view');
+                    cursor.textContent = '';
+                });
+            });
+        })();
+
+        // ===== INDICADOR DE SECCIÓN LATERAL: resalta el punto de la sección visible =====
+        (function() {
+            const dots = document.querySelectorAll('#section-dots a[data-dot]');
+            if (!dots.length || !('IntersectionObserver' in window)) return;
+
+            const sectionIds = Array.from(dots).map(d => d.getAttribute('data-dot'));
+            const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const dot = document.querySelector(`#section-dots a[data-dot="${entry.target.id}"]`);
+                    if (!dot) return;
+                    if (entry.isIntersecting) {
+                        dots.forEach(d => d.classList.remove('dot-active'));
+                        dot.classList.add('dot-active');
+                    }
+                });
+            }, { threshold: 0.4 });
+
+            sections.forEach(sec => observer.observe(sec));
+        })();
+
+        // ===== TRANSICIÓN DE PÁGINA CON EL LOGO al navegar a otra página del sitio =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const overlay = document.createElement('div');
+            overlay.id = 'page-transition-overlay';
+            overlay.className = 'fixed inset-0 z-[300] bg-slate-950 flex items-center justify-center pointer-events-none opacity-0';
+            overlay.style.transition = 'opacity 0.35s var(--ease-apple)';
+            overlay.innerHTML = '<p class="text-xl font-bold tracking-tight text-white">DREAMSCAPE <span class="text-indigo-400">EVENTS</span></p>';
+            document.body.appendChild(overlay);
+
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                // Solo enlaces internos a otra página real (.html o "/"), nunca anclas, externos, WhatsApp, mailto o target="_blank"
+                if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:') || link.target === '_blank') return;
+                if (!(href.endsWith('.html') || href === '/')) return;
+
+                link.addEventListener('click', (e) => {
+                    if (reduceMotion) return; // navegación normal, sin transición
+                    e.preventDefault();
+                    overlay.classList.remove('pointer-events-none');
+                    overlay.style.opacity = '1';
+                    setTimeout(() => { window.location.href = href; }, 320);
+                });
+            });
+        })();
+
+        // ===== MÁSCARA DE REVELADO ("CORTINA") en las fotos grandes de Servicios =====
+        (function() {
+            const wraps = document.querySelectorAll('[data-curtain]');
+            if (!wraps.length) return;
+            if (!('IntersectionObserver' in window)) {
+                wraps.forEach(w => w.classList.add('is-revealed'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            wraps.forEach(w => observer.observe(w));
         })();
 
         // ===== EFECTO "LINTERNA": foco de luz que sigue al cursor en secciones oscuras =====
