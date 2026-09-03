@@ -6,38 +6,58 @@
     <title>Términos y Condiciones | Dreamscape Events</title>
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://www.eventsandproductionsap.com/terminos-y-condiciones.html">
-    <link rel="icon" type="image/png" href="./favicon.png?v=2">
+    <link rel="icon" type="image/png" href="./favicon.png?v=3">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root { --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal-1 { animation: revealUp 0.8s var(--ease-apple) 0.05s both; }
+        .reveal-2 { animation: revealUp 0.8s var(--ease-apple) 0.18s both; }
+        .reveal-3 { animation: revealUp 0.8s var(--ease-apple) 0.3s both; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-1, .reveal-2, .reveal-3 { animation: none !important; opacity: 1 !important; transform: none !important; }
+        }
     </style>
 </head>
-<body class="bg-white text-slate-800 antialiased">
+<body class="bg-[#F5F5F7] text-slate-800 antialiased">
 
-    <header class="bg-white shadow-sm border-b border-slate-100 sticky top-0 z-50">
+    <header class="bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-100 sticky top-0 z-50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
             <a href="/" class="text-lg font-bold tracking-tight text-slate-900">
                 DREAMSCAPE <span class="text-indigo-500">EVENTS</span>
             </a>
-            <a href="/" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-2">
+            <a href="/" class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-2 transition-colors">
                 <i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver al inicio
             </a>
         </div>
     </header>
 
-    <article class="max-w-3xl mx-auto px-4 sm:px-6 py-14">
-        <div class="flex items-center gap-3 mb-8">
-            <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100 flex-shrink-0">
-                <i class="fa-solid fa-file-contract text-xl" aria-hidden="true"></i>
-            </div>
-            <h1 class="text-2xl sm:text-3xl font-black text-slate-950">Términos y Condiciones</h1>
+    <!-- CABECERA DE MARCA -->
+    <section class="relative bg-slate-950 text-white py-16 sm:py-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-25 pointer-events-none">
+            <div class="absolute -top-32 -left-32 w-80 h-80 bg-indigo-600 rounded-full blur-[110px]"></div>
+            <div class="absolute -bottom-32 -right-32 w-80 h-80 bg-emerald-500 rounded-full blur-[110px]"></div>
         </div>
+        <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center z-10">
+            <div class="reveal-1 w-16 h-16 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-sm text-indigo-300 flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-file-contract text-2xl" aria-hidden="true"></i>
+            </div>
+            <h1 class="reveal-2 text-3xl sm:text-4xl font-extrabold tracking-tight">Términos y Condiciones</h1>
+            <p class="reveal-3 text-slate-400 text-sm mt-4">Última actualización: 3 de septiembre de 2026</p>
+        </div>
+    </section>
 
-        <div class="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed space-y-4">
+    <article class="max-w-3xl mx-auto px-4 sm:px-6 -mt-8 sm:-mt-10 pb-16 relative z-10">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 p-6 sm:p-10">
+            <div class="prose prose-slate max-w-none text-sm text-slate-700 leading-relaxed space-y-4">
 
 <p><strong>Objeto:</strong> Las presentes Condiciones Generales regulan la prestación de servicios de producción técnica, equipos audiovisuales, montaje, desmontaje y demás servicios ofrecidos por Dreamscape Events and Complete Productions, S.L. (en adelante, el Prestador) al cliente (en adelante, el Cliente), conforme a lo establecido en el presupuesto, pedido o factura correspondiente.</p>
 
@@ -88,10 +108,23 @@ En caso de facturación posterior, el plazo de pago será el indicado en la fact
 - <strong>Dietas y manutención:</strong> En jornadas que coincidan con los horarios habituales de comida (de 13:30h a 16:00h) o cena (de 20:30h a 23:00h), el Cliente deberá proporcionar un menú caliente completo (menú de catering o restaurante) al personal técnico, o en su defecto, abonar una dieta compensatoria (previamente establecida) que se añadirá a la factura final. El tiempo estipulado para la comida / cena será de un mínimo de 45 minutos, libres de cualquier servicio o guardia técnica activa. El Cliente se compromete a garantizar el acceso a agua mineral o bebidas hidratantes durante toda la jornada de trabajo, especialmente en montajes exteriores o condiciones térmicas adversas.<br>
 - <strong>Retrasos ajenos al equipo técnico:</strong> Los retrasos o impedimentos imputables al Cliente, al recinto o a terceros que prolonguen la jornada técnica inicial devengarán costes adicionales por horas extra conforme a lo estipulado en este apartado.</p>
 
+            </div>
+        </div>
+
+        <!-- Enlaces cruzados a otros documentos legales -->
+        <div class="mt-8 bg-white rounded-3xl shadow-sm border border-slate-100 p-6 sm:p-8">
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">Otros documentos legales</p>
+            <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm font-medium">
+                <a href="/aviso-legal.html" class="text-indigo-600 hover:underline">Aviso Legal</a>
+                <a href="/privacidad.html" class="text-indigo-600 hover:underline">Política de Privacidad</a>
+                <a href="/cookies.html" class="text-indigo-600 hover:underline">Política de Cookies</a>
+                <a href="/accesibilidad.html" class="text-indigo-600 hover:underline">Declaración de Accesibilidad</a>
+                <a href="/politica-reembolso.html" class="text-indigo-600 hover:underline">Política de Reembolso</a>
+            </div>
         </div>
     </article>
 
-    <footer class="bg-slate-950 text-slate-400 py-10 border-t border-slate-800 mt-8">
+    <footer class="bg-slate-950 text-slate-400 py-10 border-t border-slate-800">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 text-xs text-center">
             <p>&copy; 2026 Dreamscape Events and Complete Productions, S.L. Servicios de producción técnica en toda España.</p>
             <a href="/" class="text-indigo-400 hover:text-white underline mt-2 inline-block">Volver a la página principal</a>
