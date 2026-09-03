@@ -60,4 +60,34 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/que-es-un-rider-tecnico.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/preguntas-antes-de-contratar-sonido-boda.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/sonido-bluetooth-vs-sonido-profesional.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/con-cuanta-antelacion-reservar-equipo-tecnico.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/errores-comunes-evento-corporativo.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.eventsandproductionsap.com/dj-o-grupo-en-directo-boda.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
