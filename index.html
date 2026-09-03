@@ -163,11 +163,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./styles.css">
     <!-- FontAwesome para Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS - Animate On Scroll Library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- jsPDF se carga bajo demanda (ver downloadProfessionalPDF) para no bloquear la carga inicial -->
     
     <style>
@@ -449,14 +447,6 @@
             70% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
-        
-        [data-aos] {
-            pointer-events: none;
-            transition-timing-function: var(--ease-apple) !important;
-        }
-        .aos-animate {
-            pointer-events: auto;
-        }
     </style>
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
@@ -656,7 +646,7 @@
 
     <!-- SERVICIOS -->
     <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-aos="fade-up">
+        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-scroll-fade>
             <h2 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
             <p class="text-slate-500 text-lg md:text-xl mt-6">Montaje de escenarios y alquiler de equipos audiovisuales, con técnico especializado en cada proyecto.</p>
         </div>
@@ -664,7 +654,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
             <!-- Servicio 1: Corporativo -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-aos="fade-right">
+                <div class="order-2 md:order-1" data-scroll-fade>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.</p>
                     <a href="eventos-corporativos.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -683,7 +673,7 @@
                     <img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
                     <div class="curtain"></div>
                 </div>
-                <div data-aos="fade-left">
+                <div data-scroll-fade>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala y microfonía avanzada, con soporte técnico en todo momento para un flujo perfecto.</p>
                     <a href="congresos-y-ferias.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -694,7 +684,7 @@
 
             <!-- Servicio 3: Bodas -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-aos="fade-right">
+                <div class="order-2 md:order-1" data-scroll-fade>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
                     <a href="bodas-y-celebraciones.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -719,7 +709,7 @@
         <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center space-y-4 mb-10" data-aos="fade-up">
+            <div class="text-center space-y-4 mb-10" data-scroll-fade>
                 <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Así lo vivimos</h2>
                 <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">Bodas, fiestas y congresos que hemos hecho realidad — cada evento es distinto, y eso es lo que nos hace volver a por más.</p>
                 <div class="flex items-center justify-center gap-6 sm:gap-8 pt-2 text-slate-300">
@@ -735,7 +725,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-scroll-fade style="transition-delay: 100ms;">
                 <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 0ms;" onclick="openVideoLightbox()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-poster.jpg">
                         <source src="portfolio-video-jardin.mp4" type="video/mp4">
@@ -986,7 +976,7 @@
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- TÍTULO CON ESPACIADO EQUILIBRADO -->
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-aos="fade-up">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-scroll-fade>
                 <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Simulador de rider y presupuesto</h2>
                 <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y envíanos la configuración para recibir un presupuesto personalizado.</p>
             </div>
@@ -994,7 +984,7 @@
             <!-- CONTENEDOR GRID CON IGUALACIÓN DE ALTURA (LG:FLEX) -->
             <div class="grid lg:grid-cols-12 gap-8 items-stretch">
                 <!-- Opciones de Configuración -->
-                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-aos="fade-right">
+                <div class="lg:col-span-7 bg-white/15 backdrop-blur-md rounded-3xl p-8 border border-white/20 space-y-8 shadow-xl flex flex-col justify-between" data-scroll-fade>
                     <div class="space-y-8">
                         <!-- Selector de Fecha y Disponibilidad en Tiempo Real -->
                         <div class="space-y-3 bg-white/5 p-5 rounded-2xl border border-white/10 w-full">
@@ -1088,7 +1078,7 @@
                 </div>
 
                 <!-- Resumen Limpio con Altura Igualada (Flex Col justify-between) -->
-                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6 flex flex-col justify-between" data-aos="fade-left">
+                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl p-8 shadow-2xl relative space-y-6 flex flex-col justify-between" data-scroll-fade>
                     <div class="space-y-6">
                         <div class="border-b border-slate-100 pb-4">
                             <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Dreamscape Events | Resumen</span>
@@ -1176,7 +1166,7 @@
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-                <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-aos="fade-right">
+                <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-scroll-fade>
                     <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Tu tranquilidad es nuestro principal éxito</h2>
                     <p class="text-slate-300 text-lg leading-relaxed">
                         Entendemos la responsabilidad que supone cada evento. Nuestro enfoque se basa en una planificación meticulosa y una ejecución técnica impecable para que tú solo tengas que preocuparte de disfrutar y atender a tus invitados. Nos convertimos en tu socio tecnológico y logístico de confianza.
@@ -1222,7 +1212,7 @@
                     </div>
                 </div>
 
-                <div class="lg:col-span-6 grid grid-cols-2 gap-6 card-perspective" data-aos="zoom-in" data-aos-delay="200">
+                <div class="lg:col-span-6 grid grid-cols-2 gap-6 card-perspective" data-scroll-fade style="transition-delay: 200ms;">
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center space-y-3 backdrop-blur-sm card-hover-3d group hover:border-emerald-500/30">
                         <i class="fa-solid fa-layer-group text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
                         <span class="block text-5xl font-black text-white">15K+</span>
@@ -1247,12 +1237,12 @@
             <div class="parallax-blob absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-100 rounded-full blur-[100px]" data-speed="0.28"></div>
         </div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-aos="fade-up">
+            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-scroll-fade>
                 <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas frecuentes</h2>
                 <p class="text-slate-600 text-lg">Resolvemos las dudas más habituales antes de que contactes con nosotros.</p>
             </div>
 
-            <div class="space-y-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="space-y-4" data-scroll-fade style="transition-delay: 100ms;">
                 <!-- Pregunta 1 -->
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
@@ -1336,14 +1326,14 @@
     <!-- SECCIÓN DE BLOG -->
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-aos="fade-up">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-scroll-fade>
                 <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Historias y backstage</h2>
                 <p class="text-slate-600 text-lg md:text-xl">Descubre cómo trabajamos, las últimas tendencias en eventos y casos de éxito reales de producciones Dreamscape.</p>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 card-perspective">
                 <!-- Blog 1 -->
-                <a href="blog-gala-penguin.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                <a href="blog-gala-penguin.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-scroll-fade style="transition-delay: 100ms;">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1505236858219-8359eb29e329?q=75&w=600&auto=format&fit=crop" alt="Backstage de evento" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     </div>
@@ -1361,7 +1351,7 @@
                 </a>
 
                 <!-- Blog 2 -->
-                <a href="blog-audio-congresos-hibridos.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                <a href="blog-audio-congresos-hibridos.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-scroll-fade style="transition-delay: 200ms;">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?q=75&w=600&auto=format&fit=crop" alt="Sonorización profesional" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     </div>
@@ -1379,7 +1369,7 @@
                 </a>
 
                 <!-- Blog 3 -->
-                <a href="blog-iluminacion-bodas-exterior.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                <a href="blog-iluminacion-bodas-exterior.html" class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm card-hover-3d flex flex-col group cursor-pointer" data-scroll-fade style="transition-delay: 300ms;">
                     <div class="relative overflow-hidden aspect-[16/10]">
                         <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=75&w=600&auto=format&fit=crop" alt="Iluminación de boda" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     </div>
@@ -1617,10 +1607,7 @@
 
 
     <!-- SCRIPTS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
-
         // Cabecera: transparente sobre el vídeo del hero, sólida con desenfoque al hacer scroll
         (function() {
             const header = document.getElementById('site-header');
