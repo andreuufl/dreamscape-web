@@ -6,25 +6,32 @@
     <title>¡Solicitud Enviada! | Dreamscape Events</title>
     <meta name="robots" content="noindex">
     <link rel="canonical" href="https://www.eventsandproductionsap.com/gracias.html">
-    <link rel="icon" type="image/png" href="./favicon.png?v=2">
+    <link rel="icon" type="image/png" href="./favicon.png?v=3">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root { --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); }
         body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
 
-        /* Círculo animado que dibuja el check, como si se completara al cargar */
-        .check-circle {
+        .svg-icon { display: inline-block; width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; }
+
+        /* Círculo animado que dibuja el check, como si se completara al cargar.
+           IMPORTANTE: el estado inicial (visible, dashoffset 0) es el que se ve
+           si la animación no llega a completarse por cualquier motivo (ver red
+           de seguridad en JS más abajo) — nunca se queda invisible del todo. */
+        .check-circle, .check-mark {
+            stroke-dashoffset: 0;
+        }
+        .anim-ready .check-circle {
             stroke-dasharray: 166;
             stroke-dashoffset: 166;
             animation: drawCircle 0.7s var(--ease-apple) 0.1s forwards;
         }
-        .check-mark {
+        .anim-ready .check-mark {
             stroke-dasharray: 48;
             stroke-dashoffset: 48;
             animation: drawCheck 0.4s var(--ease-apple) 0.65s forwards;
@@ -36,9 +43,12 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .reveal-1 { animation: revealUp 0.8s var(--ease-apple) 0.9s both; }
-        .reveal-2 { animation: revealUp 0.8s var(--ease-apple) 1.05s both; }
-        .reveal-3 { animation: revealUp 0.8s var(--ease-apple) 1.2s both; }
+        /* Igual que arriba: visibles por defecto, la animación es un extra que se
+           añade solo cuando JS confirma que la página está lista */
+        .reveal-1, .reveal-2, .reveal-3 { opacity: 1; }
+        .anim-ready .reveal-1 { animation: revealUp 0.8s var(--ease-apple) 0.9s both; }
+        .anim-ready .reveal-2 { animation: revealUp 0.8s var(--ease-apple) 1.05s both; }
+        .anim-ready .reveal-3 { animation: revealUp 0.8s var(--ease-apple) 1.2s both; }
 
         /* Confeti: pequeños rectángulos de color que caen y giran al cargar la página */
         .confetti-piece {
@@ -53,7 +63,10 @@
             to { transform: translateY(110vh) rotate(540deg); opacity: 0; }
         }
         @media (prefers-reduced-motion: reduce) {
-            .check-circle, .check-mark, .reveal-1, .reveal-2, .reveal-3 { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; transform: none !important; }
+            .anim-ready .check-circle, .anim-ready .check-mark,
+            .anim-ready .reveal-1, .anim-ready .reveal-2, .anim-ready .reveal-3 {
+                animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important;
+            }
             .confetti-piece { display: none; }
         }
     </style>
@@ -99,7 +112,7 @@
                     Volver al inicio
                 </a>
                 <a href="https://wa.me/34613089894" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/15 border border-white/25 text-white px-8 py-3.5 rounded-full font-medium text-base text-center transition-all">
-                    <i class="fa-brands fa-whatsapp mr-2" aria-hidden="true"></i>Hablar por WhatsApp
+                    <svg class="svg-icon mr-2" aria-hidden="true" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>Hablar por WhatsApp
                 </a>
             </div>
 
@@ -114,25 +127,44 @@
     </footer>
 
     <script>
-        // Confeti sutil al cargar la página (respeta prefers-reduced-motion vía CSS)
         (function() {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion) return;
-            const container = document.getElementById('confetti-container');
-            const colors = ['#818cf8', '#34d399', '#fbbf24', '#f472b6', '#60a5fa'];
-            const total = 60;
-            for (let i = 0; i < total; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.left = Math.random() * 100 + 'vw';
-                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
-                piece.style.animationDelay = (Math.random() * 0.6) + 's';
-                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
-                container.appendChild(piece);
+
+            // Activamos las animaciones de entrada SOLO si JS confirma que todo va bien.
+            // Antes de esto, todo el contenido ya está visible por CSS (ver estilos arriba),
+            // así que si algo falla aquí abajo, la página nunca se queda "pillada" en blanco.
+            if (!reduceMotion) {
+                document.documentElement.classList.add('anim-ready');
+
+                // Confeti
+                try {
+                    const container = document.getElementById('confetti-container');
+                    const colors = ['#818cf8', '#34d399', '#fbbf24', '#f472b6', '#60a5fa'];
+                    for (let i = 0; i < 60; i++) {
+                        const piece = document.createElement('div');
+                        piece.className = 'confetti-piece';
+                        piece.style.left = Math.random() * 100 + 'vw';
+                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+                        piece.style.animationDelay = (Math.random() * 0.6) + 's';
+                        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        container.appendChild(piece);
+                    }
+                    setTimeout(() => { container.innerHTML = ''; }, 5500);
+                } catch (e) { /* si el confeti falla, no pasa nada: el resto de la página sigue intacta */ }
             }
-            // Limpiar el confeti del DOM pasados unos segundos, ya no aporta nada visible
-            setTimeout(() => { container.innerHTML = ''; }, 5500);
+
+            // Red de seguridad final: pase lo que pase, a los 2.5s forzamos que
+            // absolutamente todo esté visible y en su sitio, sin excepción.
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-1, .reveal-2, .reveal-3').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+                document.querySelectorAll('.check-circle, .check-mark').forEach(el => {
+                    el.style.strokeDashoffset = '0';
+                });
+            }, 2500);
         })();
     </script>
 </body>
