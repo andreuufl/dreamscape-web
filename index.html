@@ -8,7 +8,7 @@
          cabeceras HTTP reales como X-Frame-Options o Permissions-Policy — solo lo que cabe en meta tags).
          Comprobado contra los dominios externos reales que usa esta página. Si algo deja de funcionar
          tras subir esto (el chat o Analytics, sobre todo), avisa y lo ajustamos. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://www.googletagmanager.com https://*.chatbase.co; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co; frame-src https://*.chatbase.co; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.chatbase.co; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co; frame-src https://*.chatbase.co; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>Montaje de Escenarios y Equipos Audiovisuales | Dreamscape Events</title>
@@ -148,9 +148,7 @@
     </script>
 
     <!-- Rendimiento: conexión anticipada a los dominios externos usados -->
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://unpkg.com">
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://www.chatbase.co">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -162,10 +160,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS (compilado) -->
     <link rel="stylesheet" href="./styles.css">
-    <!-- FontAwesome para Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Los iconos ya no dependen de FontAwesome por CDN: van incrustados como sprite SVG en el body -->
     <!-- jsPDF se carga bajo demanda (ver downloadProfessionalPDF) para no bloquear la carga inicial -->
     
     <style>
@@ -355,6 +352,17 @@
             transition: width 0.1s linear;
         }
 
+        /* Iconos SVG (sprite incrustado, sustituye a la fuente de FontAwesome):
+           se comportan igual que los iconos de fuente que reemplazan, heredando tamaño y color del texto */
+        .svg-icon {
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            fill: currentColor;
+            vertical-align: -0.125em;
+            flex-shrink: 0;
+        }
+
         /* Punto activo del indicador de sección */
         #section-dots a.dot-active {
             background: #4f46e5;
@@ -460,6 +468,9 @@
     </style>
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
+    <!-- Sprite de iconos (SVG reales de FontAwesome, incrustados: sin CDN externo) -->
+    <svg style="display:none" aria-hidden="true"><symbol id="fa-arrow-up" viewBox="0 0 384 512"><path fill="currentColor" d="M214.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 109.3 160 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-370.7 105.4 105.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></symbol><symbol id="fa-bars" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z"/></symbol><symbol id="fa-bolt" viewBox="0 0 448 512"><path fill="currentColor" d="M338.8-9.9c11.9 8.6 16.3 24.2 10.9 37.8L271.3 224 416 224c13.5 0 25.5 8.4 30.1 21.1s.7 26.9-9.6 35.5l-288 240c-11.3 9.4-27.4 9.9-39.3 1.3s-16.3-24.2-10.9-37.8L176.7 288 32 288c-13.5 0-25.5-8.4-30.1-21.1s-.7-26.9 9.6-35.5l288-240c11.3-9.4 27.4-9.9 39.3-1.3z"/></symbol><symbol id="fa-calculator" viewBox="0 0 384 512"><path fill="currentColor" d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-384c0-35.3-28.7-64-64-64L64 0zM96 64l192 0c17.7 0 32 14.3 32 32l0 32c0 17.7-14.3 32-32 32L96 160c-17.7 0-32-14.3-32-32l0-32c0-17.7 14.3-32 32-32zm16 168a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zm80 24a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm128-24a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zM88 352a24 24 0 1 1 0-48 24 24 0 1 1 0 48zm128-24a24 24 0 1 1 -48 0 24 24 0 1 1 48 0zm80 24a24 24 0 1 1 0-48 24 24 0 1 1 0 48zM64 424c0-13.3 10.7-24 24-24l112 0c13.3 0 24 10.7 24 24s-10.7 24-24 24L88 448c-13.3 0-24-10.7-24-24zm232-24c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24z"/></symbol><symbol id="fa-champagne-glasses" viewBox="0 0 640 512"><path fill="currentColor" d="M155.6 17.3C163 3 179.9-3.6 195 1.9l125 45.6 125-45.6c15.1-5.5 32 1.1 39.4 15.4l78.8 152.9c28.8 55.8 10.3 122.3-38.5 156.6l31.3 86.2 41-15c16.6-6 35 2.5 41 19.1s-2.5 35-19.1 41c-47.4 17.3-94.8 34.5-142.2 51.8-16.6 6.1-35-2.5-41-19.1s2.5-35 19.1-41l41-15-31.3-86.2c-59.4 5.2-116.2-33.9-130-95.2l-14.6-64.7-14.6 64.7c-13.8 61.3-70.6 100.4-130 95.2l-31.3 86.2 41 15c16.6 6.1 25.2 24.4 19.1 41s-24.4 25.2-41 19.1c-47.4-17.3-94.8-34.6-142.2-51.8-16.6-6.1-25.2-24.4-19.1-41S26.3 392 42.9 398l41 15 31.3-86.2C66.5 292.5 48.1 226 76.9 170.2L155.6 17.3zm44 54.4l-27.2 52.8 89.2 32.5 13.1-57.9-75.1-27.4zm240.9 0l-75.1 27.4 13.1 57.9 89.2-32.5-27.2-52.8z"/></symbol><symbol id="fa-check" viewBox="0 0 448 512"><path fill="currentColor" d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></symbol><symbol id="fa-chevron-down" viewBox="0 0 448 512"><path fill="currentColor" d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></symbol><symbol id="fa-chevron-left" viewBox="0 0 320 512"><path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></symbol><symbol id="fa-chevron-right" viewBox="0 0 320 512"><path fill="currentColor" d="M311.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L243.2 256 73.9 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></symbol><symbol id="fa-cookie-bite" viewBox="0 0 512 512"><path fill="currentColor" d="M257.5 27.6c-.8-5.4-4.9-9.8-10.3-10.6-22.1-3.1-44.6 .9-64.4 11.4l-74 39.5C89.1 78.4 73.2 94.9 63.4 115L26.7 190.6c-9.8 20.1-13 42.9-9.1 64.9l14.5 82.8c3.9 22.1 14.6 42.3 30.7 57.9l60.3 58.4c16.1 15.6 36.6 25.6 58.7 28.7l83 11.7c22.1 3.1 44.6-.9 64.4-11.4l74-39.5c19.7-10.5 35.6-27 45.4-47.2l36.7-75.5c9.8-20.1 13-42.9 9.1-64.9-.9-5.3-5.3-9.3-10.6-10.1-51.5-8.2-92.8-47.1-104.5-97.4-1.8-7.6-8-13.4-15.7-14.6-54.6-8.7-97.7-52-106.2-106.8zM208 144a32 32 0 1 1 0 64 32 32 0 1 1 0-64zM144 336a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm224-64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></symbol><symbol id="fa-envelope" viewBox="0 0 512 512"><path fill="currentColor" d="M48 64c-26.5 0-48 21.5-48 48 0 15.1 7.1 29.3 19.2 38.4l208 156c17.1 12.8 40.5 12.8 57.6 0l208-156c12.1-9.1 19.2-23.3 19.2-38.4 0-26.5-21.5-48-48-48L48 64zM0 196L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-188-198.4 148.8c-34.1 25.6-81.1 25.6-115.2 0L0 196z"/></symbol><symbol id="fa-expand" viewBox="0 0 448 512"><path fill="currentColor" d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z"/></symbol><symbol id="fa-file-pdf" viewBox="0 0 576 512"><path fill="currentColor" d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l80 0 0-112c0-35.3 28.7-64 64-64l176 0 0-165.5c0-17-6.7-33.3-18.7-45.3L290.7 18.7C278.7 6.7 262.5 0 245.5 0L96 0zM357.5 176L264 176c-13.3 0-24-10.7-24-24L240 58.5 357.5 176zM240 380c-11 0-20 9-20 20l0 128c0 11 9 20 20 20s20-9 20-20l0-28 12 0c33.1 0 60-26.9 60-60s-26.9-60-60-60l-32 0zm32 80l-12 0 0-40 12 0c11 0 20 9 20 20s-9 20-20 20zm96-80c-11 0-20 9-20 20l0 128c0 11 9 20 20 20l32 0c28.7 0 52-23.3 52-52l0-64c0-28.7-23.3-52-52-52l-32 0zm20 128l0-88 12 0c6.6 0 12 5.4 12 12l0 64c0 6.6-5.4 12-12 12l-12 0zm88-108l0 128c0 11 9 20 20 20s20-9 20-20l0-44 28 0c11 0 20-9 20-20s-9-20-20-20l-28 0 0-24 28 0c11 0 20-9 20-20s-9-20-20-20l-48 0c-11 0-20 9-20 20z"/></symbol><symbol id="fa-headset" viewBox="0 0 448 512"><path fill="currentColor" d="M224 64c-79 0-144.7 57.3-157.7 132.7 9.3-3 19.3-4.7 29.7-4.7l16 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-16 0c-53 0-96-43-96-96l0-64C0 100.3 100.3 0 224 0S448 100.3 448 224l0 168.1c0 66.3-53.8 120-120.1 120l-87.9-.1-32 0c-26.5 0-48-21.5-48-48s21.5-48 48-48l32 0c26.5 0 48 21.5 48 48l0 0 40 0c39.8 0 72-32.2 72-72l0-20.9c-14.1 8.2-30.5 12.8-48 12.8l-16 0c-26.5 0-48-21.5-48-48l0-96c0-26.5 21.5-48 48-48l16 0c10.4 0 20.3 1.6 29.7 4.7-13-75.3-78.6-132.7-157.7-132.7z"/></symbol><symbol id="fa-heart" viewBox="0 0 512 512"><path fill="currentColor" d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/></symbol><symbol id="fa-house" viewBox="0 0 512 512"><path fill="currentColor" d="M277.8 8.6c-12.3-11.4-31.3-11.4-43.5 0l-224 208c-9.6 9-12.8 22.9-8 35.1S18.8 272 32 272l16 0 0 176c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-176 16 0c13.2 0 25-8.1 29.8-20.3s1.6-26.2-8-35.1l-224-208zM240 320l32 0c26.5 0 48 21.5 48 48l0 96-128 0 0-96c0-26.5 21.5-48 48-48z"/></symbol><symbol id="fa-layer-group" viewBox="0 0 512 512"><path fill="currentColor" d="M232.5 5.2c14.9-6.9 32.1-6.9 47 0l218.6 101c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 149.8C5.4 145.8 0 137.3 0 128s5.4-17.9 13.9-21.8L232.5 5.2zM48.1 218.4l164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 277.8C5.4 273.8 0 265.3 0 256s5.4-17.9 13.9-21.8l34.1-15.8zM13.9 362.2l34.1-15.8 164.3 75.9c27.7 12.8 59.6 12.8 87.3 0l164.3-75.9 34.1 15.8c8.5 3.9 13.9 12.4 13.9 21.8s-5.4 17.9-13.9 21.8l-218.6 101c-14.9 6.9-32.1 6.9-47 0L13.9 405.8C5.4 401.8 0 393.3 0 384s5.4-17.9 13.9-21.8z"/></symbol><symbol id="fa-location-dot" viewBox="0 0 384 512"><path fill="currentColor" d="M0 188.6C0 84.4 86 0 192 0S384 84.4 384 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0-50.2-54.5-170.4-197.5-170.4-316.8zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128z"/></symbol><symbol id="fa-magnifying-glass-plus" viewBox="0 0 512 512"><path fill="currentColor" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376C296.3 401.1 253.9 416 208 416 93.1 416 0 322.9 0 208S93.1 0 208 0 416 93.1 416 208zM208 112c-13.3 0-24 10.7-24 24l0 48-48 0c-13.3 0-24 10.7-24 24s10.7 24 24 24l48 0 0 48c0 13.3 10.7 24 24 24s24-10.7 24-24l0-48 48 0c13.3 0 24-10.7 24-24s-10.7-24-24-24l-48 0 0-48c0-13.3-10.7-24-24-24z"/></symbol><symbol id="fa-map-location-dot" viewBox="0 0 640 512"><path fill="currentColor" d="M576 48c0-11.1-5.7-21.4-15.2-27.2s-21.2-6.4-31.1-1.4L413.5 77.5 234.1 17.6c-8.1-2.7-16.8-2.1-24.4 1.7l-128 64C70.8 88.8 64 99.9 64 112l0 352c0 11.1 5.7 21.4 15.2 27.2s21.2 6.4 31.1 1.4l116.1-58.1 173.3 57.8c-4.3-6.4-8.5-13.1-12.6-19.9-11-18.3-21.9-39.3-30-61.8l-101.2-33.7 0-284.5 128 42.7 0 99.3c31-35.8 77-58.4 128-58.4 22.6 0 44.2 4.4 64 12.5L576 48zM512 224c-66.3 0-120 52.8-120 117.9 0 68.9 64.1 150.4 98.6 189.3 11.6 13 31.3 13 42.9 0 34.5-38.9 98.6-120.4 98.6-189.3 0-65.1-53.7-117.9-120-117.9zM472 344a40 40 0 1 1 80 0 40 40 0 1 1 -80 0z"/></symbol><symbol id="fa-paper-plane" viewBox="0 0 576 512"><path fill="currentColor" d="M536.4-26.3c9.8-3.5 20.6-1 28 6.3s9.8 18.2 6.3 28l-178 496.9c-5 13.9-18.1 23.1-32.8 23.1-14.2 0-27-8.6-32.3-21.7l-64.2-158c-4.5-11-2.5-23.6 5.2-32.6l94.5-112.4c5.1-6.1 4.7-15-.9-20.6s-14.6-6-20.6-.9L229.2 276.1c-9.1 7.6-21.6 9.6-32.6 5.2L38.1 216.8c-13.1-5.3-21.7-18.1-21.7-32.3 0-14.7 9.2-27.8 23.1-32.8l496.9-178z"/></symbol><symbol id="fa-people-group" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0a64 64 0 1 1 0 128 64 64 0 1 1 0-128zm96 312c0 25-12.7 47-32 59.9l0 92.1c0 26.5-21.5 48-48 48l-32 0c-26.5 0-48-21.5-48-48l0-92.1C172.7 359 160 337 160 312l0-40c0-53 43-96 96-96s96 43 96 96l0 40zM96 32a56 56 0 1 1 0 112 56 56 0 1 1 0-112zm16 240l0 32c0 32.5 12.1 62.1 32 84.7l0 75.3c0 1.2 0 2.5 .1 3.7-8.5 7.6-19.7 12.3-32.1 12.3l-32 0c-26.5 0-48-21.5-48-48l0-56.6C12.9 364.4 0 343.7 0 320l0-32c0-53 43-96 96-96 12.7 0 24.8 2.5 35.9 6.9-12.6 21.4-19.9 46.4-19.9 73.1zM368 464l0-75.3c19.9-22.5 32-52.2 32-84.7l0-32c0-26.7-7.3-51.6-19.9-73.1 11.1-4.5 23.2-6.9 35.9-6.9 53 0 96 43 96 96l0 32c0 23.7-12.9 44.4-32 55.4l0 56.6c0 26.5-21.5 48-48 48l-32 0c-12.3 0-23.6-4.6-32.1-12.3 0-1.2 .1-2.5 .1-3.7zM416 32a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/></symbol><symbol id="fa-puzzle-piece" viewBox="0 0 512 512"><path fill="currentColor" d="M224 0c35.3 0 64 21.5 64 48 0 10.4-4.4 20-12 27.9-6.6 6.9-12 15.3-12 24.9 0 15 12.2 27.2 27.2 27.2l44.8 0c26.5 0 48 21.5 48 48l0 44.8c0 15 12.2 27.2 27.2 27.2 9.5 0 18-5.4 24.9-12 7.9-7.5 17.5-12 27.9-12 26.5 0 48 28.7 48 64s-21.5 64-48 64c-10.4 0-20.1-4.4-27.9-12-6.9-6.6-15.3-12-24.9-12-15 0-27.2 12.2-27.2 27.2L384 464c0 26.5-21.5 48-48 48l-56.8 0c-12.8 0-23.2-10.4-23.2-23.2 0-9.2 5.8-17.3 13.2-22.8 11.6-8.7 18.8-20.7 18.8-34 0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34 7.4 5.5 13.2 13.5 13.2 22.8 0 12.8-10.4 23.2-23.2 23.2L48 512c-26.5 0-48-21.5-48-48L0 343.2c0-12.8 10.4-23.2 23.2-23.2 9.2 0 17.3 5.8 22.8 13.2 8.7 11.6 20.7 18.8 34 18.8 26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8-5.5 7.4-13.5 13.2-22.8 13.2-12.8 0-23.2-10.4-23.2-23.2L0 176c0-26.5 21.5-48 48-48l108.8 0c15 0 27.2-12.2 27.2-27.2 0-9.5-5.4-18-12-24.9-7.5-7.9-12-17.5-12-27.9 0-26.5 28.7-48 64-48z"/></symbol><symbol id="fa-shield-cat" viewBox="0 0 512 512"><path fill="currentColor" d="M269.4 2.9C265.2 1 260.7 0 256 0s-9.2 1-13.4 2.9L54.3 82.8c-22 9.3-38.4 31-38.3 57.2 .5 99.2 41.3 280.7 213.6 363.2 16.7 8 36.1 8 52.8 0 172.4-82.5 213.2-264 213.6-363.2 .1-26.2-16.3-47.9-38.3-57.2L269.4 2.9zM160 154.4c0-5.8 4.7-10.4 10.4-10.4l.2 0c3.4 0 6.5 1.6 8.5 4.3l40 53.3c3 4 7.8 6.4 12.8 6.4l48 0c5 0 9.8-2.4 12.8-6.4l40-53.3c2-2.7 5.2-4.3 8.5-4.3l.2 0c5.8 0 10.4 4.7 10.4 10.4L352 272c0 53-43 96-96 96s-96-43-96-96l0-117.6zM216 288a16 16 0 1 0 0-32 16 16 0 1 0 0 32zm96-16a16 16 0 1 0 -32 0 16 16 0 1 0 32 0z"/></symbol><symbol id="fa-shield-halved" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0c4.6 0 9.2 1 13.4 2.9L457.8 82.8c22 9.3 38.4 31 38.3 57.2-.5 99.2-41.3 280.7-213.6 363.2-16.7 8-36.1 8-52.8 0-172.4-82.5-213.1-264-213.6-363.2-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.9 1 251.4 0 256 0zm0 66.8l0 378.1c138-66.8 175.1-214.8 176-303.4l-176-74.6 0 0z"/></symbol><symbol id="fa-thumbs-up" viewBox="0 0 512 512"><path fill="currentColor" d="M80 160c17.7 0 32 14.3 32 32l0 256c0 17.7-14.3 32-32 32l-48 0c-17.7 0-32-14.3-32-32L0 192c0-17.7 14.3-32 32-32l48 0zM270.6 16C297.9 16 320 38.1 320 65.4l0 4.2c0 6.8-1.3 13.6-3.8 19.9L288 160 448 160c26.5 0 48 21.5 48 48 0 19.7-11.9 36.6-28.9 44 17 7.4 28.9 24.3 28.9 44 0 23.4-16.8 42.9-39 47.1 4.4 7.3 7 15.8 7 24.9 0 22.2-15 40.8-35.4 46.3 2.2 5.5 3.4 11.5 3.4 17.7 0 26.5-21.5 48-48 48l-87.9 0c-36.3 0-71.6-12.4-99.9-35.1L184 435.2c-15.2-12.1-24-30.5-24-50l0-186.6c0-14.9 3.5-29.6 10.1-42.9L226.3 43.3C234.7 26.6 251.8 16 270.6 16z"/></symbol><symbol id="fa-tree" viewBox="0 0 448 512"><path fill="currentColor" d="M224-32c7 0 13.7 3.1 18.3 8.5l136 160c6.1 7.1 7.4 17.1 3.5 25.6S369.4 176 360 176l-24.9 0 75.2 88.5c6.1 7.1 7.4 17.1 3.5 25.6S401.4 304 392 304l-38.5 0 88.8 104.5c6.1 7.1 7.4 17.1 3.5 25.6S433.4 448 424 448l-168 0 0 64c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-64-168 0c-9.4 0-17.9-5.4-21.8-13.9s-2.6-18.5 3.5-25.6L94.5 304 56 304c-9.4 0-17.9-5.4-21.8-13.9s-2.6-18.5 3.5-25.6L112.9 176 88 176c-9.4 0-17.9-5.4-21.8-13.9s-2.6-18.5 3.5-25.6l136-160C210.3-28.9 217-32 224-32z"/></symbol><symbol id="fa-triangle-exclamation" viewBox="0 0 512 512"><path fill="currentColor" d="M256 0c14.7 0 28.2 8.1 35.2 21l216 400c6.7 12.4 6.4 27.4-.8 39.5S486.1 480 472 480L40 480c-14.1 0-27.2-7.4-34.4-19.5s-7.5-27.1-.8-39.5l216-400c7-12.9 20.5-21 35.2-21zm0 352a32 32 0 1 0 0 64 32 32 0 1 0 0-64zm0-192c-18.2 0-32.7 15.5-31.4 33.7l7.4 104c.9 12.5 11.4 22.3 23.9 22.3 12.6 0 23-9.7 23.9-22.3l7.4-104c1.3-18.2-13.1-33.7-31.4-33.7z"/></symbol><symbol id="fa-video" viewBox="0 0 576 512"><path fill="currentColor" d="M96 64c-35.3 0-64 28.7-64 64l0 256c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64L96 64zM464 336l73.5 58.8c4.2 3.4 9.4 5.2 14.8 5.2 13.1 0 23.7-10.6 23.7-23.7l0-240.6c0-13.1-10.6-23.7-23.7-23.7-5.4 0-10.6 1.8-14.8 5.2L464 176 464 336z"/></symbol><symbol id="fa-wand-magic-sparkles" viewBox="0 0 576 512"><path fill="currentColor" d="M263.4-27L278.2 9.8 315 24.6c3 1.2 5 4.2 5 7.4s-2 6.2-5 7.4L278.2 54.2 263.4 91c-1.2 3-4.2 5-7.4 5s-6.2-2-7.4-5L233.8 54.2 197 39.4c-3-1.2-5-4.2-5-7.4s2-6.2 5-7.4L233.8 9.8 248.6-27c1.2-3 4.2-5 7.4-5s6.2 2 7.4 5zM110.7 41.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7L59.8 164.2 9.7 142.7C3.8 140.2 0 134.4 0 128s3.8-12.2 9.7-14.7L59.8 91.8 81.3 41.7C83.8 35.8 89.6 32 96 32s12.2 3.8 14.7 9.7zM464 304c6.4 0 12.2 3.8 14.7 9.7l21.5 50.1 50.1 21.5c5.9 2.5 9.7 8.3 9.7 14.7s-3.8 12.2-9.7 14.7l-50.1 21.5-21.5 50.1c-2.5 5.9-8.3 9.7-14.7 9.7s-12.2-3.8-14.7-9.7l-21.5-50.1-50.1-21.5c-5.9-2.5-9.7-8.3-9.7-14.7s3.8-12.2 9.7-14.7l50.1-21.5 21.5-50.1c2.5-5.9 8.3-9.7 14.7-9.7zM460 0c11 0 21.6 4.4 29.5 12.2l42.3 42.3C539.6 62.4 544 73 544 84s-4.4 21.6-12.2 29.5l-88.2 88.2-101.3-101.3 88.2-88.2C438.4 4.4 449 0 460 0zM44.2 398.5L308.4 134.3 409.7 235.6 145.5 499.8C137.6 507.6 127 512 116 512s-21.6-4.4-29.5-12.2L44.2 457.5C36.4 449.6 32 439 32 428s4.4-21.6 12.2-29.5z"/></symbol><symbol id="fa-xmark" viewBox="0 0 384 512"><path fill="currentColor" d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"/></symbol><symbol id="fa-instagram" viewBox="0 0 448 512"><path fill="currentColor" d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></symbol><symbol id="fa-linkedin" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32L31.9 32C14.3 32 0 46.5 0 64.3L0 447.7C0 465.5 14.3 480 31.9 480L416 480c17.6 0 32-14.5 32-32.3l0-383.4C448 46.5 433.6 32 416 32zM135.4 416l-66.4 0 0-213.8 66.5 0 0 213.8-.1 0zM102.2 96a38.5 38.5 0 1 1 0 77 38.5 38.5 0 1 1 0-77zM384.3 416l-66.4 0 0-104c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9l0 105.8-66.4 0 0-213.8 63.7 0 0 29.2 .9 0c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9l0 117.2z"/></symbol><symbol id="fa-whatsapp" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></symbol></svg>
+
 
     <!-- Indicador de sección lateral (solo en pantallas grandes) -->
     <nav id="section-dots" aria-label="Navegación rápida por secciones" class="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
@@ -555,10 +566,10 @@
                 <div class="hidden xl:flex items-center gap-3 flex-shrink-0">
                     <a href="destination-weddings-spain.html" class="logo-text-dark text-xs font-bold text-slate-500 hover:text-indigo-600 transition-colors border border-slate-200 rounded-full px-3 py-1.5 whitespace-nowrap" hreflang="en" lang="en">🇬🇧 EN</a>
                     <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dreamscape Events" class="logo-text-dark text-slate-500 hover:text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-gradient-to-br hover:from-indigo-500 hover:to-rose-500 transition-all duration-300 text-base flex-shrink-0">
-                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-instagram"></use></svg>
                     </a>
                     <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Dreamscape Events" class="logo-text-dark text-slate-500 hover:text-white w-8 h-8 rounded-full flex items-center justify-center hover:bg-[#0A66C2] transition-all duration-300 text-base flex-shrink-0">
-                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-linkedin"></use></svg>
                     </a>
                     <a href="#contacto" class="btn-apple magnetic-btn bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap flex-shrink-0">
                         Solicitar Presupuesto
@@ -568,7 +579,7 @@
                 <!-- Mobile menu button -->
                 <div class="xl:hidden flex items-center">
                     <button type="button" id="mobile-menu-btn" class="logo-text-dark text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg cursor-pointer" aria-label="Abrir menú">
-                        <i class="fa-solid fa-bars text-xl" id="menu-icon" aria-hidden="true"></i>
+                        <svg class="svg-icon text-xl" id="menu-icon" aria-hidden="true"><use href="#fa-bars"></use></svg>
                     </button>
                 </div>
             </div>
@@ -589,10 +600,10 @@
                     Solicitar Información
                 </a>
                 <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" class="mobile-link flex items-center justify-center gap-2 text-slate-500 hover:text-indigo-600 px-4 py-3 text-sm font-medium">
-                    <i class="fa-brands fa-instagram text-lg" aria-hidden="true"></i> Síguenos en Instagram
+                    <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-instagram"></use></svg> Síguenos en Instagram
                 </a>
                 <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" class="mobile-link flex items-center justify-center gap-2 text-slate-500 hover:text-indigo-600 px-4 py-3 text-sm font-medium">
-                    <i class="fa-brands fa-linkedin text-lg" aria-hidden="true"></i> Síguenos en LinkedIn
+                    <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-linkedin"></use></svg> Síguenos en LinkedIn
                 </a>
                 <a href="destination-weddings-spain.html" hreflang="en" lang="en" class="mobile-link flex items-center justify-center gap-2 text-slate-500 hover:text-indigo-600 px-4 py-3 text-sm font-medium border-t border-slate-100 mt-2 pt-4">
                     🇬🇧 English version (Destination Weddings)
@@ -643,14 +654,14 @@
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-white/20"></div>
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-map-location-dot text-indigo-400" aria-hidden="true"></i>
+                    <svg class="svg-icon text-indigo-400" aria-hidden="true"><use href="#fa-map-location-dot"></use></svg>
                     <span class="text-sm font-medium text-white">Cobertura en toda España</span>
                 </div>
             </div>
         </div>
 
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-            <i class="fa-solid fa-chevron-down text-white/50" aria-hidden="true"></i>
+            <svg class="svg-icon text-white/50" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
         </div>
     </section>
 
@@ -668,7 +679,7 @@
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.</p>
                     <a href="eventos-corporativos.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
                     </a>
                 </div>
                 <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
@@ -687,7 +698,7 @@
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala y microfonía avanzada, con soporte técnico en todo momento para un flujo perfecto.</p>
                     <a href="congresos-y-ferias.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
                     </a>
                 </div>
             </div>
@@ -698,7 +709,7 @@
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
                     <a href="bodas-y-celebraciones.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
                     </a>
                 </div>
                 <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
@@ -724,13 +735,13 @@
                 <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">Bodas, fiestas y congresos que hemos hecho realidad — cada evento es distinto, y eso es lo que nos hace volver a por más.</p>
                 <div class="flex items-center justify-center gap-6 sm:gap-8 pt-2 text-slate-300">
                     <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold">
-                        <i class="fa-solid fa-heart text-rose-400" aria-hidden="true"></i> Bodas
+                        <svg class="svg-icon text-rose-400" aria-hidden="true"><use href="#fa-heart"></use></svg> Bodas
                     </span>
                     <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold">
-                        <i class="fa-solid fa-champagne-glasses text-amber-400" aria-hidden="true"></i> Fiestas
+                        <svg class="svg-icon text-amber-400" aria-hidden="true"><use href="#fa-champagne-glasses"></use></svg> Fiestas
                     </span>
                     <span class="flex items-center gap-2 text-xs sm:text-sm font-semibold">
-                        <i class="fa-solid fa-people-group text-indigo-400" aria-hidden="true"></i> Congresos
+                        <svg class="svg-icon text-indigo-400" aria-hidden="true"><use href="#fa-people-group"></use></svg> Congresos
                     </span>
                 </div>
             </div>
@@ -743,11 +754,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
                         </span>
                     </div>
                     <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Boda en jardín</span>
                 </div>
@@ -758,11 +769,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
                         </span>
                     </div>
                     <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Fiesta en directo</span>
                 </div>
@@ -773,11 +784,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
                         </span>
                     </div>
                     <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Gala corporativa</span>
                 </div>
@@ -786,7 +797,7 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-magnifying-glass-plus text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-magnifying-glass-plus"></use></svg>
                         </span>
                     </div>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Congreso corporativo</span>
@@ -798,11 +809,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
                         </span>
                     </div>
                     <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Salón de gala</span>
                 </div>
@@ -813,11 +824,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
                         <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <i class="fa-solid fa-expand text-slate-900 text-sm" aria-hidden="true"></i>
+                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
                         </span>
                     </div>
                     <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <i class="fa-solid fa-video" aria-hidden="true"></i> Vídeo
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">080 Barcelona Fashion Week</span>
                 </div>
@@ -828,13 +839,13 @@
     <!-- LIGHTBOX: foto ampliada + descripción -->
     <div id="modal-photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeModal('modal-photo-lightbox')" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <button type="button" onclick="lightboxMove(-1)" aria-label="Foto anterior" class="hidden sm:flex absolute left-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            <svg class="svg-icon" aria-hidden="true"><use href="#fa-chevron-left"></use></svg>
         </button>
         <button type="button" onclick="lightboxMove(1)" aria-label="Foto siguiente" class="hidden sm:flex absolute right-5 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <svg class="svg-icon" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
         </button>
 
         <div class="max-w-4xl w-full max-h-[90vh] flex flex-col items-center">
@@ -849,7 +860,7 @@
     <!-- LIGHTBOX DE VÍDEO -->
     <div id="modal-video-lightbox" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeVideoLightbox()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
             <video id="lightbox-video" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop muted playsinline preload="none" poster="portfolio-video-poster.jpg">
@@ -864,7 +875,7 @@
 
     <div id="modal-video-lightbox-2" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title-2" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeVideoLightbox2()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
             <video id="lightbox-video-2" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop muted playsinline preload="none" poster="portfolio-video-fiesta-poster.jpg">
@@ -879,7 +890,7 @@
 
     <div id="modal-video-lightbox-3" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title-3" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeVideoLightbox3()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
             <video id="lightbox-video-3" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop muted playsinline preload="none" poster="portfolio-video-fashionweek-poster.jpg">
@@ -894,7 +905,7 @@
 
     <div id="modal-video-lightbox-4" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title-4" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeVideoLightbox4()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
             <video id="lightbox-video-4" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop muted playsinline preload="none" poster="portfolio-video-hotelpalace-poster.jpg">
@@ -909,7 +920,7 @@
 
     <div id="modal-video-lightbox-5" role="dialog" aria-modal="true" aria-labelledby="video-lightbox-title-5" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeVideoLightbox5()" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
-            <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-xmark"></use></svg>
         </button>
         <div class="max-w-3xl w-full max-h-[90vh] flex flex-col items-center">
             <video id="lightbox-video-5" class="max-w-full max-h-[70vh] rounded-2xl shadow-2xl" controls autoplay loop muted playsinline preload="none" poster="portfolio-video-candlelight-poster.jpg">
@@ -926,10 +937,10 @@
     <div id="modal-exit-intent" role="dialog" aria-modal="true" aria-labelledby="exit-intent-title" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[160] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 sm:p-10 text-center relative shadow-2xl">
             <button type="button" onclick="closeModal('modal-exit-intent')" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                <svg class="svg-icon" aria-hidden="true"><use href="#fa-xmark"></use></svg>
             </button>
             <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-5 border border-indigo-100">
-                <i class="fa-solid fa-calculator text-2xl" aria-hidden="true"></i>
+                <svg class="svg-icon text-2xl" aria-hidden="true"><use href="#fa-calculator"></use></svg>
             </div>
             <h3 id="exit-intent-title" class="text-2xl font-bold text-slate-950 mb-3">¿Sigues ahí?</h3>
             <p class="text-slate-600 leading-relaxed mb-7">Aprovecha para probar nuestro simulador: en menos de un minuto configuras tu evento y nos lo envías para recibir un presupuesto personalizado.</p>
@@ -949,7 +960,7 @@
                 <!-- Garantía 1 -->
                 <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 0ms;">
                     <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
-                        <i class="fa-solid fa-headset text-2xl text-indigo-600" aria-hidden="true"></i>
+                        <svg class="svg-icon text-2xl text-indigo-600" aria-hidden="true"><use href="#fa-headset"></use></svg>
                     </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Retén técnico in situ</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Personal especializado presente durante todo el evento para garantizar cero incidencias en directo.</p>
@@ -957,7 +968,7 @@
                 <!-- Garantía 2 -->
                 <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 120ms;">
                     <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
-                        <i class="fa-solid fa-shield-cat text-2xl text-indigo-600" aria-hidden="true"></i>
+                        <svg class="svg-icon text-2xl text-indigo-600" aria-hidden="true"><use href="#fa-shield-cat"></use></svg>
                     </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Equipos redundantes</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Sistemas duplicados y material de respaldo crítico preparado para cualquier eventualidad.</p>
@@ -965,7 +976,7 @@
                 <!-- Garantía 3 -->
                 <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 240ms;">
                     <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
-                        <i class="fa-solid fa-wand-magic-sparkles text-2xl text-indigo-600" aria-hidden="true"></i>
+                        <svg class="svg-icon text-2xl text-indigo-600" aria-hidden="true"><use href="#fa-wand-magic-sparkles"></use></svg>
                     </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Montajes escénicos limpios</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Ocultación milimétrica de cableado y acabados estéticos de máxima gama para eventos exigentes.</p>
@@ -1019,8 +1030,8 @@
                         <div class="space-y-3">
                             <label class="block text-sm font-bold uppercase tracking-wider text-indigo-300">2. Tipo de Recinto / Espacio</label>
                             <div class="grid grid-cols-2 gap-3">
-                                <button type="button" onclick="setVenue('Interior / Salón', 'venue-int')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><i class="fa-solid fa-house mr-2" aria-hidden="true"></i> Interior / Salón</button>
-                                <button type="button" onclick="setVenue('Exterior / Finca / Jardín', 'venue-ext')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><i class="fa-solid fa-tree mr-2" aria-hidden="true"></i> Exterior / Finca</button>
+                                <button type="button" onclick="setVenue('Interior / Salón', 'venue-int')" id="venue-int" class="sim-venue-btn bg-indigo-600 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-indigo-500 transition-all cursor-pointer shadow-md"><svg class="svg-icon mr-2" aria-hidden="true"><use href="#fa-house"></use></svg> Interior / Salón</button>
+                                <button type="button" onclick="setVenue('Exterior / Finca / Jardín', 'venue-ext')" id="venue-ext" class="sim-venue-btn bg-white/10 text-slate-300 hover:bg-white/25 font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm border border-white/15 transition-all cursor-pointer"><svg class="svg-icon mr-2" aria-hidden="true"><use href="#fa-tree"></use></svg> Exterior / Finca</button>
                             </div>
                         </div>
 
@@ -1128,7 +1139,7 @@
 
                         <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex items-center gap-3">
                             <div class="w-10 h-10 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center flex-shrink-0">
-                                <i class="fa-solid fa-paper-plane text-sm"></i>
+                                <svg class="svg-icon text-sm"><use href="#fa-paper-plane"></use></svg>
                             </div>
                             <div>
                                 <span class="block text-sm font-bold text-slate-900">Configuración lista para enviar</span>
@@ -1143,22 +1154,22 @@
                             <span class="block text-xs font-bold uppercase tracking-wider text-indigo-900">¿Dudas o proyecto a medida?</span>
                             <p class="text-xs text-indigo-700">Contáctanos ahora directamente:</p>
                             <a href="mailto:info@ap-events.es" class="inline-flex items-center gap-2 font-bold text-indigo-600 hover:text-indigo-800 text-sm">
-                                <i class="fa-solid fa-envelope" aria-hidden="true"></i> info@ap-events.es
+                                <svg class="svg-icon" aria-hidden="true"><use href="#fa-envelope"></use></svg> info@ap-events.es
                             </a>
                             
                             <!-- BOTONES DE ACCIÓN AGRUPADOS -->
                             <div class="pt-2 space-y-2">
                                 <button onclick="downloadProfessionalPDF()" class="w-full bg-slate-950 hover:bg-slate-900 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-file-pdf text-sm text-rose-400" aria-hidden="true"></i> Descargar Propuesta Técnica
+                                    <svg class="svg-icon text-sm text-rose-400" aria-hidden="true"><use href="#fa-file-pdf"></use></svg> Descargar Propuesta Técnica
                                 </button>
 
                                 <button type="button" onclick="transferToContactForm()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer shadow-md flex items-center justify-center gap-2">
-                                    <i class="fa-solid fa-paper-plane text-sm" aria-hidden="true"></i> Traspasar configuración al formulario
+                                    <svg class="svg-icon text-sm" aria-hidden="true"><use href="#fa-paper-plane"></use></svg> Traspasar configuración al formulario
                                 </button>
 
                                 <!-- BOTÓN DE WHATSAPP DINÁMICO ACTUALIZADO -->
                                 <a id="whatsapp-config-btn" href="javascript:void(0)" onclick="sendWhatsAppSimulation()" class="block w-full text-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-md transition-all btn-shine cursor-pointer flex items-center justify-center gap-2">
-                                    <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i> Contáctanos ahora por WhatsApp
+                                    <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-whatsapp"></use></svg> Contáctanos ahora por WhatsApp
                                 </a>
                             </div>
                         </div>
@@ -1185,7 +1196,7 @@
                     <div class="grid sm:grid-cols-2 gap-x-8 gap-y-6 pt-6">
                         <div class="flex items-start space-x-4">
                             <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                                <i class="fa-solid fa-check text-sm" aria-hidden="true"></i>
+                                <svg class="svg-icon text-sm" aria-hidden="true"><use href="#fa-check"></use></svg>
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-base">Atención 100% Personalizada</h4>
@@ -1194,7 +1205,7 @@
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                                <i class="fa-solid fa-bolt text-sm" aria-hidden="true"></i>
+                                <svg class="svg-icon text-sm" aria-hidden="true"><use href="#fa-bolt"></use></svg>
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-base">Equipamiento de Vanguardia</h4>
@@ -1203,7 +1214,7 @@
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                                <i class="fa-solid fa-shield-halved text-sm" aria-hidden="true"></i>
+                                <svg class="svg-icon text-sm" aria-hidden="true"><use href="#fa-shield-halved"></use></svg>
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-base">Fiabilidad y Seguridad</h4>
@@ -1212,7 +1223,7 @@
                         </div>
                         <div class="flex items-start space-x-4">
                             <div class="mt-1 flex-shrink-0 w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
-                                <i class="fa-solid fa-puzzle-piece text-sm" aria-hidden="true"></i>
+                                <svg class="svg-icon text-sm" aria-hidden="true"><use href="#fa-puzzle-piece"></use></svg>
                             </div>
                             <div>
                                 <h4 class="font-bold text-white text-base">Montajes Creativos</h4>
@@ -1224,13 +1235,13 @@
 
                 <div class="lg:col-span-6 grid grid-cols-2 gap-6 card-perspective" data-scroll-fade style="transition-delay: 200ms;">
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center space-y-3 backdrop-blur-sm card-hover-3d group hover:border-emerald-500/30">
-                        <i class="fa-solid fa-layer-group text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
+                        <svg class="svg-icon text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"><use href="#fa-layer-group"></use></svg>
                         <span class="block text-5xl font-black text-white">15K+</span>
                         <span class="block font-bold text-lg text-slate-100">M² Transformados</span>
                         <span class="block text-sm text-slate-400">De superficie técnica montada entre escenarios, ferias y grandes recintos.</span>
                     </div>
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center space-y-3 backdrop-blur-sm card-hover-3d group hover:border-emerald-500/30 mt-12">
-                        <i class="fa-solid fa-thumbs-up text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"></i>
+                        <svg class="svg-icon text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"><use href="#fa-thumbs-up"></use></svg>
                         <span class="block text-5xl font-black text-white">100%</span>
                         <span class="block font-bold text-lg text-slate-100">Clientes Satisfechos</span>
                         <span class="block text-sm text-slate-400">Nuestro compromiso con la excelencia es total.</span>
@@ -1257,7 +1268,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿En qué zonas de España trabajáis?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">Ofrecemos servicios de producción técnica y alquiler de equipos audiovisuales en toda España, desplazando equipo propio y técnico especializado allá donde nos necesitéis. Contáctanos con la ubicación de tu evento para confirmar disponibilidad.</p>
@@ -1268,7 +1279,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Con cuánta antelación hay que reservar?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">Recomendamos contactar al menos 2-3 meses antes, especialmente en temporada alta (primavera-verano), aunque podemos gestionar solicitudes con menos margen según disponibilidad.</p>
@@ -1279,7 +1290,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Puedo saber el presupuesto antes de contactar?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">Tenemos un <a href="#simulador" class="text-indigo-600 font-semibold hover:underline">simulador online</a> donde puedes configurar los detalles técnicos de tu evento y enviárnoslo directamente. Con esa información os preparamos un presupuesto personalizado sin compromiso.</p>
@@ -1290,7 +1301,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Qué pasa si un equipo falla durante el evento?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">Nuestra garantía de servicio incluye equipo de respaldo y técnico in situ en todo momento, así que cualquier imprevisto se resuelve sin que se note en tu evento.</p>
@@ -1301,7 +1312,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Trabajáis con wedding planners y agencias de eventos?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">Sí, coordinamos directamente con planners y agencias: montajes, horarios y ensayos técnicos, sin que el cliente final tenga que gestionar nada técnico.</p>
@@ -1312,7 +1323,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Podéis alquilar solo el equipo, sin técnico?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">No ofrecemos alquiler sin instalación: cada equipo lo monta, calibra y supervisa nuestro técnico especializado, para garantizar que todo funcione perfectamente durante tu evento.</p>
@@ -1323,7 +1334,7 @@
                 <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Qué diferencia a Dreamscape Events de otras empresas de alquiler audiovisual?</span>
-                        <i class="fa-solid fa-chevron-down text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"></i>
+                        <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
                     </button>
                     <div class="faq-answer max-h-0 overflow-hidden transition-all duration-300">
                         <p class="px-6 pb-6 text-slate-600 leading-relaxed">No alquilamos equipo suelto: cada proyecto incluye técnico especializado, material redundante de respaldo y un único interlocutor durante todo el proceso, desde la primera llamada hasta el desmontaje.</p>
@@ -1414,7 +1425,7 @@
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4 group">
                             <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100">
-                                <i class="fa-solid fa-envelope text-lg" aria-hidden="true"></i>
+                                <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-envelope"></use></svg>
                             </div>
                             <div>
                                 <p class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Escríbenos</p>
@@ -1423,7 +1434,7 @@
                         </div>
                         <div class="flex items-center space-x-4 group">
                             <a href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20estoy%20interesado%20en%20recibir%20informaci%C3%B3n%20y%20presupuesto%20para%20un%20pr%C3%B3ximo%20evento." target="_blank" rel="noopener noreferrer" class="flex-shrink-0 w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
-                                <i class="fa-brands fa-whatsapp text-xl" aria-hidden="true"></i>
+                                <svg class="svg-icon text-xl" aria-hidden="true"><use href="#fa-whatsapp"></use></svg>
                             </a>
                             <div>
                                 <p class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Llámanos o Escríbenos</p>
@@ -1432,7 +1443,7 @@
                         </div>
                         <div class="flex items-center space-x-4 group">
                             <div class="flex-shrink-0 w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-100">
-                                <i class="fa-solid fa-location-dot text-lg" aria-hidden="true"></i>
+                                <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-location-dot"></use></svg>
                             </div>
                             <div>
                                 <p class="text-xs text-slate-500 uppercase font-semibold tracking-wider">Área de Cobertura</p>
@@ -1519,13 +1530,13 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Síguenos</span>
                 <div class="flex items-center gap-4">
                     <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dreamscape Events" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-600 hover:scale-110 transition-all text-lg">
-                        <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-instagram"></use></svg>
                     </a>
                     <a href="https://www.linkedin.com/company/dreamscape-events-and-complete-productions/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Dreamscape Events" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-indigo-600 hover:border-indigo-600 hover:scale-110 transition-all text-lg">
-                        <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-linkedin"></use></svg>
                     </a>
                     <a href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20estoy%20interesado%20en%20recibir%20informaci%C3%B3n%20y%20presupuesto%20para%20un%20pr%C3%B3ximo%20evento." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp de Dreamscape Events" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate-300 hover:text-white hover:bg-emerald-600 hover:border-emerald-600 hover:scale-110 transition-all text-lg">
-                        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-whatsapp"></use></svg>
                     </a>
                 </div>
             </div>
@@ -1565,7 +1576,7 @@
                 <h4 class="text-center text-slate-400 uppercase tracking-widest font-bold text-xs">Dreamscape Events Legal</h4>
                 <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> utiliza en este sitio web cookies técnicas necesarias para su funcionamiento y el formulario de contacto vía <strong>Web3Forms</strong>, y, solo si lo aceptas, el asistente virtual con IA vía <strong>Chatbase</strong> y cookies analíticas de <strong>Google Analytics</strong> para conocer el uso del sitio. Estos servicios pueden implicar una transferencia de datos fuera del Espacio Económico Europeo. Para más información consulta nuestra <a href="/cookies.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a> y nuestra <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de privacidad</a>.</p>
                 <p>El asistente virtual y las cookies de Google Analytics <strong>solo se instalan si pulsas "Aceptar"</strong>. Si pulsas "Rechazar las no esenciales", seguirás pudiendo contactarnos por el formulario o por WhatsApp con total normalidad, pero no se activará el chat de IA ni ninguna cookie de analítica. En todo caso, puedes gestionar tu decisión mediante los botones inferiores.</p>
-                <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><i class="fa-solid fa-cookie-bite text-indigo-600" aria-hidden="true"></i> Finalidades de la web y sus asociados</h5>
+                <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><svg class="svg-icon text-indigo-600" aria-hidden="true"><use href="#fa-cookie-bite"></use></svg> Finalidades de la web y sus asociados</h5>
                 <p class="text-slate-500 text-xs">Funcionamiento técnico esencial del sitio (recordar tu configuración del simulador durante la sesión). Procesamiento del formulario de contacto a través de Web3Forms. Coordinación de la comunicación directa vía WhatsApp. Si aceptas: atención mediante el asistente virtual Chatbase y análisis estadístico anónimo de visitas mediante Google Analytics.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 mt-4">
                     <div class="flex flex-wrap gap-3 w-full sm:w-auto justify-center sm:justify-start">
@@ -1895,7 +1906,7 @@
             }
         })();
 
-        // ===== TÍTULO DEL HERO: aparición letra a letra en cascada =====
+        // ===== TÍTULO DEL HERO: aparición letra a letra en cascada (sin partir palabras) =====
         (function() {
             const el = document.getElementById('hero-title');
             if (!el) return;
@@ -1905,12 +1916,16 @@
             const lines = el.innerHTML.split('<br>');
             let i = 0;
             const html = lines.map(line => {
-                return Array.from(line).map(ch => {
-                    const content = ch === ' ' ? '&nbsp;' : ch;
-                    const delay = (0.3 + i * 0.032).toFixed(3);
-                    i++;
-                    return `<span class="hero-letter" style="animation-delay:${delay}s">${content}</span>`;
-                }).join('');
+                const words = line.trim().split(' ');
+                return words.map(word => {
+                    const letters = Array.from(word).map(ch => {
+                        const delay = (0.3 + i * 0.032).toFixed(3);
+                        i++;
+                        return `<span class="hero-letter" style="animation-delay:${delay}s">${ch}</span>`;
+                    }).join('');
+                    // Cada palabra queda en un bloque que no se puede partir por la mitad al hacer wrap
+                    return `<span style="display:inline-block; white-space:nowrap;">${letters}</span>`;
+                }).join(' ');
             }).join('<br>');
             el.innerHTML = html;
         })();
@@ -2045,6 +2060,7 @@
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
+        const menuIconUse = menuIcon ? menuIcon.querySelector('use') : null;
         let mobileMenuOpen = false;
 
         function openMobileMenu() {
@@ -2054,8 +2070,7 @@
             mobileMenu.style.maxHeight = `calc(100vh - ${headerHeight}px - 8px)`;
             mobileMenu.classList.remove('max-h-0', 'opacity-0');
             mobileMenu.classList.add('opacity-100');
-            menuIcon.classList.remove('fa-bars');
-            menuIcon.classList.add('fa-xmark');
+            if (menuIconUse) menuIconUse.setAttribute('href', '#fa-xmark');
             mobileMenuOpen = true;
             // Al abrir el menú móvil, forzamos la cabecera sólida para que se lea bien
             if (headerEl) { headerEl.classList.remove('header-transparent'); headerEl.classList.add('header-solid'); }
@@ -2069,8 +2084,7 @@
             mobileMenu.style.maxHeight = '0px';
             mobileMenu.classList.add('max-h-0', 'opacity-0');
             mobileMenu.classList.remove('opacity-100');
-            menuIcon.classList.remove('fa-xmark');
-            menuIcon.classList.add('fa-bars');
+            if (menuIconUse) menuIconUse.setAttribute('href', '#fa-bars');
             mobileMenuOpen = false;
             const waBtn = document.getElementById('whatsapp-float-btn');
             const chatBubble = document.getElementById('chatbase-bubble-button');
@@ -2117,10 +2131,10 @@
 
             if (dayOfWeek === 5 || dayOfWeek === 6) {
                 badge.className = "bg-amber-500/20 text-amber-300 border border-amber-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold animate-pulse";
-                badge.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1" aria-hidden="true"></i> ¡Alta demanda en fin de semana!';
+                badge.innerHTML = '<svg class="svg-icon mr-1" aria-hidden="true"><use href="#fa-triangle-exclamation"></use></svg> ¡Alta demanda en fin de semana!';
             } else {
                 badge.className = "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-3 py-0.5 rounded-full text-[11px] font-semibold";
-                badge.innerHTML = '<i class="fa-solid fa-check mr-1" aria-hidden="true"></i> Fecha disponible';
+                badge.innerHTML = '<svg class="svg-icon mr-1" aria-hidden="true"><use href="#fa-check"></use></svg> Fecha disponible';
             }
         }
 
@@ -2729,12 +2743,12 @@
 
     <!-- BOTÓN FLOTANTE DE WHATSAPP (abajo-izquierda, para no chocar con el chat de IA de abajo-derecha) -->
     <a id="whatsapp-float-btn" href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20estoy%20interesado%20en%20recibir%20informaci%C3%B3n%20y%20presupuesto%20para%20un%20pr%C3%B3ximo%20evento." target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp" class="fixed bottom-6 left-6 z-40 w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center shadow-xl transition-all hover:scale-105">
-        <i class="fa-brands fa-whatsapp text-3xl" aria-hidden="true"></i>
+        <svg class="svg-icon text-3xl" aria-hidden="true"><use href="#fa-whatsapp"></use></svg>
     </a>
 
     <!-- BOTÓN "VOLVER ARRIBA" (abajo-derecha, encima de la burbuja de chat, aparece solo tras hacer scroll) -->
     <button type="button" id="back-to-top" aria-label="Volver arriba" class="fixed bottom-24 right-6 z-40 w-12 h-12 rounded-full bg-slate-900/90 hover:bg-slate-900 text-white flex items-center justify-center shadow-xl backdrop-blur-sm opacity-0 pointer-events-none translate-y-3 transition-all duration-300">
-        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+        <svg class="svg-icon" aria-hidden="true"><use href="#fa-arrow-up"></use></svg>
     </button>
 
     <!-- Chatbase AI Assistant: la carga real del widget se dispara desde loadChatbaseWidget()
