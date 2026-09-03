@@ -1389,7 +1389,7 @@
                         
                         <div class="flex items-center space-x-3 pt-2">
                             <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
-                            <label for="privacidad" class="text-xs text-slate-500 cursor-pointer select-none">Acepto la <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
+                            <label for="privacidad" class="text-xs text-slate-500 cursor-pointer select-none">Acepto la <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
                         </div>
                         
                         <button type="submit" id="submit-btn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg btn-shine cursor-pointer">Enviar Solicitud</button>
@@ -1452,12 +1452,12 @@
             <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-center md:text-left border-t border-slate-800 pt-8">
                 <p>&copy; 2026 Dreamscape Events. Todos los derechos reservados. Servicios de producción técnica en toda España.</p>
                 <div class="grid grid-cols-2 sm:flex sm:space-x-6 gap-x-6 gap-y-2.5 justify-center font-medium">
-                    <a href="javascript:void(0)" onclick="openModal('modal-aviso')" class="hover:text-white transition-colors">Aviso Legal</a>
-                    <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="hover:text-white transition-colors">Privacidad</a>
-                    <a href="javascript:void(0)" onclick="openModal('modal-cookies')" class="hover:text-white transition-colors">Cookies</a>
-                    <a href="javascript:void(0)" onclick="openModal('modal-accesibilidad')" class="hover:text-white transition-colors">Accesibilidad</a>
-                    <a href="javascript:void(0)" onclick="openModal('modal-terminos')" class="hover:text-white transition-colors">Términos y Condiciones</a>
-                    <a href="javascript:void(0)" onclick="openModal('modal-reembolso')" class="hover:text-white transition-colors">Política de Reembolso</a>
+                    <a href="/aviso-legal.html" class="hover:text-white transition-colors">Aviso Legal</a>
+                    <a href="/privacidad.html" class="hover:text-white transition-colors">Privacidad</a>
+                    <a href="/cookies.html" class="hover:text-white transition-colors">Cookies</a>
+                    <a href="/accesibilidad.html" class="hover:text-white transition-colors">Accesibilidad</a>
+                    <a href="/terminos-y-condiciones.html" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                    <a href="/politica-reembolso.html" class="hover:text-white transition-colors">Política de Reembolso</a>
                 </div>
             </div>
         </div>
@@ -1471,7 +1471,7 @@
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
             <div class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed pr-1">
                 <h4 class="text-center text-slate-400 uppercase tracking-widest font-bold text-xs">Dreamscape Events Legal</h4>
-                <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> utiliza en este sitio web cookies técnicas necesarias para su funcionamiento y el formulario de contacto vía <strong>Web3Forms</strong>, y, solo si lo aceptas, el asistente virtual con IA vía <strong>Chatbase</strong> y cookies analíticas de <strong>Google Analytics</strong> para conocer el uso del sitio. Estos servicios pueden implicar una transferencia de datos fuera del Espacio Económico Europeo. Para más información consulta nuestra <a href="javascript:void(0)" onclick="openModal('modal-cookies')" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a> y nuestra <a href="javascript:void(0)" onclick="openModal('modal-privacidad')" class="text-indigo-600 hover:underline font-semibold">Política de privacidad</a>.</p>
+                <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> utiliza en este sitio web cookies técnicas necesarias para su funcionamiento y el formulario de contacto vía <strong>Web3Forms</strong>, y, solo si lo aceptas, el asistente virtual con IA vía <strong>Chatbase</strong> y cookies analíticas de <strong>Google Analytics</strong> para conocer el uso del sitio. Estos servicios pueden implicar una transferencia de datos fuera del Espacio Económico Europeo. Para más información consulta nuestra <a href="/cookies.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a> y nuestra <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de privacidad</a>.</p>
                 <p>El asistente virtual y las cookies de Google Analytics <strong>solo se instalan si pulsas "Aceptar"</strong>. Si pulsas "Rechazar las no esenciales", seguirás pudiendo contactarnos por el formulario o por WhatsApp con total normalidad, pero no se activará el chat de IA ni ninguna cookie de analítica. En todo caso, puedes gestionar tu decisión mediante los botones inferiores.</p>
                 <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><i class="fa-solid fa-cookie-bite text-indigo-600" aria-hidden="true"></i> Finalidades de la web y sus asociados</h5>
                 <p class="text-slate-500 text-xs">Funcionamiento técnico esencial del sitio (recordar tu configuración del simulador durante la sesión). Procesamiento del formulario de contacto a través de Web3Forms. Coordinación de la comunicación directa vía WhatsApp. Si aceptas: atención mediante el asistente virtual Chatbase y análisis estadístico anónimo de visitas mediante Google Analytics.</p>
@@ -1480,7 +1480,7 @@
                         <button onclick="acceptAllCookies()" class="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center">Aceptar</button>
                         <button onclick="rejectNonEssentialCookies()" class="border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold px-5 py-3 rounded-xl text-xs uppercase tracking-wider transition-all cursor-pointer w-full sm:w-auto text-center">Rechazar las no esenciales</button>
                     </div>
-                    <a href="javascript:void(0)" onclick="openModal('modal-cookies')" class="text-slate-400 hover:text-indigo-600 text-xs underline font-medium tracking-wide">Gestionar preferencias</a>
+                    <a href="/cookies.html" target="_blank" class="text-slate-400 hover:text-indigo-600 text-xs underline font-medium tracking-wide">Gestionar preferencias</a>
                 </div>
             </div>
         </div>
@@ -1524,188 +1524,6 @@
                 <p>Diseño ambiental a medida. Montaje lumínico perimetral IP65, microiluminación LED decorativa y sonorización oculta integrada en exteriores.</p>
                 <button onclick="closeModal('modal-service-bodas')" class="mt-4 bg-rose-600 text-white px-6 py-2 rounded-xl text-xs font-bold cursor-pointer">Cerrar</button>
             </div>
-        </div>
-    </div>
-
-
-    <!-- =========================================================================
-         VENTANAS MODALES LEGALES
-         ========================================================================= -->
-    <div id="modal-aviso" role="dialog" aria-modal="true" aria-labelledby="title-aviso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
-            <h3 id="title-aviso" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-gavel text-indigo-600" aria-hidden="true"></i> Aviso Legal</h3>
-            <p><strong>Titular y Razón Social Legal:</strong> Dreamscape Events and Complete Productions, S.L.</p>
-            <p><strong>NIF/CIF:</strong> B19859115</p>
-            <p><strong>Domicilio Social:</strong> c/ Valencia, 76 - 08759 Vallirana (Barcelona), España.</p>
-            <p><strong>Datos registrales:</strong> Constituida mediante escritura otorgada en Barcelona el 4 de julio de 2024 ante el Notario D. José Ángel Ruiz Prado, número 1472/2024 de protocolo. Inscrita en el Registro Mercantil de Barcelona, inscripción 1ª de la hoja B-618349, folio 1 del tomo/I.R.U.S. 1000424597377, Sección General de Sociedades, fecha 5 de julio de 2024.</p>
-            <p><strong>Contacto:</strong> info@ap-events.es | 613 08 98 94</p>
-            <p><strong>Objeto:</strong> Servicios de producción técnica e integral de eventos (sonido, iluminación, escenografía, gestión logística) y solicitud de presupuestos a través del formulario y el simulador de esta web.</p>
-            <p><strong>Propiedad intelectual e industrial:</strong> Todos los contenidos de este sitio web (textos, imágenes, logotipos, diseño y código fuente) son propiedad de Dreamscape Events and Complete Productions, S.L. o de terceros que han autorizado su uso, y están protegidos por la normativa de propiedad intelectual e industrial. Queda prohibida su reproducción total o parcial sin autorización expresa.</p>
-            <p><strong>Exclusión de responsabilidad:</strong> Dreamscape Events and Complete Productions, S.L. no se hace responsable de los daños derivados del mal uso del sitio web ni de la disponibilidad continuada del servicio, sin perjuicio de las medidas técnicas adoptadas para evitar incidencias.</p>
-            <p><strong>Legislación aplicable y fuero:</strong> Legislación española. Para cualquier controversia relacionada con este sitio web, las partes se someten a los Juzgados y Tribunales de Barcelona, salvo que la normativa de consumidores establezca un fuero distinto.</p>
-            <button onclick="closeModal('modal-aviso')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="modal-privacidad" role="dialog" aria-modal="true" aria-labelledby="title-privacidad" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
-            <h3 id="title-privacidad" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-shield-halved text-indigo-600" aria-hidden="true"></i> Política de Privacidad</h3>
-            <p><strong>Responsable del tratamiento:</strong> Dreamscape Events and Complete Productions, S.L. (NIF: B19859115), c/ Valencia, 76, 08759 Vallirana (Barcelona). Contacto: info@ap-events.es</p>
-            <p><strong>¿Qué datos recogemos?</strong> A través del formulario de contacto y el simulador de presupuesto: nombre/empresa, teléfono, correo electrónico y detalles del proyecto/evento.</p>
-            <p><strong>¿Con qué finalidad?</strong> Gestionar y responder a solicitudes de presupuesto e información, contactar por teléfono, email o WhatsApp, y elaborar propuestas técnicas y comerciales.</p>
-            <p><strong>Base legal:</strong> Consentimiento del interesado, prestado al marcar la casilla de aceptación del formulario, así como la ejecución de medidas precontractuales adoptadas a petición tuya (elaborar y enviarte el presupuesto solicitado).</p>
-            <p><strong>Conservación:</strong> Mientras exista un interés mutuo para gestionar la solicitud/proyecto y, tras finalizar la relación, durante los plazos legalmente exigibles (hasta 6 años a efectos mercantiles si se formaliza contratación).</p>
-            <p><strong>Destinatarios y terceros:</strong> No cedemos datos a terceros salvo obligación legal. Utilizamos los siguientes encargados del tratamiento para operar la web: <strong>Web3Forms</strong> (procesamiento técnico del formulario de contacto), <strong>Chatbase</strong> (asistente virtual de atención, solo si aceptas las cookies no esenciales), <strong>WhatsApp/Meta</strong> (canal de contacto directo), y, únicamente si aceptas las cookies analíticas, <strong>Google Analytics</strong> (estadísticas de uso del sitio web, con anonimización de IP activada). Estos proveedores pueden estar ubicados fuera del Espacio Económico Europeo; en tal caso, el tratamiento se ampara en las garantías previstas por el RGPD para transferencias internacionales (cláusulas contractuales tipo u otro mecanismo equivalente).</p>
-            <p><strong>Derechos:</strong> Acceso, rectificación, supresión, oposición, limitación y portabilidad, mediante email a info@ap-events.es adjuntando copia de un documento que acredite tu identidad. Cuando el tratamiento se base en tu consentimiento, puedes retirarlo en cualquier momento, sin que ello afecte a la licitud del tratamiento previo a su retirada. Puedes reclamar ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
-            <button onclick="closeModal('modal-privacidad')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="modal-cookies" role="dialog" aria-modal="true" aria-labelledby="title-cookies" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
-            <h3 id="title-cookies" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-cookie-bite text-indigo-600" aria-hidden="true"></i> Política de Cookies</h3>
-            <p>Este sitio web, gestionado por Dreamscape Events and Complete Productions, S.L., utiliza cookies propias técnicas necesarias para su funcionamiento (por ejemplo, recordar tu configuración del simulador durante la sesión y tu decisión sobre el aviso de cookies), y, solo si nos das tu consentimiento, cookies analíticas de terceros.</p>
-
-            <div class="border border-slate-200 rounded-xl overflow-hidden my-2">
-                <table class="w-full text-left">
-                    <thead class="bg-slate-50">
-                        <tr>
-                            <th class="p-2 font-bold text-slate-700">Cookie / Servicio</th>
-                            <th class="p-2 font-bold text-slate-700">Tipo</th>
-                            <th class="p-2 font-bold text-slate-700">¿Requiere consentimiento?</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr>
-                            <td class="p-2">Configuración del simulador / aviso de cookies</td>
-                            <td class="p-2">Técnica propia</td>
-                            <td class="p-2 text-emerald-600 font-semibold">No</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2">Web3Forms (formulario de contacto)</td>
-                            <td class="p-2">Funcional de terceros</td>
-                            <td class="p-2 text-emerald-600 font-semibold">No*</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2">Chatbase (asistente virtual)</td>
-                            <td class="p-2">Funcional de terceros</td>
-                            <td class="p-2 text-amber-600 font-semibold">Sí</td>
-                        </tr>
-                        <tr>
-                            <td class="p-2">Google Analytics</td>
-                            <td class="p-2">Analítica de terceros</td>
-                            <td class="p-2 text-amber-600 font-semibold">Sí</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-slate-600">* Web3Forms solo se activa cuando envías el formulario de contacto (uso imprescindible para prestarte ese servicio concreto en el momento en que lo solicitas), por lo que no requiere consentimiento previo.</p>
-
-            <p><strong>Google Analytics y el asistente virtual (Chatbase):</strong> si pulsas "Aceptar" en el aviso de cookies, se activan tanto las cookies analíticas de Google Analytics (para conocer de forma anónima cómo se usa la web, con la IP anonimizada) como el widget del asistente virtual con IA que ves en la esquina inferior de la web. Si pulsas "Rechazar las no esenciales", ninguna de las dos herramientas se activa — puedes seguir contactándonos igualmente por el formulario o por WhatsApp. Puedes cambiar tu decisión en cualquier momento borrando las cookies de tu navegador y volviendo a visitar la web.</p>
-
-            <p>Puedes permitir, bloquear o eliminar las cookies en cualquier momento desde la configuración de tu navegador, o gestionar tu decisión sobre las cookies no esenciales mediante el aviso que aparece al entrar en la web.</p>
-            <button onclick="closeModal('modal-cookies')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="modal-accesibilidad" role="dialog" aria-modal="true" aria-labelledby="title-accesibilidad" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
-            <h3 id="title-accesibilidad" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-universal-access text-indigo-600" aria-hidden="true"></i> Declaración de Accesibilidad</h3>
-            <p>Esta declaración es <strong>voluntaria</strong>: la normativa de accesibilidad web (Real Decreto 1112/2018) es de obligado cumplimiento para organismos del sector público, no para empresas privadas como Dreamscape Events and Complete Productions, S.L. Aun así, publicamos este resumen de las medidas que aplicamos por buenas prácticas.</p>
-            <p><strong>Medidas aplicadas en este sitio:</strong></p>
-            <p>- Textos alternativos descriptivos en las imágenes y vídeos con contenido informativo.<br>
-            - Estructura semántica de encabezados (H1-H3) y uso de HTML5 y atributos ARIA en botones, menús y ventanas emergentes.<br>
-            - Navegación por teclado: los menús, el simulador y las ventanas emergentes se pueden cerrar con la tecla Escape.<br>
-            - Contraste de color cuidado entre texto y fondo en la mayoría de secciones.<br>
-            - Respeto a la preferencia de "movimiento reducido" del sistema operativo/navegador: si la tienes activada, las animaciones decorativas de la web se desactivan automáticamente.<br>
-            - Formularios con etiquetas asociadas a cada campo y validación con mensajes comprensibles.</p>
-            <p><strong>Limitaciones conocidas:</strong> Algunos elementos visuales (como los vídeos de fondo o determinadas animaciones) pueden no cumplir al 100% con el nivel AA de las WCAG 2.1. Estamos abiertos a mejorar esta web de forma continua.</p>
-            <p><strong>¿Detectas alguna barrera de accesibilidad?</strong> Escríbenos a info@ap-events.es y lo revisaremos con prioridad.</p>
-            <button onclick="closeModal('modal-accesibilidad')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="modal-terminos" role="dialog" aria-modal="true" aria-labelledby="title-terminos" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-3xl w-full p-8 overflow-y-auto max-h-[85vh] text-xs space-y-4 shadow-2xl text-slate-700 leading-relaxed">
-            <h3 id="title-terminos" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-file-contract text-indigo-600" aria-hidden="true"></i> Términos y Condiciones</h3>
-            
-            <p><strong>Objeto:</strong> Las presentes Condiciones Generales regulan la prestación de servicios de producción técnica, equipos audiovisuales, montaje, desmontaje y demás servicios ofrecidos por Dreamscape Events and Complete Productions, S.L. (en adelante, el Prestador) al cliente (en adelante, el Cliente), conforme a lo establecido en el presupuesto, pedido o factura correspondiente.</p>
-            
-            <p><strong>Aceptación:</strong> La aceptación expresa o táctica del presupuesto, pedido o factura, así como la contratación efectiva del servicio, implica la aceptación íntegra, expresa y sin reservas de las presentes Condiciones Generales.</p>
-
-            <p><strong>Cliente consumidor y cliente profesional:</strong> Cuando el Cliente sea una persona física que contrate al margen de su actividad profesional o empresarial (Cliente consumidor), se le aplicarán, además de lo aquí previsto, las protecciones establecidas en el Texto Refundido de la Ley General para la Defensa de los Consumidores y Usuarios (RDL 1/2007). Cuando el Cliente sea una empresa, autónomo o profesional que contrate para su actividad, dichas protecciones específicas de consumidores no resultarán de aplicación.</p>
-
-            <p><strong>Derecho de desistimiento:</strong> De acuerdo con el artículo 103.l) del RDL 1/2007, el derecho de desistimiento de 14 días naturales previsto para contratos a distancia con consumidores <strong>no resulta de aplicación</strong> a los servicios de producción técnica de eventos contratados a través de esta web, al tratarse de servicios relacionados con actividades de esparcimiento vinculados a una fecha o periodo de ejecución específico (la fecha del evento). En su lugar, resultan de aplicación las condiciones de cancelación y reembolso recogidas en el apartado "Cancelaciones y desistimiento" de estas Condiciones y en nuestra Política de Reembolso.</p>
-
-            <p><strong>Validez del documento:</strong> Salvo indicación expresa en contrario, los presupuestos tendrán una validez de 7 días naturales desde su fecha de emisión. Transcurrido dicho plazo, el Prestador se reserva el derecho de modificar precios, condiciones y disponibilidad.</p>
-            
-            <p><strong>Condiciones económicas y formas de pago:</strong> Salvo pacto expreso en contrario:<br>
-            - El Cliente abonará el 50% del importe total en concepto de señal y reserva del servicio.<br>
-            - El importe restante deberá abonarse con carácter previo o el mismo día de la prestación del servicio.<br>
-            En caso de facturación posterior, el plazo de pago será el indicado en la factura. El incumplimiento de pago facultará al Prestador a suspender el servicio, cancelar futuros trabajos y reclamar las cantidades adecuadas conforme la normativa vigente.</p>
-            
-            <p><strong>Cancelaciones y desistimiento:</strong><br>
-            - Cancelaciones con más de 7 días naturales de antelación: devolución de las cantidades abonadas, descontando los gastos ya realizados.<br>
-            - Cancelaciones entre 7 días y 48 horas antes del evento: pérdida total de la señal de entrega.<br>
-            - Cancelaciones con menos de 48 horas de antelación: se devengará el 100% del importe presupuestado.</p>
-            
-            <p><strong>Modificaciones del servicio:</strong> Cualquier modificación solicitada por el Cliente una vez aceptado el presupuesto deberá formalizarse por escrito. Dichas modificaciones podrán implicar una revisión del precio, del material asignado y de los plazos inicialmente acordados.</p>
-            
-            <p><strong>Montaje, desmontaje y horarios:</strong> Los horarios de montaje, pruebas técnicas, prestación del servicio y desmontaje serán los acordados previamente. Los retrasos o impedimentos imputables al Cliente, al recinto o a terceros podrán generar costes adicionales que serán facturados aparte.</p>
-            
-            <p><strong>Uso, custodia y responsabilidad del material:</strong> El material suministrado deberá ser utilizado exclusivamente para el fin contratado y conforme a las instrucciones del Prestador. El Cliente asume la plena responsabilidad sobre el material desde el inicio del montaje hasta su retirada, incluyendo daños, pérdidas, robos, manipulaciones indebidas o uso incorrecto. Cualquier daño o pérdida será facturado conforme al coste de reparación o reposición, sin perjuicio de las acciones legales que pudieran corresponder.</p>
-            
-            <p><strong>Condiciones técnicas y del espacio:</strong> El Cliente garantiza que el espacio donde se prestará el servicio cumple con todas las condiciones técnicas, legales y de seguridad necesarias (suministro eléctrico adecuado, accesos, permisos, licencias, horarios, etc.). El Prestador no será responsable de incidencias derivadas del incumplimiento de dichas condiciones.</p>
-            
-            <p><strong>Fuerza mayor:</strong> El Prestador no será responsable del incumplimiento total o parcial de sus obligaciones cuando este sea consecuencia de causas de fuerza mayor, incluyendo, a título enunciativo y no limitativo, fenómenos meteorológicos adversos, cortes de suministros, restricciones administrativas, accidentes o situaciones imprevisibles.</p>
-            
-            <p><strong>Reclamaciones:</strong> Cualquier reclamación relativa a la prestación del servicio deberá comunicarse por escrito en un plazo máximo de 48 horas desde la finalización del mismo. Transcurrido dicho plazo, el servicio se considerará aceptado de conformidad.</p>
-            
-            <p><strong>Protección de datos:</strong> En cumplimiento del Reglamento (UE) 2016/679 (RGPD) y demás normativa vigente, los datos personales facilitados por el Cliente serán tratados con la finalidad de gestionar la relación contractual, administrativa y comercial. El Cliente podrá ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad mediante comunicación escrita al Prestador. Los datos no serán cedidos a terceros salvo obligación legal.</p>
-            
-            <p><strong>Confidencialidad:</strong> Ambas partes se comprometen a mantener la confidencialidad sobre la información técnica, comercial o contractual a la que tengan acceso como consecuencia de la relación profesional, no pudiendo divulgarla a terceros sin autorización expresa, salvo obligación legal.</p>
-            
-            <p><strong>Derechos de imagen:</strong> Salvo manifestación expresa y por escrito en contrario, el Prestador podrá utilizar imágenes y/o vídeos del evento con fines corporativos y promocionales, sin que ello genere derecho a compensación económica alguna para el Cliente.</p>
-            
-            <p><strong>Redes Sociales:</strong> El Cliente autoriza al Prestador a mencionar el evento o servicio prestado en sus canales de comunicación digital y redes sociales, exclusivamente con fines corporativos y promocionales, respetando en todo momento la imagen y confidencialidad del Cliente. El seguimiento o contacto a través de redes sociales no generará relación contractual adicional.<br>
-            📲 Instagram oficial: @dreamscape_events_sl</p>
-            
-            <p><strong>Legislación aplicable y jurisdicción:</strong> Las presentes Condiciones Generales se rigen e interpretan de conformidad por la legislación española vigente, en particular por el Código Civil, el Código de Comercio y demás normativa aplicable. Para la resolución de cualquier controversia derivada de su interpretación, ejecución o cumplimiento, las partes se someten expresamente a los Juzgados y Tribunales del domicilio del Prestador, salvo que la normativa aplicable disponga otro fuero imperativo.</p>
-            
-            <p><strong>Montaje, desmontaje, horarios y condiciones del personal técnico:</strong> Los horarios de montaje, pruebas técnicas, prestación del servicio y desmontaje serán los acordados previamente en el presupuesto. Con el fin de garantizar la seguridad laboral, la calidad del servicio y el cumplimiento de la normativa vigente, se establecen las siguientes condiciones obligatorias para el personal técnico desplazado:<br>
-            - <strong>Jornada estándar y horas extraordinarias:</strong> La jornada técnica estándar estipulada en los presupuestos es de un máximo de 10 horas (incluyendo montajes, pruebas, show y desmontaje). Cualquier hora que exceda este límite se considerará hora extraordinaria y se facturará con un recargo del 35% sobre la tarifa de hora ordinaria (o la tarifa previamente acordada por hora extra en el presupuesto).<br>
-            - <strong>Tiempos de descanso obligatorio:</strong> En jornadas que superen las 6 horas continuadas, el personal técnico tendrá derecho a un descanso obligatorio de 20 minutos para refrigerio. Entre el fin de un montaje/pruebas y el inicio del evento/show, se deberá garantizar un tiempo mínimo de descanso y preparación técnica de 30 minutos. Se debe respetar escrupulosamente el descanso mínimo de 12 horas entre jornadas en eventos de múltiples días consecutivos.<br>
-            - <strong>Dietas y manutención:</strong> En jornadas que coincidan con los horarios habituales de comida (de 13:30h a 16:00h) o cena (de 20:30h a 23:00h), el Cliente deberá proporcionar un menú caliente completo (menú de catering o restaurante) al personal técnico, o en su defecto, abonar una dieta compensatoria (previamente establecida) que se añadirá a la factura final. El tiempo estipulado para la comida / cena será de un mínimo de 45 minutos, libres de cualquier servicio o guardia técnica activa. El Cliente se compromete a garantizar el acceso a agua mineral o bebidas hidratantes durante toda la jornada de trabajo, especialmente en montajes exteriores o condiciones térmicas adversas.<br>
-            - <strong>Retrasos ajenos al equipo técnico:</strong> Los retrasos o impedimentos imputables al Cliente, al recinto o a terceros que prolonguen la jornada técnica inicial devengarán costes adicionales por horas extra conforme a lo estipulado en este apartado.</p>
-
-            <button onclick="closeModal('modal-terminos')" class="mt-4 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
-        </div>
-    </div>
-
-    <div id="modal-reembolso" role="dialog" aria-modal="true" aria-labelledby="title-reembolso" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full p-8 overflow-y-auto max-h-[80vh] text-xs space-y-3 shadow-2xl">
-            <h3 id="title-reembolso" class="text-lg font-black border-b pb-2 flex items-center gap-2 text-slate-950"><i class="fa-solid fa-money-bill-transfer text-indigo-600" aria-hidden="true"></i> Política de Reembolso</h3>
-
-            <p><strong>Ámbito:</strong> Esta Política de Reembolso complementa lo establecido en los Términos y Condiciones de Dreamscape Events and Complete Productions, S.L. y regula específicamente la devolución de cantidades abonadas por el Cliente en concepto de señal, reserva o pago de servicios de producción técnica de eventos (sonido, iluminación, escenografía, estructuras y demás servicios contratados).</p>
-
-            <p><strong>Reserva de fecha y señal:</strong> La confirmación de una fecha y el bloqueo del material técnico y personal asignado requiere el abono del 50% del importe total presupuestado en concepto de señal. Este importe formaliza la reserva y compromete a Dreamscape Events a no ofrecer dicha fecha ni el material reservado a terceros.</p>
-
-            <p><strong>Cancelaciones por parte del Cliente:</strong></p>
-            <p>- <strong>Con más de 7 días naturales de antelación</strong> respecto a la fecha del evento: se reembolsarán las cantidades abonadas, descontando los gastos ya incurridos (reservas de material, subcontrataciones a terceros, desplazamientos ya comprometidos, etc.).<br>
-            - <strong>Entre 7 días y 48 horas antes del evento:</strong> se pierde el 100% de la señal entregada (50% del presupuesto). El resto de cantidades adicionales abonadas, si las hubiera, sí serán reembolsadas.<br>
-            - <strong>Con menos de 48 horas de antelación:</strong> se devengará el 100% del importe total presupuestado, sin derecho a reembolso, dado que a esas alturas el material, el personal técnico y la logística ya están plenamente comprometidos y no es posible reasignarlos a otro proyecto.</p>
-
-            <p><strong>Cancelaciones o modificaciones por causa de fuerza mayor:</strong> En caso de cancelación por causas de fuerza mayor (ver definición en los Términos y Condiciones), ambas partes negociarán de buena fe una nueva fecha o, si esto no fuera posible, la devolución de las cantidades abonadas descontando los gastos ya generados hasta el momento de la cancelación.</p>
-
-            <p><strong>Reembolsos por incidencias imputables al Prestador:</strong> Si un servicio contratado no pudiera prestarse por causa exclusivamente imputable a Dreamscape Events and Complete Productions, S.L. (y no por fuerza mayor ni por causas ajenas), el Cliente tendrá derecho al reembolso íntegro de las cantidades abonadas correspondientes a la parte del servicio no prestado.</p>
-
-            <p><strong>Plazo y forma de reembolso:</strong> Los reembolsos que procedan conforme a esta política se tramitarán mediante transferencia bancaria a la misma cuenta desde la que se realizó el pago, en un plazo máximo de 14 días naturales desde la confirmación de la cancelación o incidencia.</p>
-
-            <p><strong>Modificaciones de fecha (en lugar de cancelación):</strong> Si el Cliente prefiere posponer el evento a una nueva fecha en lugar de cancelar, y dicha fecha está disponible, la señal abonada podrá trasladarse íntegramente a la nueva fecha sin penalización, siempre que la solicitud se realice con más de 7 días naturales de antelación respecto a la fecha original.</p>
-
-            <p><strong>Contacto:</strong> Cualquier solicitud de reembolso debe comunicarse por escrito a info@ap-events.es, indicando los datos del evento y el motivo de la solicitud.</p>
-
-            <button onclick="closeModal('modal-reembolso')" class="mt-2 bg-slate-950 text-white px-5 py-2.5 rounded-xl font-bold cursor-pointer">Cerrar</button>
         </div>
     </div>
 
@@ -2574,14 +2392,14 @@
         }
         
         window.addEventListener('click', function(e) {
-            const list = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3','modal-video-lightbox-4','modal-video-lightbox-5','modal-exit-intent'];
+            const list = ['modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3','modal-video-lightbox-4','modal-video-lightbox-5','modal-exit-intent'];
             list.forEach(id => { if(e.target === document.getElementById(id)) closeModal(id); });
         });
 
         // Accesibilidad: cerrar cualquier modal abierto (o el banner de cookies) con la tecla Escape
         window.addEventListener('keydown', function(e) {
             if (e.key !== 'Escape') return;
-            const allModals = ['modal-aviso','modal-privacidad','modal-cookies','modal-accesibilidad','modal-terminos','modal-reembolso','modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3','modal-video-lightbox-4','modal-video-lightbox-5','modal-exit-intent'];
+            const allModals = ['modal-service-corporativo','modal-service-congresos','modal-service-bodas','modal-blog-1','modal-blog-2','modal-blog-3','modal-photo-lightbox','modal-video-lightbox','modal-video-lightbox-2','modal-video-lightbox-3','modal-video-lightbox-4','modal-video-lightbox-5','modal-exit-intent'];
             allModals.forEach(id => {
                 const m = document.getElementById(id);
                 if (m && !m.classList.contains('hidden')) closeModal(id);
