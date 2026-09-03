@@ -859,20 +859,26 @@
             </div>
             <div class="grid md:grid-cols-3 gap-10 md:gap-8">
                 <!-- Garantía 1 -->
-                <div class="text-center md:text-left">
-                    <i class="fa-solid fa-headset text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 0ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
+                        <i class="fa-solid fa-headset text-2xl text-indigo-600" aria-hidden="true"></i>
+                    </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Retén técnico in situ</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Personal especializado presente durante todo el evento para garantizar cero incidencias en directo.</p>
                 </div>
                 <!-- Garantía 2 -->
-                <div class="text-center md:text-left">
-                    <i class="fa-solid fa-shield-cat text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 120ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
+                        <i class="fa-solid fa-shield-cat text-2xl text-indigo-600" aria-hidden="true"></i>
+                    </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Equipos redundantes</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Sistemas duplicados y material de respaldo crítico preparado para cualquier eventualidad.</p>
                 </div>
                 <!-- Garantía 3 -->
-                <div class="text-center md:text-left">
-                    <i class="fa-solid fa-wand-magic-sparkles text-2xl text-indigo-600 mb-4" aria-hidden="true"></i>
+                <div class="text-center md:text-left tilt-card" data-scroll-fade style="transition-delay: 240ms;">
+                    <div class="w-14 h-14 rounded-2xl bg-white shadow-md flex items-center justify-center mb-4 mx-auto md:mx-0">
+                        <i class="fa-solid fa-wand-magic-sparkles text-2xl text-indigo-600" aria-hidden="true"></i>
+                    </div>
                     <h4 class="font-semibold text-slate-900 text-lg mb-2">Montajes escénicos limpios</h4>
                     <p class="text-slate-500 text-sm leading-relaxed">Ocultación milimétrica de cableado y acabados estéticos de máxima gama para eventos exigentes.</p>
                 </div>
@@ -1076,8 +1082,9 @@
     </section>
 
     <!-- FILOSOFÍA / DIFERENCIACIÓN -->
-    <section id="filosofia" class="relative py-28 md:py-36 bg-slate-950 text-white overflow-hidden bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=70&w=1600&auto=format&fit=crop');">
+    <section id="filosofia" class="spotlight-section relative py-28 md:py-36 bg-slate-950 text-white overflow-hidden bg-fixed bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1516939884455-1445c8652f83?q=70&w=1600&auto=format&fit=crop');">
         <div class="absolute inset-0 bg-slate-950/85 z-0"></div>
+        <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
@@ -1305,13 +1312,15 @@
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="py-24 md:py-32 bg-slate-100 relative overflow-hidden">
+    <section id="contacto" class="spotlight-section py-24 md:py-32 bg-slate-100 relative overflow-hidden">
         <div class="absolute inset-0 opacity-40 z-0">
-            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-200 rounded-full blur-[128px]"></div>
+            <div class="parallax-blob absolute -bottom-40 -right-40 w-96 h-96 bg-indigo-200 rounded-full blur-[128px]" data-speed="0.15"></div>
+            <div class="parallax-blob absolute -top-40 -left-40 w-96 h-96 bg-emerald-100 rounded-full blur-[128px]" data-speed="0.22"></div>
         </div>
+        <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300" style="background: radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(79, 70, 229, 0.08), transparent 60%);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-12 gap-10 bg-white rounded-3xl p-10 sm:p-12 shadow-xl border border-slate-100">
+            <div class="grid md:grid-cols-12 gap-10 bg-white rounded-3xl p-10 sm:p-12 shadow-xl border border-slate-100" data-scroll-fade>
                 <div class="md:col-span-5 space-y-10 border-t md:border-t-0 md:border-r border-slate-100 md:pr-10">
                     <h3 class="text-2xl font-bold text-slate-950">Información de Contacto</h3>
                     <div class="space-y-6">
@@ -1390,9 +1399,29 @@
         </div>
     </section>
 
+    <!-- MEGA CTA: remate final antes del footer -->
+    <section class="relative bg-black text-white py-24 md:py-32 overflow-hidden text-center">
+        <div class="absolute inset-0 opacity-25 pointer-events-none">
+            <div class="parallax-blob absolute top-0 left-1/4 w-96 h-96 bg-indigo-600 rounded-full blur-[140px]" data-speed="0.2"></div>
+            <div class="parallax-blob absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500 rounded-full blur-[140px]" data-speed="0.3"></div>
+        </div>
+        <div class="relative max-w-3xl mx-auto px-6 z-10" data-scroll-fade>
+            <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">¿Listo para crear algo memorable?</h2>
+            <p class="text-slate-400 text-lg mb-10">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad, con la técnica resuelta de principio a fin.</p>
+            <a href="#contacto" class="btn-apple magnetic-btn inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg">
+                Empezar ahora
+            </a>
+        </div>
+    </section>
+
     <!-- FOOTER -->
-    <footer class="bg-slate-950 text-slate-400 py-16 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8">
+    <footer class="bg-slate-950 text-slate-400 pt-16 pb-4 border-t border-slate-800 relative overflow-hidden">
+        <!-- Nombre de marca gigante decorativo de fondo -->
+        <div class="absolute inset-x-0 bottom-0 flex justify-center pointer-events-none select-none overflow-hidden leading-none" aria-hidden="true">
+            <span class="text-[18vw] sm:text-[14vw] font-extrabold tracking-tighter whitespace-nowrap" style="-webkit-text-stroke: 1px rgba(255,255,255,0.08); color: transparent; transform: translateY(28%);">DREAMSCAPE</span>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-8 relative z-10">
             <!-- Síguenos -->
             <div class="flex flex-col items-center gap-3">
                 <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Síguenos</span>
