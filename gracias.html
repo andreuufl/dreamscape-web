@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Solicitud Enviada! | Dreamscape Events</title>
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://www.eventsandproductionsap.com/gracias.html">
+    <link rel="icon" type="image/png" href="./favicon.png?v=2">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root { --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        /* Círculo animado que dibuja el check, como si se completara al cargar */
+        .check-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: drawCircle 0.7s var(--ease-apple) 0.1s forwards;
+        }
+        .check-mark {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: drawCheck 0.4s var(--ease-apple) 0.65s forwards;
+        }
+        @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+        @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .reveal-1 { animation: revealUp 0.8s var(--ease-apple) 0.9s both; }
+        .reveal-2 { animation: revealUp 0.8s var(--ease-apple) 1.05s both; }
+        .reveal-3 { animation: revealUp 0.8s var(--ease-apple) 1.2s both; }
+
+        /* Confeti: pequeños rectángulos de color que caen y giran al cargar la página */
+        .confetti-piece {
+            position: absolute;
+            top: -20px;
+            width: 8px;
+            height: 14px;
+            opacity: 0.9;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            to { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .check-circle, .check-mark, .reveal-1, .reveal-2, .reveal-3 { animation: none !important; opacity: 1 !important; stroke-dashoffset: 0 !important; transform: none !important; }
+            .confetti-piece { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white min-h-screen overflow-x-hidden">
+
+    <!-- Confeti (generado por JS al cargar) -->
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Resplandores decorativos de fondo -->
+    <div class="fixed inset-0 opacity-25 pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px]"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px]"></div>
+    </div>
+
+    <header class="relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+            <a href="/" class="text-lg font-bold tracking-tight text-white">
+                DREAMSCAPE <span class="text-indigo-400">EVENTS</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="relative z-10 min-h-[75vh] flex items-center justify-center px-6 py-12">
+        <div class="max-w-lg w-full text-center">
+            <!-- Check animado -->
+            <svg class="mx-auto mb-8" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                <circle class="check-circle" cx="44" cy="44" r="40" stroke="url(#gradCheck)" stroke-width="4"/>
+                <path class="check-mark" d="M28 45L39 56L60 33" stroke="url(#gradCheck)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="gradCheck" x1="0" y1="0" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#818cf8"/>
+                        <stop offset="1" stop-color="#34d399"/>
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <h1 class="reveal-1 text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">¡Solicitud enviada con éxito!</h1>
+            <p class="reveal-2 text-slate-300 text-lg leading-relaxed mb-10">Gracias por confiar en Dreamscape Events. Hemos recibido los detalles de tu evento y nuestro equipo te responderá lo antes posible con un presupuesto personalizado.</p>
+
+            <div class="reveal-3 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/" class="bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center transition-transform hover:scale-105">
+                    Volver al inicio
+                </a>
+                <a href="https://wa.me/34613089894" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/15 border border-white/25 text-white px-8 py-3.5 rounded-full font-medium text-base text-center transition-all">
+                    <i class="fa-brands fa-whatsapp mr-2" aria-hidden="true"></i>Hablar por WhatsApp
+                </a>
+            </div>
+
+            <p class="reveal-3 text-slate-500 text-sm mt-10">Mientras tanto, puedes echar un vistazo a <a href="/#porfolio" class="text-indigo-400 hover:underline">nuestro trabajo real</a>.</p>
+        </div>
+    </main>
+
+    <footer class="relative z-10 py-8 border-t border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-xs text-slate-500 text-center">
+            <p>&copy; 2026 Dreamscape Events and Complete Productions, S.L.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Confeti sutil al cargar la página (respeta prefers-reduced-motion vía CSS)
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            const container = document.getElementById('confetti-container');
+            const colors = ['#818cf8', '#34d399', '#fbbf24', '#f472b6', '#60a5fa'];
+            const total = 60;
+            for (let i = 0; i < total; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'confetti-piece';
+                piece.style.left = Math.random() * 100 + 'vw';
+                piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+                piece.style.animationDelay = (Math.random() * 0.6) + 's';
+                piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(piece);
+            }
+            // Limpiar el confeti del DOM pasados unos segundos, ya no aporta nada visible
+            setTimeout(() => { container.innerHTML = ''; }, 5500);
+        })();
+    </script>
+</body>
+</html>
