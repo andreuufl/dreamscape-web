@@ -327,10 +327,10 @@
             transition: transform 0.2s ease-out;
             will-change: transform;
         }
-        .tilt-card img {
+        .tilt-card img, .tilt-card video {
             transition: transform 0.6s var(--ease-apple);
         }
-        .tilt-card:hover img {
+        .tilt-card:hover img, .tilt-card:hover video {
             transform: scale(1.08) !important;
         }
 
@@ -342,6 +342,22 @@
         /* Barra de progreso de lectura */
         #scroll-progress {
             transition: width 0.1s linear;
+        }
+
+        /* Efecto "linterna": foco de luz que sigue al cursor en secciones oscuras */
+        .spotlight-section {
+            isolation: isolate;
+        }
+        .spotlight {
+            background: radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(129, 140, 248, 0.22), transparent 60%);
+        }
+        @media (hover: none) {
+            .spotlight { display: none; } /* sin efecto en pantallas táctiles, no hay cursor */
+        }
+
+        /* Parallax de profundidad para los círculos de fondo */
+        .parallax-blob {
+            will-change: transform;
         }
 
         /* Elementos que aparecen con un desvanecimiento + desplazamiento suave al hacer scroll */
@@ -504,13 +520,14 @@
     </header>
 
     <!-- HERO SECTION: vídeo real a pantalla completa -->
-    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section id="inicio" class="spotlight-section relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
         <div id="hero-video-wrap" class="absolute inset-0 z-0">
             <video id="hero-video" autoplay muted loop playsinline preload="auto" class="w-full h-full object-cover opacity-90" poster="portfolio-video-candlelight-poster.jpg">
                 <source src="portfolio-video-candlelight.mp4" type="video/mp4">
             </video>
             <div class="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/70"></div>
         </div>
+        <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div id="hero-text" class="relative max-w-4xl mx-auto px-6 text-center z-20">
             <h1 class="hero-reveal-1 text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">
@@ -605,12 +622,13 @@
     </section>
 
     <!-- CARRUSEL DE FOTOS REALES -->
-    <section id="porfolio" class="py-16 md:py-20 bg-slate-950 relative overflow-hidden">
+    <section id="porfolio" class="spotlight-section py-16 md:py-20 bg-slate-950 relative overflow-hidden">
         <!-- Resplandores decorativos de fondo, mismo estilo que la cabecera -->
         <div class="absolute inset-0 opacity-20 z-0 pointer-events-none">
-            <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px] animate-pulse"></div>
-            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px] animate-pulse" style="animation-delay: 1s;"></div>
+            <div class="parallax-blob absolute -top-40 -left-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px] animate-pulse" data-speed="0.15"></div>
+            <div class="parallax-blob absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px] animate-pulse" style="animation-delay: 1s;" data-speed="0.25"></div>
         </div>
+        <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center space-y-4 mb-10" data-aos="fade-up">
@@ -630,7 +648,7 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-aos="fade-up" data-aos-delay="100">
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 0ms;" onclick="openVideoLightbox()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 0ms;" onclick="openVideoLightbox()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-poster.jpg">
                         <source src="portfolio-video-jardin.mp4" type="video/mp4">
                     </video>
@@ -645,7 +663,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Boda en jardín</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 90ms;" onclick="openVideoLightbox2()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 90ms;" onclick="openVideoLightbox2()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-fiesta-poster.jpg">
                         <source src="portfolio-video-fiesta.mp4" type="video/mp4">
                     </video>
@@ -660,7 +678,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Fiesta en directo</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 180ms;" onclick="openVideoLightbox5()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 180ms;" onclick="openVideoLightbox5()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-candlelight-poster.jpg">
                         <source src="portfolio-video-candlelight.mp4" type="video/mp4">
                     </video>
@@ -675,7 +693,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Gala corporativa</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 270ms;" onclick="openPhotoLightbox(0)">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 270ms;" onclick="openPhotoLightbox(0)">
                     <img src="portfolio-2-congreso.jpg" alt="Congreso YPO Global Leadership Conference" class="w-full h-full object-cover group-hover/photo:scale-110 transition-transform duration-500" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent"></div>
                     <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
@@ -685,7 +703,7 @@
                     </div>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Congreso corporativo</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 360ms;" onclick="openVideoLightbox4()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 360ms;" onclick="openVideoLightbox4()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-hotelpalace-poster.jpg">
                         <source src="portfolio-video-hotelpalace.mp4" type="video/mp4">
                     </video>
@@ -700,7 +718,7 @@
                     </span>
                     <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Salón de gala</span>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg" data-scroll-fade style="transition-delay: 450ms;" onclick="openVideoLightbox3()">
+                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 450ms;" onclick="openVideoLightbox3()">
                     <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-fashionweek-poster.jpg">
                         <source src="portfolio-video-fashionweek.mp4" type="video/mp4">
                     </video>
@@ -865,11 +883,12 @@
     <!-- =========================================================================
          SIMULADOR DE PRESUPUESTOS Y RIDERS TÉCNICOS (CAMPO DE FECHA DESTACADO)
          ========================================================================= -->
-    <section id="simulador" class="py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
+    <section id="simulador" class="spotlight-section py-16 md:py-24 bg-indigo-950 text-white relative overflow-hidden">
         <div class="absolute inset-0 opacity-15 pointer-events-none">
-            <div class="absolute top-10 left-10 w-96 h-96 bg-indigo-500 rounded-full blur-[128px]"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-emerald-500 rounded-full blur-[128px]"></div>
+            <div class="parallax-blob absolute top-10 left-10 w-96 h-96 bg-indigo-500 rounded-full blur-[128px]" data-speed="0.2"></div>
+            <div class="parallax-blob absolute bottom-10 right-10 w-96 h-96 bg-emerald-500 rounded-full blur-[128px]" data-speed="0.3"></div>
         </div>
+        <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- TÍTULO CON ESPACIADO EQUILIBRADO -->
@@ -1128,6 +1147,10 @@
 
     <!-- SECCIÓN DE PREGUNTAS FRECUENTES (FAQ) -->
     <section id="faq" class="py-24 md:py-32 bg-slate-50 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-40 pointer-events-none">
+            <div class="parallax-blob absolute -top-20 -right-20 w-80 h-80 bg-indigo-200 rounded-full blur-[100px]" data-speed="0.18"></div>
+            <div class="parallax-blob absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-100 rounded-full blur-[100px]" data-speed="0.28"></div>
+        </div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-aos="fade-up">
                 <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas frecuentes</h2>
@@ -1773,6 +1796,60 @@
                     card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
             });
+        })();
+
+        // ===== EFECTO "LINTERNA": foco de luz que sigue al cursor en secciones oscuras =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            if (window.matchMedia('(hover: none)').matches) return; // sin efecto en pantallas táctiles
+
+            document.querySelectorAll('.spotlight-section').forEach(section => {
+                const spot = section.querySelector('.spotlight');
+                if (!spot) return;
+                section.addEventListener('mousemove', (e) => {
+                    const rect = section.getBoundingClientRect();
+                    const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+                    const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+                    spot.style.setProperty('--spot-x', xPct + '%');
+                    spot.style.setProperty('--spot-y', yPct + '%');
+                    spot.style.opacity = '1';
+                });
+                section.addEventListener('mouseleave', () => {
+                    spot.style.opacity = '0';
+                });
+            });
+        })();
+
+        // ===== PARALLAX DE PROFUNDIDAD: los círculos de fondo se mueven más lento que el scroll =====
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+
+            const blobs = Array.from(document.querySelectorAll('.parallax-blob'));
+            if (!blobs.length) return;
+            let ticking = false;
+
+            function updateParallax() {
+                const vh = window.innerHeight;
+                blobs.forEach(blob => {
+                    const speed = parseFloat(blob.getAttribute('data-speed')) || 0.2;
+                    const rect = blob.getBoundingClientRect();
+                    // Desplazamiento proporcional a lo lejos que está el centro del bloque del centro de la pantalla
+                    const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
+                    blob.style.transform = `translateY(${offset}px)`;
+                });
+                ticking = false;
+            }
+            function onScroll() {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            }
+            updateParallax();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
         })();
 
         // ===== BARRA DE PROGRESO DE LECTURA =====
