@@ -355,35 +355,6 @@
             transition: width 0.1s linear;
         }
 
-        /* Cursor personalizado: círculo que sigue al ratón y cambia según lo que sobrevuela */
-        @media (hover: hover) and (pointer: fine) {
-            body.custom-cursor-active, body.custom-cursor-active a, body.custom-cursor-active button {
-                cursor: none;
-            }
-        }
-        #custom-cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            background: rgba(79, 70, 229, 0.9);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: width 0.25s var(--ease-apple), height 0.25s var(--ease-apple), background-color 0.25s ease, opacity 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-            color: white;
-            white-space: nowrap;
-            opacity: 0;
-        }
-        #custom-cursor.cursor-visible { opacity: 1; }
-        #custom-cursor.cursor-link { width: 48px; height: 48px; background: rgba(79, 70, 229, 0.15); border: 1.5px solid rgba(79, 70, 229, 0.5); backdrop-filter: blur(2px); }
-        #custom-cursor.cursor-view { width: 64px; height: 64px; background: rgba(15, 23, 42, 0.85); }
-
         /* Punto activo del indicador de sección */
         #section-dots a.dot-active {
             background: #4f46e5;
@@ -489,9 +460,6 @@
     </style>
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
-
-    <!-- Cursor personalizado (solo en dispositivos con ratón real) -->
-    <div id="custom-cursor" aria-hidden="true"></div>
 
     <!-- Indicador de sección lateral (solo en pantallas grandes) -->
     <nav id="section-dots" aria-label="Navegación rápida por secciones" class="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-4">
@@ -1776,52 +1744,6 @@
                 });
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-                });
-            });
-        })();
-
-        // ===== CURSOR PERSONALIZADO: círculo que sigue al ratón y cambia según lo que sobrevuela =====
-        (function() {
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion) return;
-            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return; // solo con ratón real
-
-            const cursor = document.getElementById('custom-cursor');
-            if (!cursor) return;
-            document.body.classList.add('custom-cursor-active');
-
-            let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursor.classList.add('cursor-visible');
-            });
-            document.addEventListener('mouseleave', () => cursor.classList.remove('cursor-visible'));
-
-            function tick() {
-                // Suavizado (lerp) para que el cursor "persiga" al ratón con un pequeño retraso elegante
-                curX += (mouseX - curX) * 0.18;
-                curY += (mouseY - curY) * 0.18;
-                cursor.style.left = curX + 'px';
-                cursor.style.top = curY + 'px';
-                requestAnimationFrame(tick);
-            }
-            tick();
-
-            // Cambia de forma según el elemento sobrevolado
-            document.querySelectorAll('a, button, .tilt-card, input, textarea').forEach(el => {
-                const isGallery = el.closest('#porfolio') && el.hasAttribute('onclick');
-                el.addEventListener('mouseenter', () => {
-                    if (isGallery) {
-                        cursor.classList.add('cursor-view');
-                        cursor.textContent = 'Ver';
-                    } else {
-                        cursor.classList.add('cursor-link');
-                    }
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursor.classList.remove('cursor-link', 'cursor-view');
-                    cursor.textContent = '';
                 });
             });
         })();
