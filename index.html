@@ -445,6 +445,21 @@
             [data-scroll-fade] { opacity: 1 !important; transform: none !important; }
         }
 
+        /* ===== REVELADO CONTINUO LIGADO AL SCROLL (estilo Apple) =====
+           A diferencia de [data-scroll-fade] (que aparece una vez y ya está), estos elementos
+           se revelan en proporción EXACTA a cuánto se ha hecho scroll sobre ellos: la variable
+           --p (0 a 1) la actualiza JS en cada fotograma, y aquí solo definimos cómo se traduce
+           visualmente. Da esa sensación de "ir descubriendo" el contenido con el propio dedo/rueda. */
+        [data-scrub] {
+            --p: 0;
+            opacity: var(--p);
+            transform: translateY(calc((1 - var(--p)) * 60px)) scale(calc(0.96 + var(--p) * 0.04));
+            will-change: transform, opacity;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-scrub] { opacity: 1 !important; transform: none !important; }
+        }
+
         /* Animación de pulso flotante para la burbuja de IA de Chatbase */
         #chatbase-bubble-button {
             animation: aiPulseBubble 2.5s infinite ease-in-out !important;
@@ -667,7 +682,7 @@
 
     <!-- SERVICIOS -->
     <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-scroll-fade>
+        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-scrub>
             <h2 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
             <p class="text-slate-500 text-lg md:text-xl mt-6">Montaje de escenarios y alquiler de equipos audiovisuales, con técnico especializado en cada proyecto.</p>
         </div>
@@ -675,7 +690,7 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
             <!-- Servicio 1: Corporativo -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-scroll-fade>
+                <div class="order-2 md:order-1" data-scrub>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa. Diseño técnico, sonido impecable y realización de vídeo profesional para impactar a tu audiencia.</p>
                     <a href="eventos-corporativos.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -694,7 +709,7 @@
                     <img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
                     <div class="curtain"></div>
                 </div>
-                <div data-scroll-fade>
+                <div data-scrub>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Montaje de escenarios, infraestructura audiovisual completa, iluminación de sala y microfonía avanzada, con soporte técnico en todo momento para un flujo perfecto.</p>
                     <a href="congresos-y-ferias.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -705,7 +720,7 @@
 
             <!-- Servicio 3: Bodas -->
             <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-scroll-fade>
+                <div class="order-2 md:order-1" data-scrub>
                     <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
                     <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
                     <a href="bodas-y-celebraciones.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
@@ -730,7 +745,7 @@
         <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300"></div>
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center space-y-4 mb-10" data-scroll-fade>
+            <div class="text-center space-y-4 mb-10" data-scrub>
                 <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight">Así lo vivimos</h2>
                 <p class="text-slate-400 text-base md:text-lg max-w-xl mx-auto">Bodas, fiestas y congresos que hemos hecho realidad — cada evento es distinto, y eso es lo que nos hace volver a por más.</p>
                 <div class="flex items-center justify-center gap-6 sm:gap-8 pt-2 text-slate-300">
@@ -997,7 +1012,7 @@
 
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <!-- TÍTULO CON ESPACIADO EQUILIBRADO -->
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-scroll-fade>
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14" data-scrub>
                 <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight">Simulador de rider</h2>
                 <p class="text-slate-300 text-lg mt-3">Configura las necesidades técnicas de tu evento en tiempo real y envíanos la configuración para recibir un presupuesto personalizado.</p>
             </div>
@@ -1187,7 +1202,7 @@
 
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
-                <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-scroll-fade>
+                <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-scrub>
                     <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Tu tranquilidad es nuestro principal éxito</h2>
                     <p class="text-slate-300 text-lg leading-relaxed">
                         Entendemos la responsabilidad que supone cada evento. Nuestro enfoque se basa en una planificación meticulosa y una ejecución técnica impecable para que tú solo tengas que preocuparte de disfrutar y atender a tus invitados. Nos convertimos en tu socio tecnológico y logístico de confianza.
@@ -1258,7 +1273,7 @@
             <div class="parallax-blob absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-100 rounded-full blur-[100px]" data-speed="0.28"></div>
         </div>
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-scroll-fade>
+            <div class="text-center max-w-2xl mx-auto space-y-4 mb-16" data-scrub>
                 <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Preguntas frecuentes</h2>
                 <p class="text-slate-600 text-lg">Resolvemos las dudas más habituales antes de que contactes con nosotros.</p>
             </div>
@@ -1347,7 +1362,7 @@
     <!-- SECCIÓN DE BLOG -->
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-scroll-fade>
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-20" data-scrub>
                 <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">Historias y backstage</h2>
                 <p class="text-slate-600 text-lg md:text-xl">Descubre cómo trabajamos, las últimas tendencias en eventos y casos de éxito reales de producciones Dreamscape.</p>
             </div>
@@ -1515,7 +1530,7 @@
                 <div class="aurora-blob w-full h-full top-0 left-0" style="background:#10b981; animation-delay:-8s;"></div>
             </div>
         </div>
-        <div class="relative max-w-3xl mx-auto px-6 z-10" data-scroll-fade>
+        <div class="relative max-w-3xl mx-auto px-6 z-10" data-scrub>
             <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">¿Listo para crear algo memorable?</h2>
             <p class="text-slate-400 text-lg mb-10">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad, con la técnica resuelta de principio a fin.</p>
             <a href="#contacto" class="btn-apple magnetic-btn inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg">
@@ -1935,6 +1950,45 @@
                 }).join(' ');
             }).join('<br>');
             el.innerHTML = html;
+        })();
+
+        // ===== REVELADO CONTINUO LIGADO AL SCROLL (estilo Apple) =====
+        // A diferencia del sistema [data-scroll-fade] (dispara una vez), aquí recalculamos
+        // el progreso de cada elemento [data-scrub] EN CADA FOTOGRAMA de scroll, así el
+        // contenido se va "descubriendo" en proporción exacta a la posición del scroll,
+        // en vez de simplemente aparecer al llegar.
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const els = Array.from(document.querySelectorAll('[data-scrub]'));
+            if (!els.length || reduceMotion) return;
+
+            let ticking = false;
+
+            function updateScrub() {
+                const vh = window.innerHeight;
+                els.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    // El elemento empieza a revelarse cuando su borde superior entra por abajo
+                    // de la pantalla, y termina de revelarse cuando llega más o menos a la mitad.
+                    const start = vh * 0.92;
+                    const end = vh * 0.45;
+                    let progress = (start - rect.top) / (start - end);
+                    progress = Math.max(0, Math.min(1, progress));
+                    el.style.setProperty('--p', progress.toFixed(3));
+                });
+                ticking = false;
+            }
+
+            function onScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(updateScrub);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll);
+            updateScrub(); // estado inicial al cargar
         })();
 
         // ===== BARRA DE PROGRESO DE LECTURA =====
