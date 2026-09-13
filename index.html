@@ -2464,6 +2464,7 @@
             doc.text("Este documento es una propuesta técnica orientativa sujeta a validación final de accesos y recinto.", 15, 283);
 
             doc.save("Propuesta_Tecnica_Dreamscape_Events.pdf");
+            trackEvent('download_pdf_presupuesto');
         }
 
         function sendWhatsAppSimulation() {
@@ -2505,6 +2506,14 @@
             window.gtag = gtag;
             gtag('js', new Date());
             gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+        }
+
+        // Seguimiento de conversiones reales (solo se envía si hay consentimiento de cookies,
+        // ya que "gtag" no existe en absoluto hasta que se acepta el aviso de cookies).
+        function trackEvent(eventName, params) {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', eventName, params || {});
+            }
         }
 
         // Chatbase (asistente virtual con IA) — se carga SOLO si el usuario ha dado su consentimiento,
@@ -2549,6 +2558,14 @@
                 loadGoogleAnalytics();
                 loadChatbaseWidget();
             }
+
+            // Seguimiento de conversión: clic en cualquier enlace de WhatsApp de la web
+            // (bloque de contacto, footer, botón flotante), sea cual sea su ubicación.
+            document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    trackEvent('click_whatsapp', { link_location: link.id || link.closest('section')?.id || 'desconocido' });
+                });
+            });
         });
 
         function acceptAllCookies() {

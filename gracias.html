@@ -128,6 +128,24 @@
 
     <script>
         (function() {
+            // Seguimiento de conversión: llegar a esta página significa que el formulario
+            // se envió correctamente. Respetamos la misma decisión de cookies que en la home
+            // (guardada en localStorage, compartido entre páginas del mismo dominio).
+            try {
+                if (localStorage.getItem('dreamscape_cookies_accepted') === 'all') {
+                    const GA_ID = 'G-PNDXKYXT9K';
+                    const script = document.createElement('script');
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                    script.async = true;
+                    document.head.appendChild(script);
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ window.dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', GA_ID, { anonymize_ip: true });
+                    gtag('event', 'generate_lead', { form_name: 'contacto_dreamscape' });
+                }
+            } catch (e) { /* si falla, no pasa nada: la página sigue funcionando con normalidad */ }
+
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             // Activamos las animaciones de entrada SOLO si JS confirma que todo va bien.
