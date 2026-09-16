@@ -8,7 +8,7 @@
          cabeceras HTTP reales como X-Frame-Options o Permissions-Policy — solo lo que cabe en meta tags).
          Comprobado contra los dominios externos reales que usa esta página. Si algo deja de funcionar
          tras subir esto (el chat o Analytics, sobre todo), avisa y lo ajustamos. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.chatbase.co; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co; frame-src https://*.chatbase.co; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.chatbase.co https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co https://challenges.cloudflare.com; frame-src https://*.chatbase.co https://challenges.cloudflare.com; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>Montaje de Escenarios y Equipos Audiovisuales | Dreamscape Events</title>
@@ -205,10 +205,11 @@
             transition: background-color 0.5s var(--ease-apple), backdrop-filter 0.5s var(--ease-apple), border-color 0.5s var(--ease-apple);
         }
         #site-header.header-solid {
-            background-color: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom-color: rgba(0,0,0,0.06);
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border-bottom-color: rgba(255,255,255,0.5);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 30px rgba(15,23,42,0.06);
         }
         #site-header.header-transparent {
             background-color: transparent;
@@ -483,7 +484,54 @@
             70% { box-shadow: 0 0 0 14px rgba(16, 185, 129, 0); }
             100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
+
+        /* ===== LIQUID GLASS (estilo Apple/iOS/visionOS) =====
+           Superficies traslúcidas con desenfoque de fondo, un borde de luz sutil y
+           una sombra suave, para dar sensación de "cristal" flotando sobre el contenido.
+           Se mantiene la paleta blanco / negro / índigo de la marca: solo cambia la
+           textura de las superficies, no los colores. */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(28px) saturate(180%);
+            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        .glass-panel-soft {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            transition: background-color 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple), transform 0.4s var(--ease-apple);
+        }
+        .glass-panel-soft:hover {
+            background: rgba(255, 255, 255, 0.65);
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+        .glass-input {
+            background: rgba(255, 255, 255, 0.5) !important;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(148, 163, 184, 0.4) !important;
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-color: rgba(79, 70, 229, 0.55) !important;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+        }
+        /* Navegador sin soporte de backdrop-filter: se cae a un panel casi sólido, sin perder legibilidad */
+        @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+            .glass-panel, .glass-panel-soft { background: rgba(255, 255, 255, 0.94); }
+            .glass-input { background: rgba(255, 255, 255, 0.96) !important; }
+        }
     </style>
+
+    <!-- Captcha invisible (Cloudflare Turnstile): protege el formulario de contacto de envíos automáticos.
+         IMPORTANTE: sustituye el valor de data-sitekey más abajo (en la sección #contacto) por tu Site Key
+         real de Cloudflare. Se crea gratis en https://dash.cloudflare.com/sign-up -> Turnstile -> Add widget. -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
     <!-- Sprite de iconos (SVG reales de FontAwesome, incrustados: sin CDN externo) -->
@@ -604,7 +652,7 @@
         </div>
 
         <!-- Mobile Nav Menu -->
-        <div class="xl:hidden bg-white border-b border-slate-100 overflow-y-auto transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] max-h-0 opacity-0" id="mobile-menu" style="max-height: 0;">
+        <div class="xl:hidden glass-panel border-t-0 overflow-y-auto transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] max-h-0 opacity-0" id="mobile-menu" style="max-height: 0;">
             <div class="px-4 pt-2 pb-6 space-y-3 shadow-xl">
                 <a href="#inicio" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Inicio</a>
                 <a href="#servicios" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Servicios</a>
@@ -1248,7 +1296,7 @@
 
             <div class="space-y-4" data-scroll-fade style="transition-delay: 100ms;">
                 <!-- Pregunta 1 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿En qué zonas de España trabajáis?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1259,7 +1307,7 @@
                 </div>
 
                 <!-- Pregunta 2 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Con cuánta antelación hay que reservar?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1270,7 +1318,7 @@
                 </div>
 
                 <!-- Pregunta 3 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Puedo saber el presupuesto antes de contactar?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1281,7 +1329,7 @@
                 </div>
 
                 <!-- Pregunta 4 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Qué pasa si un equipo falla durante el evento?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1292,7 +1340,7 @@
                 </div>
 
                 <!-- Pregunta 5 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Trabajáis con wedding planners y agencias de eventos?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1303,7 +1351,7 @@
                 </div>
 
                 <!-- Pregunta 6 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Podéis alquilar solo el equipo, sin técnico?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1314,7 +1362,7 @@
                 </div>
 
                 <!-- Pregunta 7 -->
-                <div class="faq-item bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+                <div class="faq-item glass-panel-soft rounded-2xl overflow-hidden">
                     <button type="button" onclick="toggleFaq(this)" class="w-full flex items-center justify-between text-left p-6 cursor-pointer">
                         <span class="text-lg font-bold text-slate-950 pr-4">¿Qué diferencia a Dreamscape Events de otras empresas de alquiler audiovisual?</span>
                         <svg class="svg-icon text-indigo-600 flex-shrink-0 transition-transform duration-300" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
@@ -1409,7 +1457,7 @@
         <div class="spotlight absolute inset-0 z-[5] pointer-events-none opacity-0 transition-opacity duration-300" style="background: radial-gradient(500px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(79, 70, 229, 0.08), transparent 60%);"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid md:grid-cols-12 gap-10 bg-white rounded-3xl p-10 sm:p-12 shadow-xl border border-slate-100" data-scroll-fade>
+            <div class="grid md:grid-cols-12 gap-10 glass-panel rounded-3xl p-10 sm:p-12" data-scroll-fade>
                 <div class="md:col-span-5 space-y-10 border-t md:border-t-0 md:border-r border-slate-100 md:pr-10">
                     <h3 class="text-2xl font-bold text-slate-950">Información de Contacto</h3>
                     <div class="space-y-6">
@@ -1456,31 +1504,35 @@
                         <div class="grid sm:grid-cols-2 gap-6">
                             <div class="space-y-2">
                                 <label for="nombre" class="text-sm font-semibold text-slate-700">Nombre / Empresa</label>
-                                <input type="text" id="nombre" name="Nombre_Empresa" required minlength="2" maxlength="100" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. Juan Pérez">
+                                <input type="text" id="nombre" name="Nombre_Empresa" required minlength="2" maxlength="100" class="w-full px-5 py-3.5 rounded-xl glass-input focus:outline-none" placeholder="Ej. Juan Pérez">
                             </div>
                             <div class="space-y-2">
                                 <label for="telefono" class="text-sm font-semibold text-slate-700">Teléfono de contacto</label>
-                                <input type="tel" id="telefono" name="Telefono_Contacto" required pattern="[0-9+\s()-]{9,20}" maxlength="20" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Ej. 600 000 000">
+                                <input type="tel" id="telefono" name="Telefono_Contacto" required pattern="[0-9+\s()-]{9,20}" maxlength="20" class="w-full px-5 py-3.5 rounded-xl glass-input focus:outline-none" placeholder="Ej. 600 000 000">
                             </div>
                         </div>
 
                         <!-- Fila 2: Correo Electrónico -->
                         <div class="space-y-2">
                             <label for="email" class="text-sm font-semibold text-slate-700">Correo Electrónico</label>
-                            <input type="email" id="email" name="Email_Contacto" required maxlength="120" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="ejemplo@correo.com">
+                            <input type="email" id="email" name="Email_Contacto" required maxlength="120" class="w-full px-5 py-3.5 rounded-xl glass-input focus:outline-none" placeholder="ejemplo@correo.com">
                         </div>
 
                         <!-- Fila 3: Detalles del proyecto -->
                         <div class="space-y-2">
                             <label for="mensaje" class="text-sm font-semibold text-slate-700">Detalles del proyecto</label>
-                            <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required minlength="10" maxlength="3000" class="w-full px-5 py-3.5 rounded-xl border border-slate-200 focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
+                            <textarea id="mensaje" name="Detalles_Proyecto" rows="5" required minlength="10" maxlength="3000" class="w-full px-5 py-3.5 rounded-xl glass-input focus:outline-none" placeholder="Cuéntanos las necesidades de tu evento..."></textarea>
                         </div>
                         
                         <div class="flex items-center space-x-3 pt-2">
                             <input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer flex-shrink-0">
                             <label for="privacidad" class="text-xs text-slate-500 cursor-pointer select-none">Acepto la <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">política de privacidad</a>.</label>
                         </div>
-                        
+
+                        <!-- Captcha invisible de Cloudflare Turnstile: no se ve ni pide interacción salvo que
+                             detecte tráfico sospechoso. Sustituye "TU_SITE_KEY_DE_CLOUDFLARE" por tu Site Key real. -->
+                        <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_DE_CLOUDFLARE" data-size="invisible" data-appearance="interaction-only" data-callback="onTurnstileOk" data-error-callback="onTurnstileFallback"></div>
+
                         <button type="submit" id="submit-btn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg btn-shine cursor-pointer">Enviar Solicitud</button>
                     </form>
                 </div>
@@ -2777,6 +2829,18 @@
                 answer.style.maxHeight = answer.scrollHeight + 'px';
                 icon.style.transform = 'rotate(180deg)';
             }
+        }
+
+        // Captcha invisible (Cloudflare Turnstile): callbacks informativos.
+        // El widget, al completarse, añade solo un campo oculto "cf-turnstile-response" al propio
+        // formulario, así que no hace falta interceptar el envío para que funcione. Estos callbacks
+        // son solo para no romper nada si el script no llega a cargar (bloqueadores de anuncios, etc.):
+        // en ese caso el formulario se sigue pudiendo enviar con normalidad.
+        function onTurnstileOk(token) {
+            console.debug('Turnstile: verificación superada.');
+        }
+        function onTurnstileFallback() {
+            console.warn('Turnstile no se ha podido cargar; el formulario sigue funcionando con el resto de protecciones (campo trampa).');
         }
     </script>
 
