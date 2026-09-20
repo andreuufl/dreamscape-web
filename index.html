@@ -206,8 +206,8 @@
         }
         #site-header.header-solid {
             background-color: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
             border-bottom-color: rgba(255,255,255,0.5);
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 30px rgba(15,23,42,0.06);
         }
@@ -492,15 +492,15 @@
            textura de las superficies, no los colores. */
         .glass-panel {
             background: rgba(255, 255, 255, 0.55);
-            backdrop-filter: blur(28px) saturate(180%);
-            -webkit-backdrop-filter: blur(28px) saturate(180%);
+            backdrop-filter: blur(18px) saturate(160%);
+            -webkit-backdrop-filter: blur(18px) saturate(160%);
             border: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5);
         }
         .glass-panel-soft {
             background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(20px) saturate(160%);
-            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            backdrop-filter: blur(14px) saturate(150%);
+            -webkit-backdrop-filter: blur(14px) saturate(150%);
             border: 1px solid rgba(255, 255, 255, 0.55);
             box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.5);
             transition: background-color 0.4s var(--ease-apple), box-shadow 0.4s var(--ease-apple), transform 0.4s var(--ease-apple);
@@ -511,8 +511,8 @@
         }
         .glass-input {
             background: rgba(255, 255, 255, 0.5) !important;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.4) !important;
             transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -1695,87 +1695,77 @@
 
     <!-- SCRIPTS -->
     <script>
-        // Cabecera: transparente sobre el vídeo del hero, sólida con desenfoque al hacer scroll
+        // ===== CONTROLADOR ÚNICO DE SCROLL (evita los "tirones" al bajar) =====
+        // Antes había varios listeners de scroll independientes (cabecera, botón "volver
+        // arriba", zoom del vídeo del hero, parallax de círculos, revelado por scroll, barra
+        // de progreso), cada uno leyendo Y escribiendo el layout por su cuenta. Eso obliga al
+        // navegador a recalcular el layout varias veces en cada fotograma ("layout thrashing"),
+        // que es la causa típica de que el scroll se note trabado. Aquí se unifica todo en un
+        // único requestAnimationFrame por fotograma: primero se hacen TODAS las lecturas de
+        // posición y después TODAS las escrituras, sin intercalarlas.
         (function() {
-            const header = document.getElementById('site-header');
-            if (!header) return;
-            function updateHeader() {
-                if (window.scrollY > 60) {
-                    header.classList.remove('header-transparent');
-                    header.classList.add('header-solid');
-                } else {
-                    header.classList.remove('header-solid');
-                    header.classList.add('header-transparent');
-                }
-            }
-            updateHeader();
-            window.addEventListener('scroll', updateHeader, { passive: true });
-        })();
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        // ===== BOTÓN "VOLVER ARRIBA" + CTA FIJO EN MÓVIL (con reposicionamiento del botón de WhatsApp) =====
-        (function() {
+            const header = document.getElementById('site-header');
             const backToTop = document.getElementById('back-to-top');
             const stickyCta = document.getElementById('mobile-sticky-cta');
             const waBtn = document.getElementById('whatsapp-float-btn');
             const heroEl = document.getElementById('inicio');
-            const contactoEl = document.getElementById('contacto');
-            if (!backToTop) return;
-
-            function updateFloatingUI() {
-                const scrolledPastHero = window.scrollY > (heroEl ? heroEl.offsetHeight * 0.6 : 400);
-
-                // Botón "volver arriba": visible tras bajar un poco
-                if (window.scrollY > 500) {
-                    backToTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
-                } else {
-                    backToTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
-                }
-
-                // CTA fijo en móvil: aparece tras el hero, se oculta al llegar al formulario de contacto (ya no hace falta insistir)
-                if (stickyCta) {
-                    let nearContact = false;
-                    if (contactoEl) {
-                        const rect = contactoEl.getBoundingClientRect();
-                        nearContact = rect.top < window.innerHeight;
-                    }
-                    const showCta = scrolledPastHero && !nearContact;
-                    stickyCta.classList.toggle('translate-y-full', !showCta);
-
-                    // Reposicionamos WhatsApp y "volver arriba" para que no choquen con la barra fija
-                    if (waBtn) waBtn.style.bottom = showCta ? '92px' : '';
-                    backToTop.style.bottom = showCta ? '160px' : '';
-                }
-            }
-
-            updateFloatingUI();
-            window.addEventListener('scroll', updateFloatingUI, { passive: true });
-            window.addEventListener('resize', updateFloatingUI, { passive: true });
-
-            backToTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        })();
-
-        // ===== EFECTOS INMERSIVOS DE SCROLL (estilo Apple) =====
-        (function() {
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion) return; // Respetamos la preferencia de accesibilidad del usuario
-
-            const heroSection = document.getElementById('inicio');
             const heroVideo = document.getElementById('hero-video');
             const heroText = document.getElementById('hero-text');
+            const contactoEl = document.getElementById('contacto');
+            const progressBar = document.getElementById('scroll-progress');
+            const blobs = Array.from(document.querySelectorAll('.parallax-blob'));
+            const scrubEls = Array.from(document.querySelectorAll('[data-scrub]'));
+
+            let heroHeight = heroEl ? heroEl.offsetHeight : 0;
+            let docScrollable = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+            function refreshCachedSizes() {
+                heroHeight = heroEl ? heroEl.offsetHeight : 0;
+                docScrollable = Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+            }
+
             let ticking = false;
 
-            function updateScrollFX() {
+            function update() {
+                ticking = false;
+                const scrollY = window.scrollY;
                 const vh = window.innerHeight;
 
-                // Zoom progresivo del vídeo del hero + desplazamiento del texto (efecto parallax)
-                if (heroSection && heroVideo) {
-                    const heroRect = heroSection.getBoundingClientRect();
-                    // scrolled: 0 al inicio, crece a medida que el hero sale de pantalla por arriba
+                // ---- LECTURA: todo lo que fuerza layout, junto y de una sola vez ----
+                const heroRect = (!reduceMotion && heroEl && heroVideo) ? heroEl.getBoundingClientRect() : null;
+                const contactoRect = (stickyCta && contactoEl) ? contactoEl.getBoundingClientRect() : null;
+                const blobRects = reduceMotion ? null : blobs.map(b => b.getBoundingClientRect());
+                const scrubRects = reduceMotion ? null : scrubEls.map(el => el.getBoundingClientRect());
+
+                // ---- ESCRITURA: ya no se vuelve a leer nada del layout a partir de aquí ----
+
+                // Cabecera: transparente sobre el vídeo del hero, sólida (cristal) al bajar
+                if (header) {
+                    if (scrollY > 60) { header.classList.remove('header-transparent'); header.classList.add('header-solid'); }
+                    else { header.classList.remove('header-solid'); header.classList.add('header-transparent'); }
+                }
+
+                // Botón "volver arriba" + CTA fijo en móvil (con reposicionamiento del botón de WhatsApp)
+                if (backToTop) {
+                    if (scrollY > 500) backToTop.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+                    else backToTop.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+
+                    const scrolledPastHero = scrollY > (heroHeight ? heroHeight * 0.6 : 400);
+                    if (stickyCta) {
+                        const nearContact = contactoRect ? contactoRect.top < vh : false;
+                        const showCta = scrolledPastHero && !nearContact;
+                        stickyCta.classList.toggle('translate-y-full', !showCta);
+                        if (waBtn) waBtn.style.bottom = showCta ? '92px' : '';
+                        backToTop.style.bottom = showCta ? '160px' : '';
+                    }
+                }
+
+                // Zoom progresivo del vídeo del hero + desplazamiento del texto (parallax)
+                if (heroRect && heroVideo) {
                     const scrolled = Math.min(Math.max(-heroRect.top, 0), vh);
-                    const progress = scrolled / vh; // 0 -> 1
-                    const scale = 1 + progress * 0.25; // hasta un 25% de zoom
+                    const progress = scrolled / vh;
+                    const scale = 1 + progress * 0.25;
                     heroVideo.style.transform = `scale(${scale})`;
                     if (heroText) {
                         heroText.style.transform = `translateY(${progress * 80}px)`;
@@ -1783,19 +1773,51 @@
                     }
                 }
 
-                ticking = false;
-            }
+                // Parallax de profundidad: los círculos de fondo se mueven más lento que el scroll
+                if (blobRects) {
+                    blobs.forEach((blob, i) => {
+                        const speed = parseFloat(blob.getAttribute('data-speed')) || 0.2;
+                        const rect = blobRects[i];
+                        const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
+                        blob.style.transform = `translateY(${offset}px)`;
+                    });
+                }
 
-            function onScroll() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateScrollFX);
-                    ticking = true;
+                // Revelado continuo ligado al scroll ([data-scrub])
+                if (scrubRects) {
+                    const start = vh * 0.92, end = vh * 0.45;
+                    scrubEls.forEach((el, i) => {
+                        const rect = scrubRects[i];
+                        let progress = (start - rect.top) / (start - end);
+                        progress = Math.max(0, Math.min(1, progress));
+                        el.style.setProperty('--p', progress.toFixed(3));
+                    });
+                }
+
+                // Barra de progreso de lectura
+                if (progressBar) {
+                    const pct = docScrollable > 0 ? (scrollY / docScrollable) * 100 : 0;
+                    progressBar.style.width = pct + '%';
                 }
             }
 
-            updateScrollFX();
+            function onScroll() {
+                if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+            }
+            function onResize() {
+                refreshCachedSizes();
+                onScroll();
+            }
+
+            update();
             window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll, { passive: true });
+            window.addEventListener('resize', onResize, { passive: true });
+
+            if (backToTop) {
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         })();
 
         // ===== TARJETAS CON INCLINACIÓN 3D QUE SIGUE AL CURSOR (estilo Apple) =====
@@ -1911,37 +1933,6 @@
             });
         })();
 
-        // ===== PARALLAX DE PROFUNDIDAD: los círculos de fondo se mueven más lento que el scroll =====
-        (function() {
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (reduceMotion) return;
-
-            const blobs = Array.from(document.querySelectorAll('.parallax-blob'));
-            if (!blobs.length) return;
-            let ticking = false;
-
-            function updateParallax() {
-                const vh = window.innerHeight;
-                blobs.forEach(blob => {
-                    const speed = parseFloat(blob.getAttribute('data-speed')) || 0.2;
-                    const rect = blob.getBoundingClientRect();
-                    // Desplazamiento proporcional a lo lejos que está el centro del bloque del centro de la pantalla
-                    const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
-                    blob.style.transform = `translateY(${offset}px)`;
-                });
-                ticking = false;
-            }
-            function onScroll() {
-                if (!ticking) {
-                    window.requestAnimationFrame(updateParallax);
-                    ticking = true;
-                }
-            }
-            updateParallax();
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll, { passive: true });
-        })();
-
         // ===== NAVEGACIÓN INTERNA SIN MODIFICAR LA URL =====
         // Al hacer clic en cualquier enlace #sección, hacemos scroll suave nosotros mismos
         // y evitamos que el navegador añada el "#sección" a la barra de direcciones.
@@ -1990,60 +1981,6 @@
                 }).join(' ');
             }).join('<br>');
             el.innerHTML = html;
-        })();
-
-        // ===== REVELADO CONTINUO LIGADO AL SCROLL (estilo Apple) =====
-        // A diferencia del sistema [data-scroll-fade] (dispara una vez), aquí recalculamos
-        // el progreso de cada elemento [data-scrub] EN CADA FOTOGRAMA de scroll, así el
-        // contenido se va "descubriendo" en proporción exacta a la posición del scroll,
-        // en vez de simplemente aparecer al llegar.
-        (function() {
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const els = Array.from(document.querySelectorAll('[data-scrub]'));
-            if (!els.length || reduceMotion) return;
-
-            let ticking = false;
-
-            function updateScrub() {
-                const vh = window.innerHeight;
-                els.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    // El elemento empieza a revelarse cuando su borde superior entra por abajo
-                    // de la pantalla, y termina de revelarse cuando llega más o menos a la mitad.
-                    const start = vh * 0.92;
-                    const end = vh * 0.45;
-                    let progress = (start - rect.top) / (start - end);
-                    progress = Math.max(0, Math.min(1, progress));
-                    el.style.setProperty('--p', progress.toFixed(3));
-                });
-                ticking = false;
-            }
-
-            function onScroll() {
-                if (!ticking) {
-                    requestAnimationFrame(updateScrub);
-                    ticking = true;
-                }
-            }
-
-            window.addEventListener('scroll', onScroll, { passive: true });
-            window.addEventListener('resize', onScroll);
-            updateScrub(); // estado inicial al cargar
-        })();
-
-        // ===== BARRA DE PROGRESO DE LECTURA =====
-        (function() {
-            const bar = document.getElementById('scroll-progress');
-            if (!bar) return;
-            function updateProgress() {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-                bar.style.width = pct + '%';
-            }
-            updateProgress();
-            window.addEventListener('scroll', updateProgress, { passive: true });
-            window.addEventListener('resize', updateProgress, { passive: true });
         })();
 
         // ===== CONTADORES ANIMADOS (cifras del hero) =====
@@ -2875,6 +2812,29 @@
         function onTurnstileFallback() {
             console.warn('Turnstile no se ha podido cargar; el formulario sigue funcionando con el resto de protecciones (campo trampa).');
         }
+
+        // ===== PAUSAR VÍDEOS FUERA DE PANTALLA (fluidez del scroll) =====
+        // Antes los 6 vídeos del porfolio (más el del hero) estaban SIEMPRE reproduciéndose
+        // en bucle, aunque el usuario ya hubiera bajado más allá y no se vieran. Descodificar
+        // 7 vídeos a la vez es un gasto de CPU/GPU muy alto y es una de las causas típicas de
+        // que el scroll se note trabado, sobre todo en portátiles y móviles. Con esto, cada
+        // vídeo solo se reproduce mientras está realmente visible en pantalla.
+        (function() {
+            if (!('IntersectionObserver' in window)) return;
+            const videos = document.querySelectorAll('video[autoplay]');
+            if (!videos.length) return;
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const video = entry.target;
+                    if (entry.isIntersecting) {
+                        video.play().catch(() => {}); // algunos navegadores exigen que el play() venga de una interacción; lo ignoramos si falla
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.15 });
+            videos.forEach(video => videoObserver.observe(video));
+        })();
     </script>
 
     <!-- CTA FIJO EN MÓVIL: reaparece al hacer scroll, para que "Solicitar Presupuesto" esté siempre a mano -->
