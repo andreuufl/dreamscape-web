@@ -356,6 +356,30 @@
             transition: width 0.1s linear;
         }
 
+        /* Secuencia de scroll estilo Apple: por defecto ocupa 400vh de scroll para dar tiempo
+           a recorrer los fotogramas; con "reducir movimiento" se colapsa a una imagen fija */
+        #scrub-sequence { height: 400vh; }
+        #scrub-canvas { display: block; }
+        #scrub-fallback-img { display: none; }
+        @media (prefers-reduced-motion: reduce) {
+            #scrub-sequence { height: auto; }
+            #scrub-sticky { position: static; height: 70vh; }
+            #scrub-canvas { display: none; }
+            #scrub-fallback-img { display: block; }
+        }
+
+        /* Transiciones nativas entre páginas del sitio (efecto app), sin librerías.
+           Los navegadores que no la soportan lo ignoran sin ningún efecto negativo. */
+        @view-transition { navigation: auto; }
+
+        /* Titulares con revelado palabra a palabra al entrar en pantalla */
+        .reveal-words .rw-word { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+        .reveal-words .rw-inner { display: inline-block; transform: translateY(115%); transition: transform 0.7s var(--ease-apple); transition-delay: calc(var(--i, 0) * 45ms); }
+        .reveal-words.rw-visible .rw-inner { transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-words .rw-inner { transform: none !important; transition: none !important; }
+        }
+
         /* Iconos SVG (sprite incrustado, sustituye a la fuente de FontAwesome):
            se comportan igual que los iconos de fuente que reemplazan, heredando tamaño y color del texto */
         .svg-icon {
@@ -731,10 +755,24 @@
         </div>
     </section>
 
+    <!-- SECUENCIA DE SCROLL ESTILO APPLE: el montaje del escenario avanza fotograma a fotograma
+         según el scroll, igual que el efecto "gira el iPhone" de apple.com. En pantallas con
+         "reducir movimiento" activado, se sustituye por una imagen fija (ver CSS y JS más abajo). -->
+    <section id="scrub-sequence" class="relative bg-slate-950">
+        <div id="scrub-sticky" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+            <canvas id="scrub-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+            <img id="scrub-fallback-img" src="scrub/frame-0072.webp" loading="lazy" alt="Montaje de escenario de Dreamscape Events" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/70 pointer-events-none"></div>
+            <div class="relative z-10 max-w-2xl mx-auto px-6 text-center text-white">
+                <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight transition-opacity duration-500 ease-out" style="text-shadow: 0 2px 24px rgba(0,0,0,0.4);">Cada evento empieza con una idea</p>
+            </div>
+        </div>
+    </section>
+
     <!-- SERVICIOS -->
     <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-scrub>
-            <h2 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
+            <h2 class="reveal-words text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
             <p class="text-slate-500 text-lg md:text-xl mt-6">Montaje de escenarios y alquiler de equipos audiovisuales, con técnico especializado en cada proyecto.</p>
         </div>
 
@@ -1239,7 +1277,7 @@
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
             <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
                 <div class="lg:col-span-6 space-y-6 mb-16 lg:mb-0" data-scrub>
-                    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Tu tranquilidad es nuestro principal éxito</h2>
+                    <h2 class="reveal-words text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">Tu tranquilidad es nuestro principal éxito</h2>
                     <p class="text-slate-300 text-lg leading-relaxed">
                         Entendemos la responsabilidad que supone cada evento. Nuestro enfoque se basa en una planificación meticulosa y una ejecución técnica impecable para que tú solo tengas que preocuparte de disfrutar y atender a tus invitados. Nos convertimos en tu socio tecnológico y logístico de confianza.
                     </p>
@@ -1570,7 +1608,7 @@
             </div>
         </div>
         <div class="relative max-w-3xl mx-auto px-6 z-10" data-scrub>
-            <h2 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">¿Listo para crear algo memorable?</h2>
+            <h2 class="reveal-words text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">¿Listo para crear algo memorable?</h2>
             <p class="text-slate-400 text-lg mb-10">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad, con la técnica resuelta de principio a fin.</p>
             <a href="#contacto" class="btn-apple magnetic-btn inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg">
                 Empezar ahora
@@ -1694,6 +1732,106 @@
 
     <!-- SCRIPTS -->
     <script>
+        // ===== SECUENCIA DE SCROLL ESTILO APPLE (canvas + fotogramas) =====
+        // Se define aquí, ANTES del controlador único de scroll, para que este último pueda
+        // llamar a scrubEngine.update(...) dentro de su mismo requestAnimationFrame, sin añadir
+        // un segundo listener de scroll (por eso la sección no "tira" al bajar la página).
+        const scrubEngine = (function() {
+            const section = document.getElementById('scrub-sequence');
+            const canvas = document.getElementById('scrub-canvas');
+            const captionEl = document.getElementById('scrub-caption-text');
+            if (!section || !canvas || !canvas.getContext) return null;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null; // usa la imagen fija de respaldo (ver CSS)
+
+            const TOTAL_FRAMES = 72;
+            const frames = new Array(TOTAL_FRAMES);
+            let started = false;
+            let lastDrawnIndex = -1;
+            const ctx = canvas.getContext('2d');
+
+            const captions = [
+                { until: 0.22, text: 'Cada evento empieza con una idea' },
+                { until: 0.5, text: 'Se convierte en un plano técnico' },
+                { until: 0.78, text: 'Y cobra vida con nuestro equipo' },
+                { until: 1.01, text: 'Listo para el gran día' }
+            ];
+            let currentCaption = captions[0].text;
+
+            function frameSrc(i) {
+                return 'scrub/frame-' + String(i + 1).padStart(4, '0') + '.webp';
+            }
+
+            function startLoading() {
+                if (started) return;
+                started = true;
+                for (let i = 0; i < TOTAL_FRAMES; i++) {
+                    const img = new Image();
+                    img.decoding = 'async';
+                    if (i === 0) {
+                        img.onload = () => { if (lastDrawnIndex === -1) drawFrame(0); };
+                    }
+                    img.src = frameSrc(i);
+                    frames[i] = img;
+                }
+            }
+
+            function resizeCanvas() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = Math.round(canvas.clientWidth * dpr);
+                canvas.height = Math.round(canvas.clientHeight * dpr);
+                lastDrawnIndex = -1; // fuerza redibujar tras cambiar de tamaño
+            }
+
+            function drawFrame(index) {
+                const img = frames[index];
+                if (!img || !img.complete || !img.naturalWidth) return;
+                lastDrawnIndex = index;
+                const cw = canvas.width, ch = canvas.height;
+                const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+                const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
+                ctx.clearRect(0, 0, cw, ch);
+                ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+            }
+
+            // Empieza a precargar los fotogramas un poco antes de llegar a la sección, no al cargar la página
+            if ('IntersectionObserver' in window) {
+                const preloadObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) { startLoading(); preloadObserver.disconnect(); }
+                    });
+                }, { rootMargin: '150% 0px' });
+                preloadObserver.observe(section);
+            } else {
+                startLoading();
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas, { passive: true });
+
+            return {
+                section,
+                // Recibe el rect ya leído por el controlador de scroll (sin volver a forzar layout aquí)
+                update(rect, vh) {
+                    if (!rect) return;
+                    const total = rect.height - vh;
+                    if (total <= 0) return;
+                    const progress = Math.min(Math.max(-rect.top / total, 0), 1);
+                    const index = Math.round(progress * (TOTAL_FRAMES - 1));
+                    if (index !== lastDrawnIndex) drawFrame(index);
+
+                    const found = captions.find(c => progress <= c.until) || captions[captions.length - 1];
+                    if (found.text !== currentCaption && captionEl) {
+                        currentCaption = found.text;
+                        captionEl.style.opacity = '0';
+                        setTimeout(() => {
+                            captionEl.textContent = currentCaption;
+                            captionEl.style.opacity = '1';
+                        }, 200);
+                    }
+                }
+            };
+        })();
+
         // ===== CONTROLADOR ÚNICO DE SCROLL (evita los "tirones" al bajar) =====
         // Antes había varios listeners de scroll independientes (cabecera, botón "volver
         // arriba", zoom del vídeo del hero, parallax de círculos, revelado por scroll, barra
@@ -1736,6 +1874,7 @@
                 const contactoRect = (stickyCta && contactoEl) ? contactoEl.getBoundingClientRect() : null;
                 const blobRects = reduceMotion ? null : blobs.map(b => b.getBoundingClientRect());
                 const scrubRects = reduceMotion ? null : scrubEls.map(el => el.getBoundingClientRect());
+                const scrubSeqRect = scrubEngine ? scrubEngine.section.getBoundingClientRect() : null;
 
                 // ---- ESCRITURA: ya no se vuelve a leer nada del layout a partir de aquí ----
 
@@ -1798,6 +1937,9 @@
                     const pct = docScrollable > 0 ? (scrollY / docScrollable) * 100 : 0;
                     progressBar.style.width = pct + '%';
                 }
+
+                // Secuencia de scroll estilo Apple (montaje del escenario fotograma a fotograma)
+                if (scrubEngine) scrubEngine.update(scrubSeqRect, vh);
             }
 
             function onScroll() {
@@ -1840,6 +1982,40 @@
                     card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
             });
+        })();
+
+        // ===== TITULARES CON REVELADO PALABRA A PALABRA (estilo editorial premium) =====
+        (function() {
+            const heads = document.querySelectorAll('.reveal-words');
+            if (!heads.length) return;
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            heads.forEach(h => {
+                // Envuelve cada palabra en dos <span>: el exterior oculta el desbordamiento,
+                // el interior es el que se desliza hacia arriba al entrar en pantalla
+                const lines = h.innerHTML.split(/<br\s*\/?>/i);
+                const wrapped = lines.map(line => {
+                    const words = line.trim().split(/\s+/).filter(Boolean);
+                    return words.map(w => `<span class="rw-word"><span class="rw-inner">${w}</span></span>`).join(' ');
+                });
+                h.innerHTML = wrapped.join('<br>');
+                let i = 0;
+                h.querySelectorAll('.rw-inner').forEach(span => span.style.setProperty('--i', i++));
+            });
+
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                heads.forEach(h => h.classList.add('rw-visible'));
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('rw-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.4 });
+            heads.forEach(h => observer.observe(h));
         })();
 
         // ===== INDICADOR DE SECCIÓN LATERAL: resalta el punto de la sección visible =====
