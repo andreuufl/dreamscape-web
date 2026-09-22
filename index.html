@@ -808,7 +808,7 @@
     <section id="scrub-sequence">
         <div id="scrub-sticky">
             <canvas id="scrub-canvas" aria-hidden="true"></canvas>
-            <img id="scrub-fallback-img" src="frame-0075.webp?v=terraza" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
+            <img id="scrub-fallback-img" src="frame-0075.webp?v=terraza-hd" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
             <div id="scrub-gradient"></div>
             <div id="scrub-caption-wrap">
                 <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight">Cada evento empieza con una idea</p>
@@ -1800,14 +1800,14 @@
                 { until: 0.22, text: 'Cada evento empieza con una idea' },
                 { until: 0.5, text: 'Se convierte en un plano técnico' },
                 { until: 0.78, text: 'Y cobra vida con nuestro equipo' },
-                { until: 1.01, text: 'Listo para el gran día' }
+                { until: 1.01, text: '¿Listo para el gran día?' }
             ];
             let currentCaption = captions[0].text;
 
             function frameSrc(i) {
-                // "?v=terraza" evita que el navegador/CDN sirvan la copia antigua en caché
-                // de los fotogramas 1-72, que se llaman igual que antes pero con contenido nuevo.
-                return 'frame-' + String(i + 1).padStart(4, '0') + '.webp?v=terraza';
+                // "?v=" evita que el navegador/CDN sirvan una copia antigua en caché
+                // cuando se sube un fotograma nuevo con el mismo nombre de archivo.
+                return 'frame-' + String(i + 1).padStart(4, '0') + '.webp?v=terraza-hd';
             }
 
             function startLoading() {
