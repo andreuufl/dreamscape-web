@@ -365,7 +365,8 @@
         #scrub-sticky {
             position: sticky;
             top: 0;
-            height: 100vh;
+            height: 100vh; /* respaldo para navegadores sin soporte de svh */
+            height: 100svh; /* evita huecos/recortes cuando aparece/desaparece la barra del navegador móvil */
             width: 100%;
             overflow: hidden;
             display: flex;
@@ -399,7 +400,7 @@
         }
         @media (prefers-reduced-motion: reduce) {
             #scrub-sequence { height: auto; }
-            #scrub-sticky { position: static; height: 70vh; }
+            #scrub-sticky { position: static; height: 70vh; height: 70svh; }
             #scrub-canvas { display: none; }
             #scrub-fallback-img { display: block; }
         }
