@@ -1,4 +1,29 @@
 User-agent: *
 Allow: /
 
+# Buscadores de IA y motores de respuesta (para aparecer en resúmenes y recomendaciones de IA)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://www.eventsandproductionsap.com/sitemap.xml
