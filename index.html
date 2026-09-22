@@ -357,10 +357,46 @@
         }
 
         /* Secuencia de scroll estilo Apple: por defecto ocupa 400vh de scroll para dar tiempo
-           a recorrer los fotogramas; con "reducir movimiento" se colapsa a una imagen fija */
-        #scrub-sequence { height: 400vh; }
+           a recorrer los fotogramas; con "reducir movimiento" se colapsa a una imagen fija.
+           Todo el layout se define aquí con CSS propio (no con clases de Tailwind) porque
+           styles.css es un build ya compilado/purgado: una clase de Tailwind que no existiera
+           ya en el HTML en el momento de generar ese archivo no tiene ningún efecto. */
+        #scrub-sequence { position: relative; height: 400vh; background: #020617; }
+        #scrub-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #scrub-canvas, #scrub-fallback-img, #scrub-gradient {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
         #scrub-canvas { display: block; }
-        #scrub-fallback-img { display: none; }
+        #scrub-fallback-img { display: none; object-fit: cover; }
+        #scrub-gradient {
+            pointer-events: none;
+            background: linear-gradient(to bottom, rgba(2,6,23,0.5), rgba(2,6,23,0) 40%, rgba(2,6,23,0.7));
+        }
+        #scrub-caption-wrap {
+            position: relative;
+            z-index: 10;
+            max-width: 42rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+            color: #fff;
+        }
+        #scrub-caption-text {
+            transition: opacity 0.5s ease;
+            text-shadow: 0 2px 24px rgba(0,0,0,0.4);
+        }
         @media (prefers-reduced-motion: reduce) {
             #scrub-sequence { height: auto; }
             #scrub-sticky { position: static; height: 70vh; }
@@ -544,6 +580,16 @@
             background: rgba(255, 255, 255, 0.85) !important;
             border-color: rgba(79, 70, 229, 0.8) !important;
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.35);
+        }
+
+        /* Anillo de foco visible (WCAG 2.4.7): escrito como CSS propio, no como clases de
+           Tailwind "focus-visible:*", porque styles.css es un build ya compilado y esas
+           clases concretas no existían en él, así que no tenían ningún efecto real. */
+        #mobile-menu-btn:focus-visible,
+        #modal-exit-intent button:focus-visible {
+            outline: 2px solid #818cf8;
+            outline-offset: 2px;
+            border-radius: 0.5rem;
         }
         /* Navegador sin soporte de backdrop-filter: se cae a un panel casi sólido, sin perder legibilidad */
         @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -758,13 +804,13 @@
     <!-- SECUENCIA DE SCROLL ESTILO APPLE: el montaje del escenario avanza fotograma a fotograma
          según el scroll, igual que el efecto "gira el iPhone" de apple.com. En pantallas con
          "reducir movimiento" activado, se sustituye por una imagen fija (ver CSS y JS más abajo). -->
-    <section id="scrub-sequence" class="relative bg-slate-950">
-        <div id="scrub-sticky" class="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
-            <canvas id="scrub-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
-            <img id="scrub-fallback-img" src="scrub/frame-0072.webp" loading="lazy" alt="Montaje de escenario de Dreamscape Events" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/70 pointer-events-none"></div>
-            <div class="relative z-10 max-w-2xl mx-auto px-6 text-center text-white">
-                <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight transition-opacity duration-500 ease-out" style="text-shadow: 0 2px 24px rgba(0,0,0,0.4);">Cada evento empieza con una idea</p>
+    <section id="scrub-sequence">
+        <div id="scrub-sticky">
+            <canvas id="scrub-canvas" aria-hidden="true"></canvas>
+            <img id="scrub-fallback-img" src="scrub/frame-0072.webp" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
+            <div id="scrub-gradient"></div>
+            <div id="scrub-caption-wrap">
+                <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight">Cada evento empieza con una idea</p>
             </div>
         </div>
     </section>
