@@ -518,8 +518,8 @@
         }
         .glass-input:focus {
             background: rgba(255, 255, 255, 0.85) !important;
-            border-color: rgba(79, 70, 229, 0.55) !important;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+            border-color: rgba(79, 70, 229, 0.8) !important;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.35);
         }
         /* Navegador sin soporte de backdrop-filter: se cae a un panel casi sólido, sin perder legibilidad */
         @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -644,7 +644,7 @@
 
                 <!-- Mobile menu button -->
                 <div class="xl:hidden flex items-center">
-                    <button type="button" id="mobile-menu-btn" class="logo-text-dark text-slate-600 hover:text-slate-900 focus:outline-none p-2 rounded-lg cursor-pointer" aria-label="Abrir menú">
+                    <button type="button" id="mobile-menu-btn" class="logo-text-dark text-slate-600 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 p-2 rounded-lg cursor-pointer" aria-label="Abrir menú">
                         <svg class="svg-icon text-xl" id="menu-icon" aria-hidden="true"><use href="#fa-bars"></use></svg>
                     </button>
                 </div>
@@ -714,9 +714,9 @@
                     <span class="text-sm">m² transformados</span>
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-white/20"></div>
-                <div class="flex items-baseline gap-2">
-                    <span class="text-2xl font-bold text-white"><span data-count-to="100" data-suffix="%">0</span></span>
-                    <span class="text-sm">clientes satisfechos</span>
+                <div class="flex items-center gap-2">
+                    <svg class="svg-icon text-indigo-400" aria-hidden="true"><use href="#fa-thumbs-up"></use></svg>
+                    <span class="text-sm font-medium text-white">Atención personalizada en cada proyecto</span>
                 </div>
                 <div class="hidden sm:block w-px h-6 bg-white/20"></div>
                 <div class="flex items-center gap-2">
@@ -1022,7 +1022,7 @@
     <!-- MODAL DE INTENCIÓN DE SALIDA (exit-intent): aparece una vez por sesión -->
     <div id="modal-exit-intent" role="dialog" aria-modal="true" aria-labelledby="exit-intent-title" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[160] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 sm:p-10 text-center relative shadow-2xl">
-            <button type="button" onclick="closeModal('modal-exit-intent')" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 flex items-center justify-center transition-all">
+            <button type="button" onclick="closeModal('modal-exit-intent')" aria-label="Cerrar" class="absolute top-4 right-4 w-9 h-9 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-700 focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 flex items-center justify-center transition-all">
                 <svg class="svg-icon" aria-hidden="true"><use href="#fa-xmark"></use></svg>
             </button>
             <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto mb-5 border border-indigo-100">
@@ -1293,9 +1293,8 @@
                     </div>
                     <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center space-y-3 backdrop-blur-sm card-hover-3d group hover:border-emerald-500/30 mt-12">
                         <svg class="svg-icon text-3xl text-emerald-400 group-hover:scale-110 transition-transform" aria-hidden="true"><use href="#fa-thumbs-up"></use></svg>
-                        <span class="block text-5xl font-black text-white">100%</span>
-                        <span class="block font-bold text-lg text-slate-100">Clientes Satisfechos</span>
-                        <span class="block text-sm text-slate-400">Nuestro compromiso con la excelencia es total.</span>
+                        <span class="block font-bold text-lg text-slate-100">Compromiso Total</span>
+                        <span class="block text-sm text-slate-400">Nuestro compromiso con la excelencia guía cada proyecto que producimos.</span>
                     </div>
                 </div>
             </div>
@@ -1615,7 +1614,7 @@
             </div>
 
             <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-center md:text-left border-t border-slate-800 pt-8">
-                <p>&copy; 2026 Dreamscape Events. Todos los derechos reservados. Servicios de producción técnica en toda España.</p>
+                <p>&copy; 2026 Dreamscape Events and Complete Productions, S.L. (NIF B19859115) · c/ Valencia, 76, 08759 Vallirana (Barcelona). Todos los derechos reservados.</p>
                 <div class="grid grid-cols-2 sm:flex sm:space-x-6 gap-x-6 gap-y-2.5 justify-center font-medium">
                     <a href="/aviso-legal.html" class="hover:text-white transition-colors">Aviso Legal</a>
                     <a href="/privacidad.html" class="hover:text-white transition-colors">Privacidad</a>
@@ -1656,7 +1655,7 @@
     <div id="modal-service-corporativo" role="dialog" aria-modal="true" aria-labelledby="title-service-corporativo" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
             <div class="w-full h-48 relative overflow-hidden flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?q=75&w=900&auto=format&fit=crop" alt="Gala corporativa con iluminación escénica" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <img src="servicio-corporativo.jpg?v=2" alt="Montaje técnico de Dreamscape Events para un evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
             </div>
             <div class="p-8 text-sm space-y-4">
                 <h3 id="title-service-corporativo" class="text-2xl font-black">Eventos Corporativos</h3>
@@ -1669,7 +1668,7 @@
     <div id="modal-service-congresos" role="dialog" aria-modal="true" aria-labelledby="title-service-congresos" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
             <div class="w-full h-48 relative overflow-hidden flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=75&w=900&auto=format&fit=crop" alt="Congreso con infraestructura audiovisual" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <img src="servicio-congresos.jpg?v=2" alt="Escenografía de Dreamscape Events para un congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async">
             </div>
             <div class="p-8 text-sm space-y-4">
                 <h3 id="title-service-congresos" class="text-2xl font-black">Congresos y Ferias</h3>
@@ -1682,7 +1681,7 @@
     <div id="modal-service-bodas" role="dialog" aria-modal="true" aria-labelledby="title-service-bodas" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden items-center justify-center p-4">
         <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative shadow-2xl flex flex-col">
             <div class="w-full h-48 relative overflow-hidden flex-shrink-0">
-                <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?q=75&w=900&auto=format&fit=crop" alt="Boda al aire libre con iluminación decorativa" class="w-full h-full object-cover" loading="lazy" decoding="async">
+                <img src="servicio-bodas.jpg?v=4" alt="Técnico de sonido de Dreamscape Events en una boda" class="w-full h-full object-cover" loading="lazy" decoding="async">
             </div>
             <div class="p-8 text-sm space-y-4">
                 <h3 id="title-service-bodas" class="text-2xl font-black">Bodas y Celebraciones</h3>
