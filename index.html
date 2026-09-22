@@ -459,6 +459,13 @@
         @media (prefers-reduced-motion: reduce) {
             .aurora-blob { animation: none !important; }
         }
+        /* En móvil, un desenfoque (blur) grande y en animación continua es de lo más costoso
+           para la GPU y provoca lentitud/tirones en gama media-baja. Se reduce el radio y se
+           para la animación en pantallas pequeñas, conservando el efecto pero ligero. */
+        @media (max-width: 768px) {
+            .aurora-blob { animation: none !important; filter: blur(36px); }
+            .parallax-blob { filter: blur(36px) !important; }
+        }
 
         /* Máscara de revelado tipo cortina en las fotos grandes de Servicios */
         .curtain-wrap { position: relative; }
@@ -1825,7 +1832,10 @@
             }
 
             function resizeCanvas() {
-                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                // En pantallas pequeñas se limita a 1x: en móvil dibujar a 2x-3x de densidad
+                // real cuesta mucha más GPU y apenas se aprecia por el tamaño físico del panel.
+                const maxDpr = window.innerWidth <= 768 ? 1 : 2;
+                const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
                 canvas.width = Math.round(canvas.clientWidth * dpr);
                 canvas.height = Math.round(canvas.clientHeight * dpr);
                 lastDrawnIndex = -1; // fuerza redibujar tras cambiar de tamaño
