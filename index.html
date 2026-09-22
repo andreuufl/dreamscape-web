@@ -808,7 +808,7 @@
     <section id="scrub-sequence">
         <div id="scrub-sticky">
             <canvas id="scrub-canvas" aria-hidden="true"></canvas>
-            <img id="scrub-fallback-img" src="frame-0075.webp" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
+            <img id="scrub-fallback-img" src="frame-0075.webp?v=terraza" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
             <div id="scrub-gradient"></div>
             <div id="scrub-caption-wrap">
                 <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight">Cada evento empieza con una idea</p>
@@ -1805,7 +1805,9 @@
             let currentCaption = captions[0].text;
 
             function frameSrc(i) {
-                return 'frame-' + String(i + 1).padStart(4, '0') + '.webp';
+                // "?v=terraza" evita que el navegador/CDN sirvan la copia antigua en caché
+                // de los fotogramas 1-72, que se llaman igual que antes pero con contenido nuevo.
+                return 'frame-' + String(i + 1).padStart(4, '0') + '.webp?v=terraza';
             }
 
             function startLoading() {
