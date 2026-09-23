@@ -17,6 +17,13 @@
 
     <link rel="icon" type="image/png" href="./favicon.png?v=3">
     <link rel="stylesheet" href="./styles.css">
+    <style>
+        /* Más aire entre la etiqueta de categoría y el título de cada tarjeta del blog.
+           Se escribe como CSS propio (no como una clase nueva de Tailwind) porque
+           styles.css es un build ya compilado: una clase que no existiera ya en el
+           HTML en el momento de generar ese archivo no tendría ningún efecto. */
+        .blog-card-title { margin-top: 0.9rem !important; }
+    </style>
 
     <script type="application/ld+json">
 {
@@ -66,7 +73,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full border border-indigo-100 text-xs font-semibold uppercase tracking-wider">Producción Integral</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Detrás de las cámaras: Despliegue técnico para la Gala Penguin</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Detrás de las cámaras: Despliegue técnico para la Gala Penguin</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Analizamos la logística, el diseño de iluminación y la realización de vídeo para un evento de dos días con más de 1000 asistentes.</p>
                     </div>
                 </a>
@@ -77,7 +84,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100 text-xs font-semibold uppercase tracking-wider">Innovación</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">Tendencias en Audio Profesional para Congresos Híbridos</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">Tendencias en Audio Profesional para Congresos Híbridos</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Cómo garantizar un sonido nítido tanto para asistentes presenciales como remotos.</p>
                     </div>
                 </a>
@@ -88,7 +95,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full border border-rose-100 text-xs font-semibold uppercase tracking-wider">Diseño Ambiental</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-rose-600 transition-colors line-clamp-2">El poder de la Iluminación Arquitectónica en Bodas de Exterior</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-rose-600 transition-colors line-clamp-2">El poder de la Iluminación Arquitectónica en Bodas de Exterior</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Transformamos espacios ajardinados en escenarios de cuento de hadas.</p>
                     </div>
                 </a>
@@ -99,7 +106,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-violet-50 text-violet-600 px-3 py-1 rounded-full border border-violet-100 text-xs font-semibold uppercase tracking-wider">Guía Técnica</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-violet-600 transition-colors line-clamp-2">¿Qué es un rider técnico y por qué tu evento lo necesita?</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-violet-600 transition-colors line-clamp-2">¿Qué es un rider técnico y por qué tu evento lo necesita?</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">El documento que evita imprevistos de última hora en tu evento.</p>
                     </div>
                 </a>
@@ -110,7 +117,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-rose-50 text-rose-600 px-3 py-1 rounded-full border border-rose-100 text-xs font-semibold uppercase tracking-wider">Guía de Bodas</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-rose-600 transition-colors line-clamp-2">5 preguntas antes de contratar el equipo técnico de tu boda</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-rose-600 transition-colors line-clamp-2">5 preguntas antes de contratar el equipo técnico de tu boda</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Cómo detectar si un proveedor tiene las garantías que tu día necesita.</p>
                     </div>
                 </a>
@@ -121,7 +128,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100 text-xs font-semibold uppercase tracking-wider">Sonido Profesional</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">Sonido Bluetooth vs. sonido profesional: por qué importa</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">Sonido Bluetooth vs. sonido profesional: por qué importa</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">¿De verdad necesitas un técnico de sonido? Las diferencias reales.</p>
                     </div>
                 </a>
@@ -132,7 +139,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full border border-amber-100 text-xs font-semibold uppercase tracking-wider">Planificación</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-600 transition-colors line-clamp-2">Con cuánta antelación reservar el equipo técnico de tu boda</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-600 transition-colors line-clamp-2">Con cuánta antelación reservar el equipo técnico de tu boda</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Los plazos reales según la época del año y el tipo de evento.</p>
                     </div>
                 </a>
@@ -143,7 +150,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full border border-indigo-100 text-xs font-semibold uppercase tracking-wider">Eventos Corporativos</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Errores más comunes al organizar un evento corporativo</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Errores más comunes al organizar un evento corporativo</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Los fallos técnicos más habituales, y cómo evitarlos.</p>
                     </div>
                 </a>
@@ -154,7 +161,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-sky-50 text-sky-600 px-3 py-1 rounded-full border border-sky-100 text-xs font-semibold uppercase tracking-wider">Guía de Bodas</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-sky-600 transition-colors line-clamp-2">DJ o grupo en directo: qué cambia a nivel técnico</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-sky-600 transition-colors line-clamp-2">DJ o grupo en directo: qué cambia a nivel técnico</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Lo que cambia a nivel de sonido, espacio e instalación para tu boda.</p>
                     </div>
                 </a>
@@ -165,7 +172,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100 text-xs font-semibold uppercase tracking-wider">Presupuestos</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">¿Cuánto cuesta alquilar sonido e iluminación para un evento?</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-emerald-600 transition-colors line-clamp-2">¿Cuánto cuesta alquilar sonido e iluminación para un evento?</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Los factores que determinan el precio y rangos orientativos según el evento.</p>
                     </div>
                 </a>
@@ -176,7 +183,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full border border-indigo-100 text-xs font-semibold uppercase tracking-wider">Guía de Alquiler</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Alquilar equipo de sonido: ¿con técnico o sin técnico?</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-indigo-600 transition-colors line-clamp-2">Alquilar equipo de sonido: ¿con técnico o sin técnico?</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Los riesgos reales de montarlo tú mismo, y cuándo sí tiene sentido.</p>
                     </div>
                 </a>
@@ -187,7 +194,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-sky-50 text-sky-600 px-3 py-1 rounded-full border border-sky-100 text-xs font-semibold uppercase tracking-wider">Sonido Profesional</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-sky-600 transition-colors line-clamp-2">¿Cuánta potencia de sonido necesito según el aforo?</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-sky-600 transition-colors line-clamp-2">¿Cuánta potencia de sonido necesito según el aforo?</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Por qué "más vatios" no siempre es mejor, y qué factores importan de verdad.</p>
                     </div>
                 </a>
@@ -198,7 +205,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-violet-50 text-violet-600 px-3 py-1 rounded-full border border-violet-100 text-xs font-semibold uppercase tracking-wider">Producción Audiovisual</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-violet-600 transition-colors line-clamp-2">Pantallas LED para eventos: guía completa</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-violet-600 transition-colors line-clamp-2">Pantallas LED para eventos: guía completa</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Qué son, en qué se diferencian de un proyector y cuándo usarlas.</p>
                     </div>
                 </a>
@@ -209,7 +216,7 @@
                     </div>
                     <div class="p-8 space-y-3 flex-grow">
                         <span class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full border border-amber-100 text-xs font-semibold uppercase tracking-wider">Organización de Eventos</span>
-                        <h2 class="text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-600 transition-colors line-clamp-2">¿Necesito un seguro de responsabilidad civil para mi evento?</h2>
+                        <h2 class="blog-card-title text-xl font-bold text-slate-950 leading-snug group-hover:text-amber-600 transition-colors line-clamp-2">¿Necesito un seguro de responsabilidad civil para mi evento?</h2>
                         <p class="text-slate-600 text-sm leading-relaxed line-clamp-3">Cuándo suele exigirlo el recinto y qué cubre habitualmente.</p>
                     </div>
                 </a>
