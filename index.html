@@ -4,6 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- RED DE SEGURIDAD GLOBAL contra pantallas "en blanco" en scroll: totalmente independiente
+         del script principal (que va al final de la página). En algunos móviles concretos, si el
+         script grande no llega a ejecutarse entero (error de parseo puntual de ese navegador,
+         extensión/bloqueador que corta la carga, etc.), el contenido con [data-scroll-fade] se
+         quedaría invisible para siempre porque el CSS lo oculta hasta que JS añade ".is-visible".
+         Este script diminuto, colocado aquí arriba, no depende de nada más: a los 4s SIEMPRE
+         fuerza la visibilidad de ese contenido, pase lo que pase con el resto de la página. -->
+    <script>
+        setTimeout(function () {
+            document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]').forEach(function (el) {
+                el.classList.add('is-visible');
+            });
+        }, 4000);
+    </script>
+
     <!-- Cabeceras de seguridad (lo máximo posible sin servidor propio; GitHub Pages no permite
          cabeceras HTTP reales como X-Frame-Options o Permissions-Policy — solo lo que cabe en meta tags).
          Comprobado contra los dominios externos reales que usa esta página. Si algo deja de funcionar
@@ -158,7 +173,7 @@
 
     <!-- Favicon: recorte de la "A" del logo real de Dreamscape, la única parte legible a tamaño de pestaña -->
     <link rel="icon" type="image/png" href="./favicon.png?v=3">
-    <link rel="apple-touch-icon" href="./New%20Logo%20Dreamscape%20.JPG">
+    <link rel="apple-touch-icon" href="./favicon.png?v=3">
     <!-- Tipografía: Inter (la alternativa web más cercana a SF Pro) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -644,6 +659,42 @@
         </div>
     </div>
     <script>
+        // ===== APARICIÓN SUAVE AL HACER SCROLL (IntersectionObserver) =====
+        // NOTA: este bloque se ejecuta el PRIMERO de todo el script, antes de cualquier otra
+        // función. Así, si algún otro bloque más abajo lanza un error en algún navegador/móvil
+        // concreto, el contenido de la página ya se ha hecho visible y no se queda "en blanco"
+        // por culpa de una animación de aparición que nunca llegó a dispararse. Además va
+        // envuelto en try/catch como red de seguridad adicional.
+        try {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // Unificamos data-scroll-fade y data-scroll-zoom: ambos son SIEMPRE visibles por CSS
+            // por defecto; este observer solo añade la clase que dispara el efecto de entrada.
+            const fadeEls = document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]');
+            if (reduceMotion || !('IntersectionObserver' in window)) {
+                fadeEls.forEach(el => el.classList.add('is-visible'));
+            } else {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+                fadeEls.forEach(el => observer.observe(el));
+
+                // Red de seguridad: si por lo que sea el observer no llega a disparar
+                // (pestaña en segundo plano, fallo puntual, etc.), forzamos visibilidad a los 2.5s
+                setTimeout(() => {
+                    fadeEls.forEach(el => el.classList.add('is-visible'));
+                }, 2500);
+            }
+        } catch (e) {
+            // Si algo falla, mostramos todo el contenido igualmente: nunca debe quedar invisible.
+            document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]').forEach(el => el.classList.add('is-visible'));
+            console.error('scroll-fade init error:', e);
+        }
+
         // Pantalla de carga: progreso simulado + ocultado real cuando la página está lista
         (function() {
             const bar = document.getElementById('loading-bar');
@@ -729,7 +780,7 @@
                 <a href="#blog" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Blog</a>
                 <a href="#contacto" class="mobile-link block text-base font-medium text-slate-700 hover:bg-indigo-50 hover:text-indigo-700 px-3 py-2.5 rounded-xl">Contacto</a>
                 <a href="#contacto" class="mobile-link block text-center bg-indigo-600 text-white px-4 py-3 rounded-xl font-semibold shadow-md btn-shine mt-4">
-                    Solicitar Información
+                    Solicitar Presupuesto
                 </a>
                 <a href="https://www.instagram.com/dreamscape_events_sl" target="_blank" rel="noopener noreferrer" class="mobile-link flex items-center justify-center gap-2 text-slate-500 hover:text-indigo-600 px-4 py-3 text-sm font-medium">
                     <svg class="svg-icon text-lg" aria-hidden="true"><use href="#fa-instagram"></use></svg> Síguenos en Instagram
@@ -766,7 +817,7 @@
             </p>
             <div class="hero-reveal-3 mt-11 flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#simulador" class="btn-apple magnetic-btn bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center">
-                    Solicitar presupuesto
+                    Calcular Presupuesto
                 </a>
                 <a href="#porfolio" class="btn-apple magnetic-btn bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center backdrop-blur-sm">
                     Ver nuestro trabajo
@@ -1158,7 +1209,7 @@
             <h3 id="exit-intent-title" class="text-2xl font-bold text-slate-950 mb-3">¿Sigues ahí?</h3>
             <p class="text-slate-600 leading-relaxed mb-7">Aprovecha para probar nuestro simulador: en menos de un minuto configuras tu evento y nos lo envías para recibir un presupuesto personalizado.</p>
             <a href="#simulador" onclick="closeModal('modal-exit-intent')" class="btn-apple inline-block w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3.5 rounded-full font-semibold">
-                Probar el simulador
+                Calcular Presupuesto
             </a>
         </div>
     </div>
@@ -1734,7 +1785,7 @@
             <h2 class="reveal-words text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">¿Listo para crear algo memorable?</h2>
             <p class="text-slate-400 text-lg mb-10">Cuéntanos tu proyecto y te ayudamos a hacerlo realidad, con la técnica resuelta de principio a fin.</p>
             <a href="#contacto" class="btn-apple magnetic-btn inline-block bg-white text-black px-10 py-4 rounded-full font-bold text-lg">
-                Empezar ahora
+                Solicitar Presupuesto
             </a>
         </div>
     </section>
@@ -2306,32 +2357,6 @@
             document.addEventListener('click', resetInactivityTimer);
         })();
 
-        // ===== APARICIÓN SUAVE AL HACER SCROLL (IntersectionObserver) =====
-        (function() {
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            // Unificamos data-scroll-fade y data-scroll-zoom: ambos son SIEMPRE visibles por CSS
-            // por defecto; este observer solo añade la clase que dispara el efecto de entrada.
-            const fadeEls = document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]');
-            if (reduceMotion || !('IntersectionObserver' in window)) {
-                fadeEls.forEach(el => el.classList.add('is-visible'));
-                return;
-            }
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-            fadeEls.forEach(el => observer.observe(el));
-
-            // Red de seguridad: si por lo que sea el observer no llega a disparar
-            // (pestaña en segundo plano, fallo puntual, etc.), forzamos visibilidad a los 2.5s
-            setTimeout(() => {
-                fadeEls.forEach(el => el.classList.add('is-visible'));
-            }, 2500);
-        })();
 
         // Control del Menú Móvil (con transición suave de altura/opacidad)
         const mobileBtn = document.getElementById('mobile-menu-btn');
