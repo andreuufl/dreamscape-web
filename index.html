@@ -357,11 +357,13 @@
         }
 
         /* Secuencia de scroll estilo Apple: por defecto ocupa 400vh de scroll para dar tiempo
-           a recorrer los fotogramas; con "reducir movimiento" se colapsa a una imagen fija.
-           Todo el layout se define aquí con CSS propio (no con clases de Tailwind) porque
-           styles.css es un build ya compilado/purgado: una clase de Tailwind que no existiera
-           ya en el HTML en el momento de generar ese archivo no tiene ningún efecto. */
-        #scrub-sequence { position: relative; height: 400vh; background: #020617; }
+           a leer las frases. Sin imágenes ni vídeo: solo texto y un fondo con degradado
+           (coste de GPU prácticamente nulo, pensado para ir fluido en cualquier móvil). */
+        #scrub-sequence {
+            position: relative;
+            height: 400vh;
+            background: linear-gradient(160deg, #0b1224 0%, #1e1b4b 55%, #0b1224 100%);
+        }
         #scrub-sticky {
             position: sticky;
             top: 0;
@@ -372,18 +374,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        #scrub-canvas, #scrub-fallback-img, #scrub-gradient {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-        #scrub-canvas { display: block; }
-        #scrub-fallback-img { display: none; object-fit: cover; }
-        #scrub-gradient {
-            pointer-events: none;
-            background: linear-gradient(to bottom, rgba(2,6,23,0.5), rgba(2,6,23,0) 40%, rgba(2,6,23,0.7));
         }
         #scrub-caption-wrap {
             position: relative;
@@ -401,8 +391,6 @@
         @media (prefers-reduced-motion: reduce) {
             #scrub-sequence { height: auto; }
             #scrub-sticky { position: static; height: 70vh; height: 70svh; }
-            #scrub-canvas { display: none; }
-            #scrub-fallback-img { display: block; }
         }
 
         /* Transiciones nativas entre páginas del sitio (efecto app), sin librerías.
@@ -809,14 +797,10 @@
         </div>
     </section>
 
-    <!-- SECUENCIA DE SCROLL ESTILO APPLE: el montaje del escenario avanza fotograma a fotograma
-         según el scroll, igual que el efecto "gira el iPhone" de apple.com. En pantallas con
-         "reducir movimiento" activado, se sustituye por una imagen fija (ver CSS y JS más abajo). -->
+    <!-- SECUENCIA DE TEXTO ESTILO APPLE: las frases van cambiando según el scroll, sobre un
+         fondo con degradado (sin imágenes ni vídeo, para que vaya fluido en cualquier móvil). -->
     <section id="scrub-sequence">
         <div id="scrub-sticky">
-            <canvas id="scrub-canvas" aria-hidden="true"></canvas>
-            <img id="scrub-fallback-img" src="frame-0075.avif?v=terraza-avif" loading="lazy" alt="Montaje de escenario de Dreamscape Events">
-            <div id="scrub-gradient"></div>
             <div id="scrub-caption-wrap">
                 <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight">Cada evento empieza con una idea</p>
             </div>
@@ -1786,22 +1770,16 @@
 
     <!-- SCRIPTS -->
     <script>
-        // ===== SECUENCIA DE SCROLL ESTILO APPLE (canvas + fotogramas) =====
+        // ===== SECUENCIA DE TEXTO ESTILO APPLE (sin imágenes ni canvas) =====
         // Se define aquí, ANTES del controlador único de scroll, para que este último pueda
         // llamar a scrubEngine.update(...) dentro de su mismo requestAnimationFrame, sin añadir
         // un segundo listener de scroll (por eso la sección no "tira" al bajar la página).
+        // No carga ningún archivo (ni imagen ni vídeo): solo cambia un texto, así que el coste
+        // para el navegador es prácticamente nulo incluso en móviles de gama baja.
         const scrubEngine = (function() {
             const section = document.getElementById('scrub-sequence');
-            const canvas = document.getElementById('scrub-canvas');
             const captionEl = document.getElementById('scrub-caption-text');
-            if (!section || !canvas || !canvas.getContext) return null;
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null; // usa la imagen fija de respaldo (ver CSS)
-
-            const TOTAL_FRAMES = 75;
-            const frames = new Array(TOTAL_FRAMES);
-            let started = false;
-            let lastDrawnIndex = -1;
-            const ctx = canvas.getContext('2d');
+            if (!section || !captionEl) return null;
 
             const captions = [
                 { until: 0.22, text: 'Cada evento empieza con una idea' },
@@ -1811,62 +1789,6 @@
             ];
             let currentCaption = captions[0].text;
 
-            function frameSrc(i) {
-                // "?v=" evita que el navegador/CDN sirvan una copia antigua en caché
-                // cuando se sube un fotograma nuevo con el mismo nombre de archivo.
-                return 'frame-' + String(i + 1).padStart(4, '0') + '.avif?v=terraza-avif';
-            }
-
-            function startLoading() {
-                if (started) return;
-                started = true;
-                for (let i = 0; i < TOTAL_FRAMES; i++) {
-                    const img = new Image();
-                    img.decoding = 'async';
-                    if (i === 0) {
-                        img.onload = () => { if (lastDrawnIndex === -1) drawFrame(0); };
-                    }
-                    img.src = frameSrc(i);
-                    frames[i] = img;
-                }
-            }
-
-            function resizeCanvas() {
-                // En pantallas pequeñas se limita a 1x: en móvil dibujar a 2x-3x de densidad
-                // real cuesta mucha más GPU y apenas se aprecia por el tamaño físico del panel.
-                const maxDpr = window.innerWidth <= 768 ? 1 : 2;
-                const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
-                canvas.width = Math.round(canvas.clientWidth * dpr);
-                canvas.height = Math.round(canvas.clientHeight * dpr);
-                lastDrawnIndex = -1; // fuerza redibujar tras cambiar de tamaño
-            }
-
-            function drawFrame(index) {
-                const img = frames[index];
-                if (!img || !img.complete || !img.naturalWidth) return;
-                lastDrawnIndex = index;
-                const cw = canvas.width, ch = canvas.height;
-                const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
-                const dw = img.naturalWidth * scale, dh = img.naturalHeight * scale;
-                ctx.clearRect(0, 0, cw, ch);
-                ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
-            }
-
-            // Empieza a precargar los fotogramas un poco antes de llegar a la sección, no al cargar la página
-            if ('IntersectionObserver' in window) {
-                const preloadObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) { startLoading(); preloadObserver.disconnect(); }
-                    });
-                }, { rootMargin: '150% 0px' });
-                preloadObserver.observe(section);
-            } else {
-                startLoading();
-            }
-
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas, { passive: true });
-
             return {
                 section,
                 // Recibe el rect ya leído por el controlador de scroll (sin volver a forzar layout aquí)
@@ -1875,11 +1797,9 @@
                     const total = rect.height - vh;
                     if (total <= 0) return;
                     const progress = Math.min(Math.max(-rect.top / total, 0), 1);
-                    const index = Math.round(progress * (TOTAL_FRAMES - 1));
-                    if (index !== lastDrawnIndex) drawFrame(index);
 
                     const found = captions.find(c => progress <= c.until) || captions[captions.length - 1];
-                    if (found.text !== currentCaption && captionEl) {
+                    if (found.text !== currentCaption) {
                         currentCaption = found.text;
                         captionEl.style.opacity = '0';
                         setTimeout(() => {
