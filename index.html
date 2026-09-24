@@ -1684,7 +1684,13 @@
                         <input type="hidden" name="access_key" value="755b52de-71b1-4719-8646-96acf95bad91">
                         <input type="hidden" name="subject" value="Nueva descarga: Checklist técnico">
                         <input type="hidden" name="Formulario" value="Lead Magnet - Checklist Técnico">
-                        <input type="hidden" name="redirect" value="https://www.eventsandproductionsap.com/gracias-checklist.html">
+                        <!-- Campo "message" explícito: Web3Forms aplica un filtro antispam más agresivo a
+                             formularios que solo tienen nombre+email sin ningún cuerpo de mensaje (patrón
+                             típico de spam de bots), lo que puede hacer que el envío "funcione" (redirige a
+                             la página de gracias) pero el correo se descarte en silencio sin llegar nunca a
+                             la bandeja de entrada. Con este campo el formulario deja de encajar en ese patrón. -->
+                        <input type="hidden" name="message" value="Nuevo lead: se ha descargado el checklist técnico gratuito desde la web.">
+                        <input type="hidden" name="from_name" value="Web Dreamscape Events - Checklist técnico">
                         <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
 
                         <div class="space-y-2">
