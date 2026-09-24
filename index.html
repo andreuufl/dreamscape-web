@@ -371,42 +371,6 @@
             transition: width 0.1s linear;
         }
 
-        /* Secuencia de scroll estilo Apple: por defecto ocupa 400vh de scroll para dar tiempo
-           a leer las frases. Sin imágenes ni vídeo: solo texto y un fondo con degradado
-           (coste de GPU prácticamente nulo, pensado para ir fluido en cualquier móvil). */
-        #scrub-sequence {
-            position: relative;
-            height: 400vh;
-            background: linear-gradient(160deg, #0b1224 0%, #1e1b4b 55%, #0b1224 100%);
-        }
-        #scrub-sticky {
-            position: sticky;
-            top: 0;
-            height: 100vh; /* respaldo para navegadores sin soporte de svh */
-            height: 100svh; /* evita huecos/recortes cuando aparece/desaparece la barra del navegador móvil */
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        #scrub-caption-wrap {
-            position: relative;
-            z-index: 10;
-            max-width: 42rem;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            text-align: center;
-            color: #fff;
-        }
-        #scrub-caption-text {
-            transition: opacity 0.5s ease;
-            text-shadow: 0 2px 24px rgba(0,0,0,0.4);
-        }
-        @media (prefers-reduced-motion: reduce) {
-            #scrub-sequence { height: auto; }
-            #scrub-sticky { position: static; height: 70vh; height: 70svh; }
-        }
 
         /* Transiciones nativas entre páginas del sitio (efecto app), sin librerías.
            Los navegadores que no la soportan lo ignoran sin ningún efecto negativo. */
@@ -834,7 +798,7 @@
             </p>
             <div class="hero-reveal-3 mt-11 flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="#simulador" class="btn-apple magnetic-btn bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center">
-                    Calcular Presupuesto
+                    Configurar mi Evento
                 </a>
                 <a href="#porfolio" class="btn-apple magnetic-btn bg-white/10 hover:bg-white/15 text-white border border-white/25 px-8 py-3.5 rounded-full font-medium text-base text-center backdrop-blur-sm">
                     Ver nuestro trabajo
@@ -862,16 +826,6 @@
 
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
             <svg class="svg-icon text-white/50" aria-hidden="true"><use href="#fa-chevron-down"></use></svg>
-        </div>
-    </section>
-
-    <!-- SECUENCIA DE TEXTO ESTILO APPLE: las frases van cambiando según el scroll, sobre un
-         fondo con degradado (sin imágenes ni vídeo, para que vaya fluido en cualquier móvil). -->
-    <section id="scrub-sequence">
-        <div id="scrub-sticky">
-            <div id="scrub-caption-wrap">
-                <p id="scrub-caption-text" class="text-2xl md:text-4xl font-bold tracking-tight">Cada evento empieza con una idea</p>
-            </div>
         </div>
     </section>
 
@@ -1226,7 +1180,7 @@
             <h3 id="exit-intent-title" class="text-2xl font-bold text-slate-950 mb-3">¿Sigues ahí?</h3>
             <p class="text-slate-600 leading-relaxed mb-7">Aprovecha para probar nuestro simulador: en menos de un minuto configuras tu evento y nos lo envías para recibir un presupuesto personalizado.</p>
             <a href="#simulador" onclick="closeModal('modal-exit-intent')" class="btn-apple inline-block w-full bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3.5 rounded-full font-semibold">
-                Calcular Presupuesto
+                Configurar mi Evento
             </a>
         </div>
     </div>
@@ -1935,47 +1889,6 @@
 
     <!-- SCRIPTS -->
     <script>
-        // ===== SECUENCIA DE TEXTO ESTILO APPLE (sin imágenes ni canvas) =====
-        // Se define aquí, ANTES del controlador único de scroll, para que este último pueda
-        // llamar a scrubEngine.update(...) dentro de su mismo requestAnimationFrame, sin añadir
-        // un segundo listener de scroll (por eso la sección no "tira" al bajar la página).
-        // No carga ningún archivo (ni imagen ni vídeo): solo cambia un texto, así que el coste
-        // para el navegador es prácticamente nulo incluso en móviles de gama baja.
-        const scrubEngine = (function() {
-            const section = document.getElementById('scrub-sequence');
-            const captionEl = document.getElementById('scrub-caption-text');
-            if (!section || !captionEl) return null;
-
-            const captions = [
-                { until: 0.22, text: 'Cada evento empieza con una idea' },
-                { until: 0.5, text: 'Se convierte en un plano técnico' },
-                { until: 0.78, text: 'Y cobra vida con nuestro equipo' },
-                { until: 1.01, text: '¿Listo para el gran día?' }
-            ];
-            let currentCaption = captions[0].text;
-
-            return {
-                section,
-                // Recibe el rect ya leído por el controlador de scroll (sin volver a forzar layout aquí)
-                update(rect, vh) {
-                    if (!rect) return;
-                    const total = rect.height - vh;
-                    if (total <= 0) return;
-                    const progress = Math.min(Math.max(-rect.top / total, 0), 1);
-
-                    const found = captions.find(c => progress <= c.until) || captions[captions.length - 1];
-                    if (found.text !== currentCaption) {
-                        currentCaption = found.text;
-                        captionEl.style.opacity = '0';
-                        setTimeout(() => {
-                            captionEl.textContent = currentCaption;
-                            captionEl.style.opacity = '1';
-                        }, 200);
-                    }
-                }
-            };
-        })();
-
         // ===== CONTROLADOR ÚNICO DE SCROLL (evita los "tirones" al bajar) =====
         // Antes había varios listeners de scroll independientes (cabecera, botón "volver
         // arriba", zoom del vídeo del hero, parallax de círculos, revelado por scroll, barra
@@ -2023,7 +1936,6 @@
                 const contactoRect = (stickyCta && contactoEl) ? contactoEl.getBoundingClientRect() : null;
                 const blobRects = heavyFxDisabled ? null : blobs.map(b => b.getBoundingClientRect());
                 const scrubRects = heavyFxDisabled ? null : scrubEls.map(el => el.getBoundingClientRect());
-                const scrubSeqRect = scrubEngine ? scrubEngine.section.getBoundingClientRect() : null;
 
                 // ---- ESCRITURA: ya no se vuelve a leer nada del layout a partir de aquí ----
 
@@ -2086,9 +1998,6 @@
                     const pct = docScrollable > 0 ? (scrollY / docScrollable) * 100 : 0;
                     progressBar.style.width = pct + '%';
                 }
-
-                // Secuencia de scroll estilo Apple (montaje del escenario fotograma a fotograma)
-                if (scrubEngine) scrubEngine.update(scrubSeqRect, vh);
             }
 
             function onScroll() {
