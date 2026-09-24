@@ -1691,6 +1691,7 @@
                              la bandeja de entrada. Con este campo el formulario deja de encajar en ese patrón. -->
                         <input type="hidden" name="message" value="Nuevo lead: se ha descargado el checklist técnico gratuito desde la web.">
                         <input type="hidden" name="from_name" value="Web Dreamscape Events - Checklist técnico">
+                        <input type="hidden" name="redirect" value="https://www.eventsandproductionsap.com/gracias-checklist.html">
                         <input type="checkbox" name="botcheck" class="hidden" style="display:none;" tabindex="-1" autocomplete="off">
 
                         <div class="space-y-2">
@@ -3116,6 +3117,76 @@
         function onTurnstileFallback() {
             console.warn('Turnstile no se ha podido cargar; el formulario sigue funcionando con el resto de protecciones (campo trampa).');
         }
+
+        // ===== ENVÍO DE FORMULARIOS POR AJAX (en vez de dejar que el navegador navegue directamente
+        // a Web3Forms) =====
+        // Motivo: Web3Forms hace la redirección a nuestra página de "gracias" en su propio servidor,
+        // y esa redirección puede no aplicarse (por ejemplo si el dominio de destino no coincide
+        // exactamente con el registrado en la cuenta de Web3Forms), mostrando en su lugar la página
+        // genérica "Form Submitted Successfully" de Web3Forms. Esto es lo que le pasó al formulario
+        // del checklist: el correo SÍ llegaba, pero el visitante se quedaba en la página de Web3Forms
+        // en vez de llegar a gracias-checklist.html, así que nunca se disparaba la descarga del PDF.
+        // Enviando el formulario nosotros mismos por fetch() y haciendo la redirección con JavaScript
+        // en cuanto Web3Forms confirma el envío, dejamos de depender de esa redirección del servidor.
+        (function() {
+            function setupAjaxForm(formId) {
+                const form = document.getElementById(formId);
+                if (!form) return;
+                const redirectInput = form.querySelector('input[name="redirect"]');
+                const redirectUrl = redirectInput ? redirectInput.value : null;
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+
+                const errorMsg = document.createElement('p');
+                errorMsg.className = 'hidden text-sm text-red-600 font-medium mt-3 text-center';
+                errorMsg.textContent = 'No se ha podido enviar el formulario. Escríbenos directamente a info@ap-events.es o por WhatsApp al 613 08 98 94.';
+                form.appendChild(errorMsg);
+
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    errorMsg.classList.add('hidden');
+
+                    // Campo trampa contra bots: si viene marcado, no enviamos nada (mismo
+                    // comportamiento que antes, cuando lo gestionaba Web3Forms del lado servidor).
+                    const honeypot = form.querySelector('input[name="botcheck"]');
+                    if (honeypot && honeypot.checked) return;
+
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.innerHTML = 'Enviando…';
+                    }
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                        headers: { 'Accept': 'application/json' }
+                    })
+                    .then(function(res) { return res.json(); })
+                    .then(function(data) {
+                        if (data && data.success) {
+                            if (redirectUrl) {
+                                window.location.href = redirectUrl;
+                            } else if (submitBtn) {
+                                submitBtn.disabled = false;
+                                submitBtn.innerHTML = originalBtnHTML;
+                            }
+                        } else {
+                            throw new Error((data && data.message) || 'Envío rechazado');
+                        }
+                    })
+                    .catch(function() {
+                        errorMsg.classList.remove('hidden');
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = originalBtnHTML;
+                        }
+                    });
+                });
+            }
+
+            setupAjaxForm('checklist-form');
+            setupAjaxForm('dreamscape-form');
+        })();
 
         // ===== PAUSAR VÍDEOS FUERA DE PANTALLA (fluidez del scroll) =====
         // Antes los 6 vídeos del porfolio (más el del hero) estaban SIEMPRE reproduciéndose
