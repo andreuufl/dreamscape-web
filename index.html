@@ -581,6 +581,15 @@
         #hero-text { margin-top: 18px; }
         @media (min-width: 640px) { #hero-text { margin-top: 22px; } }
 
+        /* Legibilidad del subtítulo del hero: el vídeo de fondo tiene zonas muy claras
+           (cortinas doradas) que hacían que el texto blanco semitransparente se mezclara
+           con el fondo. Con sombra de texto queda legible en cualquier punto del vídeo,
+           sin tener que oscurecer todo el vídeo ni perder el efecto visual. */
+        #hero-text p.hero-subtitle {
+            color: rgba(255, 255, 255, 0.92);
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55), 0 1px 4px rgba(0, 0, 0, 0.6);
+        }
+
         /* Anillo de foco visible (WCAG 2.4.7): escrito como CSS propio, no como clases de
            Tailwind "focus-visible:*", porque styles.css es un build ya compilado y esas
            clases concretas no existían en él, así que no tenían ningún efecto real. */
@@ -813,7 +822,7 @@
         <div class="relative z-20 flex-1 flex items-start justify-center">
         <div id="hero-text" class="relative max-w-4xl mx-auto px-6 text-center z-20">
             <h1 id="hero-title" class="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">Cada evento,<br>una experiencia inolvidable</h1>
-            <p class="hero-reveal-2 mt-7 text-lg md:text-2xl text-white/80 max-w-2xl mx-auto font-normal leading-relaxed">
+            <p class="hero-subtitle hero-reveal-2 mt-7 text-lg md:text-2xl text-white/80 max-w-2xl mx-auto font-normal leading-relaxed">
                 Producción técnica de eventos: montaje de escenarios, alquiler de sonido e iluminación y pantallas LED con técnico incluido, en Barcelona, Madrid, Valencia y toda España.
             </p>
             <div class="hero-reveal-3 mt-11 flex flex-col sm:flex-row gap-4 justify-center">
