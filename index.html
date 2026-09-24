@@ -535,6 +535,18 @@
             [data-scrub] { opacity: 1 !important; transform: none !important; }
         }
 
+        /* En móvil y tablet desactivamos por completo las animaciones ligadas al scroll
+           (fade, zoom y scrub): el contenido se muestra siempre visible y estático, sin
+           depender de que el JavaScript de scroll se ejecute correctamente en cada
+           dispositivo. Es la misma pantalla que ven los usuarios con "reducir movimiento"
+           activado, aplicada aquí a todo el rango táctil (móvil + iPad) para evitar los
+           fallos de scroll reportados en ciertos móviles y tablets. */
+        @media (max-width: 1024px) {
+            [data-scroll-fade] { opacity: 1 !important; transform: none !important; transition: none !important; }
+            [data-scroll-zoom] { opacity: 1 !important; transform: none !important; transition: none !important; }
+            [data-scrub] { opacity: 1 !important; transform: none !important; }
+        }
+
         /* Animación de pulso flotante para la burbuja de IA de Chatbase */
         #chatbase-bubble-button {
             animation: aiPulseBubble 2.5s infinite ease-in-out !important;
@@ -667,10 +679,15 @@
         // envuelto en try/catch como red de seguridad adicional.
         try {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // En móvil y tablet (≤1024px) el efecto de aparición al hacer scroll se desactiva
+            // por completo: el CSS ya fuerza el contenido visible en ese rango (ver
+            // [data-scroll-fade]/[data-scroll-zoom] en el media query max-width:1024px más
+            // arriba), así que ni siquiera creamos el IntersectionObserver ahí.
+            const skipScrollFx = reduceMotion || window.matchMedia('(max-width: 1024px)').matches;
             // Unificamos data-scroll-fade y data-scroll-zoom: ambos son SIEMPRE visibles por CSS
             // por defecto; este observer solo añade la clase que dispara el efecto de entrada.
             const fadeEls = document.querySelectorAll('[data-scroll-fade], [data-scroll-zoom]');
-            if (reduceMotion || !('IntersectionObserver' in window)) {
+            if (skipScrollFx || !('IntersectionObserver' in window)) {
                 fadeEls.forEach(el => el.classList.add('is-visible'));
             } else {
                 const observer = new IntersectionObserver((entries) => {
@@ -1569,9 +1586,11 @@
                     </div>
                 </div>
             </div>
+
+            <p class="text-center text-slate-500 text-sm mt-8">¿No encuentras tu pregunta? <a href="/mas-preguntas-frecuentes.html" class="text-indigo-600 font-semibold hover:underline">Consulta la guía completa de preguntas frecuentes</a>.</p>
         </div>
     </section>
-    
+
     <!-- SECCIÓN DE BLOG -->
     <section id="blog" class="py-24 md:py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1825,6 +1844,16 @@
                 </div>
             </div>
 
+            <!-- Recursos (enlazado interno para SEO) -->
+            <div class="flex flex-col items-center gap-3">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Recursos</span>
+                <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-medium">
+                    <a href="blog.html" class="hover:text-white transition-colors">Blog</a>
+                    <a href="marcas-y-equipos-tecnicos.html" class="hover:text-white transition-colors">Marcas y Equipos Técnicos</a>
+                    <a href="mas-preguntas-frecuentes.html" class="hover:text-white transition-colors">Más Preguntas Frecuentes</a>
+                </div>
+            </div>
+
             <div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-center md:text-left border-t border-slate-800 pt-8">
                 <p>&copy; 2026 Dreamscape Events and Complete Productions, S.L. (NIF B19859115) · c/ Valencia, 76, 08759 Vallirana (Barcelona). Todos los derechos reservados.</p>
                 <div class="grid grid-cols-2 sm:flex sm:space-x-6 gap-x-6 gap-y-2.5 justify-center font-medium">
@@ -1957,6 +1986,11 @@
         // posición y después TODAS las escrituras, sin intercalarlas.
         (function() {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // En móvil/tablet desactivamos también los efectos de scroll más pesados
+            // (zoom del hero, parallax de fondo, revelado "scrub"): son puramente
+            // decorativos y, en dispositivos táctiles, es donde se han reportado
+            // fallos de scroll. Se calcula una sola vez al cargar la página.
+            const heavyFxDisabled = reduceMotion || window.matchMedia('(max-width: 1024px)').matches;
 
             const header = document.getElementById('site-header');
             const backToTop = document.getElementById('back-to-top');
@@ -1985,10 +2019,10 @@
                 const vh = window.innerHeight;
 
                 // ---- LECTURA: todo lo que fuerza layout, junto y de una sola vez ----
-                const heroRect = (!reduceMotion && heroEl && heroVideo) ? heroEl.getBoundingClientRect() : null;
+                const heroRect = (!heavyFxDisabled && heroEl && heroVideo) ? heroEl.getBoundingClientRect() : null;
                 const contactoRect = (stickyCta && contactoEl) ? contactoEl.getBoundingClientRect() : null;
-                const blobRects = reduceMotion ? null : blobs.map(b => b.getBoundingClientRect());
-                const scrubRects = reduceMotion ? null : scrubEls.map(el => el.getBoundingClientRect());
+                const blobRects = heavyFxDisabled ? null : blobs.map(b => b.getBoundingClientRect());
+                const scrubRects = heavyFxDisabled ? null : scrubEls.map(el => el.getBoundingClientRect());
                 const scrubSeqRect = scrubEngine ? scrubEngine.section.getBoundingClientRect() : null;
 
                 // ---- ESCRITURA: ya no se vuelve a leer nada del layout a partir de aquí ----
