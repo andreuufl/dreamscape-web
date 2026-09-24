@@ -570,6 +570,17 @@
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.35);
         }
 
+        /* Separación real del título del hero bajo la barra de navegación: escrito como
+           CSS propio (no clases de tamaño de Tailwind tipo h-32/h-48/mt-14), por el mismo
+           motivo que el comentario de abajo: styles.css es un build ya compilado y esas
+           clases no existían en él, así que no tenían ningún efecto real (de ahí que el
+           título siguiera pegado al menú pese a subir el número varias veces). */
+        .hero-top-spacer { flex-shrink: 0; height: 170px; }
+        @media (min-width: 640px) { .hero-top-spacer { height: 210px; } }
+        @media (min-width: 1024px) { .hero-top-spacer { height: 240px; } }
+        #hero-text { margin-top: 28px; }
+        @media (min-width: 640px) { #hero-text { margin-top: 40px; } }
+
         /* Anillo de foco visible (WCAG 2.4.7): escrito como CSS propio, no como clases de
            Tailwind "focus-visible:*", porque styles.css es un build ya compilado y esas
            clases concretas no existían en él, así que no tenían ningún efecto real. */
@@ -797,10 +808,10 @@
              la sección, el centrado flex se "come" la mitad del espacio añadido; este espaciador
              en su propio hueco de flujo evita ese problema y deja el hueco siempre visible,
              incluso en ventanas o pantallas poco altas. -->
-        <div class="flex-shrink-0 h-40 sm:h-48 lg:h-56" aria-hidden="true"></div>
+        <div class="hero-top-spacer" aria-hidden="true"></div>
 
         <div class="relative z-20 flex-1 flex items-start justify-center">
-        <div id="hero-text" class="relative max-w-4xl mx-auto px-6 text-center z-20 mt-10 sm:mt-14">
+        <div id="hero-text" class="relative max-w-4xl mx-auto px-6 text-center z-20">
             <h1 id="hero-title" class="text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.98] tracking-tight">Cada evento,<br>una experiencia inolvidable</h1>
             <p class="hero-reveal-2 mt-7 text-lg md:text-2xl text-white/80 max-w-2xl mx-auto font-normal leading-relaxed">
                 Producción técnica de eventos: montaje de escenarios, alquiler de sonido e iluminación y pantallas LED con técnico incluido, en Barcelona, Madrid, Valencia y toda España.
