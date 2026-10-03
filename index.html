@@ -611,7 +611,7 @@
          real de Cloudflare. Se crea gratis en https://dash.cloudflare.com/sign-up -> Turnstile -> Add widget. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="./dreamscape-2026.css?v=2">
+    <link rel="stylesheet" href="./dreamscape-2026.css?v=3">
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
     <div class="ds-intro" data-ds-intro aria-hidden="true"><div class="ds-intro-in"><div class="ds-intro-word"><b style="animation-delay:.05s">DREAMSCAPE</b>&nbsp;<b class="g" style="animation-delay:.18s">EVENTS</b></div><div class="ds-intro-bar"><i></i></div><div class="ds-intro-sub">Producción técnica de eventos</div></div></div>
@@ -925,53 +925,97 @@
     </section>
 
     <!-- CÓMO TRABAJAMOS -->
-    <section id="como-trabajamos" class="py-20 md:py-24 bg-slate-50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16" data-scroll-fade>
-                <span class="text-indigo-600 font-semibold text-sm tracking-wider uppercase">Nuestro proceso</span>
-                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight mt-3">Cómo trabajamos, paso a paso</h2>
-                <p class="text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto mt-4">
-                    Desde el primer mensaje hasta que se apaga el último foco, un mismo equipo técnico lleva tu proyecto de principio a fin.
-                </p>
+    <section id="como-trabajamos" class="ds-proc py-20 md:py-28 bg-slate-50 relative overflow-hidden">
+        <div class="ds-proc-head max-w-6xl mx-auto px-6">
+            <div class="ds-proc-intro">
+                <p class="ds-eyebrow">Nuestro proceso</p>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">Cómo trabajamos, <em>paso a paso</em></h2>
+                <p class="ds-proc-lede">Desde el primer mensaje hasta que se apaga el último foco, un mismo equipo técnico lleva tu proyecto de principio a fin.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade>
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">1</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-calculator"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">Consulta y presupuesto</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Nos cuentas tu evento por el simulador, WhatsApp o el formulario, y te respondemos con un presupuesto claro y sin sorpresas.</p>
-                </div>
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade style="transition-delay: 100ms;">
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">2</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-file-pdf"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">Planificación técnica</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Definimos el rider técnico, los planos de escenario y los tiempos de montaje según las necesidades del recinto.</p>
-                </div>
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade style="transition-delay: 200ms;">
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">3</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-layer-group"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">Montaje</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Nuestro equipo técnico instala y calibra escenario, sonido e iluminación con margen suficiente antes del evento.</p>
-                </div>
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade style="transition-delay: 300ms;">
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">4</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-headset"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">El evento</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Un técnico permanece en cabina durante todo el evento, supervisando sonido e iluminación en tiempo real.</p>
-                </div>
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade style="transition-delay: 400ms;">
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">5</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-check"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">Desmontaje y cierre</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Retiramos todo el equipo dejando el espacio como lo encontramos, dentro de los tiempos acordados con el recinto.</p>
-                </div>
-                <div class="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm" data-scroll-fade style="transition-delay: 500ms;">
-                    <span class="text-5xl font-black text-slate-100 absolute top-4 right-5 select-none">6</span>
-                    <svg class="svg-icon text-indigo-600 text-2xl mb-4" aria-hidden="true"><use href="#fa-heart"></use></svg>
-                    <h3 class="font-bold text-slate-900 mb-2">Tu opinión nos importa</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Días después del evento te contactamos para saber cómo fue tu experiencia y confirmar que todo salió como esperabas.</p>
-                </div>
+            <div class="ds-proc-nav" aria-hidden="false">
+                <span class="ds-proc-count"><b data-steps-now>01</b><span>/ 06</span></span>
+                <button type="button" class="ds-round" data-steps-prev aria-label="Paso anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <button type="button" class="ds-round" data-steps-next aria-label="Paso siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
+        </div>
+
+        <!-- Línea de tiempo deslizable (dreamscape-fx.js añade el arrastre y la línea dorada) -->
+        <div class="ds-steps" data-steps>
+            <div class="ds-steps-rail" aria-hidden="true"><i data-steps-fill></i></div>
+            <ol class="ds-steps-track" data-steps-track tabindex="0" aria-label="Pasos de trabajo">
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">01</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-calculator"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Antes del evento</p>
+                        <h3>Consulta y presupuesto</h3>
+                        <p class="ds-step-text">Nos cuentas tu evento por el simulador, WhatsApp o el formulario, y te respondemos con un presupuesto claro y sin sorpresas.</p>
+                    </div>
+                </li>
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">02</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-file-pdf"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Antes del evento</p>
+                        <h3>Planificación técnica</h3>
+                        <p class="ds-step-text">Definimos el rider técnico, los planos de escenario y los tiempos de montaje según las necesidades del recinto.</p>
+                    </div>
+                </li>
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">03</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-layer-group"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Día del montaje</p>
+                        <h3>Montaje</h3>
+                        <p class="ds-step-text">Nuestro equipo técnico instala y calibra escenario, sonido e iluminación con margen suficiente antes del evento.</p>
+                    </div>
+                </li>
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">04</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-headset"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Durante el evento</p>
+                        <h3>El evento</h3>
+                        <p class="ds-step-text">Un técnico permanece en cabina durante todo el evento, supervisando sonido e iluminación en tiempo real.</p>
+                    </div>
+                </li>
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">05</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-check"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Después del evento</p>
+                        <h3>Desmontaje y cierre</h3>
+                        <p class="ds-step-text">Retiramos todo el equipo dejando el espacio como lo encontramos, dentro de los tiempos acordados con el recinto.</p>
+                    </div>
+                </li>
+                <li class="ds-step" data-step>
+                    <span class="ds-step-node" aria-hidden="true"><i></i></span>
+                    <div class="ds-step-card">
+                        <div class="ds-step-top">
+                            <span class="ds-step-n">06</span>
+                            <span class="ds-step-ic"><svg class="svg-icon" aria-hidden="true"><use href="#fa-heart"></use></svg></span>
+                        </div>
+                        <p class="ds-step-phase">Después del evento</p>
+                        <h3>Tu opinión nos importa</h3>
+                        <p class="ds-step-text">Días después del evento te contactamos para saber cómo fue tu experiencia y confirmar que todo salió como esperabas.</p>
+                    </div>
+                </li>
+            </ol>
         </div>
     </section>
 
@@ -1001,101 +1045,59 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5" data-scroll-fade style="transition-delay: 100ms;">
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 0ms;" onclick="openVideoLightbox(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-poster.jpg">
-                        <source src="portfolio-video-jardin.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Boda en jardín</span>
+            <div class="ds-reel" data-reel role="region" aria-roledescription="carrusel" aria-label="Vídeos de eventos reales">
+                <div class="ds-reel-stage" data-reel-stage>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-poster.jpg"><source src="portfolio-video-jardin.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Bodas</span><span class="ds-reel-title">Boda en jardín</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: Boda en jardín"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox2" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-fiesta-poster.jpg"><source src="portfolio-video-fiesta.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Fiestas</span><span class="ds-reel-title">Fiesta en directo</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: Fiesta en directo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox5" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-candlelight-poster.jpg"><source src="portfolio-video-candlelight.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Galas</span><span class="ds-reel-title">Gala corporativa</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: Gala corporativa"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox6" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-congreso-poster.jpg"><source src="portfolio-video-congreso.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Congresos</span><span class="ds-reel-title">Congreso corporativo</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: Congreso corporativo"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox4" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-hotelpalace-poster.jpg"><source src="portfolio-video-hotelpalace.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Galas</span><span class="ds-reel-title">Salón de gala</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: Salón de gala"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
+                <figure class="ds-reel-card" data-reel-card data-open="openVideoLightbox3" tabindex="-1">
+                    <video muted loop playsinline preload="metadata" poster="portfolio-video-fashionweek-poster.jpg"><source src="portfolio-video-fashionweek.mp4" type="video/mp4"></video>
+                    <span class="ds-reel-shade" aria-hidden="true"></span>
+                    <span class="ds-reel-badge"><svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo</span>
+                    <figcaption><span class="ds-reel-tag">Moda</span><span class="ds-reel-title">080 Barcelona Fashion Week</span></figcaption>
+                    <button type="button" class="ds-reel-play" data-reel-play aria-label="Ver vídeo: 080 Barcelona Fashion Week"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.6-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg></button>
+                </figure>
                 </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 90ms;" onclick="openVideoLightbox2(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-fiesta-poster.jpg">
-                        <source src="portfolio-video-fiesta.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Fiesta en directo</span>
-                </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 180ms;" onclick="openVideoLightbox5(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-candlelight-poster.jpg">
-                        <source src="portfolio-video-candlelight.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Gala corporativa</span>
-                </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 270ms;" onclick="openVideoLightbox6(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-congreso-poster.jpg">
-                        <source src="portfolio-video-congreso.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Congreso corporativo</span>
-                </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 360ms;" onclick="openVideoLightbox4(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-hotelpalace-poster.jpg">
-                        <source src="portfolio-video-hotelpalace.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">Salón de gala</span>
-                </div>
-                <div class="relative aspect-[4/5] rounded-2xl overflow-hidden cursor-pointer group/photo shadow-lg tilt-card" data-scroll-fade style="transition-delay: 450ms;" onclick="openVideoLightbox3(this)">
-                    <video class="w-full h-full object-cover" autoplay muted loop playsinline preload="metadata" poster="portfolio-video-fashionweek-poster.jpg">
-                        <source src="portfolio-video-fashionweek.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/5 to-transparent pointer-events-none"></div>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover/photo:opacity-100 transition-opacity bg-slate-950/30">
-                        <span class="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                            <svg class="svg-icon text-slate-900 text-sm" aria-hidden="true"><use href="#fa-expand"></use></svg>
-                        </span>
-                    </div>
-                    <span class="absolute top-3 right-3 bg-white/90 text-slate-900 text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-full flex items-center gap-1">
-                        <svg class="svg-icon" aria-hidden="true"><use href="#fa-video"></use></svg> Vídeo
-                    </span>
-                    <span class="absolute bottom-3 left-3 text-white font-semibold text-xs sm:text-sm">080 Barcelona Fashion Week</span>
+                <div class="ds-reel-ctrl">
+                    <button type="button" class="ds-round" data-reel-prev aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+                    <div class="ds-reel-info" aria-live="polite"><span class="ds-reel-now"><b data-reel-now>01</b> / 06</span><span class="ds-reel-name" data-reel-name>Boda en jardín</span></div>
+                    <button type="button" class="ds-round" data-reel-next aria-label="Vídeo siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- LIGHTBOX: foto ampliada + descripción -->
     <div id="modal-photo-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" class="fixed inset-0 bg-slate-950/95 backdrop-blur-sm z-[150] hidden items-center justify-center p-4">
         <button type="button" onclick="closeModal('modal-photo-lightbox')" aria-label="Cerrar" class="absolute top-5 right-5 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all z-10">
@@ -3181,6 +3183,6 @@
 
     <!-- Chatbase AI Assistant: la carga real del widget se dispara desde loadChatbaseWidget()
          (ver bloque de scripts principal), solo tras consentimiento de cookies. -->
-    <script src="./dreamscape-fx.js?v=2" defer></script>
+    <script src="./dreamscape-fx.js?v=3" defer></script>
 </body>
 </html>

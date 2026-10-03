@@ -87,7 +87,7 @@
   /* ---------- 6. Apariciones al hacer scroll ---------- */
   safe(function () {
     if (reduce || !('IntersectionObserver' in window)) return;
-    var excluir = 'header, footer, nav, form, #mobile-menu, #inicio, .ds-marquee, [data-scroll-fade], [data-scroll-zoom], [data-scrub], [data-curtain], .tilt-card, [data-svc], .reveal-words, [hidden], dialog, details:not([open])';
+    var excluir = 'header, footer, nav, form, #mobile-menu, #inicio, .ds-marquee, [data-scroll-fade], [data-scroll-zoom], [data-scrub], [data-curtain], .tilt-card, [data-svc], [data-steps], [data-reel], .reveal-words, [hidden], dialog, details:not([open])';
     var sel = 'main h1, main h2, main h3, main p, main ul, main ol, main figure, main blockquote, main table, ' +
               'section h2, section h3, section > div > p, .ds-glow, article h2, article h3, article p, article ul, article img';
     var lista = [];
@@ -272,5 +272,175 @@
     }
     window.addEventListener('resize', function () { pintar(0); });
     pintar(0);
+  });
+  /* ---------- 9. Cómo trabajamos: línea de tiempo deslizable ---------- */
+  safe(function () {
+    var root = document.querySelector('[data-steps]');
+    if (!root) return;
+    var track = root.querySelector('[data-steps-track]');
+    var fill = root.querySelector('[data-steps-fill]');
+    var steps = Array.prototype.slice.call(track.querySelectorAll('[data-step]'));
+    var now = document.querySelector('[data-steps-now]');
+    var prev = document.querySelector('[data-steps-prev]');
+    var next = document.querySelector('[data-steps-next]');
+    var actual = -1;
+
+    function paso() { return steps.length > 1 ? steps[1].offsetLeft - steps[0].offsetLeft : track.clientWidth; }
+    function marcar() {
+      var max = track.scrollWidth - track.clientWidth;
+      var idx = Math.round(track.scrollLeft / paso());
+      if (track.scrollLeft >= max - 4) idx = steps.length - 1;
+      idx = Math.max(0, Math.min(idx, steps.length - 1));
+      /* La línea dorada avanza con el desplazamiento */
+      var p = max > 0 ? track.scrollLeft / max : 1;
+      root.style.setProperty('--p', (0.12 + p * 0.88).toFixed(3));
+      if (idx === actual) return;
+      actual = idx;
+      steps.forEach(function (st, i) {
+        st.classList.toggle('is-active', i === idx);
+        st.classList.toggle('is-passed', i < idx);
+      });
+      if (now) now.textContent = (idx < 9 ? '0' : '') + (idx + 1);
+      if (prev) prev.disabled = idx === 0;
+      if (next) next.disabled = idx === steps.length - 1;
+    }
+    function ir(i) {
+      i = Math.max(0, Math.min(i, steps.length - 1));
+      track.scrollTo({ left: steps[i].offsetLeft - steps[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { ir(actual - 1); });
+    if (next) next.addEventListener('click', function () { ir(actual + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); ir(actual + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); ir(actual - 1); }
+    });
+    var raf = false;
+    track.addEventListener('scroll', function () { if (!raf) { raf = true; requestAnimationFrame(function () { marcar(); raf = false; }); } }, { passive: true });
+    steps.forEach(function (st, i) { st.addEventListener('click', function () { if (i !== actual) ir(i); }); });
+
+    /* Arrastrar con el ratón (en móvil ya se desliza con el dedo) */
+    var x0 = null, s0 = 0, movido = false;
+    track.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse') return;
+      x0 = e.clientX; s0 = track.scrollLeft; movido = false;
+    });
+    window.addEventListener('pointermove', function (e) {
+      if (x0 === null) return;
+      var dx = e.clientX - x0;
+      if (Math.abs(dx) > 5) { movido = true; track.classList.add('is-grabbing'); }
+      if (movido) track.scrollLeft = s0 - dx;
+    });
+    window.addEventListener('pointerup', function () {
+      if (x0 === null) return;
+      x0 = null;
+      if (movido) {
+        track.classList.remove('is-grabbing');
+        ir(Math.round((track.scrollLeft) / paso()));
+      }
+    });
+    window.addEventListener('resize', function () { actual = -1; marcar(); });
+    marcar();
+  });
+
+  /* ---------- 10. Así lo vivimos: abanico de vídeos ---------- */
+  safe(function () {
+    var root = document.querySelector('[data-reel]');
+    if (!root) return;
+    var stage = root.querySelector('[data-reel-stage]');
+    var cards = Array.prototype.slice.call(root.querySelectorAll('[data-reel-card]'));
+    var n = cards.length;
+    var nowEl = root.querySelector('[data-reel-now]');
+    var nameEl = root.querySelector('[data-reel-name]');
+    var actual = Math.floor((n - 1) / 2);
+    var enVista = false;
+    root.classList.add('is-ready');
+
+    function offset(i) {
+      var d = i - actual;
+      if (d > n / 2) d -= n;
+      if (d < -n / 2) d += n;
+      return d;
+    }
+    function videos() {
+      cards.forEach(function (c, i) {
+        var v = c.querySelector('video');
+        if (!v) return;
+        var cerca = Math.abs(offset(i)) <= 1;
+        if (enVista && cerca && !reduce) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+        else v.pause();
+      });
+    }
+    function pintar(arrastre) {
+      var w = cards[0].offsetWidth;
+      var movil = window.innerWidth < 768;
+      cards.forEach(function (c, i) {
+        var d = offset(i) + (arrastre || 0);
+        var a = Math.abs(d);
+        var x = d * w * (movil ? 0.42 : 0.5);
+        var y = Math.pow(a, 1.35) * (movil ? 14 : 20);
+        var r = d * (movil ? 7 : 8);
+        var sc = i === actual && !arrastre ? 1.06 : 1 - Math.min(a, 3) * 0.06;
+        c.style.transform = 'translateX(' + x + 'px) translateY(' + (y - (i === actual ? 14 : 0)) + 'px) rotate(' + r + 'deg) scale(' + sc + ')';
+        c.style.zIndex = String(50 - Math.round(a * 10));
+        c.style.filter = 'brightness(' + Math.max(1 - a * 0.22, 0.4) + ')';
+        c.style.opacity = a > 3.2 ? '0' : '1';
+        c.classList.toggle('is-active', i === actual);
+        var b = c.querySelector('[data-reel-play]');
+        if (b) b.tabIndex = i === actual ? 0 : -1;
+      });
+      if (nowEl) nowEl.textContent = (actual < 9 ? '0' : '') + (actual + 1);
+      if (nameEl) { var t = cards[actual].querySelector('.ds-reel-title'); nameEl.textContent = t ? t.textContent : ''; }
+    }
+    function ir(i) { actual = (i + n) % n; pintar(0); videos(); }
+    function abrir(c) {
+      var fn = window[c.getAttribute('data-open')];
+      if (typeof fn === 'function') fn(c);
+    }
+
+    var prev = root.querySelector('[data-reel-prev]');
+    var next = root.querySelector('[data-reel-next]');
+    if (prev) prev.addEventListener('click', function () { ir(actual - 1); });
+    if (next) next.addEventListener('click', function () { ir(actual + 1); });
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); ir(actual - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); ir(actual + 1); }
+    });
+
+    var arrastrado = false;
+    cards.forEach(function (c, i) {
+      c.addEventListener('click', function (e) {
+        if (arrastrado) { arrastrado = false; return; }
+        if (i !== actual) { ir(i); return; }
+        abrir(c);
+      });
+    });
+
+    var x0 = null, y0 = 0, dx = 0, horizontal = null;
+    stage.addEventListener('pointerdown', function (e) { x0 = e.clientX; y0 = e.clientY; dx = 0; horizontal = null; arrastrado = false; });
+    window.addEventListener('pointermove', function (e) {
+      if (x0 === null) return;
+      dx = e.clientX - x0;
+      if (horizontal === null && (Math.abs(dx) > 8 || Math.abs(e.clientY - y0) > 8)) horizontal = Math.abs(dx) > Math.abs(e.clientY - y0);
+      if (!horizontal) return;
+      arrastrado = true;
+      root.classList.add('is-dragging');
+      pintar(dx / (cards[0].offsetWidth * 0.5));
+    }, { passive: true });
+    function soltar() {
+      if (x0 === null) return;
+      root.classList.remove('is-dragging');
+      if (horizontal && Math.abs(dx) > 40) { var k = Math.round(dx / (cards[0].offsetWidth * 0.5)); if (!k) k = dx > 0 ? 1 : -1; ir(actual - k); }
+      else pintar(0);
+      x0 = null;
+    }
+    window.addEventListener('pointerup', soltar);
+    window.addEventListener('pointercancel', soltar);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { enVista = en[0].isIntersecting; videos(); }, { threshold: 0.2 }).observe(root);
+    } else { enVista = true; }
+    window.addEventListener('resize', function () { pintar(0); });
+    pintar(0);
+    videos();
   });
 })();
