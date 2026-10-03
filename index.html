@@ -611,7 +611,7 @@
          real de Cloudflare. Se crea gratis en https://dash.cloudflare.com/sign-up -> Turnstile -> Add widget. -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-    <link rel="stylesheet" href="./dreamscape-2026.css?v=1">
+    <link rel="stylesheet" href="./dreamscape-2026.css?v=2">
 </head>
 <body class="bg-white text-[#1d1d1f] font-sans antialiased overflow-x-hidden">
     <div class="ds-intro" data-ds-intro aria-hidden="true"><div class="ds-intro-in"><div class="ds-intro-word"><b style="animation-delay:.05s">DREAMSCAPE</b>&nbsp;<b class="g" style="animation-delay:.18s">EVENTS</b></div><div class="ds-intro-bar"><i></i></div><div class="ds-intro-sub">Producción técnica de eventos</div></div></div>
@@ -867,56 +867,59 @@
     <div class="ds-marquee" aria-hidden="true"><div class="ds-marquee-track"><span>Sonido profesional</span><i></i><span>Iluminación escénica</span><i></i><span>Pantallas LED</span><i></i><span>Escenarios</span><i></i><span>Streaming</span><i></i><span>Bodas</span><i></i><span>Congresos</span><i></i><span>Galas</span><i></i><span>Presentaciones de producto</span><i></i><span>Conciertos</span><i></i><span>Sonido profesional</span><i></i><span>Iluminación escénica</span><i></i><span>Pantallas LED</span><i></i><span>Escenarios</span><i></i><span>Streaming</span><i></i><span>Bodas</span><i></i><span>Congresos</span><i></i><span>Galas</span><i></i><span>Presentaciones de producto</span><i></i><span>Conciertos</span><i></i></div></div>
 
     <!-- SERVICIOS -->
-    <section id="servicios" class="py-24 md:py-32 bg-white relative overflow-hidden">
-        <div class="max-w-3xl mx-auto px-6 text-center mb-20" data-scrub>
+    <section id="servicios" class="py-20 md:py-28 bg-white relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-6 text-center mb-10 md:mb-14" data-scrub>
             <h2 class="reveal-words text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">Soluciones para cada tipo de evento</h2>
             <p class="text-slate-500 text-lg md:text-xl mt-6">Montaje de escenarios y alquiler de equipos audiovisuales, con técnico especializado en cada proyecto.</p>
         </div>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32">
-            <!-- Servicio 1: Corporativo -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-scrub>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Eventos Corporativos</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Presentaciones de producto, galas y aniversarios de empresa en Barcelona, Madrid, Valencia y el resto de España. Diseño técnico, sonido impecable, iluminación de marca y realización de vídeo profesional para impactar a tu audiencia.</p>
-                    <a href="eventos-corporativos.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
-                    </a>
-                </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
-                    <picture><source srcset="servicio-corporativo.webp?v=2" type="image/webp"><img src="servicio-corporativo.jpg?v=2" alt="Montaje técnico para evento corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async"></picture>
-                    <div class="curtain"></div>
-                </div>
+        <!-- Servicios en abanico 3D (lo anima dreamscape-fx.js; sin JS se ven en columna) -->
+        <div class="ds-svc" data-svc role="region" aria-roledescription="carrusel" aria-label="Servicios de Dreamscape Events">
+            <div class="ds-svc-stage" data-svc-stage>
+                <article class="ds-svc-card" data-svc-card aria-roledescription="diapositiva" aria-label="01 de 03: Eventos Corporativos">
+                    <div class="ds-svc-media" data-svc-media>
+                        <picture><source srcset="servicio-corporativo.webp?v=2" type="image/webp"><img src="servicio-corporativo.jpg?v=2" alt="Montaje técnico para evento corporativo" loading="lazy" decoding="async" draggable="false"></picture>
+                    </div>
+                    <div class="ds-svc-shade" aria-hidden="true"></div>
+                    <div class="ds-svc-body">
+                        <p class="ds-svc-kicker"><span>01</span>Empresas</p>
+                        <h3>Eventos Corporativos</h3>
+                        <p class="ds-svc-text">Presentaciones de producto, galas y aniversarios de empresa en Barcelona, Madrid, Valencia y el resto de España. Diseño técnico, sonido impecable, iluminación de marca y realización de vídeo profesional para impactar a tu audiencia.</p>
+                        <ul class="ds-svc-chips"><li>Sonido</li><li>Iluminación de marca</li><li>Vídeo</li></ul>
+                        <a href="eventos-corporativos.html" class="ds-svc-cta">Saber más <span aria-hidden="true">→</span></a>
+                    </div>
+                </article>
+                <article class="ds-svc-card" data-svc-card aria-roledescription="diapositiva" aria-label="02 de 03: Congresos y Ferias">
+                    <div class="ds-svc-media" data-svc-media>
+                        <picture><source srcset="servicio-congresos.webp?v=2" type="image/webp"><img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" loading="lazy" decoding="async" draggable="false"></picture>
+                    </div>
+                    <div class="ds-svc-shade" aria-hidden="true"></div>
+                    <div class="ds-svc-body">
+                        <p class="ds-svc-kicker"><span>02</span>Auditorios y recintos</p>
+                        <h3>Congresos y Ferias</h3>
+                        <p class="ds-svc-text">Escenarios modulares, pantallas LED y proyección para ponentes, microfonía inalámbrica multicanal y sonido de sala calibrado para auditorios y stands, con un técnico en cabina durante todo el evento. Coordinamos con tu agencia o departamento de comunicación el rider técnico y los tiempos de montaje y desmontaje en el recinto ferial.</p>
+                        <ul class="ds-svc-chips"><li>Pantallas LED</li><li>Microfonía</li><li>Técnico en cabina</li></ul>
+                        <a href="congresos-y-ferias.html" class="ds-svc-cta">Saber más <span aria-hidden="true">→</span></a>
+                    </div>
+                </article>
+                <article class="ds-svc-card" data-svc-card aria-roledescription="diapositiva" aria-label="03 de 03: Bodas y Celebraciones">
+                    <div class="ds-svc-media" data-svc-media>
+                        <picture><source srcset="servicio-bodas.webp?v=4" type="image/webp"><img src="servicio-bodas.jpg?v=4" alt="Técnico de sonido Dreamscape Events en una boda" loading="lazy" decoding="async" draggable="false"></picture>
+                    </div>
+                    <div class="ds-svc-shade" aria-hidden="true"></div>
+                    <div class="ds-svc-body">
+                        <p class="ds-svc-kicker"><span>03</span>Fincas y salones</p>
+                        <h3>Bodas y Celebraciones</h3>
+                        <p class="ds-svc-text">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
+                        <ul class="ds-svc-chips"><li>Ceremonia</li><li>Fiesta</li><li>Iluminación decorativa</li></ul>
+                        <a href="bodas-y-celebraciones.html" class="ds-svc-cta">Saber más <span aria-hidden="true">→</span></a>
+                    </div>
+                </article>
             </div>
-
-            <!-- Servicio 2: Congresos -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
-                    <picture><source srcset="servicio-congresos.webp?v=2" type="image/webp"><img src="servicio-congresos.jpg?v=2" alt="Escenografía para congreso corporativo" class="w-full h-full object-cover" loading="lazy" decoding="async"></picture>
-                    <div class="curtain"></div>
-                </div>
-                <div data-scrub>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Congresos y Ferias</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Escenarios modulares, pantallas LED y proyección para ponentes, microfonía inalámbrica multicanal y sonido de sala calibrado para auditorios y stands, con un técnico en cabina durante todo el evento. Coordinamos con tu agencia o departamento de comunicación el rider técnico y los tiempos de montaje y desmontaje en el recinto ferial.</p>
-                    <a href="congresos-y-ferias.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Servicio 3: Bodas -->
-            <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-                <div class="order-2 md:order-1" data-scrub>
-                    <h3 class="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight mb-5">Bodas y Celebraciones</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed mb-6">Creamos ambientes memorables: iluminación decorativa y arquitectónica, sonido para ceremonia y fiesta, y montajes especiales pensados para vuestro día.</p>
-                    <a href="bodas-y-celebraciones.html" class="inline-flex items-center text-indigo-600 font-medium hover:gap-2.5 gap-1.5 transition-all">
-                        Saber más <svg class="svg-icon text-xs" aria-hidden="true"><use href="#fa-chevron-right"></use></svg>
-                    </a>
-                </div>
-                <div class="order-1 md:order-2 rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl tilt-card curtain-wrap" data-curtain>
-                    <picture><source srcset="servicio-bodas.webp?v=4" type="image/webp"><img src="servicio-bodas.jpg?v=4" alt="Técnico de sonido Dreamscape Events en una boda" class="w-full h-full object-cover" loading="lazy" decoding="async"></picture>
-                    <div class="curtain"></div>
-                </div>
+            <div class="ds-svc-ctrl">
+                <button type="button" class="ds-svc-arrow" data-svc-prev aria-label="Servicio anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+                <div class="ds-svc-tabs" role="tablist" aria-label="Elegir servicio"><button type="button" class="ds-svc-tab" data-svc-tab role="tab" aria-selected="true"><span class="ds-svc-tab-n">01</span><span class="ds-svc-tab-t">Eventos Corporativos</span><i class="ds-svc-tab-bar" aria-hidden="true"><b></b></i></button><button type="button" class="ds-svc-tab" data-svc-tab role="tab" aria-selected="false"><span class="ds-svc-tab-n">02</span><span class="ds-svc-tab-t">Congresos y Ferias</span><i class="ds-svc-tab-bar" aria-hidden="true"><b></b></i></button><button type="button" class="ds-svc-tab" data-svc-tab role="tab" aria-selected="false"><span class="ds-svc-tab-n">03</span><span class="ds-svc-tab-t">Bodas y Celebraciones</span><i class="ds-svc-tab-bar" aria-hidden="true"><b></b></i></button></div>
+                <button type="button" class="ds-svc-arrow" data-svc-next aria-label="Servicio siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
             </div>
         </div>
     </section>
@@ -3178,6 +3181,6 @@
 
     <!-- Chatbase AI Assistant: la carga real del widget se dispara desde loadChatbaseWidget()
          (ver bloque de scripts principal), solo tras consentimiento de cookies. -->
-    <script src="./dreamscape-fx.js?v=1" defer></script>
+    <script src="./dreamscape-fx.js?v=2" defer></script>
 </body>
 </html>
