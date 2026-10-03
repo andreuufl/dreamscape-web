@@ -1,0 +1,188 @@
+/* ============================================================
+   THYME 2026 — capa de estilo para las páginas interiores
+   Se carga DESPUÉS de thyme.css y le aplica el mismo look de la
+   portada (crema, oliva profundo, oro suave, Fraunces ligera +
+   Manrope), sin tocar el HTML de cada página salvo cabecera y pie.
+   ============================================================ */
+
+/* ---------- 1. Paleta y tipografía (sobrescribe tokens de thyme.css) ---------- */
+:root{
+  --cream:#F4EEE3;
+  --cream-2:#E9E0D0;
+  --paper:#FBF8F2;
+  --paper-rgb:251,248,242;
+  --espresso:#1D1913;
+  --espresso-70:rgba(29,25,19,.72);
+  --espresso-50:rgba(29,25,19,.66);
+  --banda:#2E3624;
+  --banda-texto:#F4EEE3;
+  --banda-texto-rgb:244,238,227;
+  --gold:#A57D43;
+  --gold-deep:#76572A;
+  --gold-soft:#D9BE8C;
+  --marron-logo:#2E3624;
+  --marron-logo-oscuro:#232A1B;
+  --wine:#1D1913;          /* botón principal = tinta, como en la portada */
+  --wine-deep:#2E3624;     /* hover = oliva */
+  --wine-ink:#1D1913;
+  --wine-texto:#76572A;    /* enlaces y acentos de texto = oro oscuro (legible) */
+  --olive:#3B4530;
+  --line:rgba(29,25,19,.12);
+  --glass-bg:rgba(251,248,242,.7);
+  --glass-bg-strong:rgba(251,248,242,.92);
+  --glass-border:rgba(29,25,19,.08);
+  --glass-shadow:0 20px 50px -30px rgba(29,25,19,.4);
+  --font-display:'Fraunces', 'Times New Roman', serif;
+  --font-body:'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --x-ink:#1D1913;
+  --x-olive:#2E3624;
+  --x-gold:#B0874B;
+  --x-gold-soft:#D9BE8C;
+  --x-wa:#1FA855;
+}
+body{background:var(--cream);color:var(--espresso);font-family:var(--font-body);}
+html,body{overflow-x:clip;}
+::selection{background:#D9BE8C;color:#1D1913;}
+
+/* ---------- 2. Titulares editoriales ---------- */
+h1,h2,h3,h4{font-weight:400;letter-spacing:-.02em;font-variation-settings:'opsz' 144;}
+h1{font-weight:300;letter-spacing:-.035em;line-height:1;}
+h2{font-weight:300;letter-spacing:-.03em;line-height:1.04;}
+h1 em,h2 em{font-style:italic;font-weight:300;color:var(--x-gold);}
+.section-head h2{font-size:clamp(2.1rem, 4.6vw, 3.6rem);}
+.section-head p{color:var(--espresso-70);}
+.section{padding:clamp(64px, 9vw, 120px) 0;}
+
+/* Kicker: versalitas finas con línea dorada (igual que la portada) */
+.kicker{font-family:var(--font-body);font-style:normal;font-size:.74rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);gap:10px;}
+.kicker::before{width:22px;height:1px;border:0;border-radius:0;background:currentColor;}
+.kicker::after{display:none;}
+.section-head.center .kicker::after{display:block;content:"";width:22px;height:1px;background:currentColor;}
+
+/* ---------- 3. Botones ---------- */
+.btn{font-family:var(--font-body);font-weight:600;letter-spacing:-.005em;min-height:50px;padding:0 26px;border-radius:999px;transition:transform .35s var(--ease), background .3s, color .3s, box-shadow .35s var(--ease), border-color .3s;}
+.btn-primary{background:var(--x-ink);color:#F4EEE3;box-shadow:0 10px 24px -12px rgba(29,25,19,.55);}
+.btn-primary:hover{background:var(--x-olive);transform:none;box-shadow:0 16px 30px -14px rgba(29,25,19,.6);}
+.btn-outline{background:transparent;border:1px solid rgba(29,25,19,.22);color:var(--x-ink);}
+.btn-outline:hover{border-color:var(--x-ink);background:rgba(29,25,19,.04);transform:none;}
+.btn-glass{background:var(--paper);border:1px solid var(--line);}
+.btn-whatsapp{background:var(--x-wa);color:#fff;box-shadow:0 10px 24px -12px rgba(31,168,85,.6);}
+.btn-whatsapp:hover{background:#1a9149;transform:none;}
+
+/* ---------- 4. Superficies (tarjetas, campos) ---------- */
+input:not([type=checkbox]):not([type=radio]),select,textarea{font-family:var(--font-body)!important;font-size:16px!important;border-radius:14px!important;border:1px solid rgba(29,25,19,.16)!important;background-color:#fff!important;}
+input:focus,select:focus,textarea:focus{border-color:var(--x-ink)!important;box-shadow:0 0 0 4px rgba(176,135,75,.16)!important;outline:none;}
+input[type=checkbox]{accent-color:var(--x-ink);}
+
+/* ---------- 5. Barra superior ---------- */
+.topbar{background:var(--x-olive);color:rgba(244,238,227,.86);font-size:.76rem;letter-spacing:.04em;}
+.topbar strong{color:var(--x-gold-soft);font-weight:600;}
+
+/* ---------- 6. Cabecera nueva ---------- */
+.x-wrap{width:100%;max-width:1240px;margin-inline:auto;padding-inline:clamp(18px, 4vw, 40px);}
+.x-header{padding:0!important;transform:none!important;-webkit-transform:none!important;will-change:auto!important;background:rgba(244,238,227,.82);-webkit-backdrop-filter:blur(18px) saturate(160%);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid transparent;transition:transform .45s var(--ease), background .35s, border-color .35s!important;font-family:var(--font-body);}
+.x-header.is-scrolled{background:rgba(244,238,227,.94);border-bottom-color:var(--line);}
+.x-header.is-hidden{transform:translateY(calc(-100% - 60px))!important;}
+.x-header-in{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:72px;}
+.x-brand{display:flex;align-items:center;gap:12px;flex-shrink:0;text-decoration:none;}
+.x-brand picture{display:contents;}
+.x-brand img{width:44px;height:44px;border-radius:50%;box-shadow:0 0 0 1px var(--line);}
+.x-brand-txt{display:flex;flex-direction:column;line-height:1;}
+.x-brand-txt b{font-family:var(--font-display);font-weight:400;font-size:1.4rem;letter-spacing:.12em;color:var(--x-ink);}
+.x-brand-txt small{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--espresso-70);margin-top:5px;}
+.x-header nav{margin:0;}
+.x-nav{display:flex;align-items:center;gap:4px;margin:0;padding:0;list-style:none;
+  /* anula los estilos del menú antiguo de thyme.css */
+  position:static!important;transform:none!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;background:none!important;box-shadow:none!important;border:0!important;inset:auto!important;width:auto!important;max-height:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;}
+.x-nav a{display:block;padding:10px 12px;font-size:.9rem;font-weight:500;color:var(--espresso-70);border-radius:999px;text-decoration:none;transition:color .25s, background .25s;}
+.x-nav a:hover,.x-nav a[aria-current=page]{color:var(--x-ink);background:rgba(29,25,19,.05);}
+.x-nav-cta{display:none;}
+.x-header-actions{display:flex;align-items:center;gap:10px;}
+.x-header-actions .cart-btn{position:relative;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;color:var(--x-ink);}
+.x-header-actions .cart-btn svg{width:20px;height:20px;}
+.x-burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);position:relative;background:none;padding:0;cursor:pointer;}
+.x-burger span{position:absolute;left:14px;right:14px;height:1.5px;background:var(--x-ink);transition:transform .4s var(--ease), top .4s var(--ease);border-radius:0;width:auto;margin:0;}
+.x-burger span::before,.x-burger span::after{display:none!important;}
+.x-burger span:first-child{top:18px;}
+.x-burger span:last-child{top:26px;}
+.nav-open .x-burger span:first-child{top:22px;transform:rotate(45deg);}
+.nav-open .x-burger span:last-child{top:22px;transform:rotate(-45deg);}
+
+.x-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;font-family:var(--font-body);font-weight:600;font-size:.95rem;white-space:nowrap;text-decoration:none;transition:background .3s, color .3s, border-color .3s, box-shadow .35s var(--ease);}
+.x-btn-sm{min-height:40px;padding:0 18px;font-size:.88rem;}
+.x-btn-dark{background:var(--x-ink);color:#F4EEE3!important;box-shadow:0 10px 24px -12px rgba(29,25,19,.55);}
+.x-btn-dark:hover{background:var(--x-olive);}
+.x-btn-line{border:1px solid rgba(29,25,19,.22);color:var(--x-ink);}
+.x-btn-line:hover{border-color:var(--x-ink);}
+
+@media (max-width:1080px){
+  .x-burger{display:block;}
+  .x-header-actions .x-btn{display:none;}
+  .x-header nav{position:fixed;inset:0;z-index:-1;background:var(--cream);padding:150px clamp(18px, 4vw, 40px) 40px;opacity:0;visibility:hidden;transition:opacity .4s var(--ease), visibility .4s;overflow-y:auto;}
+  .nav-open nav{opacity:1;visibility:visible;}
+  .x-header.nav-open{background:var(--cream);-webkit-backdrop-filter:none;backdrop-filter:none;}
+  .x-nav{flex-direction:column;align-items:stretch;gap:0;}
+  .x-nav li{border-bottom:1px solid var(--line);opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease), transform .5s var(--ease);}
+  .nav-open .x-nav li{opacity:1;transform:none;}
+  .x-nav a{font-family:var(--font-display);font-weight:300;font-size:1.9rem;letter-spacing:-.02em;color:var(--x-ink);padding:14px 0;border-radius:0;}
+  .x-nav a:hover,.x-nav a[aria-current=page]{background:none;color:var(--gold-deep);}
+  .x-nav-cta{display:flex;flex-direction:column;gap:10px;border-bottom:0!important;padding-top:28px;}
+  .x-nav-cta a{display:flex;align-items:center;justify-content:center;min-height:54px;font-family:var(--font-body);font-size:1rem;font-weight:600;letter-spacing:0;padding:0 24px;border-radius:999px;}
+  .x-nav-cta .x-btn-dark,.x-nav-cta .x-btn-dark:hover{color:#F4EEE3;}
+}
+@media (max-width:760px){
+  .x-header-in{min-height:64px;}
+  .x-brand img{width:40px;height:40px;}
+  .x-brand-txt b{font-size:1.25rem;}
+}
+
+/* ---------- 7. Pie nuevo ---------- */
+.x-footer{background:var(--x-ink);color:rgba(244,238,227,.72);padding-top:clamp(64px, 8vw, 110px);overflow:hidden;font-family:var(--font-body);margin-top:0;}
+.x-footer a{color:inherit;text-decoration:none;}
+.x-footer-top{display:grid;grid-template-columns:1fr 2fr;gap:40px;}
+.x-footer-top > *{min-width:0;}
+.x-footer-brand picture{display:contents;}
+.x-footer-brand img{width:88px;height:88px;border-radius:50%;margin-bottom:18px;}
+.x-footer-brand p{font-family:var(--font-display);font-style:italic;font-size:1.15rem;color:#F4EEE3;line-height:1.4;margin:0;}
+.x-footer-cols{display:grid;grid-template-columns:repeat(3, 1fr);gap:30px;}
+.x-footer h3,.x-footer h4{font-family:var(--font-body);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--x-gold-soft);margin:0 0 18px;font-weight:700;}
+.x-footer ul{display:grid;gap:10px;margin:0;padding:0;list-style:none;}
+.x-footer ul a{font-size:.94rem;transition:color .25s;word-break:break-word;}
+.x-footer a:hover{color:#F4EEE3;}
+.x-footer-word{font-family:var(--font-display);font-weight:300;font-size:clamp(5rem, 24vw, 22rem);line-height:.8;letter-spacing:-.04em;color:rgba(244,238,227,.07);text-align:center;margin:clamp(40px, 6vw, 80px) 0 -0.08em;user-select:none;}
+.x-footer-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(244,238,227,.12);padding:22px 0 calc(22px + env(safe-area-inset-bottom));font-size:.82rem;position:relative;}
+.x-footer-bottom > span:last-child{display:flex;gap:18px;flex-wrap:wrap;}
+@media (max-width:980px){ .x-footer-top{grid-template-columns:1fr;} }
+@media (max-width:760px){
+  .x-footer-cols{grid-template-columns:1fr 1fr;}
+  .x-footer-cols > div:last-child{grid-column:1 / -1;}
+}
+
+/* ---------- 8. Flotantes ---------- */
+.whatsapp-float{background:var(--x-wa)!important;box-shadow:0 14px 30px -10px rgba(31,168,85,.6)!important;}
+.back-to-top{background:rgba(251,248,242,.92);border:1px solid var(--line);color:var(--x-ink);}
+.scroll-progress{background:var(--x-gold)!important;height:2px!important;}
+.cookie-banner{background:rgba(251,248,242,.97);border:1px solid var(--line);box-shadow:0 24px 50px -20px rgba(29,25,19,.4);}
+.cookie-banner a{color:var(--x-ink);}
+
+/* ---------- 9. Anula el menú antiguo de thyme.css dentro de la cabecera nueva ---------- */
+.x-header .x-nav a::after{display:none!important;}
+.x-header .x-nav li{border-bottom:0;}
+@media (max-width:1080px){
+  .x-header .x-nav li:not(.x-nav-cta){border-bottom:1px solid var(--line)!important;}
+  .x-header .x-nav a:not(.x-btn){display:block!important;font-family:var(--font-display)!important;font-weight:300!important;font-size:1.9rem!important;letter-spacing:-.02em!important;color:var(--x-ink)!important;padding:14px 0!important;border-radius:0!important;background:none!important;}
+  .x-header .x-nav a[aria-current=page]:not(.x-btn){color:var(--gold-deep)!important;font-style:italic;}
+  .x-header .x-nav .x-nav-cta a{display:flex!important;padding:0 24px!important;font-size:1rem!important;}
+  .x-header .x-nav .x-nav-cta a.x-btn-dark{color:#F4EEE3!important;background:var(--x-ink)!important;}
+  .x-header .x-nav .x-nav-cta a.x-btn-line{color:var(--x-ink)!important;background:transparent!important;}
+}
+
+/* Contraste (revisión técnica) */
+.topbar-cp input::placeholder{color:rgba(244,238,227,.72)!important;}
+.topbar-cp input{color:#F4EEE3!important;background-color:rgba(255,255,255,.08)!important;border-color:rgba(244,238,227,.3)!important;}
+.menu-tbd,.catalogo-count,.producto-alergeno{color:var(--espresso-70)!important;}
+/* Botón de catálogo en la cabecera oscura de "A domicilio" */
+.catalogo-pdf{margin-top:18px;}
+.catalogo-banner .catalogo-pdf-btn{border-color:rgba(244,238,227,.35)!important;color:#F4EEE3!important;}
+.catalogo-banner .catalogo-pdf-btn:hover{border-color:#D9BE8C!important;color:#D9BE8C!important;background:transparent!important;}

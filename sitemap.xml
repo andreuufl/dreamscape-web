@@ -1,195 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.eventsandproductionsap.com/</loc>
-    <lastmod>2026-09-22</lastmod>
+    <loc>https://andreuufl.github.io/THYME/</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://andreuufl.github.io/THYME/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andreuufl.github.io/THYME/en.html"/>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/eventos-corporativos.html</loc>
-    <lastmod>2026-09-22</lastmod>
+    <loc>https://andreuufl.github.io/THYME/en.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://andreuufl.github.io/THYME/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://andreuufl.github.io/THYME/en.html"/>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/empresas.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/congresos-y-ferias.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://andreuufl.github.io/THYME/pedidos.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/bodas-y-celebraciones.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/alquiler-equipos-audiovisuales-barcelona.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/servicio-barcelona.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/servicio-madrid.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/servicio-valencia.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/destination-weddings-spain.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/blog.html</loc>
-    <lastmod>2026-09-22</lastmod>
+    <loc>https://andreuufl.github.io/THYME/menus.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/blog-gala-penguin.html</loc>
-    <lastmod>2026-09-22</lastmod>
+    <loc>https://andreuufl.github.io/THYME/coffee-break.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/cocktail-box.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/tabla-box.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/barra-bebidas.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/extra-service-premium.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/blog-audio-congresos-hibridos.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/blog-iluminacion-bodas-exterior.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/que-es-un-rider-tecnico.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/preguntas-antes-de-contratar-sonido-boda.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/sonido-bluetooth-vs-sonido-profesional.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/con-cuanta-antelacion-reservar-equipo-tecnico.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/errores-comunes-evento-corporativo.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/dj-o-grupo-en-directo-boda.html</loc>
-    <lastmod>2026-09-22</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/cuanto-cuesta-alquilar-sonido-e-iluminacion-para-un-evento.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/alquilar-equipo-de-sonido-con-o-sin-tecnico.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/cuanta-potencia-de-sonido-necesito-para-mi-evento.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/pantallas-led-para-eventos-guia.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/seguro-de-responsabilidad-civil-para-eventos.html</loc>
-    <lastmod>2026-09-23</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/microfonos-necesarios-ceremonia-boda.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/plan-b-boda-exterior-lluvia.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/traduccion-simultanea-congresos-equipo-necesario.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/equipo-necesario-streaming-eventos-en-directo.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/presentacion-de-producto-efecto-sorpresa-tecnico.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/sonorizacion-cena-gala-empresa.html</loc>
-    <lastmod>2026-09-24</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.eventsandproductionsap.com/marcas-y-equipos-tecnicos.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <loc>https://andreuufl.github.io/THYME/galeria.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.eventsandproductionsap.com/mas-preguntas-frecuentes.html</loc>
-    <lastmod>2026-09-24</lastmod>
+    <loc>https://andreuufl.github.io/THYME/faq.html</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/aviso-legal.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/privacidad.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/terminos.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://andreuufl.github.io/THYME/cookies.html</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 </urlset>
