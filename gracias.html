@@ -1,165 +1,193 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-<title>¡Gracias por tu reserva! — THYME Express Catering</title>
-<meta name="description" content="Hemos recibido tu solicitud de reserva en THYME. Te confirmamos disponibilidad real por WhatsApp.">
-<meta name="robots" content="noindex, follow">
-<link rel="canonical" href="https://andreuufl.github.io/THYME/gracias.html">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Solicitud Enviada! | Dreamscape Events</title>
+    <meta name="description" content="Hemos recibido tu solicitud. El equipo de Dreamscape Events se pondrá en contacto contigo en breve para hablar de tu evento.">
+    <meta name="robots" content="noindex">
+    <link rel="canonical" href="https://www.eventsandproductionsap.com/gracias.html">
+    <link rel="icon" type="image/png" href="./favicon.png?v=3">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
 
-<link rel="stylesheet" href="thyme.css?v=65">
-<link rel="stylesheet" href="thyme-2026.css?v=2">
+    <style>
+        :root { --ease-apple: cubic-bezier(0.16, 1, 0.3, 1); }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        .svg-icon { display: inline-block; width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; }
+
+        /* Círculo animado que dibuja el check, como si se completara al cargar.
+           IMPORTANTE: el estado inicial (visible, dashoffset 0) es el que se ve
+           si la animación no llega a completarse por cualquier motivo (ver red
+           de seguridad en JS más abajo) — nunca se queda invisible del todo. */
+        .check-circle, .check-mark {
+            stroke-dashoffset: 0;
+        }
+        .anim-ready .check-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            animation: drawCircle 0.7s var(--ease-apple) 0.1s forwards;
+        }
+        .anim-ready .check-mark {
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: drawCheck 0.4s var(--ease-apple) 0.65s forwards;
+        }
+        @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+        @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Igual que arriba: visibles por defecto, la animación es un extra que se
+           añade solo cuando JS confirma que la página está lista */
+        .reveal-1, .reveal-2, .reveal-3 { opacity: 1; }
+        .anim-ready .reveal-1 { animation: revealUp 0.8s var(--ease-apple) 0.9s both; }
+        .anim-ready .reveal-2 { animation: revealUp 0.8s var(--ease-apple) 1.05s both; }
+        .anim-ready .reveal-3 { animation: revealUp 0.8s var(--ease-apple) 1.2s both; }
+
+        /* Confeti: pequeños rectángulos de color que caen y giran al cargar la página */
+        .confetti-piece {
+            position: absolute;
+            top: -20px;
+            width: 8px;
+            height: 14px;
+            opacity: 0.9;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            to { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .anim-ready .check-circle, .anim-ready .check-mark,
+            .anim-ready .reveal-1, .anim-ready .reveal-2, .anim-ready .reveal-3 {
+                animation: none !important; opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important;
+            }
+            .confetti-piece { display: none; }
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <link rel="stylesheet" href="./dreamscape-2026.css?v=3">
 </head>
-<body>
-<a href="#main" class="skip-link">Saltar al contenido</a>
+<body class="bg-slate-950 text-white min-h-screen overflow-x-hidden">
 
-<div class="topbar">
-  <div class="container topbar-inner topbar-aviso">
-    <span><strong>Pedido mínimo 100€</strong></span>
-    <span class="topbar-sep">·</span>
-    <span>Encargos con 2 días hábiles de antelación</span>
-    <span class="topbar-sep">·</span>
-    <span>Barcelona y alrededores</span>
-  </div>
-</div>
+    <!-- Confeti (generado por JS al cargar) -->
+    <div id="confetti-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
-<header class="site-header site-header-topbar x-header" data-header>
-  <div class="x-wrap x-header-in">
-    <a href="index.html" class="x-brand">
-      <picture><source srcset="logo-thyme.webp" type="image/webp"><img src="logo-thyme.jpg" alt="" width="44" height="44"></picture>
-      <span class="x-brand-txt"><b>THYME</b> <small>Express Catering</small></span>
-    </a>
-    <nav aria-label="Navegación principal">
-      <ul class="nav-links x-nav" id="nav-links">
-        <li><a href="index.html#eventos">Eventos</a></li>
-        <li><a href="empresas.html">Empresas</a></li>
-        <li><a href="index.html#boxes">Boxes</a></li>
-        <li><a href="menus.html">Menús</a></li>
-        <li><a href="extra-service-premium.html">Service Premium</a></li>
-        <li><a href="galeria.html">Galería</a></li>
-        <li><a href="pedidos.html">A domicilio</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li class="x-nav-cta"><a class="x-btn x-btn-dark" href="index.html#eventos">Pedir presupuesto</a><a class="x-btn x-btn-line" href="index.html#reserva">Reservar mesa privada</a></li>
-      </ul>
-    </nav>
-    <div class="x-header-actions">
-      <a class="x-btn x-btn-dark x-btn-sm" href="index.html#eventos">Pedir presupuesto</a>
-      <button class="nav-toggle x-burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-links"><span></span><span></span></button>
+    <!-- Resplandores decorativos de fondo -->
+    <div class="fixed inset-0 opacity-25 pointer-events-none z-0">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-indigo-600 rounded-full blur-[128px]"></div>
+        <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-emerald-600 rounded-full blur-[128px]"></div>
     </div>
-  </div>
-</header>
 
-<main id="main">
-  <section class="thanks">
-    <div class="glass-card thanks-card">
-      <div class="thanks-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
-      </div>
-      <p class="kicker" style="justify-content:center;">Solicitud enviada</p>
-      <h1 id="thanks-title">¡Gracias por escribirnos!</h1>
-      <p id="thanks-lede">Hemos abierto WhatsApp con los datos de tu reserva. Confírmanos el envío del mensaje y te responderemos con la disponibilidad real y la ubicación exacta.</p>
+    <header class="relative z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-6">
+            <a href="/" class="text-lg font-bold tracking-tight text-white">
+                DREAMSCAPE <span class="text-indigo-400">EVENTS</span>
+            </a>
+        </div>
+    </header>
 
-      <div class="thanks-detail" id="thanks-detail" style="display:none;"></div>
+    <main class="relative z-10 min-h-[75vh] flex items-center justify-center px-6 py-12">
+        <div class="max-w-lg w-full text-center">
+            <!-- Check animado -->
+            <svg class="mx-auto mb-8" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                <circle class="check-circle" cx="44" cy="44" r="40" stroke="url(#gradCheck)" stroke-width="4"/>
+                <path class="check-mark" d="M28 45L39 56L60 33" stroke="url(#gradCheck)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs>
+                    <linearGradient id="gradCheck" x1="0" y1="0" x2="88" y2="88" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#818cf8"/>
+                        <stop offset="1" stop-color="#34d399"/>
+                    </linearGradient>
+                </defs>
+            </svg>
 
-      <div class="thanks-actions">
-        <a href="https://wa.me/34607864393" target="_blank" rel="noopener" class="btn btn-whatsapp">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5C10 9 9.4 7.6 9.2 7c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.3-1 1-1 2.4s1 2.8 1.1 3c.1.2 2 3 4.8 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3.1.8.8-3-.2-.3A8 8 0 1 1 12 20z"/></svg>
-          Ir a WhatsApp
-        </a>
-        <a href="index.html" class="btn btn-outline">Volver al inicio</a>
-      </div>
-    </div>
-  </section>
-</main>
+            <h1 class="reveal-1 text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">¡Solicitud enviada con éxito!</h1>
+            <p class="reveal-2 text-slate-300 text-lg leading-relaxed mb-10">Gracias por confiar en Dreamscape Events. Hemos recibido los detalles de tu evento y nuestro equipo te responderá lo antes posible con un presupuesto personalizado.</p>
 
-<div class="quick-links">
-  <div class="container quick-links-inner">
-    <span class="quick-links-label">Acceso directo</span>
-    <a href="index.html">Inicio</a>
-    <a href="menus.html#tablas">Degustaciones</a>
-    <a href="menus.html">Menús para eventos</a>
-    <a href="pedidos.html">A domicilio</a>
-    <a href="index.html#eventos">Eventos</a>
-    <a href="faq.html">Preguntas frecuentes</a>
-    <a class="is-cta" href="index.html#reserva">Reservar mesa</a>
-  </div>
-</div>
+            <div class="reveal-3 flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/" class="bg-white text-black px-8 py-3.5 rounded-full font-medium text-base text-center transition-transform hover:scale-105">
+                    Volver al inicio
+                </a>
+                <a href="https://wa.me/34613089894" target="_blank" rel="noopener noreferrer" class="bg-white/10 hover:bg-white/15 border border-white/25 text-white px-8 py-3.5 rounded-full font-medium text-base text-center transition-all">
+                    <svg class="svg-icon mr-2" aria-hidden="true" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>Hablar por WhatsApp
+                </a>
+            </div>
 
-<footer class="x-footer">
-  <div class="x-wrap">
-    <div class="x-footer-top">
-      <div class="x-footer-brand">
-        <picture><source srcset="logo-thyme.webp" type="image/webp"><img src="logo-thyme.jpg" alt="Logo de THYME Express Catering" width="88" height="88" loading="lazy"></picture>
-        <p>Events &amp; Gastronomic Experiences.<br>Barcelona.</p>
-      </div>
-      <div class="x-footer-cols">
-        <div><h3>Servicios</h3><ul><li><a href="index.html#eventos">Bodas y eventos</a></li><li><a href="empresas.html">Para empresas</a></li><li><a href="pedidos.html">A domicilio</a></li><li><a href="index.html#reserva">Mesa privada</a></li><li><a href="extra-service-premium.html">Service Premium</a></li></ul></div>
-        <div><h3>Boxes</h3><ul><li><a href="coffee-break.html">Coffee Break Box</a></li><li><a href="cocktail-box.html">Cocktail Box</a></li><li><a href="tabla-box.html">Tabla Box</a></li><li><a href="barra-bebidas.html">Barra de bebidas</a></li></ul></div>
-        <div><h3>Contacto</h3><ul><li><a href="https://wa.me/34607864393" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:thyme.catering@outlook.es">thyme.catering@outlook.es</a></li><li><a href="https://www.instagram.com/benditatabla_gourmet/" target="_blank" rel="noopener">Instagram</a></li><li><a href="faq.html">Preguntas frecuentes</a></li><li><a href="Catalogo-THYME-2026.pdf" download>Catálogo en PDF</a></li></ul></div>
-      </div>
-    </div>
-    <p class="x-footer-word" aria-hidden="true">THYME</p>
-    <div class="x-footer-bottom">
-      <span>© <span data-year></span> THYME Express Catering</span>
-      <span><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a><a href="terminos.html">Términos</a><a href="cookies.html">Cookies</a></span>
-    </div>
-  </div>
-</footer>
+            <p class="reveal-3 text-slate-500 text-sm mt-10">Mientras tanto, puedes echar un vistazo a <a href="/#porfolio" class="text-indigo-400 hover:underline">nuestro trabajo real</a>.</p>
+        </div>
+    </main>
 
-<script src="thyme-main.js?v=23"></script>
-<script src="analitica.js?v=1"></script>
-<script>
-  (function () {
-    var params = new URLSearchParams(window.location.search);
-    var nombre = params.get('nombre');
-    var fecha = params.get('fecha');
-    var hora = params.get('hora');
-    var personas = params.get('personas');
-    var tabla = params.get('tabla');
+    <footer class="relative z-10 py-8 border-t border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-xs text-slate-500 text-center">
+            <p>&copy; 2026 Dreamscape Events and Complete Productions, S.L.</p>
+        </div>
+    </footer>
 
-    function esc(s) {
-      var d = document.createElement('div');
-      d.textContent = s;
-      return d.innerHTML;
-    }
+    <script>
+        (function() {
+            // Seguimiento de conversión: llegar a esta página significa que el formulario
+            // se envió correctamente. Respetamos la misma decisión de cookies que en la home
+            // (guardada en localStorage, compartido entre páginas del mismo dominio).
+            try {
+                if (localStorage.getItem('dreamscape_cookies_accepted') === 'all') {
+                    const GA_ID = 'G-PNDXKYXT9K';
+                    const script = document.createElement('script');
+                    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+                    script.async = true;
+                    document.head.appendChild(script);
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ window.dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', GA_ID, { anonymize_ip: true });
+                    gtag('event', 'generate_lead', { form_name: 'contacto_dreamscape' });
+                }
+            } catch (e) { /* si falla, no pasa nada: la página sigue funcionando con normalidad */ }
 
-    /* Solo aceptamos texto simple y corto en estos parámetros: cualquier otra cosa se descarta,
-       y además se escapa antes de insertarse, para evitar que la URL pueda inyectar HTML. */
-    function sanitize(v, maxLen) {
-      if (!v) return '';
-      v = v.slice(0, maxLen || 60).replace(/[<>]/g, '');
-      return v;
-    }
-    nombre = sanitize(nombre, 60);
-    fecha = sanitize(fecha, 40);
-    hora = sanitize(hora, 10);
-    personas = sanitize(personas, 5);
-    tabla = sanitize(tabla, 60);
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (nombre) {
-      document.getElementById('thanks-title').textContent = '¡Gracias, ' + nombre + '!';
-    }
-    if (fecha && hora) {
-      var box = document.getElementById('thanks-detail');
-      box.style.display = 'block';
-      box.innerHTML =
-        'Te esperamos el <strong>' + esc(fecha) + '</strong> a las <strong>' + esc(hora) + 'h</strong>' +
-        (personas ? ' para <strong>' + esc(personas) + ' personas</strong>' : '') +
-        (tabla ? ' — <strong>' + esc(tabla) + '</strong>' : '') +
-        '. En cuanto confirmemos disponibilidad real, te lo decimos por WhatsApp junto con la ubicación exacta.';
-    }
-  })();
-</script>
-<button type="button" class="back-to-top" data-back-to-top aria-label="Volver arriba">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
-</button>
+            // Activamos las animaciones de entrada SOLO si JS confirma que todo va bien.
+            // Antes de esto, todo el contenido ya está visible por CSS (ver estilos arriba),
+            // así que si algo falla aquí abajo, la página nunca se queda "pillada" en blanco.
+            if (!reduceMotion) {
+                document.documentElement.classList.add('anim-ready');
+
+                // Confeti
+                try {
+                    const container = document.getElementById('confetti-container');
+                    const colors = ['#818cf8', '#34d399', '#fbbf24', '#f472b6', '#60a5fa'];
+                    for (let i = 0; i < 60; i++) {
+                        const piece = document.createElement('div');
+                        piece.className = 'confetti-piece';
+                        piece.style.left = Math.random() * 100 + 'vw';
+                        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                        piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+                        piece.style.animationDelay = (Math.random() * 0.6) + 's';
+                        piece.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        container.appendChild(piece);
+                    }
+                    setTimeout(() => { container.innerHTML = ''; }, 5500);
+                } catch (e) { /* si el confeti falla, no pasa nada: el resto de la página sigue intacta */ }
+            }
+
+            // Red de seguridad final: pase lo que pase, a los 2.5s forzamos que
+            // absolutamente todo esté visible y en su sitio, sin excepción.
+            setTimeout(() => {
+                document.querySelectorAll('.reveal-1, .reveal-2, .reveal-3').forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
+                });
+                document.querySelectorAll('.check-circle, .check-mark').forEach(el => {
+                    el.style.strokeDashoffset = '0';
+                });
+            }, 2500);
+        })();
+    </script>
+    <script src="./dreamscape-fx.js?v=3" defer></script>
 </body>
 </html>
