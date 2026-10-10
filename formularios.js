@@ -44,11 +44,21 @@
       datos.delete('access_key');
       var destino = (form.querySelector('input[name="redirect"]') || {}).value || '/gracias.html';
 
+      var errorServidor = false;
       fetch(API, { method: 'POST', body: datos })
         .then(function (r) { return r.json(); })
         .then(function (res) {
           if (res && res.ok) { location.href = destino; return; }
+          errorServidor = true;
           throw new Error((res && res.error) || 'error');
+        })
+        .catch(function (err) {
+          if (errorServidor) throw err;
+          // Algunos navegadores (Safari/iPhone con bloqueadores o privacidad estricta) no dejan
+          // leer la respuesta de Google. El envío se repite en modo "sin respuesta": el servidor
+          // lo recibe igual, aunque aquí no podamos leer el resultado.
+          return fetch(API, { method: 'POST', mode: 'no-cors', body: datos })
+            .then(function () { location.href = destino; });
         })
         .catch(function (err) {
           aviso.textContent = ERRORES[err && err.message] ||
