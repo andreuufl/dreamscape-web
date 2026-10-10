@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; form-action 'self'; base-uri 'self'">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Darse de baja | Dreamscape Events</title>
+    <link rel="icon" type="image/png" href="./favicon.png?v=3">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+    <style>
+        :root { --oro: #d4b77a; --fondo: #070707; --texto: #f2efe8; --suave: #9b968c; --borde: rgba(212,183,122,.25); }
+        * { box-sizing: border-box; margin: 0; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--fondo); color: var(--texto); min-height: 100vh; display: flex; flex-direction: column; }
+        header, footer { padding: 24px 16px; text-align: center; }
+        header a { color: var(--texto); text-decoration: none; font-weight: 700; letter-spacing: .08em; }
+        header a span { color: var(--oro); }
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+        .tarjeta { width: 100%; max-width: 460px; border: 1px solid var(--borde); border-radius: 24px; padding: 36px 28px; text-align: center; background: linear-gradient(180deg, rgba(212,183,122,.06), rgba(212,183,122,0)); }
+        h1 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 40px; line-height: 1.1; margin-bottom: 14px; }
+        p { color: var(--suave); line-height: 1.6; font-size: 15px; }
+        .email { color: var(--texto); font-weight: 600; word-break: break-all; margin: 18px 0 26px; }
+        button, .btn { display: inline-block; width: 100%; border: 0; border-radius: 999px; padding: 15px 22px; font: 600 15px 'Inter', sans-serif; cursor: pointer; text-decoration: none; }
+        button { background: var(--oro); color: #111; }
+        button:disabled { opacity: .6; cursor: wait; }
+        .btn { margin-top: 12px; color: var(--texto); border: 1px solid var(--borde); }
+        .oculto { display: none; }
+        footer { font-size: 12px; color: #5f5b54; }
+    </style>
+</head>
+<body>
+    <header><a href="/">DREAMSCAPE <span>EVENTS</span></a></header>
+    <main>
+        <div class="tarjeta">
+            <div id="paso-confirmar">
+                <h1>Darse de baja</h1>
+                <p>Dejarás de recibir nuestros correos comerciales en esta dirección:</p>
+                <p class="email" id="email-mostrado"></p>
+                <button type="button" id="btn-baja">Confirmar la baja</button>
+                <a class="btn" href="/">Mejor no, volver a la web</a>
+            </div>
+            <div id="paso-ok" class="oculto">
+                <h1>Baja confirmada</h1>
+                <p>No volverás a recibir correos comerciales de Dreamscape Events. Si ha sido un error, escríbenos a <a href="mailto:info@ap-events.es" style="color:var(--oro)">info@ap-events.es</a>.</p>
+                <a class="btn" href="/">Volver a la web</a>
+            </div>
+            <div id="paso-error" class="oculto">
+                <h1>Enlace no válido</h1>
+                <p id="texto-error">Este enlace de baja no es válido o está incompleto. Escríbenos a <a href="mailto:info@ap-events.es" style="color:var(--oro)">info@ap-events.es</a> y te damos de baja a mano.</p>
+                <a class="btn" href="/">Volver a la web</a>
+            </div>
+        </div>
+    </main>
+    <footer>&copy; 2026 Dreamscape Events and Complete Productions, S.L.</footer>
+
+    <script src="./ds-config.js"></script>
+    <script>
+    (function () {
+        var q = new URLSearchParams(location.search);
+        var email = (q.get('e') || '').trim().toLowerCase();
+        var token = (q.get('t') || '').trim();
+        var api = (window.DS_API || '').trim();
+        function ver(id) {
+            ['paso-confirmar', 'paso-ok', 'paso-error'].forEach(function (p) {
+                document.getElementById(p).classList.toggle('oculto', p !== id);
+            });
+        }
+        // Quitamos el email de la barra de direcciones (no queda en el historial)
+        if (history.replaceState) history.replaceState(null, '', location.pathname);
+        if (!email || !token || !api) { ver('paso-error'); return; }
+        document.getElementById('email-mostrado').textContent = email;
+
+        // La baja se aplica al pulsar el botón (no al abrir el enlace), para que los
+        // antivirus de correo que "abren" los enlaces no den de baja a nadie sin querer.
+        var btn = document.getElementById('btn-baja');
+        btn.addEventListener('click', function () {
+            btn.disabled = true; btn.textContent = 'Procesando…';
+            fetch(api + '?action=baja&e=' + encodeURIComponent(email) + '&t=' + encodeURIComponent(token))
+                .then(function (r) { return r.json(); })
+                .then(function (res) { ver(res && res.ok ? 'paso-ok' : 'paso-error'); })
+                .catch(function () {
+                    document.getElementById('texto-error').innerHTML = 'No hemos podido conectar ahora mismo. Inténtalo en unos minutos o escríbenos a <a href="mailto:info@ap-events.es" style="color:var(--oro)">info@ap-events.es</a>.';
+                    ver('paso-error');
+                });
+        });
+    })();
+    </script>
+</body>
+</html>

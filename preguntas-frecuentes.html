@@ -23,7 +23,7 @@
          cabeceras HTTP reales como X-Frame-Options o Permissions-Policy — solo lo que cabe en meta tags).
          Comprobado contra los dominios externos reales que usa esta página. Si algo deja de funcionar
          tras subir esto (el chat o Analytics, sobre todo), avisa y lo ajustamos. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.chatbase.co https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co https://challenges.cloudflare.com; frame-src https://*.chatbase.co https://challenges.cloudflare.com; media-src 'self'; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://www.googletagmanager.com https://*.chatbase.co https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https:; font-src 'self' https:; img-src 'self' data: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://*.google-analytics.com https://*.analytics.google.com https://*.chatbase.co https://challenges.cloudflare.com; frame-src https://*.chatbase.co https://challenges.cloudflare.com; media-src 'self'; form-action 'self' https://script.google.com; base-uri 'self'; object-src 'none';">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>Preguntas Frecuentes sobre Producción Técnica de Eventos | Dreamscape Events</title>
@@ -1005,15 +1005,9 @@
                     </ul>
                 </div>
                 <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-2xl" data-scroll-fade style="transition-delay: 100ms;">
-                    <form id="checklist-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
-                        <input type="hidden" name="access_key" value="755b52de-71b1-4719-8646-96acf95bad91">
+                    <form id="checklist-form" action="https://script.google.com/macros/s/AKfycbwojWVtCNCNgEQZfs11LSCM2PlZwkoawJF0RNhGD3ewp0YJUsS9nBXpXbJ500UnYSqRmQ/exec" method="POST" class="space-y-5">
                         <input type="hidden" name="subject" value="Nueva descarga: Checklist técnico">
                         <input type="hidden" name="Formulario" value="Lead Magnet - Checklist Técnico">
-                        <!-- Campo "message" explícito: Web3Forms aplica un filtro antispam más agresivo a
-                             formularios que solo tienen nombre+email sin ningún cuerpo de mensaje (patrón
-                             típico de spam de bots), lo que puede hacer que el envío "funcione" (redirige a
-                             la página de gracias) pero el correo se descarte en silencio sin llegar nunca a
-                             la bandeja de entrada. Con este campo el formulario deja de encajar en ese patrón. -->
                         <input type="hidden" name="message" value="Nuevo lead: se ha descargado el checklist técnico gratuito desde la web.">
                         <input type="hidden" name="from_name" value="Web Dreamscape Events - Checklist técnico">
                         <input type="hidden" name="redirect" value="https://www.dreamscapeevents.es/gracias-checklist.html">
@@ -1143,10 +1137,10 @@
         <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 flex flex-col max-h-[90vh] overflow-y-auto">
             <div class="space-y-4 text-slate-600 text-xs sm:text-sm leading-relaxed pr-1">
                 <h4 class="text-center text-slate-400 uppercase tracking-widest font-bold text-xs">Dreamscape Events Legal</h4>
-                <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> utiliza en este sitio web cookies técnicas necesarias para su funcionamiento y el formulario de contacto vía <strong>Web3Forms</strong>, y, solo si lo aceptas, el asistente virtual con IA vía <strong>Chatbase</strong> y cookies analíticas de <strong>Google Analytics</strong> para conocer el uso del sitio. Estos servicios pueden implicar una transferencia de datos fuera del Espacio Económico Europeo. Para más información consulta nuestra <a href="/cookies.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a> y nuestra <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de privacidad</a>.</p>
+                <p><strong>Dreamscape Events and Complete Productions, S.L.</strong> utiliza en este sitio web cookies técnicas necesarias para su funcionamiento y el formulario de contacto vía <strong>Google (Apps Script)</strong>, y, solo si lo aceptas, el asistente virtual con IA vía <strong>Chatbase</strong> y cookies analíticas de <strong>Google Analytics</strong> para conocer el uso del sitio. Estos servicios pueden implicar una transferencia de datos fuera del Espacio Económico Europeo. Para más información consulta nuestra <a href="/cookies.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de cookies</a> y nuestra <a href="/privacidad.html" target="_blank" class="text-indigo-600 hover:underline font-semibold">Política de privacidad</a>.</p>
                 <p>El asistente virtual y las cookies de Google Analytics <strong>solo se instalan si pulsas "Aceptar"</strong>. Si pulsas "Rechazar las no esenciales", seguirás pudiendo contactarnos por el formulario o por WhatsApp con total normalidad, pero no se activará el chat de IA ni ninguna cookie de analítica. En todo caso, puedes gestionar tu decisión mediante los botones inferiores.</p>
                 <h5 class="font-bold text-slate-950 pt-1 text-xs uppercase tracking-wider border-t border-slate-100 pt-3 flex items-center gap-2"><svg class="svg-icon text-indigo-600" aria-hidden="true"><use href="#fa-cookie-bite"></use></svg> Finalidades de la web y sus asociados</h5>
-                <p class="text-slate-500 text-xs">Funcionamiento técnico esencial del sitio (recordar tu configuración del simulador durante la sesión). Procesamiento del formulario de contacto a través de Web3Forms. Coordinación de la comunicación directa vía WhatsApp. Si aceptas: atención mediante el asistente virtual Chatbase y análisis estadístico anónimo de visitas mediante Google Analytics.</p>
+                <p class="text-slate-500 text-xs">Funcionamiento técnico esencial del sitio (recordar tu configuración del simulador durante la sesión). Procesamiento del formulario de contacto a través de Google (Apps Script), en un servidor propio de Dreamscape Events. Coordinación de la comunicación directa vía WhatsApp. Si aceptas: atención mediante el asistente virtual Chatbase y análisis estadístico anónimo de visitas mediante Google Analytics.</p>
                 <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-100 mt-4">
                     <div class="flex flex-wrap gap-3 w-full sm:w-auto justify-center sm:justify-start">
                         <button onclick="acceptAllCookies()" class="bg-slate-950 hover:bg-slate-900 text-white font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center">Aceptar</button>
@@ -2345,15 +2339,6 @@
             console.warn('Turnstile no se ha podido cargar; el formulario sigue funcionando con el resto de protecciones (campo trampa).');
         }
 
-        // Nota sobre el envío de los formularios (checklist y contacto): se probó a interceptarlo
-        // con fetch()/AJAX para controlar la redirección desde aquí, pero en producción Web3Forms
-        // respondía 400 Bad Request a esas peticiones (aunque el envío normal del navegador sí
-        // funciona correctamente). Se ha revertido a un envío nativo del formulario, sin JavaScript
-        // de por medio: el navegador hace un POST normal a Web3Forms y es Web3Forms quien redirige
-        // al campo oculto "redirect" de cada formulario. El fallo real de la descarga del checklist
-        // era que ese campo "redirect" se había borrado sin querer al añadir otros campos; ya está
-        // restaurado, así que el envío nativo debería funcionar tal y como lo hacía el formulario
-        // de contacto principal.
 
         // ===== PAUSAR VÍDEOS FUERA DE PANTALLA (fluidez del scroll) =====
         // Antes los 6 vídeos del porfolio (más el del hero) estaban SIEMPRE reproduciéndose
@@ -2398,6 +2383,8 @@
 
     <!-- Chatbase AI Assistant: la carga real del widget se dispara desde loadChatbaseWidget()
          (ver bloque de scripts principal), solo tras consentimiento de cookies. -->
+    <script src="./ds-config.js?v=1"></script>
+    <script src="./formularios.js?v=1" defer></script>
     <script src="./dreamscape-fx.js?v=3" defer></script>
 </body>
 </html>
