@@ -123,3 +123,22 @@
 
   var yr = d.querySelectorAll('[data-year]'); yr.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
+
+/* ---------- Carruseles horizontales (móvil): barra de progreso ---------- */
+(function () {
+  var d = document;
+  d.querySelectorAll('[data-hs]').forEach(function (el) {
+    var bar = d.createElement('div'); bar.className = 'hs-bar'; bar.setAttribute('aria-hidden', 'true');
+    var th = d.createElement('i'); bar.appendChild(th); el.parentNode.insertBefore(bar, el.nextSibling);
+    function upd() {
+      var max = el.scrollWidth - el.clientWidth;
+      if (max <= 2) { bar.style.display = 'none'; return; }
+      bar.style.display = '';
+      var vis = el.clientWidth / el.scrollWidth, p = el.scrollLeft / max;
+      th.style.width = (vis * 100) + '%';
+      th.style.transform = 'translateX(' + (p * (1 / vis - 1) * 100) + '%)';
+    }
+    el.addEventListener('scroll', function () { requestAnimationFrame(upd); }, { passive: true });
+    window.addEventListener('resize', upd); upd();
+  });
+})();
