@@ -454,7 +454,7 @@ p { margin: 0 0 1em; }
 .contact-list a:hover { color: var(--gold); }
 
 /* ---------- Pie ---------- */
-.ftr { border-top: 1px solid var(--line); padding: clamp(64px, 8vw, 104px) 0 32px; background: var(--ink); }
+.ftr { border-top: 1px solid var(--line); padding: 28px 0 32px; background: var(--ink); }
 .ftr-word { font-weight: 800; font-variation-settings: "wdth" 62; text-transform: uppercase; font-size: clamp(64px, 17vw, 260px); line-height: .8; letter-spacing: -.01em; color: var(--ink-3); -webkit-text-stroke: 1px rgba(236,231,222,.16); margin-bottom: clamp(48px, 6vw, 80px); user-select: none; white-space: nowrap; }
 .ftr-cols { display: grid; gap: 40px; grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 900px) { .ftr-cols { grid-template-columns: 1.4fr repeat(4, 1fr); } }
@@ -465,7 +465,7 @@ p { margin: 0 0 1em; }
 .ftr-about { grid-column: 1 / -1; }
 @media (min-width: 900px) { .ftr-about { grid-column: auto; } }
 .ftr-about p { color: var(--paper-2); font-size: 15px; max-width: 36ch; }
-.ftr-legal { margin-top: clamp(48px, 6vw, 72px); padding-top: 24px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--mute); }
+.ftr-legal { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; color: var(--mute); }
 .ftr-legal nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .ftr-legal a:hover { color: var(--paper); }
 .social { display: flex; gap: 10px; margin-top: 20px; }
