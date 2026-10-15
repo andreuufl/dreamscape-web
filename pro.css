@@ -700,3 +700,67 @@ p { margin: 0 0 1em; }
 .esp-chips li a { color: inherit; text-decoration: none; }
 .esp-chips li a:hover { color: var(--gold-hi); }
 #faq .faq { max-width: 980px; }
+
+/* =====================================================================
+   Mejoras de experiencia (2026-10)
+   ===================================================================== */
+
+/* 5. Transición suave entre páginas (navegadores que la soportan) */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: vt-out .28s ease both; }
+::view-transition-new(root) { animation: vt-in .38s ease both; }
+@keyframes vt-out { to { opacity: 0; } }
+@keyframes vt-in { from { opacity: 0; } }
+.hdr { view-transition-name: hdr; }
+::view-transition-group(hdr) { animation-duration: 0s; }
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+}
+
+/* 1. Haz de luz en la portada */
+.beam { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; opacity: .9;
+  background: radial-gradient(circle 34vmax at var(--bx, 50%) var(--by, 45%), rgba(233, 205, 150, .22), rgba(201, 166, 107, .08) 45%, transparent 70%); }
+@media (hover: none) { .beam { opacity: .75; } }
+
+/* 4. Galería a pantalla completa */
+.pj-media.is-zoom { cursor: zoom-in; }
+.pj-media.is-zoom:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.lb { position: fixed; inset: 0; z-index: 300; background: rgba(5, 5, 6, .96); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 56px 16px 72px; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); animation: lb-in .25s ease both; }
+.lb[hidden] { display: none; }
+@keyframes lb-in { from { opacity: 0; } }
+body.lb-on { overflow: hidden; }
+.lb-stage { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; min-height: 0; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 30px 90px rgba(0, 0, 0, .7); }
+.lb-cap { position: absolute; left: 0; right: 0; bottom: calc(22px + env(safe-area-inset-bottom)); margin: 0; text-align: center; color: var(--paper-2); font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 0 64px; }
+.lb button { position: absolute; background: rgba(20, 20, 22, .7); color: var(--paper); border: 1px solid var(--line-2); border-radius: 50%; width: 46px; height: 46px; font-size: 26px; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: background .2s, color .2s; }
+.lb button:hover, .lb button:focus-visible { background: var(--gold); color: var(--ink); outline: none; }
+.lb-x { top: calc(12px + env(safe-area-inset-top)); right: 14px; font-size: 30px; }
+.lb-n { top: 50%; transform: translateY(-50%); }
+.lb-prev { left: 12px; } .lb-next { right: 12px; }
+@media (max-width: 700px) { .lb-n { display: none; } .lb { padding: 56px 8px 72px; } }
+
+/* 6. Barra de progreso de lectura */
+.readbar { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 110; pointer-events: none; }
+.readbar i { display: block; height: 100%; background: var(--gold); transform: scaleX(0); transform-origin: left; }
+
+/* 8. Cómo trabajamos: línea de tiempo animada */
+.how { --p: 0; list-style: none; margin: clamp(40px, 5vw, 72px) 0 0; padding: 0; position: relative; display: grid; gap: 36px; counter-reset: none; }
+.how::before, .how::after { content: ""; position: absolute; left: 19px; top: 8px; bottom: 8px; width: 2px; }
+.how::before { background: var(--line-2); }
+.how::after { background: var(--gold); transform-origin: top; transform: scaleY(var(--p)); box-shadow: 0 0 14px var(--gold-glow); }
+.how li { position: relative; padding-left: 64px; opacity: .35; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.how li.on { opacity: 1; transform: none; }
+.how-n { position: absolute; left: 0; top: 0; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); border: 2px solid var(--line-2); display: grid; place-items: center; font-family: var(--f-mono); font-size: 12px; color: var(--paper-2); transition: border-color .5s, color .5s, background .5s; z-index: 1; }
+.how li.on .how-n { border-color: var(--gold); color: var(--ink); background: var(--gold); }
+.how h3 { margin: 0 0 8px; font-size: clamp(20px, 2vw, 26px); text-transform: uppercase; font-variation-settings: "wdth" 75; }
+.how p { margin: 0; color: var(--paper-2); max-width: 46ch; font-size: 16px; line-height: 1.55; }
+@media (min-width: 900px) {
+  .how { grid-template-columns: repeat(4, 1fr); gap: 28px; }
+  .how::before, .how::after { left: 20px; right: 20px; top: 19px; bottom: auto; width: auto; height: 2px; }
+  .how::after { transform-origin: left; transform: scaleX(var(--p)); }
+  .how li { padding: 64px 0 0; }
+}
+@media (prefers-reduced-motion: reduce) { .how li { opacity: 1; transform: none; transition: none; } }
+
+/* 3. Contadores */
+.fact b i { font-style: normal; font-variant-numeric: tabular-nums; }

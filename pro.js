@@ -148,3 +148,173 @@ document.addEventListener('click', function (e) {
   var t = e.target.closest && e.target.closest('[data-href]');
   if (t) { window.location.href = t.getAttribute('data-href'); }
 });
+
+/* =====================================================================
+   MEJORAS DE EXPERIENCIA (2026-10): haz de luz, galería, progreso,
+   WhatsApp contextual, línea de tiempo y contadores
+   ===================================================================== */
+(function () {
+  'use strict';
+  var d = document, w = window;
+  var reduce = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var raf = w.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+
+  /* ---------- 1. Haz de luz en la portada ---------- */
+  var reel = d.querySelector('.reel');
+  if (reel && !reduce) {
+    var beam = d.createElement('div'); beam.className = 'beam'; beam.setAttribute('aria-hidden', 'true');
+    reel.insertBefore(beam, reel.querySelector('.reel-top') || null);
+    var tx = .5, ty = .45, cx = .5, cy = .45, last = 0, visible = true, running = false;
+    function loop(t) {
+      if (!visible) { running = false; return; }
+      if (t - last > 2800) { /* sin interacción: el foco barre la sala solo */
+        tx = .5 + Math.sin(t / 3400) * .32; ty = .42 + Math.cos(t / 4300) * .16;
+      }
+      cx += (tx - cx) * .07; cy += (ty - cy) * .07;
+      beam.style.setProperty('--bx', (cx * 100).toFixed(2) + '%');
+      beam.style.setProperty('--by', (cy * 100).toFixed(2) + '%');
+      raf(loop);
+    }
+    function start() { if (!running) { running = true; raf(loop); } }
+    function move(e) {
+      var r = reel.getBoundingClientRect();
+      tx = (e.clientX - r.left) / r.width; ty = (e.clientY - r.top) / r.height; last = performance.now();
+    }
+    reel.addEventListener('pointermove', move, { passive: true });
+    reel.addEventListener('pointerdown', move, { passive: true });
+    if ('IntersectionObserver' in w) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); }).observe(reel);
+    }
+    start();
+  }
+
+  /* ---------- 4. Galería a pantalla completa (Proyectos) ---------- */
+  var medias = [].slice.call(d.querySelectorAll('.pj .pj-media'));
+  if (medias.length) {
+    var lb = d.createElement('div'); lb.className = 'lb'; lb.hidden = true;
+    lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Galería de proyectos');
+    lb.innerHTML = '<button class="lb-x" type="button" aria-label="Cerrar">×</button>' +
+      '<button class="lb-n lb-prev" type="button" aria-label="Anterior">‹</button>' +
+      '<button class="lb-n lb-next" type="button" aria-label="Siguiente">›</button>' +
+      '<div class="lb-stage"></div><p class="lb-cap"></p>';
+    d.body.appendChild(lb);
+    var stage = lb.querySelector('.lb-stage'), cap = lb.querySelector('.lb-cap'), idx = 0, opener = null;
+    function items() { return medias.filter(function (m) { return !m.closest('.pj').hidden; }); }
+    function show(i) {
+      var list = items(); if (!list.length) return;
+      idx = (i + list.length) % list.length;
+      var m = list[idx], v = m.querySelector('video'), im = m.querySelector('img'), el;
+      stage.innerHTML = '';
+      if (v) {
+        el = d.createElement('video'); el.src = v.currentSrc || v.src || v.getAttribute('data-src') || '';
+        el.poster = v.getAttribute('poster') || ''; el.controls = true; el.playsInline = true; el.loop = true; el.autoplay = true;
+        el.setAttribute('playsinline', '');
+      } else if (im) { el = d.createElement('img'); el.src = im.currentSrc || im.src; el.alt = im.alt || ''; }
+      if (el) stage.appendChild(el);
+      var h = m.closest('.pj').querySelector('h3');
+      cap.textContent = (h ? h.textContent : '') + '  ·  ' + (idx + 1) + ' / ' + list.length;
+    }
+    function open(m) {
+      var list = items(); var i = list.indexOf(m); if (i < 0) return;
+      opener = d.activeElement; lb.hidden = false; d.body.classList.add('lb-on'); show(i);
+      lb.querySelector('.lb-x').focus();
+    }
+    function close() {
+      lb.hidden = true; d.body.classList.remove('lb-on'); stage.innerHTML = '';
+      if (opener && opener.focus) try { opener.focus(); } catch (e) {}
+    }
+    medias.forEach(function (m) {
+      m.classList.add('is-zoom'); m.setAttribute('tabindex', '0'); m.setAttribute('role', 'button');
+      var h = m.closest('.pj').querySelector('h3');
+      m.setAttribute('aria-label', 'Ampliar: ' + (h ? h.textContent : 'proyecto'));
+      m.addEventListener('click', function () { open(m); });
+      m.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); } });
+    });
+    lb.addEventListener('click', function (e) {
+      if (e.target.closest('.lb-x') || e.target === lb || e.target === stage) close();
+      else if (e.target.closest('.lb-prev')) show(idx - 1);
+      else if (e.target.closest('.lb-next')) show(idx + 1);
+    });
+    d.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(idx - 1); else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+    var sx = 0, sy = 0;
+    lb.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) show(idx + (dx < 0 ? 1 : -1));
+      else if (dy > 90 && Math.abs(dy) > Math.abs(dx) * 1.4) close();
+    }, { passive: true });
+  }
+
+  /* ---------- 6. Barra de progreso de lectura (artículos) ---------- */
+  var prose = d.querySelector('.prose');
+  if (prose) {
+    var pb = d.createElement('div'); pb.className = 'readbar'; pb.setAttribute('aria-hidden', 'true');
+    pb.innerHTML = '<i></i>'; d.body.appendChild(pb);
+    var bar = pb.firstChild, tk = false;
+    function prog() {
+      var r = prose.getBoundingClientRect(), total = r.height - w.innerHeight * .6;
+      var p = total > 0 ? Math.min(1, Math.max(0, (-r.top + w.innerHeight * .2) / total)) : 0;
+      bar.style.transform = 'scaleX(' + p.toFixed(4) + ')'; tk = false;
+    }
+    w.addEventListener('scroll', function () { if (!tk) { tk = true; raf(prog); } }, { passive: true });
+    w.addEventListener('resize', prog); prog();
+  }
+
+  /* ---------- 7. WhatsApp contextual según la página ---------- */
+  (function () {
+    var p = location.pathname.replace(/\/+$/, '') || '/', h1 = d.querySelector('h1'), t = '';
+    var title = h1 ? h1.textContent.replace(/\s+/g, ' ').trim() : '';
+    if (/boda|celebracion|destination/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto de sonido e iluminación para una boda o celebración.';
+    else if (/congreso|feria|traduccion|streaming/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto técnico para un congreso o feria.';
+    else if (/corporativ|empresa|gala|presentacion/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto técnico para un evento de empresa.';
+    else if (/pantallas-led/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto de pantallas LED para un evento.';
+    else if (/servicio-barcelona|barcelona/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto para un evento en Barcelona.';
+    else if (/servicio-madrid/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto para un evento en Madrid.';
+    else if (/servicio-valencia/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto para un evento en Valencia.';
+    else if (/proyectos/.test(p)) t = 'Hola Dreamscape Events, he visto vuestros proyectos y quiero pedir presupuesto para un evento.';
+    else if (d.querySelector('.prose') && title) t = 'Hola Dreamscape Events, he leído «' + title.slice(0, 90) + '» y quiero consultaros sobre mi evento.';
+    if (!t) return;
+    d.querySelectorAll('a[href^="https://wa.me/"]').forEach(function (a) {
+      var m = a.href.match(/[?&]text=([^&]*)/);
+      if (m && /quiero%20pedir%20presupuesto/.test(m[1])) a.href = a.href.replace(m[0], m[0].charAt(0) + 'text=' + encodeURIComponent(t));
+    });
+  })();
+
+  /* ---------- 8. Línea de tiempo "Cómo trabajamos" ---------- */
+  var how = d.querySelector('.how');
+  if (how) {
+    var steps = [].slice.call(how.querySelectorAll('li')), htk = false;
+    function hp() {
+      var r = how.getBoundingClientRect(), vh = w.innerHeight;
+      var p = Math.min(1, Math.max(0, (vh * .72 - r.top) / r.height));
+      how.style.setProperty('--p', p.toFixed(4));
+      steps.forEach(function (s) { var sr = s.getBoundingClientRect(); s.classList.toggle('on', reduce || sr.top < vh * .72); });
+      htk = false;
+    }
+    w.addEventListener('scroll', function () { if (!htk) { htk = true; raf(hp); } }, { passive: true });
+    w.addEventListener('resize', hp); hp();
+  }
+
+  /* ---------- 3. Contadores animados ---------- */
+  var counters = d.querySelectorAll('[data-count]');
+  if (counters.length) {
+    function run(el) {
+      var to = parseFloat(el.getAttribute('data-count')), t0 = null, dur = 1400;
+      if (reduce || !(to > 0)) { el.textContent = to; return; }
+      function step(t) {
+        if (t0 === null) t0 = t; var k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = Math.round(to * e); if (k < 1) raf(step);
+      }
+      raf(step);
+    }
+    if ('IntersectionObserver' in w) {
+      var co = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { run(e.target); co.unobserve(e.target); } });
+      }, { threshold: .6 });
+      counters.forEach(function (c) { co.observe(c); });
+    } else counters.forEach(function (c) { c.textContent = c.getAttribute('data-count'); });
+  }
+})();
