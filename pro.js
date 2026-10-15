@@ -48,6 +48,9 @@
   /* ---------- Vídeos: solo se reproducen cuando se ven ---------- */
   var vids = d.querySelectorAll('video[data-auto]');
   var reduce = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* Ahorro de datos o conexión muy lenta: los vídeos no se reproducen solos (se ve el póster) */
+  var cn = navigator.connection || {};
+  if (cn.saveData || /(^|-)2g$/.test(cn.effectiveType || '')) reduce = true;
   if ('IntersectionObserver' in w && !reduce) {
     var vo = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
@@ -267,7 +270,8 @@ document.addEventListener('click', function (e) {
   (function () {
     var p = location.pathname.replace(/\/+$/, '') || '/', h1 = d.querySelector('h1'), t = '';
     var title = h1 ? h1.textContent.replace(/\s+/g, ' ').trim() : '';
-    if (/boda|celebracion|destination/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto de sonido e iluminación para una boda o celebración.';
+    if (d.documentElement.lang === 'en') t = /destination|wedding/.test(p) ? 'Hello Dreamscape Events, I would like a quote for a destination wedding in Spain.' : 'Hello Dreamscape Events, I would like a quote for an event in Spain.';
+    else if (/boda|celebracion|destination/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto de sonido e iluminación para una boda o celebración.';
     else if (/congreso|feria|traduccion|streaming/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto técnico para un congreso o feria.';
     else if (/corporativ|empresa|gala|presentacion/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto técnico para un evento de empresa.';
     else if (/pantallas-led/.test(p)) t = 'Hola Dreamscape Events, quiero pedir presupuesto de pantallas LED para un evento.';
@@ -317,4 +321,81 @@ document.addEventListener('click', function (e) {
       counters.forEach(function (c) { co.observe(c); });
     } else counters.forEach(function (c) { c.textContent = c.getAttribute('data-count'); });
   }
+})();
+
+/* ---------- 2. Antes / después: arrastra para comparar ---------- */
+document.querySelectorAll('.ba').forEach(function (ba) {
+  var r = ba.querySelector('input[type=range]');
+  if (!r) return;
+  function set() { ba.style.setProperty('--pos', r.value + '%'); }
+  r.addEventListener('input', set); set();
+});
+
+/* =====================================================================
+   Blog: índice del artículo y artículos relacionados · Llamada directa
+   ===================================================================== */
+(function () {
+  'use strict';
+  var d = document;
+
+  /* ---------- 6a. Índice "En este artículo" ---------- */
+  var prose = d.querySelector('.prose');
+  if (prose) {
+    var hs = [].slice.call(prose.querySelectorAll('h2'));
+    if (hs.length >= 3) {
+      var used = {};
+      var items = hs.map(function (h) {
+        var base = (h.textContent || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 50) || 'seccion';
+        var id = h.id || base, n = 2; while (used[id] || (d.getElementById(id) && d.getElementById(id) !== h)) id = base + '-' + (n++);
+        used[id] = 1; h.id = id; h.style.scrollMarginTop = '96px';
+        return '<li><a href="#' + id + '">' + h.textContent.replace(/</g, '&lt;') + '</a></li>';
+      });
+      var toc = d.createElement('nav'); toc.className = 'toc'; toc.setAttribute('aria-label', 'En este artículo');
+      toc.innerHTML = '<span class="mono">En este artículo</span><ol>' + items.join('') + '</ol>';
+      prose.insertBefore(toc, prose.firstElementChild && prose.firstElementChild.tagName === 'P' ? prose.firstElementChild.nextSibling : prose.firstChild);
+    }
+
+    /* ---------- 6b. "Te puede interesar" ---------- */
+    if (window.fetch && window.DOMParser) {
+      fetch('/blog.html', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
+        if (!html) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var here = location.pathname.replace(/\/+$/, '');
+        var cards = [].slice.call(doc.querySelectorAll('.posts a.post')).filter(function (a) {
+          return a.getAttribute('href').replace(/\/+$/, '') !== here;
+        });
+        if (cards.length < 2) return;
+        /* los 3 siguientes en la lista, empezando por la posición del artículo actual (distinto en cada artículo) */
+        var all = [].slice.call(doc.querySelectorAll('.posts a.post'));
+        var idx = all.findIndex(function (a) { return a.getAttribute('href').replace(/\/+$/, '') === here; });
+        var pick = [];
+        for (var k = 1; pick.length < 3 && k <= all.length; k++) {
+          var c = all[((idx < 0 ? -1 : idx) + k + all.length) % all.length];
+          if (c.getAttribute('href').replace(/\/+$/, '') !== here && pick.indexOf(c) < 0) pick.push(c);
+        }
+        var sec = d.createElement('section'); sec.className = 'related sec sec--tight'; sec.setAttribute('aria-labelledby', 'rel-t');
+        var wrap = d.createElement('div'); wrap.className = 'wrap';
+        wrap.innerHTML = '<span class="eyebrow">Sigue leyendo</span><h2 id="rel-t" class="h1" style="margin-bottom:28px">Te puede interesar</h2><div class="posts"></div>';
+        var box = wrap.querySelector('.posts');
+        pick.forEach(function (c) {
+          var n = d.importNode(c, true); n.classList.add('in'); n.classList.remove('rv'); box.appendChild(n);
+        });
+        sec.appendChild(wrap);
+        var main = d.getElementById('main'); if (main) main.appendChild(sec);
+      }).catch(function () {});
+    }
+  }
+
+  /* ---------- 7. Llamada directa y plazo de respuesta ---------- */
+  var mcta = d.querySelector('.mcta');
+  if (mcta && !mcta.querySelector('[href^="tel:"]')) {
+    var call = d.createElement('a'); call.className = 'btn mcta-call'; call.href = 'tel:+34613089894'; call.setAttribute('aria-label', 'Llamar al 613 08 98 94'); call.textContent = 'Llamar';
+    mcta.insertBefore(call, mcta.children[1] || null);
+  }
+  ['presupuesto-rapido', 'dreamscape-form'].forEach(function (id) {
+    var f = d.getElementById(id); if (!f) return;
+    var p = d.createElement('p'); p.className = 'sla';
+    p.innerHTML = 'Respondemos normalmente en menos de 24 h. ¿Prefieres hablar ya? <a href="tel:+34613089894">Llama al 613 08 98 94</a>.';
+    f.parentNode.insertBefore(p, f.nextSibling);
+  });
 })();
