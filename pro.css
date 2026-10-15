@@ -651,3 +651,30 @@ p { margin: 0 0 1em; }
 .band h2 { max-width: 14ch; }
 .band p { color: var(--paper-2); margin: 20px 0 10px; max-width: 52ch; }
 .band .mono { color: var(--mute); font-size: 11px; display: block; }
+
+/* ===== Mejoras: legibilidad, cookies compactas, fichas enlazadas ===== */
+:root { --mute: #a39e94; }
+.mono, .eyebrow, .tag, .spec dt { font-size: max(12px, 1em); }
+.g figcaption span, .pj-media .badge, .split-media figcaption, .esp-legend, .flow .when { font-size: 12px; }
+.crumbs, .field label, .prose th, .sim-sum dt, .opt span small, .spec dt, .hs-hint, .ftr-legal, .band .mono { font-size: 12px; }
+.flow .when { color: #4a463f; }
+@media (max-width: 700px) {
+  .g figcaption span, .pj-media .badge, .esp-legend, .flow .when, .hs-hint, .crumbs, .ftr-legal { font-size: 12.5px; }
+  .fact span, .dc-body p, .flow p { font-size: 16px; }
+}
+.g[data-href] { cursor: pointer; }
+.pj:target { outline: 1px solid var(--gold); outline-offset: 12px; }
+.pj { scroll-margin-top: 110px; }
+
+/* Barra de cookies compacta, abajo */
+.cookie { left: 0; right: 0; bottom: 0; max-width: none; padding: 12px var(--gut); border-width: 1px 0 0; box-shadow: 0 -12px 40px rgba(0,0,0,.5); }
+.cookie.is-on { display: flex; flex-direction: column; gap: 10px; }
+.cookie p { margin: 0; font-size: 13px; line-height: 1.45; }
+.cookie .btns { display: flex; gap: 8px; }
+.cookie .btns .btn { min-height: 40px; padding: 0 16px; }
+@media (min-width: 700px) {
+  .cookie { left: 0; bottom: 0; }
+  .cookie.is-on { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
+  .cookie .btns { flex: 0 0 auto; }
+  .cookie .btns .btn { flex: 0 0 auto; }
+}

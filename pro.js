@@ -142,3 +142,9 @@
     window.addEventListener('resize', upd); upd();
   });
 })();
+
+/* Tarjetas de la galería de inicio -> ficha en Proyectos */
+document.addEventListener('click', function (e) {
+  var t = e.target.closest && e.target.closest('[data-href]');
+  if (t) { window.location.href = t.getAttribute('data-href'); }
+});
