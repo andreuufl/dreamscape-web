@@ -646,7 +646,8 @@ p { margin: 0 0 1em; }
 
 /* Banda de equipo a sangre */
 .band { position: relative; min-height: min(78svh, 760px); display: flex; align-items: flex-end; isolation: isolate; overflow: hidden; padding: clamp(56px, 8vw, 112px) 0; }
-.band > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: -2; filter: saturate(.85); }
+.band > picture { display: contents; }
+.band > img, .band > picture > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; z-index: -2; filter: saturate(.85); }
 .band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,10,11,.25), rgba(10,10,11,.35) 40%, rgba(10,10,11,.95)); }
 .band h2 { max-width: 14ch; }
 .band p { color: var(--paper-2); margin: 20px 0 10px; max-width: 52ch; }
@@ -825,3 +826,6 @@ body.lb-on { overflow: hidden; }
 .qlinks a:hover, .qlinks a:focus-visible { border-color: var(--gold); background: rgba(201,166,107,.06); transform: translateY(-2px); }
 .qlinks b { display: block; font-size: 20px; text-transform: uppercase; font-variation-settings: "wdth" 75; margin-bottom: 6px; }
 .qlinks span { color: var(--paper-2); font-size: 15px; line-height: 1.45; }
+
+/* Móvil y tableta: la barra inferior fija no tapa los enlaces del pie */
+@media (max-width: 1079px) { .ftr { padding-bottom: calc(112px + env(safe-area-inset-bottom)); } }
