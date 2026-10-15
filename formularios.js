@@ -7,7 +7,7 @@
   var API = (window.DS_API || '').trim();
   if (!API) return;
 
-  var FORMS = { 'dreamscape-form': 'contacto', 'checklist-form': 'checklist' };
+  var FORMS = { 'dreamscape-form': 'contacto', 'checklist-form': 'checklist', 'presupuesto-rapido': 'contacto' };
   var ERRORES = {
     email_no_valido: 'Revisa el correo electrónico, parece que no es válido.',
     telefono_no_valido: 'Revisa el teléfono (mínimo 9 dígitos).',
