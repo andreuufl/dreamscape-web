@@ -1,0 +1,34 @@
+/* DREAMSCAPE EVENTS — capa de movimiento (motion) · 2026-10
+   Complementa pro.css. Todo se desactiva con "reducir movimiento". */
+
+@property --py { syntax: "<length-percentage>"; inherits: false; initial-value: 0%; }
+
+/* Focos sobre portada y cabeceras */
+.ds-beams { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
+.phero .ds-beams { opacity: .9; }
+
+/* Titulares palabra a palabra */
+.ds-w { display: inline-block; will-change: transform, opacity, filter; }
+
+/* Paralaje de fotos y vídeos dentro de su marco */
+.ds-par { translate: 0 var(--py, 0%); scale: 1.12; }
+
+/* Tarjetas con inclinación (solo ratón) */
+.ds-tilt { will-change: transform; transform-style: preserve-3d; }
+
+/* Brillo de los botones dorados al entrar en pantalla */
+.ds-shine { position: relative; overflow: hidden; isolation: isolate; }
+.ds-shine::before { content: ""; position: absolute; inset: -2px auto -2px -60%; width: 45%; z-index: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 248, 230, .75), transparent); transform: skewX(-18deg); opacity: 0; }
+.ds-shine > * { position: relative; z-index: 1; }
+.ds-shine-on::before { animation: ds-shine 1.3s .25s cubic-bezier(.16, 1, .3, 1) forwards; }
+.ds-shine:hover::before { animation: ds-shine 1s cubic-bezier(.16, 1, .3, 1) forwards; }
+@keyframes ds-shine { 0% { left: -60%; opacity: 1; } 100% { left: 130%; opacity: 1; } }
+
+/* Cinta de trabajos */
+.ds-m .ticker { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-par { translate: none; scale: 1; }
+  .ds-shine::before { display: none; }
+}
