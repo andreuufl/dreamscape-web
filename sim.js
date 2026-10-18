@@ -142,7 +142,7 @@
     }
     function cargarYGenerar() {
       if (window.DSRider) return generar();
-      var s = document.createElement('script'); s.src = '/rider-pdf.js?v=1'; s.onload = generar;
+      var s = document.createElement('script'); s.src = '/rider-pdf.js?v=2'; s.onload = generar;
       s.onerror = function () { btn.disabled = false; btn.textContent = label; showErr('No se ha podido generar el PDF ahora mismo. Inténtalo de nuevo o escríbenos por WhatsApp.'); };
       document.head.appendChild(s);
     }

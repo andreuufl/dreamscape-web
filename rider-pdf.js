@@ -65,15 +65,14 @@
     }
     if (has('video')) { techs.push('técnico de vídeo'); px.push(['Técnico de vídeo', 'Operador de pantalla LED · jornada', 280]); }
     eq.push(['Equipo humano', (techs.join(' y ') || 'Técnico') + ' presentes durante todo el evento']);
-    eq.push(['Siempre incluido', 'Montaje, desmontaje, calibración y material de respaldo']);
     px.push(['Desplazamiento', 'Barcelona y área metropolitana · otros destinos a presupuesto', 90]);
 
     var total = 0; px.forEach(function (r) { if (r[2] != null) total += r[2]; });
     var pack = null;
-    if (tipo === 'boda' && g <= 250) pack = ['Pack Boda Completa', 'Incluye además equipo DJ y pack de iluminación de fiesta con humo; técnico hasta 10 h', 1950];
-    else if (tipo === 'empresa' && g <= 250) pack = ['Pack Evento Corporativo', 'Sonido, 4 micrófonos, iluminación escénica y pantalla LED 6 m²; técnico hasta 8 h', 2200];
-    else if (tipo === 'congreso' && g <= 300) pack = ['Pack Congreso (por jornada)', 'Sonido, 6 micrófonos, iluminación, pantalla LED 10 m² y 2 técnicos', 3600];
-    else if (tipo === 'concierto' && g <= 250) pack = ['Pack Fiesta o Evento con DJ', 'Sonido, equipo DJ, 4 cabezas móviles, 4 focos PAR y humo; técnico 6 h', 1250];
+    if (tipo === 'boda' && g <= 250) pack = ['Pack Boda Completa', 'Incluye además equipo DJ y pack de iluminación de fiesta con humo; técnico aparte', 1950];
+    else if (tipo === 'empresa' && g <= 250) pack = ['Pack Evento Corporativo', 'Sonido, 4 micrófonos, iluminación escénica y pantalla LED 6 m²; técnico aparte', 2200];
+    else if (tipo === 'congreso' && g <= 300) pack = ['Pack Congreso (por jornada)', 'Sonido, 6 micrófonos, iluminación, pantalla LED 10 m²; técnicos aparte', 3600];
+    else if (tipo === 'concierto' && g <= 250) pack = ['Pack Fiesta o Evento con DJ', 'Sonido, equipo DJ, 4 cabezas móviles, 4 focos PAR y humo; técnico aparte', 1250];
     return { eq: eq, px: px, total: total, open: open, pack: pack, w: w, dp: dp };
   }
 
