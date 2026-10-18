@@ -96,3 +96,10 @@ canvas.ds-stage, .phero canvas, .phero .ds-stage { opacity: .55; }
 .sec--paper .g figcaption span { color: var(--gold-hi); }
 .reel-cta, .reel-cta.btn--gold { background: var(--gold); color: var(--ink); text-shadow: none; }
 .reel-cta:hover { background: var(--gold-hi); }
+
+/* Portada: vídeo más visible (menos capas oscuras encima) */
+.reel::before { background: linear-gradient(180deg, rgba(10,10,11,.45) 0%, rgba(10,10,11,0) 22%, rgba(10,10,11,.1) 55%, rgba(10,10,11,.55) 100%); }
+.reel::after { background: linear-gradient(180deg, rgba(5,5,6,.15) 0%, rgba(5,5,6,0) 30%, rgba(5,5,6,.18) 58%, rgba(5,5,6,.5) 100%); }
+.reel-strip video, .reel-strip img { filter: none; }
+.reel-body .display, .reel-body .eyebrow, .reel-meta p { text-shadow: 0 1px 18px rgba(0,0,0,.6), 0 0 2px rgba(0,0,0,.35); }
+.reel .beam, .reel .beam::before, .reel .beam::after { opacity: .2; }
