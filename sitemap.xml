@@ -297,4 +297,8 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url><loc>https://www.dreamscapeevents.es/en-services.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dreamscapeevents.es/en-projects.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dreamscapeevents.es/en-for-planners-and-agencies.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.dreamscapeevents.es/en-contact.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

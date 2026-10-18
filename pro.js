@@ -360,7 +360,7 @@ document.querySelectorAll('.ba').forEach(function (ba) {
     }
 
     /* ---------- 6b. "Te puede interesar" ---------- */
-    if (window.fetch && window.DOMParser) {
+    if (window.fetch && window.DOMParser && d.documentElement.lang === 'es') {
       fetch('/blog.html', { credentials: 'same-origin' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
         if (!html) return;
         var doc = new DOMParser().parseFromString(html, 'text/html');

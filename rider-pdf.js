@@ -246,7 +246,6 @@
     // condiciones
     doc.setFont('helvetica', 'bold'); doc.setFontSize(6.6); ink(doc, GOLDD); tr(doc, 'CONDICIONES', 18, y + 2, 1.4); y += 6.6;
     ['Todos los precios son «desde» y orientativos; no incluyen IVA (21 %).',
-     'Incluyen entrega, montaje, desmontaje, calibración y material de respaldo. Trabajamos siempre con técnico.',
      'El presupuesto final tiene una validez de 30 días y se confirma tras revisar el recinto.',
      'En fechas de alta demanda (primavera-verano, congresos y Navidad), recomendamos reservar con semanas de antelación.']
       .forEach(function (t) {
