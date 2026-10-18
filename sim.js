@@ -62,13 +62,108 @@
     try { sessionStorage.setItem('ds-sim-msg', 'Hola, me interesa presupuestar este evento configurado en el simulador:\n' + summary()); } catch (e) {}
     window.location.href = '/contacto.html#formulario';
   });
-  document.getElementById('sim-pdf').addEventListener('click', function () {
-    var btn = this, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando tu rider…';
-    function ok() { btn.disabled = false; btn.textContent = label; if (typeof window.gtag === 'function') window.gtag('event', 'download_rider', { link_location: 'simulador' }); }
-    function ko() { btn.disabled = false; btn.textContent = label; alert('No se ha podido generar el PDF ahora mismo. Prueba con WhatsApp o el formulario.'); }
-    function go() { window.DSRider.generate(data(), ok, ko); }
-    if (window.DSRider) return go();
-    var s = document.createElement('script'); s.src = '/rider-pdf.js?v=1'; s.onload = go; s.onerror = ko; document.head.appendChild(s);
-  });
+  /* ---- Puerta del PDF: email válido + política obligatoria, y entonces se descarga ---- */
+  var API = (window.DS_API || '').trim();
+  var EMAIL_RE = /^[^\s@,;:<>()\[\]\\"]+@([a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i;
+  var TYPOS = { 'gmial.com': 'gmail.com', 'gmai.com': 'gmail.com', 'gamil.com': 'gmail.com', 'gmail.es': 'gmail.com', 'gmail.con': 'gmail.com', 'hotmial.com': 'hotmail.com', 'hotmai.com': 'hotmail.com', 'hotmail.con': 'hotmail.com', 'outlok.com': 'outlook.com', 'outlook.con': 'outlook.com', 'yahoo.con': 'yahoo.com', 'yaho.com': 'yahoo.com', 'icloud.con': 'icloud.com' };
+  var gate = null;
+  function buildGate() {
+    gate = document.createElement('div');
+    gate.className = 'pdfgate'; gate.hidden = true;
+    gate.innerHTML =
+      '<div class="pdfgate-box" role="dialog" aria-modal="true" aria-labelledby="pdfgate-t">' +
+      '<button type="button" class="pdfgate-x" aria-label="Cerrar">×</button>' +
+      '<span class="eyebrow">Tu rider técnico</span>' +
+      '<h2 id="pdfgate-t">¿A qué correo te lo enviamos?</h2>' +
+      '<p class="pdfgate-p">Indica tu email y se descargará al instante el PDF con la configuración de tu evento y los precios orientativos. Después te escribimos para afinar el presupuesto.</p>' +
+      '<form id="pdfgate-form" novalidate>' +
+      '<div class="field"><label for="pg-email">Correo electrónico</label><input type="email" id="pg-email" name="Email" required maxlength="120" autocomplete="email" inputmode="email" placeholder="tu@empresa.com"></div>' +
+      '<div class="field"><label for="pg-nombre">Nombre <span class="pg-opt">(opcional)</span></label><input type="text" id="pg-nombre" name="Nombre" maxlength="100" autocomplete="name" placeholder="Tu nombre y empresa"></div>' +
+      '<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">' +
+      '<label class="consent"><input type="checkbox" id="pg-priv" name="Acepta_Privacidad" value="Sí" required><span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a>. Usaréis mi email para enviarme el rider y contactarme sobre mi evento.</span></label>' +
+      '<p class="pdfgate-err" id="pg-err" role="alert" hidden></p>' +
+      '<button class="btn btn--gold" type="submit" id="pg-go">Descargar mi rider (PDF)</button>' +
+      '</form></div>';
+    document.body.appendChild(gate);
+    gate.addEventListener('click', function (e) { if (e.target === gate || e.target.classList.contains('pdfgate-x')) closeGate(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && gate && !gate.hidden) closeGate(); });
+    gate.querySelector('#pdfgate-form').addEventListener('submit', submitGate);
+  }
+  var opener = null;
+  function openGate(btn) {
+    if (!gate) buildGate();
+    opener = btn; gate.hidden = false; document.documentElement.classList.add('pdfgate-on');
+    setTimeout(function () { var i = gate.querySelector('#pg-email'); if (i) i.focus(); }, 30);
+  }
+  function closeGate() {
+    if (!gate) return;
+    gate.hidden = true; document.documentElement.classList.remove('pdfgate-on');
+    if (opener) opener.focus();
+  }
+  function showErr(msg, el) {
+    var e = gate.querySelector('#pg-err'); e.textContent = msg; e.hidden = !msg;
+    if (el) el.focus();
+  }
+  function submitGate(ev) {
+    ev.preventDefault();
+    var email = gate.querySelector('#pg-email'), priv = gate.querySelector('#pg-priv'), nombre = gate.querySelector('#pg-nombre');
+    var v = email.value.trim().toLowerCase(); email.value = v;
+    if (!v || !EMAIL_RE.test(v)) return showErr('Escribe un correo válido, por ejemplo nombre@empresa.com.', email);
+    var dom = v.split('@')[1];
+    if (TYPOS[dom]) return showErr('¿Querías decir ' + v.split('@')[0] + '@' + TYPOS[dom] + '? Corrígelo y vuelve a pulsar.', email);
+    if (!priv.checked) return showErr('Para continuar debes aceptar la política de privacidad.', priv);
+    showErr('');
+    var btn = gate.querySelector('#pg-go'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Preparando tu rider…';
+    var d = data();
+    var datos = new URLSearchParams();
+    datos.set('form', 'checklist');
+    datos.set('Email', v); datos.set('Nombre', nombre.value.trim() || '(sin nombre)');
+    datos.set('Acepta_Privacidad', 'Sí');
+    datos.set('Origen', 'Simulador rider · ' + d.tipo + ' · ' + d.asistentes + ' pers. · ' + d.recinto);
+    datos.set('Detalles_Proyecto', summary());
+    datos.set('Idioma', 'ES');
+    datos.set('ts', String(Date.now() - 4000));
+    datos.set('pagina', location.pathname);
+    var rechazado = false;
+    function generar() {
+      window.DSRider.generate(d, function () {
+        btn.disabled = false; btn.textContent = label; closeGate();
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'download_rider', { link_location: 'simulador' });
+          window.gtag('event', 'generate_lead', { form_name: 'simulador_rider' });
+        }
+        var n = document.getElementById('sim-pdf-ok');
+        if (n) { n.hidden = false; setTimeout(function () { n.hidden = true; }, 9000); }
+      }, function () {
+        btn.disabled = false; btn.textContent = label;
+        showErr('No se ha podido generar el PDF ahora mismo. Inténtalo de nuevo o escríbenos por WhatsApp.');
+      });
+    }
+    function cargarYGenerar() {
+      if (window.DSRider) return generar();
+      var s = document.createElement('script'); s.src = '/rider-pdf.js?v=1'; s.onload = generar;
+      s.onerror = function () { btn.disabled = false; btn.textContent = label; showErr('No se ha podido generar el PDF ahora mismo. Inténtalo de nuevo o escríbenos por WhatsApp.'); };
+      document.head.appendChild(s);
+    }
+    if (!API) return cargarYGenerar();
+    fetch(API, { method: 'POST', body: datos })
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (res && res.ok) return cargarYGenerar();
+        rechazado = true; throw new Error((res && res.error) || 'error');
+      })
+      .catch(function (err) {
+        if (rechazado) throw err;
+        /* Safari/iPhone con privacidad estricta no deja leer la respuesta: se reenvía sin respuesta */
+        return fetch(API, { method: 'POST', mode: 'no-cors', body: datos }).then(cargarYGenerar);
+      })
+      .catch(function (err) {
+        btn.disabled = false; btn.textContent = label;
+        var m = { email_no_valido: 'El servidor no ha aceptado ese correo. Revísalo.', privacidad: 'Debes aceptar la política de privacidad.', demasiados_envios: 'Has hecho varias solicitudes seguidas. Espera un rato o escríbenos por WhatsApp.' };
+        showErr(m[err && err.message] || 'No hemos podido registrar tu correo. Revisa tu conexión e inténtalo de nuevo.', email);
+      });
+  }
+  document.getElementById('sim-pdf').addEventListener('click', function () { openGate(this); });
   update();
 })();

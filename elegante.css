@@ -144,3 +144,19 @@ canvas.ds-stage, .phero canvas, .phero .ds-stage { opacity: .55; }
 @media (prefers-reduced-motion: reduce) { .rv-img { clip-path: none; opacity: 1; transition: none; } .reel-strip--one video, .cursor-ring, .pano img { transition: none; transform: none !important; } }
 .reel::after { background: linear-gradient(180deg, rgba(5,5,6,.3) 0%, rgba(5,5,6,0) 28%, rgba(5,5,6,.25) 52%, rgba(5,5,6,.68) 100%); }
 .reel-body .eyebrow { color: var(--gold-hi); text-shadow: 0 1px 14px rgba(0,0,0,.85); }
+
+/* Puerta de email del PDF del simulador */
+html.pdfgate-on { overflow: hidden; }
+.pdfgate { position: fixed; inset: 0; z-index: 400; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(5,5,6,.78); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.pdfgate[hidden] { display: none; }
+.pdfgate-box { position: relative; width: min(520px, 100%); max-height: calc(100dvh - 32px); overflow: auto; background: var(--ink, #0a0a0b); color: var(--paper, #f4efe6); border: 1px solid rgba(255,255,255,.14); padding: clamp(24px, 4vw, 40px); }
+.pdfgate-box h2 { font-size: clamp(26px, 4vw, 34px); margin: 8px 0 12px; }
+.pdfgate-p { color: var(--paper-2, #cfc9bd); font-size: 15px; line-height: 1.55; margin: 0 0 22px; }
+.pdfgate-x { position: absolute; top: 10px; right: 14px; background: none; border: 0; color: inherit; font-size: 30px; line-height: 1; cursor: pointer; padding: 6px 10px; }
+.pdfgate-box .field { margin-bottom: 16px; }
+.pdfgate-box .consent { margin: 4px 0 16px; }
+.pdfgate-box .btn { width: 100%; justify-content: center; }
+.pdfgate-err { color: #ff8a7a; font-size: 14px; margin: 0 0 14px; }
+.pdfgate-err[hidden] { display: none; }
+.pg-opt { text-transform: none; letter-spacing: 0; opacity: .7; }
+.pdfgate-box input[type="email"], .pdfgate-box input[type="text"] { font-size: 16px; }
