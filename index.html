@@ -31,7 +31,7 @@
 <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/pro.css?v=20261023">
-<link rel="stylesheet" href="/elegante.css?v=2">
+<link rel="stylesheet" href="/elegante.css?v=4">
 <link rel="stylesheet" href="/ds-motion.css?v=20261016">
 <link rel="stylesheet" href="/ds-show.css?v=20261017">
 <link rel="preload" as="image" href="/portfolio-video-candlelight-poster.webp">
@@ -126,11 +126,8 @@
 <main id="main">
 
 <section class="reel" aria-label="Presentación">
-  <div class="reel-strip" aria-hidden="true">
-    <figure><video data-auto muted playsinline loop autoplay preload="metadata" poster="/portfolio-video-candlelight-poster.webp" src="/portfolio-video-candlelight.mp4"></video></figure>
-    <figure><video data-auto muted playsinline loop preload="none" poster="/portfolio-video-fiesta-poster.webp" src="/portfolio-video-fiesta.mp4"></video></figure>
-    <figure><video data-auto muted playsinline loop preload="none" poster="/portfolio-video-congreso-poster.webp" src="/portfolio-video-congreso.mp4"></video></figure>
-    <figure><video data-auto muted playsinline loop preload="none" poster="/portfolio-video-fashionweek-poster.webp" src="/portfolio-video-fashionweek.mp4"></video></figure>
+  <div class="reel-strip reel-strip--one" aria-hidden="true">
+    <figure><video data-auto muted playsinline loop autoplay preload="auto" poster="/hero-video-salon-poster.webp" src="/hero-video-salon.mp4"></video></figure>
   </div>
   <div class="reel-top"><div class="wrap"><span class="rec">Showreel</span><span>Base en Barcelona · Toda España</span></div></div>
   <div class="reel-body">
@@ -142,6 +139,18 @@
         <a class="btn btn--gold reel-cta" href="#presupuesto">Pedir presupuesto <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="reelrow" aria-label="Showreel: piezas destacadas">
+  <div class="wrap">
+    <span class="mono reelrow-t">Showreel</span>
+    <ul class="reelrow-l">
+      <li><a href="/proyectos.html"><img src="/portfolio-video-candlelight-poster.webp" alt="Concierto Candlelight en espacio histórico" loading="lazy" decoding="async"><span>Candlelight</span></a></li>
+      <li><a href="/proyectos.html"><img src="/portfolio-video-fiesta-poster.webp" alt="Fiesta con iluminación en directo" loading="lazy" decoding="async"><span>Fiesta en directo</span></a></li>
+      <li><a href="/proyectos.html"><img src="/portfolio-video-congreso-poster.webp" alt="Escenario de congreso" loading="lazy" decoding="async"><span>Congreso</span></a></li>
+      <li><a href="/proyectos.html"><img src="/portfolio-video-fashionweek-poster.webp" alt="080 Barcelona Fashion Week" loading="lazy" decoding="async"><span>080 Fashion Week</span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -191,6 +200,8 @@
   </div>
 </section>
 
+<figure class="pano" aria-label="Montaje de iluminación en un concierto Candlelight"><img src="/servicio-corporativo.webp" alt="Concierto Candlelight en un anfiteatro al atardecer con miles de velas" loading="lazy" decoding="async" data-pano><figcaption><span class="eyebrow">Iluminación</span><p>Cada espacio pide su propia luz.</p></figcaption></figure>
+
 <section class="sec sec--tight sec--paper" id="proyectos">
   <div class="wrap">
     <div class="hs-head">
@@ -208,6 +219,8 @@
     <div class="mt-m rv"><a class="btn" href="/proyectos.html">Ver todos los proyectos <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></a></div>
   </div>
 </section>
+
+<figure class="pano" aria-label="Montaje de un congreso"><img src="/servicio-congresos.webp" alt="Montaje de un congreso con pantallas LED y escenario en un pabellón" loading="lazy" decoding="async" data-pano style="object-position:50% 30%"><figcaption><span class="eyebrow">Sonido y vídeo</span><p>Y su propio sonido.</p></figcaption></figure>
 
 <section class="sec esp lit" id="toda-espana" aria-labelledby="esp-t">
   <div class="wrap esp-grid">
@@ -314,6 +327,7 @@
 <script src="/formularios.js?v=4" defer></script>
 <script src="/presupuesto-rapido.js?v=2" defer></script>
 <script src="/pro.js?v=20261024" defer></script>
+<script src="/elegante.js?v=1" defer></script>
 <script src="/ds-motion.js?v=20261016" defer></script>
 <script src="/ds-show.js?v=20261017" defer></script>
 
