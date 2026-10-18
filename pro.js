@@ -13,8 +13,7 @@
     var y = w.scrollY || 0;
     if (hdr) {
       hdr.classList.toggle('is-solid', y > 40 || !hdr.hasAttribute('data-transparent'));
-      if (!d.body.classList.contains('menu-open')) hdr.classList.toggle('is-hidden', y > 480 && y > lastY + 4);
-      if (y < lastY - 4) hdr.classList.remove('is-hidden');
+      hdr.classList.toggle('is-compact', y > 120 && !d.body.classList.contains('menu-open'));
     }
     if (mcta) mcta.classList.toggle('is-on', y > w.innerHeight * 0.7);
     lastY = y; ticking = false;
@@ -64,14 +63,19 @@
     vids.forEach(function (v) { vo.observe(v); });
   }
 
-  /* ---------- Filtros de proyectos ---------- */
-  var filters = d.querySelectorAll('.filters button');
-  filters.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var f = b.getAttribute('data-f');
-      filters.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      d.querySelectorAll('.pj[data-cat]').forEach(function (pj) {
-        pj.hidden = !(f === 'all' || pj.getAttribute('data-cat').indexOf(f) !== -1);
+  /* ---------- Filtros (proyectos, servicios, blog) ---------- */
+  d.querySelectorAll('.filters').forEach(function (group) {
+    var scopeSel = group.getAttribute('data-scope'), itemSel = group.getAttribute('data-item') || '.pj';
+    var scope = scopeSel ? d.querySelector(scopeSel) : d;
+    if (!scope) return;
+    var btns = group.querySelectorAll('button');
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var f = b.getAttribute('data-f');
+        btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        scope.querySelectorAll(itemSel + '[data-cat]').forEach(function (it) {
+          it.hidden = !(f === 'all' || (' ' + it.getAttribute('data-cat') + ' ').indexOf(' ' + f + ' ') !== -1);
+        });
       });
     });
   });
@@ -203,7 +207,7 @@ document.addEventListener('click', function (e) {
       '<div class="lb-stage"></div><p class="lb-cap"></p>';
     d.body.appendChild(lb);
     var stage = lb.querySelector('.lb-stage'), cap = lb.querySelector('.lb-cap'), idx = 0, opener = null;
-    function items() { return medias.filter(function (m) { var pj = m.closest('.pj'); return !(pj && pj.hidden); }); }
+    function items() { return medias.filter(function (m) { var pj = m.closest('.pj'); return !m.hidden && !(pj && pj.hidden); }); }
     function show(i) {
       var list = items(); if (!list.length) return;
       idx = (i + list.length) % list.length;
