@@ -203,3 +203,5 @@ html.pdfgate-on { overflow: hidden; }
 }
 
 .home .reel::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(8,8,9,.5) 0%, rgba(8,8,9,.18) 48%, transparent 72%), linear-gradient(0deg, rgba(8,8,9,.55) 0%, transparent 38%); }
+
+@media (min-width: 1100px) { .facts--3 { grid-template-columns: repeat(3, 1fr); } }
