@@ -61,18 +61,18 @@
     if (has('sonido') || has('luz')) {
       var n = has('sonido') && has('luz') && g >= 250 ? 2 : 1;
       techs.push(n + (n > 1 ? ' técnicos' : ' técnico') + ' de sonido e iluminación');
-      px.push(['Técnico en cabina', n + (n > 1 ? ' técnicos' : ' técnico') + ' · jornada de hasta 8 h', n * 250]);
+      px.push(['Técnico en cabina', n + (n > 1 ? ' técnicos' : ' técnico') + ' · jornada de hasta 8 h · 280 € cada uno', n * 280]);
     }
-    if (has('video')) { techs.push('técnico de vídeo'); px.push(['Técnico de vídeo', 'Operador de pantalla LED · jornada', 280]); }
+    if (has('video')) { techs.push('técnico de vídeo'); px.push(['Técnico de vídeo', 'Operador de pantalla LED · jornada · 280 €', 280]); }
     eq.push(['Equipo humano', (techs.join(' y ') || 'Técnico') + ' presentes durante todo el evento']);
     px.push(['Desplazamiento', 'Barcelona y área metropolitana · otros destinos a presupuesto', 90]);
 
     var total = 0; px.forEach(function (r) { if (r[2] != null) total += r[2]; });
     var pack = null;
-    if (tipo === 'boda' && g <= 250) pack = ['Pack Boda Completa', 'Incluye además equipo DJ y pack de iluminación de fiesta con humo; técnico aparte', 1950];
-    else if (tipo === 'empresa' && g <= 250) pack = ['Pack Evento Corporativo', 'Sonido, 4 micrófonos, iluminación escénica y pantalla LED 6 m²; técnico aparte', 2200];
-    else if (tipo === 'congreso' && g <= 300) pack = ['Pack Congreso (por jornada)', 'Sonido, 6 micrófonos, iluminación, pantalla LED 10 m²; técnicos aparte', 3600];
-    else if (tipo === 'concierto' && g <= 250) pack = ['Pack Fiesta o Evento con DJ', 'Sonido, equipo DJ, 4 cabezas móviles, 4 focos PAR y humo; técnico aparte', 1250];
+    if (tipo === 'boda' && g <= 250) pack = ['Pack Boda Completa', 'DJ, luz de fiesta, humo y técnico incluido', 1950 + 280];
+    else if (tipo === 'empresa' && g <= 250) pack = ['Pack Evento Corporativo', 'Sonido, luz, LED 6 m² y técnico incluido', 2200 + 280];
+    else if (tipo === 'congreso' && g <= 300) pack = ['Pack Congreso (por jornada)', 'Sonido, luz, LED 10 m² y 2 técnicos incluidos', 3600 + 560];
+    else if (tipo === 'concierto' && g <= 250) pack = ['Pack Fiesta o Evento con DJ', 'DJ, 4 cabezas, PAR, humo y técnico incluido', 1250 + 280];
     return { eq: eq, px: px, total: total, open: open, pack: pack, w: w, dp: dp };
   }
 
