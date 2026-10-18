@@ -111,17 +111,51 @@
     return (hazeTex = c);
   }
 
-  /* ---------- Escenas de luces (se van encadenando) ---------- */
-  var SCENES = [
-    { fx: 'fan',   cols: ['255,222,160', '255,242,218'] },
-    { fx: 'cross', cols: ['230,238,255', '255,232,196'] },
-    { fx: 'wave',  cols: ['255,170,84',  '255,212,140'], laser: 1 },
-    { fx: 'hit',   cols: ['255,246,230', '255,222,160'], sparks: 1, flash: 1 },
-    { fx: 'chase', cols: ['255,212,140', '255,236,200'] },
-    { fx: 'bally', cols: ['160,190,255', '255,226,170'], laser: 1 },
-    { fx: 'cross', cols: ['255,120,150', '255,180,100'] },
-    { fx: 'hit',   cols: ['255,230,186', '255,248,236'], laser: 1, sparks: 1, flash: 1 }
-  ];
+  /* ---------- Escenas de luces según el tipo de evento ---------- */
+  var MOODS = {
+    show: [
+      { fx: 'fan',   cols: ['255,222,160', '255,242,218'] },
+      { fx: 'cross', cols: ['230,238,255', '255,232,196'] },
+      { fx: 'wave',  cols: ['255,170,84',  '255,212,140'], laser: 1 },
+      { fx: 'hit',   cols: ['255,246,230', '255,222,160'], sparks: 1, flash: 1 },
+      { fx: 'chase', cols: ['255,212,140', '255,236,200'] },
+      { fx: 'bally', cols: ['160,190,255', '255,226,170'], laser: 1 },
+      { fx: 'cross', cols: ['255,120,150', '255,180,100'] },
+      { fx: 'hit',   cols: ['255,230,186', '255,248,236'], laser: 1, sparks: 1, flash: 1 }
+    ],
+    /* Bodas: cálido, velas, ámbar y rosado suave; sin láser */
+    boda: [
+      { fx: 'fan',   cols: ['255,206,140', '255,232,196'], speed: .7 },
+      { fx: 'wave',  cols: ['255,176,110', '255,214,170'], speed: .6 },
+      { fx: 'cross', cols: ['255,170,150', '255,222,180'], speed: .7 },
+      { fx: 'hit',   cols: ['255,236,206', '255,214,160'], sparks: 1, flash: .6 },
+      { fx: 'chase', cols: ['255,196,120', '255,226,180'], speed: .6 }
+    ],
+    /* Empresa: blanco frío, dorado y sobrio; movimientos lentos */
+    empresa: [
+      { fx: 'fan',   cols: ['236,242,255', '255,240,214'], speed: .55 },
+      { fx: 'cross', cols: ['210,226,255', '236,242,255'], speed: .55 },
+      { fx: 'hit',   cols: ['255,250,240', '230,238,255'], flash: .45 },
+      { fx: 'wave',  cols: ['255,226,170', '236,242,255'], speed: .5, laser: 1 }
+    ]
+  };
+  var MOOD = (function () {
+    var p = location.pathname.replace(/^\/|\.html$/g, '');
+    if (/boda|wedding|ceremonia/.test(p)) return 'boda';
+    if (/corporativ|congreso|empresa|gala|presentacion|traduccion|streaming|sonorizacion/.test(p)) return 'empresa';
+    return 'show';
+  })();
+  var SCENES = MOODS[MOOD];
+  root.setAttribute('data-ds-mood', MOOD);
+
+  /* ---------- Scroll: posición y velocidad (las luces lo siguen) ---------- */
+  var SCR = { y: W.scrollY || 0, v: 0, t: performance.now() };
+  W.addEventListener('scroll', function () {
+    var now = performance.now(), y = W.scrollY || 0, dt = Math.max(8, now - SCR.t);
+    SCR.v = SCR.v * .6 + ((y - SCR.y) / dt * 1000) * .4;
+    SCR.y = y; SCR.t = now;
+  }, { passive: true });
+
   function rgb(s) { return s.split(',').map(Number); }
 
   /* ---------- Escenario: truss + cabezas móviles + láser + chispas ---------- */
@@ -134,7 +168,9 @@
     var hzC = D.createElement('canvas'), hzPat = null;
     var n = small ? o.nSmall : o.n, fx = [], i;
     for (i = 0; i < n; i++) fx.push({ x: 0, y: 0, a: 0, i: 0, z: .06, c: rgb(SCENES[0].cols[i % 2]) });
-    var sIx = o.start || 0, scene = SCENES[sIx], sT = 0;
+    var sIx = (o.start || 0) % SCENES.length, scene = SCENES[sIx], sT = 0, lt = 0;
+    var SHOW = null, scrollP = .5, bokeh = [], api = {};
+    var SHOWCOLS = ['255,244,226', '255,96,150', '120,168,255', '255,176,70'];
     var flash = 0, laser = 0, sparkT = o.intro ? 2.8 : 0, sparks = [];
     var aim = null, ptr = null, hazeOff = 0, born = -1, ty = 0;
     var aimEl = host.querySelector(o.aim || 'h1, h2');
@@ -197,7 +233,7 @@
         var r = aimEl.getBoundingClientRect(), hr = cv.c.getBoundingClientRect();
         aim = { x: r.left - hr.left + Math.min(r.width, cv.w * .8) * .5, y: r.top - hr.top + r.height * .5 };
         if (scene.flash) {
-          flash = 1;
+          flash = scene.flash;
           aimEl.classList.remove('ds-hit'); void aimEl.offsetWidth; aimEl.classList.add('ds-hit');
         }
         if (scene.sparks) sparkT = 2;
@@ -223,6 +259,23 @@
           case 'bally': ta = .55 * Math.sin(t * 1.6 + k * 1.3); tz = .05; break;
         }
         if (ptr && scene.fx !== 'hit') ta = lerp(ta, Math.atan2(ptr.x - f.x, Math.max(40, ptr.y - f.y)), .28);
+        if (SHOW) {
+          var b = SHOW.beat;
+          if (b < 0) { ta = u * .1; ti = (k === Math.round(mid)) ? clamp(1 + b / 2.5, 0, 1) * .8 : 0; tz = .03; }
+          else {
+            var bi = Math.floor(b), ph = b - bi, pat = Math.floor(bi / 2) % 4;
+            if (pat === 0) ta = u * .62;
+            else if (pat === 1) ta = u === 0 ? 0 : (u < 0 ? 1 : -1) * .34;
+            else if (pat === 2) ta = .5 * Math.sin(b * Math.PI * .5 + k * .9);
+            else ta = aim ? Math.atan2(aim.x - f.x, Math.max(40, aim.y - f.y)) : 0;
+            ti = (bi % 2 === 0) === (k % 2 === 0) ? 1 : .3;
+            ti *= .5 + .5 * Math.exp(-ph * 3.5);
+            tz = .05;
+          }
+        } else {
+          /* las luces acompañan el scroll: inercia + barrido mientras la sección pasa */
+          ta += clamp(SCR.v / 2600, -.5, .5) + (scrollP - .5) * .7 * (u >= 0 ? 1 : .6);
+        }
         f.ta = ta; f.ti = ti; f.tz = tz;
       }
     }
@@ -245,17 +298,26 @@
       if (born < 0) born = t;
       var w = cv.w, h = cv.h, x = cv.x, k, f;
       var live = clamp((t - born) / 1.6, 0, 1) * o.k;
-      sT += dt;
-      if (sT > (scene.fx === 'hit' ? 3.4 : 4.4)) nextScene();
-      targets(t);
+      var hr = host.getBoundingClientRect(), vh = W.innerHeight || 800;
+      scrollP = clamp((vh - hr.top) / (vh + hr.height), 0, 1);
+      if (host.classList.contains('reel')) scrollP = .5 + clamp(-hr.top / hr.height, 0, 1) * .5;
+      SCR.v *= Math.exp(-dt * 3);
+      if (SHOW) showTick();
+      else {
+        sT += dt;
+        if (sT > (scene.fx === 'hit' ? 3.4 : 4.4)) nextScene();
+      }
+      lt += dt * (scene.speed || 1);
+      targets(SHOW ? t : lt);
+      var rate = SHOW ? 11 : 3.4;
 
       for (k = 0; k < n; k++) {
         f = fx[k];
-        f.a += (f.ta - f.a) * ease(dt, 3.4);
-        f.i += (f.ti - f.i) * ease(dt, 7);
+        f.a += (f.ta - f.a) * ease(dt, rate);
+        f.i += (f.ti - f.i) * ease(dt, SHOW ? 18 : 7);
         f.z += (f.tz - f.z) * ease(dt, 4);
-        var tc = rgb(scene.cols[k % 2]);
-        for (var j = 0; j < 3; j++) f.c[j] += (tc[j] - f.c[j]) * ease(dt, 2.6);
+        var tc = rgb(SHOW && SHOW.beat >= 0 ? SHOWCOLS[Math.floor(SHOW.beat / 4) % 4] : scene.cols[k % 2]);
+        for (var j = 0; j < 3; j++) f.c[j] += (tc[j] - f.c[j]) * ease(dt, SHOW ? 8 : 2.6);
       }
 
       /* haces en un búfer, recortados por el humo */
@@ -302,7 +364,7 @@
       }
 
       /* láser */
-      laser += ((scene.laser ? 1 : 0) - laser) * ease(dt, 2.2);
+      laser += ((SHOW ? (SHOW.beat >= 0 ? 1 : 0) : (scene.laser ? 1 : 0)) - laser) * ease(dt, SHOW ? 8 : 2.2);
       if (laser > .02 && o.lasers) {
         var ox = w / 2, oy = ty + 26, base = .38 * Math.sin(t * 1.05), ln = small ? 7 : 11, LL = Math.hypot(w, h);
         for (k = 0; k < ln; k++) {
@@ -383,16 +445,64 @@
         x.fillRect(0, 0, w, h);
         flash = Math.max(0, flash - dt * 2.4);
       }
+      /* bokeh de velas (solo bodas) */
+      if (MOOD === 'boda') {
+        if (bokeh.length < (small ? 14 : 26) && Math.random() < dt * 6) bokeh.push({ x: rand(0, w), y: h + 20, r: rand(6, small ? 16 : 26), v: rand(14, 34), s: rand(0, 6), m: 0, l: rand(6, 11) });
+        x.globalCompositeOperation = 'lighter';
+        for (k = bokeh.length - 1; k >= 0; k--) {
+          var bk = bokeh[k]; bk.m += dt; bk.y -= bk.v * dt; bk.x += Math.sin(t * .6 + bk.s) * 6 * dt;
+          if (bk.m > bk.l) { bokeh.splice(k, 1); continue; }
+          var ba = Math.sin(bk.m / bk.l * Math.PI) * .22 * live;
+          var bgk = x.createRadialGradient(bk.x, bk.y, 0, bk.x, bk.y, bk.r);
+          bgk.addColorStop(0, 'rgba(255,214,150,' + ba + ')'); bgk.addColorStop(.7, 'rgba(255,190,110,' + ba * .5 + ')'); bgk.addColorStop(1, 'rgba(255,190,110,0)');
+          x.fillStyle = bgk; x.beginPath(); x.arc(bk.x, bk.y, bk.r, 0, Math.PI * 2); x.fill();
+        }
+      }
       x.globalCompositeOperation = 'source-over';
       return false;
     }
+
+    function showTick() {
+      SHOW.beat = SHOW.clock();
+      var b = SHOW.beat, bi = Math.floor(b);
+      host.classList.toggle('ds-blackout', b < 0);
+      if (bi !== SHOW.last && b >= 0) {
+        SHOW.last = bi;
+        if (bi === 0 || bi % 4 === 0) {
+          flash = bi === 0 ? 1.2 : .55;
+          if (aimEl) { aimEl.classList.remove('ds-hit'); void aimEl.offsetWidth; aimEl.classList.add('ds-hit'); }
+        }
+        if (bi === 0 || bi === 8) sparkT = 1.6;
+        if (aimEl && !aim) {
+          var r = aimEl.getBoundingClientRect(), hr2 = cv.c.getBoundingClientRect();
+          aim = { x: r.left - hr2.left + Math.min(r.width, cv.w * .8) * .5, y: r.top - hr2.top + r.height * .5 };
+        }
+      }
+      if (b >= SHOW.len) {
+        flash = 1; sparkT = 2.2;
+        var done = SHOW.done; SHOW = null; sT = 0;
+        host.classList.remove('ds-blackout');
+        if (done) done();
+      }
+    }
+    api.show = function (clock, len, done) {
+      if (aimEl) {
+        var r = aimEl.getBoundingClientRect(), hr2 = cv.c.getBoundingClientRect();
+        aim = { x: r.left - hr2.left + Math.min(r.width, cv.w * .8) * .5, y: r.top - hr2.top + r.height * .5 };
+      }
+      SHOW = { clock: clock, len: len, last: -99, beat: -9, done: done };
+      kick();
+    };
+    api.stop = function () { if (SHOW) { SHOW.len = -100; } };
     actor(draw, host);
+    return api;
   }
 
   /* ---------- Montaje de escenarios ---------- */
+  var REEL = null;
   safe(function () {
     var reel = D.querySelector('.reel');
-    if (reel) stage(reel, {
+    if (reel) REEL = stage(reel, {
       n: 8, nSmall: 5, k: 1, lasers: true, intro: true, aim: '.display', before: '.reel-top',
       trussY: function () { return hdrH() + (small ? 40 : 46); },
       sparks: function (w, h) { return small ? [{ x: w * .94, y: h }] : [{ x: w * .035, y: h }, { x: w * .965, y: h }]; }
@@ -418,6 +528,144 @@
     });
   });
 
+  /* ---------- Botón "Dale al show": apagón, subida, golpe y 8 compases de luces con música ---------- */
+  safe(function () {
+    var reel = D.querySelector('.reel'), meta = reel && reel.querySelector('.reel-meta');
+    if (!REEL || !meta) return;
+    var en = (root.lang || '').indexOf('en') === 0;
+    var btn = D.createElement('button');
+    btn.type = 'button'; btn.className = 'ds-showbtn';
+    btn.setAttribute('aria-pressed', 'false');
+    btn.innerHTML = '<span class="ds-showbtn-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="ds-showbtn-t">' + (en ? 'Hit the show' : 'Dale al show') + '</span><span class="ds-showbtn-s">' + (en ? 'with sound' : 'con sonido') + '</span>';
+    meta.appendChild(btn);
+
+    var BPM = 124, SPB = 60 / BPM, RISER = 2.4, BEATS = 32;
+    var ac = null, master = null, running = false, t0 = 0, perf0 = 0, nodes = [];
+
+    function audio() {
+      if (ac) return ac;
+      var AC = W.AudioContext || W.webkitAudioContext;
+      if (!AC) return null;
+      ac = new AC();
+      var comp = ac.createDynamicsCompressor();
+      comp.threshold.value = -14; comp.ratio.value = 4;
+      master = ac.createGain(); master.gain.value = .55;
+      master.connect(comp); comp.connect(ac.destination);
+      return ac;
+    }
+    var noiseBuf = null;
+    function noise() {
+      if (noiseBuf) return noiseBuf;
+      noiseBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
+      var d = noiseBuf.getChannelData(0);
+      for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      return noiseBuf;
+    }
+    function track(n) { nodes.push(n); return n; }
+    function env(g, at, peak, dec) {
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(peak, at + .005);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + dec);
+    }
+    function kickAt(at, big) {
+      var o = track(ac.createOscillator()), g = ac.createGain();
+      o.frequency.setValueAtTime(big ? 170 : 150, at);
+      o.frequency.exponentialRampToValueAtTime(42, at + .14);
+      env(g, at, big ? 1 : .85, big ? .7 : .38);
+      o.connect(g); g.connect(master); o.start(at); o.stop(at + .8);
+    }
+    function hatAt(at, v) {
+      var s2 = track(ac.createBufferSource()), f = ac.createBiquadFilter(), g = ac.createGain();
+      s2.buffer = noise(); f.type = 'highpass'; f.frequency.value = 7500;
+      env(g, at, v || .12, .06);
+      s2.connect(f); f.connect(g); g.connect(master); s2.start(at, Math.random()); s2.stop(at + .1);
+    }
+    function clapAt(at) {
+      var s2 = track(ac.createBufferSource()), f = ac.createBiquadFilter(), g = ac.createGain();
+      s2.buffer = noise(); f.type = 'bandpass'; f.frequency.value = 1600; f.Q.value = .8;
+      env(g, at, .32, .18);
+      s2.connect(f); f.connect(g); g.connect(master); s2.start(at, Math.random()); s2.stop(at + .25);
+    }
+    function synthAt(at, freqs, dur, vol, cut, type) {
+      var f = ac.createBiquadFilter(), g = ac.createGain();
+      f.type = 'lowpass'; f.frequency.setValueAtTime(cut, at); f.frequency.exponentialRampToValueAtTime(cut * .35, at + dur);
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(vol, at + .02);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      f.connect(g); g.connect(master);
+      freqs.forEach(function (fr, ix) {
+        var o = track(ac.createOscillator());
+        o.type = type || 'sawtooth'; o.frequency.value = fr; o.detune.value = ix % 2 ? 7 : -7;
+        o.connect(f); o.start(at); o.stop(at + dur + .05);
+      });
+    }
+    function schedule(start) {
+      // subida: ruido filtrado que abre + tono que sube
+      var rs = track(ac.createBufferSource()), rf = ac.createBiquadFilter(), rg = ac.createGain();
+      rs.buffer = noise(); rs.loop = true; rf.type = 'bandpass'; rf.Q.value = 3;
+      rf.frequency.setValueAtTime(300, start); rf.frequency.exponentialRampToValueAtTime(7000, start + RISER);
+      rg.gain.setValueAtTime(0.0001, start); rg.gain.exponentialRampToValueAtTime(.35, start + RISER - .05); rg.gain.linearRampToValueAtTime(0, start + RISER);
+      rs.connect(rf); rf.connect(rg); rg.connect(master); rs.start(start); rs.stop(start + RISER + .05);
+      var ro = track(ac.createOscillator()), rog = ac.createGain();
+      ro.type = 'sawtooth'; ro.frequency.setValueAtTime(110, start); ro.frequency.exponentialRampToValueAtTime(880, start + RISER);
+      rog.gain.setValueAtTime(0.0001, start); rog.gain.exponentialRampToValueAtTime(.07, start + RISER - .05); rog.gain.linearRampToValueAtTime(0, start + RISER);
+      ro.connect(rog); rog.connect(master); ro.start(start); ro.stop(start + RISER + .05);
+      // golpe + 8 compases a 124 BPM (La m · Fa · Do · Sol)
+      var drop = start + RISER, CH = [[220, 261.63, 329.63], [174.61, 220, 261.63], [261.63, 329.63, 392], [196, 246.94, 293.66]];
+      var BASS = [55, 43.65, 65.41, 49];
+      synthAt(drop, CH[0].concat([110]), 2.4, .22, 3200);
+      for (var b = 0; b < BEATS; b++) {
+        var at = drop + b * SPB, bar = Math.floor(b / 4) % 4;
+        kickAt(at, b === 0);
+        hatAt(at + SPB / 2, .14);
+        if (b % 2 === 1) clapAt(at);
+        if (b % 4 === 0) synthAt(at, CH[bar], SPB * 4 - .05, .085, 2400);
+        synthAt(at + SPB / 2, [BASS[bar]], SPB * .45, .16, 600, 'square');
+      }
+      var end = drop + BEATS * SPB;
+      kickAt(end, true);
+      synthAt(end, CH[0].concat([110, 440]), 3, .2, 3600);
+    }
+    function clock() {
+      if (ac && ac.state === 'running') return (ac.currentTime - t0) / SPB - RISER / SPB;
+      return ((performance.now() - perf0) / 1000) / SPB - RISER / SPB;
+    }
+    function stopAll() {
+      running = false;
+      btn.classList.remove('is-on'); btn.setAttribute('aria-pressed', 'false');
+      root.classList.remove('ds-showtime');
+      if (ac && master) {
+        var now = ac.currentTime;
+        master.gain.cancelScheduledValues(now);
+        master.gain.setValueAtTime(master.gain.value, now);
+        master.gain.linearRampToValueAtTime(0.0001, now + .25);
+        var old = nodes; nodes = [];
+        setTimeout(function () { old.forEach(function (n) { try { n.stop(); } catch (e) {} }); if (master) master.gain.value = .55; }, 300);
+      }
+    }
+    btn.addEventListener('click', function () {
+      if (running) { REEL.stop(); stopAll(); return; }
+      running = true;
+      btn.classList.add('is-on'); btn.setAttribute('aria-pressed', 'true');
+      root.classList.add('ds-showtime');
+      var a = audio();
+      perf0 = performance.now();
+      if (a) {
+        if (a.state === 'suspended') a.resume();
+        if (master) master.gain.value = .55;
+        t0 = a.currentTime + .05;
+        safe(function () { schedule(t0); });
+      }
+      REEL.show(clock, BEATS, function () {
+        setTimeout(function () { if (running) stopAll(); }, 2500);
+        running = false;
+        btn.classList.remove('is-on'); btn.setAttribute('aria-pressed', 'false');
+        root.classList.remove('ds-showtime');
+      });
+      if (typeof W.gtag === 'function') W.gtag('event', 'dale_al_show');
+    });
+  });
+
   /* ---------- Cañón de seguimiento en los titulares de sección ---------- */
   safe(function () {
     var hs = D.querySelectorAll('main .sec h2');
@@ -429,7 +677,7 @@
       });
     }, { threshold: .6 });
     hs.forEach(function (h) {
-      if (h.closest('.sec--paper, .band, .reel, .phero')) return;
+      if (h.closest('.sec--paper, .band, .reel, .phero, .sim-sum, .te')) return;
       var s = D.createElement('span');
       s.className = 'ds-spot'; s.setAttribute('aria-hidden', 'true');
       h.classList.add('ds-spot-h');
@@ -562,5 +810,239 @@
     eq.innerHTML = html;
     ftr.insertBefore(eq, ftr.firstChild);
     new IntersectionObserver(function (es) { eq.classList.toggle('on', es[0].isIntersecting); }).observe(eq);
+  });
+
+  /* ---------- Pantalla LED de proyectos ---------- */
+  safe(function () {
+    D.querySelectorAll('[data-ledwall]').forEach(function (wall) { safe(function () { ledWall(wall); }); });
+  });
+  function ledWall(wall) {
+    var items = wall.getAttribute('data-ledwall').split(';').map(function (s2) {
+      var p = s2.split('|'); return { src: p[0].trim(), cap: (p[1] || '').trim(), img: null, ok: false };
+    }).filter(function (it) { return it.src; });
+    if (items.length < 2) return;
+    var cv = canvasIn(wall, 'ds-ledwall-cv', null);
+    if (!cv) return;
+    wall.classList.add('is-live');
+    var cap = D.createElement('div');
+    cap.className = 'ledwall-cap'; cap.setAttribute('aria-live', 'polite');
+    wall.appendChild(cap);
+    var pix = D.createElement('canvas'), px = pix.getContext('2d');
+    var dots = null, panels = [], cols = 1, turn = 0, next = 2.2, scan = 0;
+    function load(it) {
+      if (it.img) return;
+      it.img = new Image(); it.img.decoding = 'async';
+      it.img.onload = function () { it.ok = true; };
+      it.img.src = it.src;
+    }
+    function layout() {
+      cv.fit();
+      var w = cv.w, h = cv.h;
+      cols = w > 900 ? 3 : w > 560 ? 2 : 1;
+      var old = panels; panels = [];
+      for (var i = 0; i < cols; i++) {
+        var ix = old[i] ? old[i].ix : i % items.length;
+        panels.push({ ix: ix, prev: -1, t: 9, x: Math.round(i * w / cols), w: Math.round((i + 1) * w / cols) - Math.round(i * w / cols) });
+        load(items[ix]);
+      }
+      // rejilla de píxeles LED + juntas de módulos (se dibuja una vez)
+      dots = D.createElement('canvas');
+      dots.width = cv.c.width; dots.height = cv.c.height;
+      var d = dots.getContext('2d'), pitch = 3 * DPR, cab = Math.round(64 * DPR);
+      d.fillStyle = 'rgba(0,0,0,.2)';
+      for (var y = 0; y < dots.height; y += pitch) d.fillRect(0, y, dots.width, Math.max(1, pitch * .34));
+      for (var xx = 0; xx < dots.width; xx += pitch) d.fillRect(xx, 0, Math.max(1, pitch * .34), dots.height);
+      d.fillStyle = 'rgba(0,0,0,.32)';
+      for (y = cab; y < dots.height; y += cab) d.fillRect(0, y, dots.width, Math.max(1, DPR));
+      for (xx = cab; xx < dots.width; xx += cab) d.fillRect(xx, 0, Math.max(1, DPR), dots.height);
+      for (i = 1; i < cols; i++) { d.fillStyle = '#050506'; d.fillRect(panels[i].x * DPR - 2 * DPR, 0, 4 * DPR, dots.height); }
+      setCap(panels[0].ix);
+    }
+    function setCap(ix) {
+      var it = items[ix];
+      cap.innerHTML = '<span class="mono">' + ((root.lang || '').indexOf('en') === 0 ? 'On screen' : 'En pantalla') + '</span> ' + it.cap.replace(/</g, '&lt;');
+    }
+    function cover(c, img, x, y, w, h) {
+      var ir = img.naturalWidth / img.naturalHeight, r = w / h, sw, sh, sx, sy;
+      if (ir > r) { sh = img.naturalHeight; sw = sh * r; sx = (img.naturalWidth - sw) / 2; sy = 0; }
+      else { sw = img.naturalWidth; sh = sw / r; sx = 0; sy = (img.naturalHeight - sh) * .38; }
+      c.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+    }
+    function pixelated(c, img, x, y, w, h, block) {
+      if (block <= 1.5) { cover(c, img, x, y, w, h); return; }
+      var pw = Math.max(1, Math.round(w / block)), ph = Math.max(1, Math.round(h / block));
+      pix.width = pw; pix.height = ph;
+      px.imageSmoothingEnabled = true;
+      cover(px, img, 0, 0, pw, ph);
+      c.imageSmoothingEnabled = false;
+      c.drawImage(pix, 0, 0, pw, ph, x, y, w, h);
+      c.imageSmoothingEnabled = true;
+    }
+    layout();
+    onResize(wall, layout);
+    wall.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      var href = wall.getAttribute('data-href');
+      if (href) location.href = href;
+    });
+    var born = -1;
+    actor(function (t, dt) {
+      if (born < 0) born = t;
+      var x = cv.x, w = cv.w, h = cv.h, i, p;
+      next -= dt;
+      if (next <= 0) {
+        p = panels[turn % panels.length]; turn++;
+        var ni = p.ix;
+        for (var tries = 0; tries < items.length; tries++) {
+          ni = (ni + cols) % items.length;
+          var used = panels.some(function (q) { return q !== p && q.ix === ni; });
+          if (!used) break;
+        }
+        load(items[ni]);
+        if (items[ni].ok) { p.prev = p.ix; p.ix = ni; p.t = 0; setCap(ni); load(items[(ni + cols) % items.length]); }
+        next = cols === 1 ? 3.2 : 2.1;
+      }
+      x.fillStyle = '#050506'; x.fillRect(0, 0, w, h);
+      for (i = 0; i < panels.length; i++) {
+        p = panels[i]; p.t += dt;
+        var it = items[p.ix], pv = p.prev >= 0 ? items[p.prev] : null, T = .9;
+        if (p.t < T && pv && pv.ok) {
+          var k = p.t / T;
+          if (k < .5) pixelated(x, pv.img, p.x, 0, p.w, h, 1 + Math.pow(k * 2, 2) * 46);
+          else if (it.ok) pixelated(x, it.img, p.x, 0, p.w, h, 1 + Math.pow((1 - k) * 2, 2) * 46);
+          var fl = 1 - Math.abs(k - .5) * 2;
+          x.fillStyle = 'rgba(255,226,170,' + .18 * fl + ')'; x.fillRect(p.x, 0, p.w, h);
+        } else if (it.ok) cover(x, it.img, p.x, 0, p.w, h);
+        else { x.fillStyle = '#0d0d0f'; x.fillRect(p.x, 0, p.w, h); }
+      }
+      // brillo del panel y barrido de refresco
+      scan = (scan + dt * .35) % 1.4;
+      var sy = (scan - .2) * h, sg = x.createLinearGradient(0, sy - 60, 0, sy + 60);
+      sg.addColorStop(0, 'rgba(255,255,255,0)'); sg.addColorStop(.5, 'rgba(255,248,232,.07)'); sg.addColorStop(1, 'rgba(255,255,255,0)');
+      x.fillStyle = sg; x.fillRect(0, sy - 60, w, 120);
+      if (dots) x.drawImage(dots, 0, 0, w, h);
+      var on = clamp((t - born) / 1.2, 0, 1);
+      if (on < 1) { x.fillStyle = 'rgba(5,5,6,' + (1 - on) + ')'; x.fillRect(0, 0, w, h); }
+      return false;
+    }, wall);
+  }
+
+  /* ---------- Mapa de España iluminado ---------- */
+  safe(function () {
+    var map = D.querySelector('.esp-map svg.map');
+    if (!map) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var base = map.querySelector('.m-base');
+    if (!base) return;
+    var bx0 = +base.getAttribute('cx'), by0 = +base.getAttribute('cy');
+    var arcs = Array.prototype.slice.call(map.querySelectorAll('.m-arc'));
+    var cities = Array.prototype.slice.call(map.querySelectorAll('.m-dot, .m-hab'));
+    var defs = map.querySelector('defs') || map.insertBefore(D.createElementNS(NS, 'defs'), map.firstChild);
+    defs.insertAdjacentHTML('beforeend',
+      '<filter id="dsglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>' +
+      '<radialGradient id="dsbeacon"><stop offset="0" stop-color="#fff4dc" stop-opacity=".9"/><stop offset=".35" stop-color="#e8cd97" stop-opacity=".35"/><stop offset="1" stop-color="#c9a66b" stop-opacity="0"/></radialGradient>' +
+      '<linearGradient id="dscone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffeccb" stop-opacity=".42"/><stop offset="1" stop-color="#ffeccb" stop-opacity="0"/></linearGradient>');
+    map.classList.add('ds-map');
+    // haz giratorio desde la base (como un faro)
+    var cone = D.createElementNS(NS, 'path');
+    cone.setAttribute('class', 'm-cone'); cone.setAttribute('fill', 'url(#dscone)');
+    cone.setAttribute('d', 'M' + bx0 + ' ' + by0 + ' L' + (bx0 + 760) + ' ' + (by0 - 70) + ' L' + (bx0 + 760) + ' ' + (by0 + 70) + ' Z');
+    var landG = map.querySelector('.m-arcs');
+    var clip = D.createElementNS(NS, 'clipPath');
+    clip.setAttribute('id', 'dsland');
+    Array.prototype.forEach.call(map.querySelectorAll('.m-land'), function (l) { var c2 = D.createElementNS(NS, 'path'); c2.setAttribute('d', l.getAttribute('d')); clip.appendChild(c2); });
+    defs.appendChild(clip);
+    var coneG = D.createElementNS(NS, 'g');
+    coneG.setAttribute('clip-path', 'url(#dsland)');
+    coneG.appendChild(cone);
+    map.insertBefore(coneG, landG);
+    var layer = D.createElementNS(NS, 'g');
+    layer.setAttribute('class', 'm-fx'); layer.setAttribute('filter', 'url(#dsglow)');
+    map.appendChild(layer);
+    var halos = cities.map(function (c) {
+      var hh = D.createElementNS(NS, 'circle');
+      hh.setAttribute('cx', c.getAttribute('cx')); hh.setAttribute('cy', c.getAttribute('cy'));
+      hh.setAttribute('r', '0'); hh.setAttribute('fill', 'url(#dsbeacon)');
+      layer.appendChild(hh);
+      return { el: hh, c: c, x: +c.getAttribute('cx'), y: +c.getAttribute('cy'), v: 0 };
+    });
+    // etiqueta al pasar / tocar
+    var tip = D.createElementNS(NS, 'text');
+    tip.setAttribute('class', 'm-tip'); map.appendChild(tip);
+    cities.forEach(function (c) {
+      var name = (c.querySelector('title') || {}).textContent || '';
+      c.style.cursor = 'pointer';
+      var show = function () {
+        tip.textContent = name.toUpperCase();
+        tip.setAttribute('x', +c.getAttribute('cx') + 8); tip.setAttribute('y', +c.getAttribute('cy') - 8);
+        tip.classList.add('on');
+        halos.forEach(function (h2) { if (h2.c === c) h2.v = 1.4; });
+      };
+      c.addEventListener('pointerenter', show); c.addEventListener('click', show);
+      c.addEventListener('pointerleave', function () { tip.classList.remove('on'); });
+    });
+    var comets = [];
+    for (var i = 0; i < (small ? 5 : 9); i++) {
+      var cm = D.createElementNS(NS, 'circle');
+      cm.setAttribute('r', '2.6'); cm.setAttribute('class', 'm-comet');
+      var tail = D.createElementNS(NS, 'path');
+      tail.setAttribute('class', 'm-tail');
+      layer.appendChild(tail); layer.appendChild(cm);
+      comets.push({ el: cm, tail: tail, arc: null, len: 0, p: 1 + Math.random(), sp: 0, wait: Math.random() * 2.5, trail: [] });
+    }
+    var started = false, ang = -2.6;
+    var host = map.closest('.esp-map');
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting) started = true; }, { threshold: .3 }).observe(host);
+    actor(function (t, dt) {
+      if (!started) return false;
+      // faro
+      ang += dt * .55;
+      var deg = ang * 180 / Math.PI;
+      cone.setAttribute('transform', 'rotate(' + deg.toFixed(2) + ' ' + bx0 + ' ' + by0 + ')');
+      halos.forEach(function (h2) {
+        var a = Math.atan2(h2.y - by0, h2.x - bx0), dA = Math.atan2(Math.sin(a - ang), Math.cos(a - ang));
+        if (Math.abs(dA) < .09) h2.v = Math.max(h2.v, 1);
+        h2.v = Math.max(0, h2.v - dt * .9);
+        h2.el.setAttribute('r', (h2.v * 16).toFixed(1));
+        h2.c.style.opacity = h2.v > .05 ? 1 : '';
+      });
+      // cometas Barcelona → ciudades
+      comets.forEach(function (c) {
+        if (c.wait > 0) { c.wait -= dt; return; }
+        if (!c.arc || c.p >= 1) {
+          if (c.arc) { var dest = halos[arcs.indexOf(c.arc)] ; if (dest) dest.v = 1.5; c.wait = rand(.2, 1.4); c.arc = null; c.el.setAttribute('opacity', '0'); c.tail.setAttribute('d', ''); return; }
+          c.arc = arcs[(Math.random() * arcs.length) | 0];
+          c.len = c.arc.getTotalLength(); c.p = 0; c.sp = 260 / Math.max(80, c.len) * rand(.7, 1.1); c.trail = [];
+        }
+        c.p = Math.min(1, c.p + dt * c.sp);
+        var e = c.p < .5 ? 2 * c.p * c.p : 1 - Math.pow(-2 * c.p + 2, 2) / 2;
+        var pt = c.arc.getPointAtLength(e * c.len);
+        c.el.setAttribute('cx', pt.x.toFixed(1)); c.el.setAttribute('cy', pt.y.toFixed(1)); c.el.setAttribute('opacity', '1');
+        c.trail.push(pt.x.toFixed(1) + ' ' + pt.y.toFixed(1)); if (c.trail.length > 10) c.trail.shift();
+        c.tail.setAttribute('d', 'M' + c.trail.join(' L'));
+      });
+      return false;
+    }, host);
+  });
+
+  /* ---------- Contadores: dígitos que se encienden ---------- */
+  safe(function () {
+    var facts = D.querySelectorAll('.fact');
+    if (!facts.length) return;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        e.target.classList.add('ds-count-on');
+        var n = e.target.querySelector('[data-count]');
+        setTimeout(function () { e.target.classList.add('ds-count-hit'); }, n ? 1400 : 300);
+      });
+    }, { threshold: .5 });
+    facts.forEach(function (f, i) {
+      f.style.setProperty('--fi', i);
+      var bar = D.createElement('i'); bar.className = 'ds-fact-bar'; bar.setAttribute('aria-hidden', 'true');
+      f.appendChild(bar);
+      io.observe(f);
+    });
   });
 })();

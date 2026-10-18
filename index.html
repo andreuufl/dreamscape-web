@@ -31,7 +31,7 @@
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/pro.css?v=20261020">
 <link rel="stylesheet" href="/ds-motion.css?v=20261016">
-<link rel="stylesheet" href="/ds-show.css?v=20261016">
+<link rel="stylesheet" href="/ds-show.css?v=20261017">
 <link rel="preload" as="image" href="/portfolio-video-candlelight-poster.jpg">
 <script type="application/ld+json">
     {
@@ -220,12 +220,41 @@
   </div>
 </section>
 
+<section class="sec sec--tight te" id="tu-evento" aria-labelledby="te-t" data-tu-evento>
+  <div class="wrap">
+    <span class="eyebrow rv">Tu evento en 10 segundos</span>
+    <h2 id="te-t" class="rv">Elige, pulsa y mira cómo lo montamos.</h2>
+    <div class="te-grid mt-m">
+      <div class="te-side">
+        <fieldset class="te-form"><legend class="lbl">Tipo de evento</legend><div class="opts"><label class="opt"><input type="radio" name="te-tipo" value="boda" checked><span>Boda<small>Ceremonia, banquete y fiesta</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="empresa"><span>Empresa<small>Gala, cena, presentación</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="congreso"><span>Congreso<small>Auditorio, feria, ponencias</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="concierto"><span>Concierto o fiesta<small>Música en directo, DJ</small></span></label></div></fieldset>
+        <label class="lbl mt-s" for="te-guests">Invitados</label>
+        <div class="range"><input type="range" id="te-guests" min="30" max="1500" step="10" value="150"><output class="te-guests-out" for="te-guests">150</output></div>
+        <button class="btn btn--gold te-go mt-s" type="button"><span>Montar mi evento</span> <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        </div>
+      <div class="te-stage">
+        <canvas aria-label="Montaje en 3D del evento elegido" role="img"></canvas>
+        <span class="te-count mono" aria-hidden="true">10,0 s</span>
+        <span class="te-hint mono" aria-hidden="true">Arrastra para girar</span>
+      </div>
+      <div class="te-result">
+        <ol class="te-list" aria-live="polite"></ol>
+        <div class="te-ctas btns" hidden>
+          <a class="btn btn--gold te-form-btn" href="/contacto.html#formulario">Pedir presupuesto con este montaje</a>
+          <a class="btn te-sim" href="/simulador.html">Afinarlo en el simulador</a>
+        </div>
+      </div>
+    </div>
+    <p class="note mt-s">Orientativo: cada recinto es distinto y el montaje final lo ajustamos contigo.</p>
+  </div>
+</section>
+
 <section class="sec sec--tight" id="proyectos">
   <div class="wrap">
     <div class="hs-head">
       <div><span class="eyebrow rv">Proyectos</span><h2 class="rv">Trabajo real, sin filtros</h2></div>
       <span class="hs-hint" aria-hidden="true">Desliza</span>
     </div>
+    <div class="ledwall rv" data-ledwall="/portfolio-1-gala.webp|Cena de gala;/portfolio-video-fashionweek-poster.jpg|080 Barcelona Fashion Week;/portfolio-3-candlelight.webp|Conciertos Candlelight;/portfolio-2-congreso.webp|Auditorio;/portfolio-video-hotelpalace-poster.jpg|Salón de hotel;/portfolio-4-nocturno.webp|Evento nocturno;/portfolio-video-congreso-poster.jpg|Congreso de liderazgo;/portfolio-5-velas.webp|Velas y sonido;/portfolio-6-terraza.webp|Terraza" data-href="/proyectos.html" role="img" aria-label="Pantalla LED con fotos de nuestros montajes"><picture><source type="image/webp" srcset="/portfolio-1-gala.webp"><img src="/portfolio-1-gala.jpg" alt="" loading="lazy" decoding="async"></picture></div>
     <div class="gal hs" data-hs>
       <figure class="g g--tall rv" data-href="/proyectos.html#fashion-week"><video data-auto muted playsinline loop preload="none" poster="/portfolio-video-fashionweek-poster.jpg" src="/portfolio-video-fashionweek.mp4" aria-label="Photocall de 080 Barcelona Fashion Week"></video><figcaption><b>080 Barcelona Fashion Week</b><span>Escenario y photocall</span></figcaption></figure>
       <figure class="g rv rv-d1" data-href="/proyectos.html#candlelight-catedral"><picture><source type="image/webp" srcset="/portfolio-3-candlelight.webp"><img src="/portfolio-3-candlelight.jpg" alt="Concierto a la luz de las velas en el interior de una catedral" loading="lazy" decoding="async"></picture><figcaption><b>Conciertos Candlelight</b><span>Sonido en espacios históricos</span></figcaption></figure>
@@ -415,7 +444,8 @@
 <script src="/presupuesto-rapido.js?v=2" defer></script>
 <script src="/pro.js?v=20261019" defer></script>
 <script src="/ds-motion.js?v=20261016" defer></script>
-<script src="/ds-show.js?v=20261016" defer></script>
+<script src="/ds-show.js?v=20261017" defer></script>
+<script src="/ds-3d.js?v=20261017" defer></script>
 
 </body>
 </html>

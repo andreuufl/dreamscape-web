@@ -93,7 +93,102 @@ main { overflow-x: clip; }
 .ds-eq.on i { animation-play-state: running; }
 @keyframes ds-eq { from { transform: scaleY(.06); } to { transform: scaleY(var(--h)); } }
 
+/* ===== Botón "Dale al show" ===== */
+.ds-showbtn {
+  margin-bottom: 4px; justify-self: end; align-self: end; display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(10, 10, 11, .35); color: var(--paper); border: 1px solid rgba(232, 205, 151, .45); border-radius: 999px;
+  padding: 10px 18px 10px 14px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; cursor: pointer;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transition: border-color .3s, box-shadow .3s, background .3s;
+}
+.ds-showbtn:hover, .ds-showbtn.is-on { border-color: var(--gold-hi); box-shadow: 0 0 24px rgba(232, 205, 151, .35); background: rgba(201, 166, 107, .14); }
+.ds-showbtn-s { color: var(--mute); font-size: 10px; letter-spacing: .1em; }
+.ds-showbtn-eq { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.ds-showbtn-eq i { width: 3px; height: 100%; background: var(--gold-hi); transform-origin: 50% 100%; transform: scaleY(.3); }
+.ds-showbtn:hover .ds-showbtn-eq i, .ds-showbtn.is-on .ds-showbtn-eq i { animation: ds-eq .45s ease-in-out infinite alternate; --h: 1; }
+.ds-showbtn-eq i:nth-child(2) { animation-delay: -.2s !important; } .ds-showbtn-eq i:nth-child(3) { animation-delay: -.35s !important; } .ds-showbtn-eq i:nth-child(4) { animation-delay: -.1s !important; }
+@media (max-width: 899px) { .ds-showbtn { justify-self: start; padding: 9px 14px 9px 12px; font-size: 11px; } }
+.reel .reel-strip { transition: filter .5s ease; }
+.reel.ds-blackout .reel-strip { filter: brightness(.12) saturate(.6); }
+.reel.ds-blackout .reel-body { transition: opacity .5s; opacity: .35; }
+.ds-showtime .reel .reel-body { transition: opacity .6s; }
+
+/* ===== Pantalla LED de proyectos ===== */
+.ledwall { position: relative; margin: 0 0 clamp(20px, 3vw, 32px); aspect-ratio: 21 / 8; background: #050506; overflow: hidden; border: 1px solid rgba(201, 166, 107, .35); box-shadow: 0 0 0 6px #0b0b0d, 0 0 0 7px rgba(201, 166, 107, .18), 0 30px 80px -30px rgba(201, 166, 107, .25); cursor: pointer; }
+@media (max-width: 899px) { .ledwall { aspect-ratio: 4 / 3; } }
+@media (max-width: 560px) { .ledwall { aspect-ratio: 4 / 4.4; } }
+.ledwall picture, .ledwall > picture img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ledwall.is-live picture { display: none; }
+.ds-ledwall-cv { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ledwall::after { content: "LED 3,9 mm · 4K"; position: absolute; top: 12px; left: 14px; font-family: var(--f-mono); font-size: 10px; letter-spacing: .16em; color: rgba(236, 231, 222, .7); background: rgba(5, 5, 6, .6); padding: 5px 8px; z-index: 2; }
+.ledwall-cap { position: absolute; left: 14px; bottom: 12px; z-index: 2; font-weight: 700; font-size: clamp(14px, 1.4vw, 18px); text-transform: uppercase; letter-spacing: .02em; background: rgba(5, 5, 6, .62); padding: 8px 12px; color: var(--paper); }
+.ledwall-cap .mono { color: var(--gold); font-size: 10px; letter-spacing: .16em; margin-right: 8px; font-weight: 400; }
+
+/* ===== Mapa de España iluminado ===== */
+.ds-map .m-land { filter: drop-shadow(0 0 6px rgba(201, 166, 107, .35)); }
+.ds-map .m-cone { mix-blend-mode: screen; pointer-events: none; }
+.m-comet { fill: #fff4dc; }
+.m-tail { fill: none; stroke: #e8cd97; stroke-width: 2; stroke-linecap: round; opacity: .55; }
+.m-tip { font-family: var(--f-mono); font-size: 13px; letter-spacing: .1em; fill: #fff4dc; opacity: 0; transition: opacity .25s; pointer-events: none; paint-order: stroke; stroke: #0a0a0b; stroke-width: 4px; }
+.m-tip.on { opacity: 1; }
+.ds-map .m-dot { transition: r .3s; }
+.ds-map .m-dot:hover { r: 5; }
+
+/* ===== Contadores ===== */
+.fact { position: relative; }
+.ds-fact-bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: linear-gradient(90deg, var(--gold), #fff4dc); box-shadow: 0 0 12px rgba(232, 205, 151, .6); }
+.ds-count-on .ds-fact-bar { transition: transform 1.4s cubic-bezier(.65, 0, .25, 1) calc(var(--fi, 0) * 120ms); transform: scaleX(1); }
+.ds-count-on b { animation: ds-digits 1.4s ease-out both; }
+.ds-count-hit b { animation: ds-count-hit 1.1s ease-out; }
+@keyframes ds-digits { from { text-shadow: 0 0 22px rgba(255, 236, 200, .7); color: #fff4dc; } to { text-shadow: none; } }
+@keyframes ds-count-hit { 0% { text-shadow: 0 0 0 rgba(255, 236, 200, 0); } 20% { text-shadow: 0 0 26px rgba(255, 236, 200, .85), 0 0 60px rgba(201, 166, 107, .5); } 100% { text-shadow: 0 0 0 rgba(255, 236, 200, 0); } }
+
+/* ===== Tu evento en 10 segundos ===== */
+.te-grid { display: grid; gap: clamp(20px, 3vw, 40px); }
+@media (min-width: 1000px) {
+  .te-grid { grid-template-columns: minmax(320px, 5fr) 7fr; grid-template-rows: auto 1fr; align-items: start; row-gap: 0; }
+  .te-side { grid-column: 1; grid-row: 1; } .te-result { grid-column: 1; grid-row: 2; } .te-stage { grid-column: 2; grid-row: 1 / span 2; }
+}
+.te-form { border: 0; padding: 0; margin: 0; min-width: 0; }
+.te-result:has(.te-list:empty) { display: none; }
+.te .lbl { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; display: block; padding: 0; }
+.te .opts { grid-template-columns: repeat(2, 1fr); }
+.te .opt span { padding: 14px; font-size: 15px; }
+.te .range output { min-width: 110px; }
+.te-go { width: 100%; justify-content: center; }
+.te-go:disabled { opacity: .55; cursor: progress; }
+.te-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.te-list:empty { display: none; }
+.te-list li { display: grid; grid-template-columns: 112px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; animation: te-in .6s cubic-bezier(.16, 1, .3, 1); }
+.te-list li b { font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 500; padding-top: 2px; }
+.te-list li span { color: var(--paper-2); }
+.te-list .te-reading { display: block; color: var(--mute); font-family: var(--f-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+@keyframes te-in { from { opacity: 0; transform: translateY(8px); } }
+.te-ctas { margin-top: 18px; flex-direction: column; }
+.te-ctas .btn { justify-content: center; }
+.te-stage { position: relative; aspect-ratio: 4 / 3; background: radial-gradient(120% 90% at 50% 0%, #17161b, #0a0a0b 70%); border: 1px solid var(--line-2); overflow: hidden; }
+@media (min-width: 1000px) { .te-stage { position: sticky; top: calc(var(--hdr) + 24px); aspect-ratio: 16 / 11; } }
+.te-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; }
+.te-stage canvas:active { cursor: grabbing; }
+.te-count { position: absolute; top: 14px; right: 16px; font-size: 22px; color: var(--gold-hi); letter-spacing: .06em; text-shadow: 0 0 18px rgba(232, 205, 151, .5); opacity: 0; transition: opacity .3s; }
+.te.is-running .te-count, .te.is-done .te-count { opacity: 1; }
+.te-hint { position: absolute; left: 14px; bottom: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.te.is-running .te-stage { box-shadow: 0 0 0 1px rgba(232, 205, 151, .4), 0 0 60px -10px rgba(201, 166, 107, .35); }
+
+/* ===== Simulador: montaje 3D ===== */
+.sim3d { position: relative; aspect-ratio: 16 / 10; margin: 0 0 22px; background: radial-gradient(120% 90% at 50% 0%, #17161b, #0a0a0b 70%); border: 1px solid var(--line-2); overflow: hidden; }
+.sim3d canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; }
+.sim3d-tag { position: absolute; left: 10px; bottom: 8px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); pointer-events: none; }
+@media (min-width: 1100px) {
+  .sim-sum > div { max-height: calc(100vh - var(--hdr) - 40px); overflow-y: auto; scrollbar-width: thin; }
+  .sim3d { aspect-ratio: 16 / 9; }
+  .sim-sum h2 { margin-bottom: 16px; }
+  .sim-sum dt, .sim-sum dd { padding-top: 9px; padding-bottom: 9px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .ds-rig, .ds-led, .ds-burst, .ds-laser, .ds-spot, .ds-eq { display: none !important; }
+  .ds-rig, .ds-led, .ds-burst, .ds-laser, .ds-spot, .ds-eq, .ds-showbtn { display: none !important; }
   .ds-show .reel .display em, .ds-hit, .ds-lit { animation: none !important; }
 }
+.no-js .te { display: none; }
+@media (min-width: 1000px) { .te-result { margin-top: 18px; } }
+.te-ctas[hidden] { display: none !important; }
