@@ -829,3 +829,75 @@ body.lb-on { overflow: hidden; }
 
 /* Móvil y tableta: la barra inferior fija no tapa los enlaces del pie */
 @media (max-width: 1079px) { .ftr { padding-bottom: calc(112px + env(safe-area-inset-bottom)); } }
+
+
+/* =====================================================================
+   PULIDO VISUAL (oct 2026)
+   ===================================================================== */
+/* Portada: titular legible, un solo botón, haces de luz */
+.reel::after { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(5,5,6,.35) 0%, rgba(5,5,6,0) 30%, rgba(5,5,6,.55) 58%, rgba(5,5,6,.9) 100%); }
+.reel-top, .reel-body { z-index: 2; }
+.reel-body .display { text-shadow: 0 2px 28px rgba(0,0,0,.55); }
+.reel-meta { align-items: center; }
+.reel-cta { justify-self: start; }
+@media (min-width: 900px) { .reel-cta { justify-self: end; } }
+.beam { opacity: 1; }
+.beam::before, .beam::after { content: ''; position: absolute; top: -10%; width: 38vmax; height: 120%; mix-blend-mode: screen; opacity: .55; filter: blur(14px); transform-origin: 50% 0; }
+.beam::before { left: 8%; background: conic-gradient(from 168deg at 50% 0, transparent 0 8deg, rgba(233,205,150,.20) 12deg, transparent 16deg); animation: beam-sway 11s ease-in-out infinite alternate; }
+.beam::after { right: 6%; background: conic-gradient(from 188deg at 50% 0, transparent 0 8deg, rgba(160,200,255,.14) 12deg, transparent 16deg); animation: beam-sway 14s ease-in-out infinite alternate-reverse; }
+@keyframes beam-sway { from { transform: rotate(-7deg); } to { transform: rotate(8deg); } }
+
+/* Titulares palabra a palabra */
+.words .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.words .w > i { display: inline-block; font-style: inherit; transform: translateY(108%); transition: transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+.words.words-in .w > i { transform: none; }
+.words .w > i { color: inherit; }
+.words em .w > i, .words .gold .w > i { color: var(--gold); }
+
+/* Secciones que "se encienden" al entrar en pantalla */
+.lit { position: relative; isolation: isolate; }
+.lit::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: min(70%, 640px); z-index: -1; pointer-events: none; opacity: 0; transition: opacity 1.8s var(--ease);
+  background: radial-gradient(ellipse 60% 100% at 18% 0, rgba(233,205,150,.13), transparent 70%), radial-gradient(ellipse 45% 90% at 85% 0, rgba(201,166,107,.08), transparent 70%); }
+.lit.lit-on::before { opacity: 1; }
+.cta.lit::before, .esp.lit::before { height: 100%; }
+
+/* Cifras + clientes */
+.clients { margin-top: clamp(28px, 4vw, 48px); padding-top: 24px; border-top: 1px solid var(--line); display: grid; gap: 14px; }
+.clients-t { color: var(--mute); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
+.clients-l { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px clamp(28px, 5vw, 72px); align-items: baseline; }
+.clients-l li { display: flex; flex-direction: column; gap: 4px; opacity: .72; transition: opacity .3s; }
+.clients-l li:hover { opacity: 1; }
+.clients-l img { height: 30px; width: auto; filter: grayscale(1) brightness(1.8); }
+.wm { font-weight: 800; font-variation-settings: "wdth" 75; text-transform: uppercase; font-size: clamp(22px, 2.4vw, 32px); line-height: 1; letter-spacing: .01em; color: var(--paper); }
+.wm--a { letter-spacing: .08em; } .wm--b { font-weight: 300; letter-spacing: .16em; font-size: clamp(18px, 2vw, 26px); } .wm--c { letter-spacing: .04em; }
+.wm-s { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+
+/* Enlaces por tipo y banner del simulador */
+.tipos { list-style: none; margin: clamp(24px, 3vw, 36px) 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tipos .mono { font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-right: 6px; }
+.tipos a { display: inline-block; border: 1px solid var(--line-2); padding: 10px 16px; font-size: 14px; color: var(--paper); transition: border-color .25s, color .25s, background .25s; }
+.tipos a:hover, .tipos a:focus-visible { border-color: var(--gold); color: var(--gold); background: rgba(201,166,107,.06); }
+.tipos--big a { font-size: 16px; padding: 14px 20px; }
+.simlink { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 18px; padding: 18px 22px; border: 1px solid var(--line-2); background: linear-gradient(90deg, rgba(201,166,107,.08), transparent); transition: border-color .25s; }
+.simlink:hover { border-color: var(--gold); }
+.simlink .mono { color: var(--gold); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; }
+.simlink b { font-weight: 600; font-size: clamp(15px, 1.4vw, 18px); flex: 1 1 280px; }
+.simlink svg { width: 18px; height: 18px; flex: none; }
+
+/* Página planners y agencias */
+.plan-grid { display: grid; gap: 2px; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .plan-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .plan-grid { grid-template-columns: repeat(4, 1fr); } }
+.plan-c { padding: clamp(22px, 2.4vw, 32px); background: rgba(255,255,255,.025); border: 1px solid var(--line); }
+.plan-c .mono { color: var(--gold); font-size: 12px; }
+.plan-c h3 { margin: 14px 0 10px; font-size: clamp(20px, 1.8vw, 24px); text-transform: uppercase; font-variation-settings: "wdth" 75; font-weight: 800; }
+.plan-c p { margin: 0; color: var(--paper-2); font-size: 15px; }
+
+/* Galería de portada: indicar que se amplía */
+.gal .g { cursor: zoom-in; }
+
+/* WhatsApp flotante: fuera en móvil y tableta (la barra inferior ya lo incluye) */
+@media (max-width: 1079px) { .float--l { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .beam::before, .beam::after { animation: none; } .words .w > i { transform: none; transition: none; } .lit::before { opacity: 1; transition: none; } }
+@media (max-width: 1079px) { .reel-cta { display: none; } }

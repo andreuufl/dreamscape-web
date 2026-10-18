@@ -528,7 +528,7 @@
         go.querySelector('span').textContent = EN ? 'Run it again' : 'Volver a montarlo';
         ctas.hidden = false;
         var tmap = { boda: 'boda', empresa: 'empresa', congreso: 'congreso', concierto: 'concierto' };
-        toSim.href = '/simulador.html?tipo=' + tmap[rec.tipo] + '&asistentes=' + rec.guests;
+        toSim.href = '/simulador.html?tipo=' + tmap[rec.tipo] + '&asistentes=' + rec.guests + '#simulador';
       }, 10000));
     }
     go.addEventListener('click', run);

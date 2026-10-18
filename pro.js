@@ -192,7 +192,8 @@ document.addEventListener('click', function (e) {
   }
 
   /* ---------- 4. Galería a pantalla completa (Proyectos) ---------- */
-  var medias = [].slice.call(d.querySelectorAll('.pj .pj-media'));
+  var medias = [].slice.call(d.querySelectorAll('.pj .pj-media, .gal .g'));
+  function mTitle(m) { var h = m.querySelector('figcaption b') || (m.closest('.pj') && m.closest('.pj').querySelector('h3')); return h ? h.textContent : ''; }
   if (medias.length) {
     var lb = d.createElement('div'); lb.className = 'lb'; lb.hidden = true;
     lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Galería de proyectos');
@@ -202,7 +203,7 @@ document.addEventListener('click', function (e) {
       '<div class="lb-stage"></div><p class="lb-cap"></p>';
     d.body.appendChild(lb);
     var stage = lb.querySelector('.lb-stage'), cap = lb.querySelector('.lb-cap'), idx = 0, opener = null;
-    function items() { return medias.filter(function (m) { return !m.closest('.pj').hidden; }); }
+    function items() { return medias.filter(function (m) { var pj = m.closest('.pj'); return !(pj && pj.hidden); }); }
     function show(i) {
       var list = items(); if (!list.length) return;
       idx = (i + list.length) % list.length;
@@ -214,8 +215,7 @@ document.addEventListener('click', function (e) {
         el.setAttribute('playsinline', '');
       } else if (im) { el = d.createElement('img'); el.src = im.currentSrc || im.src; el.alt = im.alt || ''; }
       if (el) stage.appendChild(el);
-      var h = m.closest('.pj').querySelector('h3');
-      cap.textContent = (h ? h.textContent : '') + '  ·  ' + (idx + 1) + ' / ' + list.length;
+      cap.textContent = mTitle(m) + '  ·  ' + (idx + 1) + ' / ' + list.length;
     }
     function open(m) {
       var list = items(); var i = list.indexOf(m); if (i < 0) return;
@@ -228,8 +228,8 @@ document.addEventListener('click', function (e) {
     }
     medias.forEach(function (m) {
       m.classList.add('is-zoom'); m.setAttribute('tabindex', '0'); m.setAttribute('role', 'button');
-      var h = m.closest('.pj').querySelector('h3');
-      m.setAttribute('aria-label', 'Ampliar: ' + (h ? h.textContent : 'proyecto'));
+      m.setAttribute('aria-label', 'Ampliar: ' + (mTitle(m) || 'proyecto'));
+      if (m.hasAttribute('data-href')) m.removeAttribute('data-href');
       m.addEventListener('click', function () { open(m); });
       m.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(m); } });
     });
@@ -398,4 +398,56 @@ document.querySelectorAll('.ba').forEach(function (ba) {
     p.innerHTML = 'Respondemos normalmente en menos de 24 h. ¿Prefieres hablar ya? <a href="tel:+34613089894">Llama al 613 08 98 94</a>.';
     f.parentNode.insertBefore(p, f.nextSibling);
   });
+})();
+
+
+/* ---------- Pulido visual (oct 2026): titulares palabra a palabra y secciones que "se encienden" ---------- */
+(function () {
+  'use strict';
+  var d = document;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO = 'IntersectionObserver' in window;
+
+  function split(el) {
+    var n = 0;
+    (function walk(node) {
+      [].slice.call(node.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var parts = c.nodeValue.split(/(\s+)/), frag = d.createDocumentFragment();
+          parts.forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { frag.appendChild(d.createTextNode(' ')); return; }
+            var o = d.createElement('span'), i = d.createElement('i');
+            o.className = 'w'; i.style.setProperty('--i', n++); i.textContent = t; o.appendChild(i); frag.appendChild(o);
+          });
+          c.parentNode.replaceChild(frag, c);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+      });
+    })(el);
+    el.classList.add('words');
+  }
+  var heads = [].slice.call(d.querySelectorAll('[data-words]'));
+  if (!reduce && hasIO) {
+    heads.forEach(function (h) {
+      var label = h.textContent.replace(/\s+/g, ' ').trim();
+      split(h); h.setAttribute('aria-label', label);
+      [].forEach.call(h.querySelectorAll('.w'), function (x) { x.setAttribute('aria-hidden', 'true'); });
+    });
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('words-in'); io.unobserve(e.target); } });
+    }, { threshold: .25 });
+    [].forEach.call(d.querySelectorAll('.words'), function (h) {
+      var r = h.getBoundingClientRect();
+      if (r.top < innerHeight * .9 && r.bottom > 0) requestAnimationFrame(function () { requestAnimationFrame(function () { h.classList.add('words-in'); }); });
+      else io.observe(h);
+    });
+  }
+
+  var lits = [].slice.call(d.querySelectorAll('.lit'));
+  if (hasIO && !reduce) {
+    var lo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.target.classList.toggle('lit-on', e.isIntersecting); });
+    }, { threshold: .18 });
+    lits.forEach(function (s) { lo.observe(s); });
+  } else lits.forEach(function (s) { s.classList.add('lit-on'); });
 })();

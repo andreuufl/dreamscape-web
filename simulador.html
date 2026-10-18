@@ -26,7 +26,7 @@
 <link rel="icon" type="image/png" href="/favicon.png?v=3">
 <link rel="apple-touch-icon" href="/favicon.png?v=3">
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/pro.css?v=20261011">
+<link rel="stylesheet" href="/pro.css?v=20261021">
 <link rel="stylesheet" href="/ds-motion.css?v=20261016">
 <link rel="stylesheet" href="/ds-show.css?v=20261017">
 </head>
@@ -76,7 +76,35 @@
     <p class="lead">Elige el tipo de evento, el espacio y lo que necesitas. Te mostramos el resumen técnico y la potencia eléctrica orientativa, y nos lo envías para recibir presupuesto.</p>
     
   </div>
-</section><section class="sec sec--tight" id="simulador"><div class="wrap">
+</section>
+<section class="sec sec--tight te" id="tu-evento" aria-labelledby="te-t" data-tu-evento>
+  <div class="wrap">
+    <span class="eyebrow rv">Tu evento en 10 segundos</span>
+    <h2 id="te-t" class="rv">Elige, pulsa y mira cómo lo montamos.</h2>
+    <div class="te-grid mt-m">
+      <div class="te-side">
+        <fieldset class="te-form"><legend class="lbl">Tipo de evento</legend><div class="opts"><label class="opt"><input type="radio" name="te-tipo" value="boda" checked><span>Boda<small>Ceremonia, banquete y fiesta</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="empresa"><span>Empresa<small>Gala, cena, presentación</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="congreso"><span>Congreso<small>Auditorio, feria, ponencias</small></span></label><label class="opt"><input type="radio" name="te-tipo" value="concierto"><span>Concierto o fiesta<small>Música en directo, DJ</small></span></label></div></fieldset>
+        <label class="lbl mt-s" for="te-guests">Invitados</label>
+        <div class="range"><input type="range" id="te-guests" min="30" max="1500" step="10" value="150"><output class="te-guests-out" for="te-guests">150</output></div>
+        <button class="btn btn--gold te-go mt-s" type="button"><span>Montar mi evento</span> <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+        </div>
+      <div class="te-stage">
+        <canvas aria-label="Montaje en 3D del evento elegido" role="img"></canvas>
+        <span class="te-count mono" aria-hidden="true">10,0 s</span>
+        <span class="te-hint mono" aria-hidden="true">Arrastra para girar</span>
+      </div>
+      <div class="te-result">
+        <ol class="te-list" aria-live="polite"></ol>
+        <div class="te-ctas btns" hidden>
+          <a class="btn btn--gold te-form-btn" href="/contacto.html#formulario">Pedir presupuesto con este montaje</a>
+          <a class="btn te-sim" href="#simulador">Afinarlo en el simulador</a>
+        </div>
+      </div>
+    </div>
+    <p class="note mt-s">Orientativo: cada recinto es distinto y el montaje final lo ajustamos contigo.</p>
+  </div>
+</section>
+<section class="sec sec--tight" id="simulador"><div class="wrap">
 <form id="sim-form" class="sim" onsubmit="return false">
   <div class="sim-steps">
     <div class="sim-step"><label class="lbl" for="event-date">01 · Fecha prevista</label><input type="date" id="event-date" name="fecha"><p class="sim-note" id="date-note" aria-live="polite"></p></div>
@@ -146,7 +174,7 @@
   <p data-chat-note hidden>Para abrir el asistente necesitamos tu permiso para sus cookies.</p>
   <div class="btns"><button class="btn btn--gold" type="button" data-cookie="all">Aceptar</button><button class="btn" type="button" data-cookie="essential">Solo esenciales</button></div>
 </div>
-<script src="/pro.js?v=20261010" defer></script>
+<script src="/pro.js?v=20261021" defer></script>
 <script src="/ds-motion.js?v=20261016" defer></script>
 <script src="/ds-show.js?v=20261017" defer></script>
 <script src="/sim.js?v=20261010" defer></script>
