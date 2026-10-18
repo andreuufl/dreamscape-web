@@ -160,3 +160,6 @@ html.pdfgate-on { overflow: hidden; }
 .pdfgate-err[hidden] { display: none; }
 .pg-opt { text-transform: none; letter-spacing: 0; opacity: .7; }
 .pdfgate-box input[type="email"], .pdfgate-box input[type="text"] { font-size: 16px; }
+
+/* Portada: sin luces móviles ni truss sobre el vídeo (solo en la home) */
+.home .reel .beam, .home .reel .ds-beams, .home .reel .ds-rig { display: none !important; }
