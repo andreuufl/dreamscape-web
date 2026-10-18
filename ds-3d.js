@@ -374,6 +374,21 @@
     canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
 
     fit(); build(); apply();
+    /* Modo imagen fija (para el PDF del rider): dibuja un solo fotograma, sin animación ni observadores */
+    if (opt.still) {
+      return {
+        draw: function (c, ck) {
+          for (var k in c) cfg[k] = c[k];
+          build(); apply(); fit(); autofit();
+          for (var key in G) G[key].a = G[key].t;
+          clock = ck == null ? 0.6 : ck; yaw = -.5 + Math.sin(clock * .18) * .28;
+          ctx.clearRect(0, 0, Wd, Hd);
+          if (cfg.outdoor) { var rs = rnd(99); ctx.fillStyle = 'rgba(255,244,220,.6)'; for (var i = 0; i < 90; i++) ctx.fillRect(rs() * Wd, rs() * Hd * .4, 1.4, 1.4); }
+          scene(clock);
+          return canvas;
+        }
+      };
+    }
     if (W.ResizeObserver) new ResizeObserver(function () { fit(); autofit(); start(); }).observe(canvas);
     if (W.IntersectionObserver) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); }).observe(canvas);
     D.addEventListener('visibilitychange', start);
@@ -447,6 +462,29 @@
     var upd = function () { clearTimeout(tmr); tmr = setTimeout(function () { st.set(read()); }, 60); };
     f.addEventListener('change', upd); f.addEventListener('input', upd);
     st.set(read(), true);
+    /* Imagen del montaje para el PDF del rider */
+    W.DS_SIM3D = {
+      read: read,
+      snapshot: function (w, h) {
+        try {
+          var cv = D.createElement('canvas');
+          cv.style.cssText = 'position:fixed;left:-99999px;top:0;width:' + w + 'px;height:' + h + 'px;pointer-events:none';
+          D.body.appendChild(cv);
+          var s = Stage3D(cv, { still: true });
+          if (!s) { cv.remove(); return null; }
+          var src = s.draw(read(), 0.6);
+          var out = D.createElement('canvas'); out.width = src.width; out.height = src.height;
+          var o = out.getContext('2d');
+          o.fillStyle = '#0a0a0b'; o.fillRect(0, 0, out.width, out.height);
+          var g = o.createRadialGradient(out.width * .5, out.height * .35, 0, out.width * .5, out.height * .35, out.width * .6);
+          g.addColorStop(0, 'rgba(201,166,107,.22)'); g.addColorStop(1, 'rgba(201,166,107,0)');
+          o.fillStyle = g; o.fillRect(0, 0, out.width, out.height);
+          o.drawImage(src, 0, 0);
+          cv.remove();
+          return out.toDataURL('image/jpeg', 0.92);
+        } catch (e) { return null; }
+      }
+    };
   })();
 
   /* =====================================================================

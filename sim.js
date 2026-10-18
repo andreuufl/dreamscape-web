@@ -15,6 +15,8 @@
     return {
       fecha: date ? new Date(date + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }) : 'Por definir',
       rawDate: date,
+      t: (function (v) { return /Boda/.test(v) ? 'boda' : /Congreso/.test(v) ? 'congreso' : /Concierto/.test(v) ? 'concierto' : 'empresa'; })(val('tipo')),
+      guests: parseInt(f.querySelector('#attendees').value, 10) || 150, keys: riders,
       tipo: val('tipo'), recinto: val('recinto'), escenario: val('escenario'), duracion: val('duracion'),
       asistentes: f.querySelector('#attendees').value,
       riders: riders.map(function (r) { return LBL[r]; }),
@@ -61,25 +63,12 @@
     window.location.href = '/contacto.html#formulario';
   });
   document.getElementById('sim-pdf').addEventListener('click', function () {
-    var btn = this; btn.disabled = true;
-    function go() {
-      var d = data(), doc = new window.jspdf.jsPDF(), y = 28;
-      doc.setFillColor(10, 10, 11); doc.rect(0, 0, 210, 18, 'F');
-      doc.setTextColor(201, 166, 107); doc.setFontSize(11); doc.text('DREAMSCAPE EVENTS · PROPUESTA TÉCNICA ORIENTATIVA', 14, 11.5);
-      doc.setTextColor(20, 20, 20); doc.setFontSize(20); doc.text('Resumen de rider técnico', 14, y); y += 12;
-      doc.setFontSize(11);
-      [['Fecha prevista', d.fecha], ['Tipo de evento', d.tipo], ['Recinto', d.recinto], ['Escenario', d.escenario], ['Duración', d.duracion],
-       ['Asistentes', d.asistentes + ' personas'], ['Rider técnico', d.riders.join(', ') || 'Ninguno'], ['Potencia eléctrica estimada', d.potencia]]
-        .forEach(function (r) { doc.setTextColor(120, 115, 105); doc.text(r[0].toUpperCase(), 14, y); doc.setTextColor(20, 20, 20); doc.text(doc.splitTextToSize(r[1], 120), 76, y); y += 10; });
-      y += 6; doc.setFontSize(10); doc.setTextColor(90, 90, 90);
-      doc.text(doc.splitTextToSize('Documento orientativo generado con el simulador de www.dreamscapeevents.es. El presupuesto definitivo se confirma tras revisar el recinto y las necesidades del evento.', 182), 14, y);
-      y += 18; doc.setTextColor(20, 20, 20); doc.text('info@ap-events.es · 613 08 98 94 · www.dreamscapeevents.es', 14, y);
-      doc.save('rider-tecnico-dreamscape.pdf'); btn.disabled = false;
-    }
-    if (window.jspdf) return go();
-    var s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-    s.onload = go; s.onerror = function () { btn.disabled = false; alert('No se ha podido generar el PDF ahora mismo. Prueba con WhatsApp o el formulario.'); };
-    document.head.appendChild(s);
+    var btn = this, label = btn.textContent; btn.disabled = true; btn.textContent = 'Preparando tu rider…';
+    function ok() { btn.disabled = false; btn.textContent = label; if (typeof window.gtag === 'function') window.gtag('event', 'download_rider', { link_location: 'simulador' }); }
+    function ko() { btn.disabled = false; btn.textContent = label; alert('No se ha podido generar el PDF ahora mismo. Prueba con WhatsApp o el formulario.'); }
+    function go() { window.DSRider.generate(data(), ok, ko); }
+    if (window.DSRider) return go();
+    var s = document.createElement('script'); s.src = '/rider-pdf.js?v=1'; s.onload = go; s.onerror = ko; document.head.appendChild(s);
   });
   update();
 })();
