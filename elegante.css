@@ -1,0 +1,98 @@
+/* Dreamscape Events — capa de diseño "elegante" (se carga después de pro.css).
+   Para volver al estilo anterior basta con quitar el <link> a este archivo. */
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/fonts/fraunces-latin.woff2") format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("/fonts/fraunces-latin-ext.woff2") format("woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "Fraunces"; font-style: italic; font-weight: 100 900; font-display: swap; src: url("/fonts/fraunces-italic.woff2") format("woff2"); }
+
+:root {
+  --f-serif: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --ivory: #f4efe6;
+  --ivory-2: #ebe4d6;
+  --sec: clamp(96px, 11vw, 150px);
+}
+
+/* 1 · Tipografía: serif elegante en frases, sin mayúsculas ni condensado */
+.display, h1, h2, h3, .h1, .h2, .h3,
+.fact b, .how h3, .qlinks b, .wz-q, .g figcaption b, .wm, .ix-row h3, .dc h3, .card h3, .post h3, .pj h3, .band h2 {
+  font-family: var(--f-serif);
+  font-weight: 380;
+  font-variation-settings: normal;
+  font-stretch: 100%;
+  text-transform: none;
+  letter-spacing: -.018em;
+  line-height: 1.06;
+}
+.display { font-size: clamp(42px, 6.4vw, 100px); line-height: 1.02; }
+h1, .h1 { font-size: clamp(38px, 5.2vw, 78px); line-height: 1.04; }
+h2, .h2 { font-size: clamp(30px, 3.7vw, 54px); }
+h3, .h3 { font-size: clamp(21px, 2vw, 28px); line-height: 1.15; }
+.cta .display { font-size: clamp(40px, 6vw, 92px); max-width: 17ch; }
+.reel-body .display { max-width: 16ch; text-shadow: none; }
+.display em, h1 em, h2 em, .gold { font-style: italic; font-weight: 340; color: var(--gold); }
+.fact b { font-size: clamp(40px, 4.4vw, 64px); font-weight: 340; }
+.fact b small { font-family: var(--f-sans); font-size: .28em; letter-spacing: .06em; }
+.g figcaption b { font-size: 21px; font-weight: 420; line-height: 1.1; }
+.wm { font-weight: 420; }
+.mnav li a { font-family: var(--f-serif); font-weight: 340; font-variation-settings: normal; text-transform: none; letter-spacing: -.01em; }
+.eyebrow { letter-spacing: .2em; }
+.lead, .prose p { font-weight: 360; }
+
+/* 2 · Menos efectos: luz suave, sin chispas ni rayos exagerados */
+.reel .beam, .beam::before, .beam::after { opacity: .35; }
+.ds-beams { opacity: .3 !important; }
+.phero .ds-beams { opacity: .3 !important; }
+.lit::before { background: radial-gradient(ellipse 60% 100% at 18% 0, rgba(233,205,150,.06), transparent 70%); }
+.fact { box-shadow: none; }
+.fact::after, .fact::before { box-shadow: none !important; opacity: .55; }
+.btn { box-shadow: none; }
+.btn--gold { background: var(--gold); background-image: none; }
+.btn--gold:hover { background: var(--gold-hi); }
+canvas.ds-stage, .phero canvas, .phero .ds-stage { opacity: .55; }
+
+/* 3 · Secciones claras (marfil) alternadas con las oscuras */
+.sec--paper { background: var(--ivory); color: #17150f; }
+.sec--paper::before { display: none !important; }
+.sec--paper h1, .sec--paper h2, .sec--paper h3, .sec--paper .display { color: #17150f; }
+.sec--paper em, .sec--paper .gold { color: #7a5a24; }
+.sec--paper .fact { border-color: rgba(23,21,15,.14); }
+.sec--paper .fact b { color: #17150f; }
+.sec--paper .fact b small { color: #7a5a24; }
+.sec--paper .fact span { color: #4a463f; }
+.sec--paper .fact::after { background: #7a5a24; opacity: .5; }
+.sec--paper .hs-hint { color: #7a5a24; }
+.sec--paper .link, .sec--paper .btn { color: #17150f; border-color: rgba(23,21,15,.3); }
+.sec--paper .btn:hover { background: #17150f; color: var(--ivory); }
+.sec--paper .tipos a, .sec--paper .filters button { color: #17150f; border-color: rgba(23,21,15,.25); }
+.sec--paper .g { background: var(--ivory-2); }
+
+/* 4 · Fotografía protagonista: más aire y fotos más grandes */
+.gal { gap: clamp(10px, 1.2vw, 18px); }
+.g { border-radius: 2px; }
+.g img { transition: transform 1.2s var(--ease); }
+.g:hover img { transform: scale(1.03); }
+.phero-fig { border-radius: 2px; }
+.phero-fig img { filter: none; }
+
+/* 5 · Cabecera sobria */
+.hdr .logo b { font-family: var(--f-serif); font-weight: 460; letter-spacing: .26em; font-size: 17px; }
+.hdr .logo small { letter-spacing: .3em; opacity: .85; }
+.nav a { letter-spacing: .12em; font-size: 11.5px; }
+.hdr.is-solid { background: rgba(10,10,11,.92); }
+.hdr-cta .btn { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+.hdr-cta .btn:hover { background: var(--gold); color: var(--ink); }
+
+/* 6 · Pie más sobrio: sin palabra gigante */
+.ftr-word, .ftr .ftr-word { display: none; }
+.ftr { padding-top: clamp(56px, 7vw, 96px); }
+.ftr-top { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 24px; }
+.ftr-nav a { font-family: var(--f-sans); font-size: 14.5px; letter-spacing: 0; opacity: .9; }
+.ftr-cities { opacity: .75; }
+
+/* detalles */
+.crumbs { letter-spacing: .14em; }
+.cta.light { background: var(--ink-2); }
+::selection { background: var(--gold); color: var(--ink); }
+.sec--paper .g figcaption b { color: var(--paper); }
+.sec--paper .g figcaption span { color: var(--gold-hi); }
+.reel-cta, .reel-cta.btn--gold { background: var(--gold); color: var(--ink); text-shadow: none; }
+.reel-cta:hover { background: var(--gold-hi); }
