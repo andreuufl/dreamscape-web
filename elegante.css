@@ -205,3 +205,13 @@ html.pdfgate-on { overflow: hidden; }
 .home .reel::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, rgba(8,8,9,.5) 0%, rgba(8,8,9,.18) 48%, transparent 72%), linear-gradient(0deg, rgba(8,8,9,.55) 0%, transparent 38%); }
 
 @media (min-width: 1100px) { .facts--3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* CTA block on EN pages: stacked, padded, never squeezes the button */
+.wrap > .band { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; min-height: 0; padding: clamp(96px, 11vw, 128px) clamp(24px, 5vw, 64px) clamp(40px, 6vw, 72px); background: var(--ink-2); border: 1px solid rgba(255,255,255,.08); }
+.wrap > .band h2 { max-width: 20ch; }
+.wrap > .band p { margin: 16px 0 28px; max-width: 56ch; }
+.wrap > .band .btn { flex: none; white-space: nowrap; }
+
+/* map legend: dot and label always stay together */
+.esp-legend .lgi { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+.esp-legend .lgi .lg { margin-right: 0; flex: none; }
