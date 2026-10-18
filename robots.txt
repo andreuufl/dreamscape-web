@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /tarifas-2026-ds-x7k2q.pdf
+Disallow: /tarifas-y-packs-dreamscape-events.pdf
 
 # Buscadores de IA y motores de respuesta (para aparecer en resúmenes y recomendaciones de IA)
 User-agent: GPTBot

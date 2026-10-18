@@ -128,6 +128,23 @@
     a.addEventListener('click', function () { if (typeof w.gtag === 'function') w.gtag('event', 'click_whatsapp', { link_location: a.getAttribute('data-loc') || 'web' }); });
   });
 
+
+  /* ---------- Medición de eventos (solo si hay consentimiento y gtag) ---------- */
+  function ev(n, p) { try { if (typeof w.gtag === 'function') w.gtag('event', n, p || {}); } catch (e) {} }
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href') || '';
+    if (h.indexOf('tel:') === 0) ev('click_telefono', { link_location: a.getAttribute('data-loc') || 'web' });
+    else if (h.indexOf('mailto:') === 0) ev('click_email', { link_location: a.getAttribute('data-loc') || 'web' });
+    else if (/\.pdf(\?|$)/i.test(h)) ev('descarga_pdf', { file_name: h.split('/').pop() });
+    else if (/^\/(contacto|en-contact)\.html/.test(h)) ev('click_pedir_presupuesto', { link_location: a.getAttribute('data-loc') || (a.closest('.mcta') ? 'barra-movil' : a.closest('.hdr') ? 'cabecera' : 'pagina') });
+    else if (h === '/simulador.html' || h === '/simulador.html#tu-evento') ev('click_simulador');
+  }, true);
+  (function () {
+    var f = d.querySelectorAll('form.form'), started = {};
+    f.forEach(function (fm) { fm.addEventListener('focusin', function () { if (!started[fm.id]) { started[fm.id] = 1; ev('form_start', { form_id: fm.id, page: location.pathname }); } }); });
+  })();
+
   var yr = d.querySelectorAll('[data-year]'); yr.forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
 
