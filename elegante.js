@@ -31,4 +31,25 @@
     d.querySelectorAll('.gal .g img, .reelrow-l img').forEach(function (im) { im.classList.add('rv-img'); io.observe(im); });
   }
 
+
+  /* gracias: plazo de respuesta (horario laborable, hora de Madrid) */
+  (function () {
+    var el = document.querySelector('[data-reply-by]');
+    if (!el) return;
+    try {
+      var f = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Madrid', weekday: 'short', hour: 'numeric', hour12: false });
+      var p = {}; f.formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+      var h = parseInt(p.hour, 10) % 24; if (isNaN(h)) return;
+      var wd = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(p.weekday);
+      var hh = Math.min(19, Math.max(10, h));
+      var day = 'mañana';
+      if (wd === 4) day = 'el lunes';
+      else if (wd === 5) day = 'el lunes';
+      else if (wd === 6) day = 'el lunes';
+      if (wd === 5 || wd === 6) hh = 12;
+      el.textContent = 'Normalmente te respondemos ' + day + ' antes de las ' + hh + ':00 (hora de España)';
+      el.hidden = false;
+    } catch (e) { /* sin plazo exacto: el texto general sigue valiendo */ }
+  })();
+
 })();

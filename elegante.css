@@ -215,3 +215,14 @@ html.pdfgate-on { overflow: hidden; }
 /* map legend: dot and label always stay together */
 .esp-legend .lgi { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
 .esp-legend .lgi .lg { margin-right: 0; flex: none; }
+
+/* gracias: plazo de respuesta + montajes */
+.reply-by { margin: 14px 0 0; font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+.reply-by[hidden] { display: none; }
+.thx-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 40px; }
+.thx-tiles a { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink-2); }
+.thx-tiles img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.thx-tiles a:hover img { transform: scale(1.04); }
+.thx-tiles a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.85)); }
+.thx-tiles span { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 1; font-family: var(--f-serif, inherit); font-size: 15px; line-height: 1.2; color: var(--paper); }
+@media (max-width: 640px) { .thx-tiles { grid-template-columns: 1fr 1fr; } .thx-tiles a:nth-child(3) { display: none; } }
