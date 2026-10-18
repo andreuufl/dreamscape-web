@@ -31,13 +31,4 @@
     d.querySelectorAll('.gal .g img, .reelrow-l img').forEach(function (im) { im.classList.add('rv-img'); io.observe(im); });
   }
 
-  /* cursor discreto (solo ratón) */
-  if (fine && !reduce) {
-    var ring = d.createElement('div'); ring.className = 'cursor-ring'; ring.setAttribute('aria-hidden', 'true'); d.body.appendChild(ring);
-    var x = 0, y = 0, tx = 0, ty = 0, run = false;
-    function loop() { x += (tx - x) * .22; y += (ty - y) * .22; ring.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)'; if (Math.abs(tx - x) > .1 || Math.abs(ty - y) > .1) w.requestAnimationFrame(loop); else run = false; }
-    d.addEventListener('pointermove', function (e) { if (e.pointerType !== 'mouse') return; tx = e.clientX; ty = e.clientY; ring.classList.add('is-on'); if (!run) { run = true; w.requestAnimationFrame(loop); } }, { passive: true });
-    d.addEventListener('pointerover', function (e) { var t = e.target.closest && e.target.closest('a, button, summary, [role="button"], input, textarea, select, label'); ring.classList.toggle('is-link', !!t); });
-    d.documentElement.addEventListener('mouseleave', function () { ring.classList.remove('is-on'); });
-  }
 })();
