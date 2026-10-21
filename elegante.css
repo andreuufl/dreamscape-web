@@ -226,3 +226,18 @@ html.pdfgate-on { overflow: hidden; }
 .thx-tiles a::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,10,11,.85)); }
 .thx-tiles span { position: absolute; left: 14px; right: 14px; bottom: 14px; z-index: 1; font-family: var(--f-serif, inherit); font-size: 15px; line-height: 1.2; color: var(--paper); }
 @media (max-width: 640px) { .thx-tiles { grid-template-columns: 1fr 1fr; } .thx-tiles a:nth-child(3) { display: none; } }
+
+/* hero: botón de pausa del vídeo (WCAG 2.2.2) */
+.reel-pause { position: absolute; z-index: 6; right: 16px; top: 84px; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 1px solid rgba(236,231,222,.4); background: rgba(10,10,11,.5); color: var(--paper); border-radius: 50%; cursor: pointer; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.reel-pause:hover { border-color: var(--gold); color: var(--gold); }
+.reel-pause svg { width: 14px; height: 14px; display: block; }
+.reel-pause .i-play { display: none; }
+.reel-pause[aria-pressed="true"] .i-pause { display: none; }
+.reel-pause[aria-pressed="true"] .i-play { display: block; }
+@media (min-width: 1080px) { .reel-pause { right: 32px; top: 100px; } }
+
+/* pie: iconos de redes */
+.ftr-social { display: flex; gap: 12px; margin: 22px 0 22px; }
+.ftr-social a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: 1px solid rgba(236,231,222,.25); border-radius: 50%; color: var(--paper-2); transition: color .25s, border-color .25s; }
+.ftr-social a:hover { color: var(--gold); border-color: var(--gold); }
+.ftr-social svg { width: 18px; height: 18px; display: block; }

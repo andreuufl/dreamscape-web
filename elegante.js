@@ -52,4 +52,19 @@
     } catch (e) { /* sin plazo exacto: el texto general sigue valiendo */ }
   })();
 
+
+  /* hero: pausa manual del vídeo de fondo */
+  (function () {
+    var b = document.querySelector('.reel-pause'), v = document.querySelector('video[data-hero]');
+    if (!b || !v) return;
+    b.addEventListener('click', function () {
+      var paused = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', paused ? 'true' : 'false');
+      b.setAttribute('aria-label', paused ? 'Reproducir vídeo de fondo' : 'Pausar vídeo de fondo');
+      if (paused) { v.dataset.userPaused = '1'; v.pause(); }
+      else { delete v.dataset.userPaused; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+    v.addEventListener('play', function () { if (v.dataset.userPaused) v.pause(); });
+  })();
+
 })();
