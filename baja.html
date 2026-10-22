@@ -64,14 +64,14 @@
   <div class="mnav-foot">
     <a class="btn btn--gold" href="/contacto.html">Pedir presupuesto</a>
     <a class="btn" href="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20quiero%20pedir%20presupuesto%20para%20un%20evento." target="_blank" rel="noopener" data-loc="menu">WhatsApp</a>
-    <p><a href="tel:+34613089894">613 08 98 94</a> · <a href="mailto:info@ap-events.es">info@ap-events.es</a> · <a href="/destination-weddings-spain.html" lang="en">English</a></p>
+    <p><a href="tel:+34613089894">613 08 98 94</a> · <a href="mailto:info@dreamscapeevents.es">info@dreamscapeevents.es</a> · <a href="/destination-weddings-spain.html" lang="en">English</a></p>
   </div>
 </div>
 <main id="main">
 <section class="phero"><div class="wrap"><div class="box" style="max-width:620px">
   <div id="paso-confirmar"><span class="eyebrow">Comunicaciones</span><h1 class="h2">Darse de baja</h1><p class="lead mt-m">Dejarás de recibir nuestros correos comerciales en esta dirección:</p><p class="mono" id="email-mostrado" style="font-size:15px;word-break:break-all"></p><div class="btns mt-m"><button class="btn btn--gold" type="button" id="btn-baja">Confirmar la baja</button><a class="btn" href="/">Volver a la web</a></div></div>
-  <div id="paso-ok" class="hidden"><span class="eyebrow">Hecho</span><h1 class="h2">Baja confirmada</h1><p class="lead mt-m">No volverás a recibir correos comerciales de Dreamscape Events. Si ha sido un error, escríbenos a <a class="link" href="mailto:info@ap-events.es">info@ap-events.es</a>.</p></div>
-  <div id="paso-error" class="hidden"><span class="eyebrow">Atención</span><h1 class="h2">Enlace no válido</h1><p class="lead mt-m" id="texto-error">Este enlace de baja no es válido o está incompleto. Escríbenos a <a class="link" href="mailto:info@ap-events.es">info@ap-events.es</a> y te damos de baja a mano.</p></div>
+  <div id="paso-ok" class="hidden"><span class="eyebrow">Hecho</span><h1 class="h2">Baja confirmada</h1><p class="lead mt-m">No volverás a recibir correos comerciales de Dreamscape Events. Si ha sido un error, escríbenos a <a class="link" href="mailto:info@dreamscapeevents.es">info@dreamscapeevents.es</a>.</p></div>
+  <div id="paso-error" class="hidden"><span class="eyebrow">Atención</span><h1 class="h2">Enlace no válido</h1><p class="lead mt-m" id="texto-error">Este enlace de baja no es válido o está incompleto. Escríbenos a <a class="link" href="mailto:info@dreamscapeevents.es">info@dreamscapeevents.es</a> y te damos de baja a mano.</p></div>
 </div></div></section>
 </main>
 <footer class="ftr">
@@ -106,7 +106,7 @@ if(!email||!token||!api){ver("paso-error");return;}
 document.getElementById("email-mostrado").textContent=email;
 var btn=document.getElementById("btn-baja");
 btn.addEventListener("click",function(){btn.disabled=true;btn.textContent="Procesando…";
-fetch(api+"?action=baja&e="+encodeURIComponent(email)+"&t="+encodeURIComponent(token)).then(function(r){return r.json();}).then(function(res){ver(res&&res.ok?"paso-ok":"paso-error");}).catch(function(){document.getElementById("texto-error").textContent="No hemos podido conectar ahora mismo. Inténtalo en unos minutos o escríbenos a info@ap-events.es.";ver("paso-error");});});})();
+fetch(api+"?action=baja&e="+encodeURIComponent(email)+"&t="+encodeURIComponent(token)).then(function(r){return r.json();}).then(function(res){ver(res&&res.ok?"paso-ok":"paso-error");}).catch(function(){document.getElementById("texto-error").textContent="No hemos podido conectar ahora mismo. Inténtalo en unos minutos o escríbenos a info@dreamscapeevents.es.";ver("paso-error");});});})();
 </script>
 </body>
 </html>

@@ -95,7 +95,7 @@
     stroke(doc, LINE, 0.25); doc.line(18, 281, 192, 281);
     doc.setFontSize(6.4); ink(doc, MUTE);
     doc.text('Dreamscape Events and Complete Productions, S.L. · NIF B19859115 · Vallirana (Barcelona)', 18, 286);
-    doc.text('info@ap-events.es · +34 613 08 98 94 · www.dreamscapeevents.es', 18, 290);
+    doc.text('info@dreamscapeevents.es · +34 613 08 98 94 · www.dreamscapeevents.es', 18, 290);
     doc.setFont('helvetica', 'bold'); ink(doc, GOLDD); doc.text(page + ' / 3', 192, 286, { align: 'right' });
   }
   function heading(doc, n, title, y) {
@@ -260,7 +260,7 @@
     doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2); ink(doc, [201, 195, 184]);
     doc.text(doc.splitTextToSize('Cuéntanos tu fecha y recinto y te enviamos propuesta técnica y presupuesto, normalmente en menos de 24 horas.', 104), 26, y + 31);
     doc.setFont('helvetica', 'bold'); doc.setFontSize(8.6); ink(doc, GOLD);
-    doc.text('WhatsApp +34 613 08 98 94', 26, y + 43); ink(doc, PAPER); doc.text('info@ap-events.es', 84, y + 43);
+    doc.text('WhatsApp +34 613 08 98 94', 26, y + 43); ink(doc, PAPER); doc.text('info@dreamscapeevents.es', 84, y + 43);
     if (qr) {
       var n = qr.getModuleCount(), cell = 28 / n, qx = 192 - 28 - 7, qy = y + 7;
       fill(doc, PAPER); doc.rect(qx - 2.2, qy - 2.2, 32.4, 32.4, 'F');
@@ -269,7 +269,7 @@
       doc.setFont('helvetica', 'normal'); doc.setFontSize(5.8); ink(doc, GOLD); trC(doc, 'ESCANEA · WHATSAPP', qx + 14, y + 46.4, 0.9);
       doc.link(qx, qy, 28, 28, { url: WA });
     }
-    doc.link(26, y + 39.4, 55, 5, { url: WA }); doc.link(84, y + 39.4, 40, 5, { url: 'mailto:info@ap-events.es' });
+    doc.link(26, y + 39.4, 55, 5, { url: WA }); doc.link(84, y + 39.4, 40, 5, { url: 'mailto:info@dreamscapeevents.es' });
 
     doc.setProperties({ title: 'Rider técnico · Dreamscape Events', author: 'Dreamscape Events and Complete Productions, S.L.', subject: 'Propuesta técnica orientativa', creator: 'www.dreamscapeevents.es' });
     return doc;
