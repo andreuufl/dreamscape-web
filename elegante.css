@@ -254,3 +254,6 @@ html.pdfgate-on { overflow: hidden; }
 .ftr-top { padding-bottom: 20px; margin-bottom: 16px; }
 .ftr-social { margin: 16px 0; }
 .ftr { padding-top: clamp(28px, 3.5vw, 40px); padding-bottom: 28px; }
+/* Zonas táctiles de enlaces de contacto */
+.contact-list a, .doc-aside dd a { display: inline-block; padding: 7px 0; }
+.doc-aside dd br { display: none; }
