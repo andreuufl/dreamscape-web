@@ -279,3 +279,16 @@ html.pdfgate-on { overflow: hidden; }
 .reel .eyebrow { max-width: 44ch; line-height: 1.55; letter-spacing: .13em; text-shadow: 0 1px 14px rgba(0,0,0,.75); }
 .reel .eyebrow::before { align-self: flex-start; margin-top: .78em; flex: none; }
 .mnav li a::before{content:counter(m,decimal-leading-zero);min-width:22px}
+/* portada v28: legibilidad */
+.reel::before{background:linear-gradient(90deg,rgba(5,5,6,.72) 0%,rgba(5,5,6,.38) 45%,rgba(5,5,6,0) 75%),linear-gradient(180deg,rgba(5,5,6,.7) 0%,rgba(5,5,6,0) 22%,rgba(5,5,6,0) 60%,rgba(5,5,6,.75) 100%)!important}
+.reel::after{background:none!important}
+.reel .eyebrow{color:#f1d9a0;font-size:13px;font-weight:500;letter-spacing:.14em;max-width:none;text-shadow:0 1px 14px rgba(0,0,0,.9),0 0 3px rgba(0,0,0,.6)}
+.reel-body .display em{color:#ecd08f}
+.reel-body .display{text-shadow:0 2px 24px rgba(0,0,0,.65)}
+.hdr[data-transparent]:not(.is-solid) .nav a{text-shadow:0 1px 10px rgba(0,0,0,.9)}
+.reel-btns{flex-direction:row;flex-wrap:wrap}
+.reel-trust{flex-basis:100%;margin:10px 0 0!important;justify-content:flex-start;font-size:10.5px!important;color:rgba(244,239,230,.82);text-shadow:0 1px 10px rgba(0,0,0,.9)}
+@media(min-width:900px){.reel-trust{justify-content:flex-end}}
+.reel-trust span:first-child::before{content:none}
+.reel-trust{flex-basis:auto;justify-content:flex-start!important;margin:14px 0 0!important}
+@media (max-width:1079px){.reel-btns .reel-cta{display:inline-flex!important}}
