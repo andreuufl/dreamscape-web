@@ -257,3 +257,6 @@ html.pdfgate-on { overflow: hidden; }
 /* Zonas táctiles de enlaces de contacto */
 .contact-list a, .doc-aside dd a { display: inline-block; padding: 7px 0; }
 .doc-aside dd br { display: none; }
+/* Portada limpia: sin botón del show */
+.ds-showbtn { display: none !important; }
+.reel-top:empty { display: none; }
