@@ -265,3 +265,17 @@ html.pdfgate-on { overflow: hidden; }
 .reel:hover .reel-strip--one img { transform: scale(1.08); }
 @media (max-width: 759px) { .reel-strip--one img { object-position: 50% 55%; } }
 @media (prefers-reduced-motion: reduce) { .reel-strip--one img { transition: none; transform: none; } }
+/* Botón de presupuesto visible desde el inicio en la portada */
+.ds-home .hdr[data-transparent]:not(.is-solid) .hdr-cta .btn--gold { opacity: 1 !important; visibility: visible !important; }
+/* Menú principal: ajustar a 8 enlaces */
+@media (min-width: 1180px) { .nav { gap: 20px; } .nav a { font-size: 11.5px; letter-spacing: .08em; } }
+/* Aviso de cookies compacto en ordenador */
+@media (min-width: 700px) {
+  .cookie { left: 20px; right: auto; bottom: 20px; max-width: 420px; padding: 14px 16px; border-width: 1px; box-shadow: 0 18px 50px rgba(0,0,0,.55); }
+  .cookie.is-on { gap: 10px; }
+  .cookie p { font-size: 12.5px; }
+}
+@media (min-width: 700px) { .cookie.is-on { flex-direction: column !important; align-items: stretch; } .cookie .btns { display: flex; gap: 8px; } }
+.reel .eyebrow { max-width: 44ch; line-height: 1.55; letter-spacing: .13em; text-shadow: 0 1px 14px rgba(0,0,0,.75); }
+.reel .eyebrow::before { align-self: flex-start; margin-top: .78em; flex: none; }
+.mnav li a::before{content:counter(m,decimal-leading-zero);min-width:22px}
