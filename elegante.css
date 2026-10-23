@@ -260,3 +260,8 @@ html.pdfgate-on { overflow: hidden; }
 /* Portada limpia: sin botón del show */
 .ds-showbtn { display: none !important; }
 .reel-top:empty { display: none; }
+/* Portada con foto fija */
+.reel-strip--one img { object-position: 50% 62%; transform: scale(1.04); transition: transform 10s linear; }
+.reel:hover .reel-strip--one img { transform: scale(1.08); }
+@media (max-width: 759px) { .reel-strip--one img { object-position: 50% 55%; } }
+@media (prefers-reduced-motion: reduce) { .reel-strip--one img { transition: none; transform: none; } }
