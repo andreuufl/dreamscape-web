@@ -214,7 +214,7 @@ document.addEventListener('click', function (e) {
 
   /* ---------- 4. Galería a pantalla completa (Proyectos) ---------- */
   var medias = [].slice.call(d.querySelectorAll('.pj .pj-media, .gal .g'));
-  function mTitle(m) { var h = m.querySelector('figcaption b') || (m.closest('.pj') && m.closest('.pj').querySelector('h3')); return h ? h.textContent : ''; }
+  function mTitle(m) { var h = m.querySelector('figcaption b') || (m.closest('.pj') && m.closest('.pj').querySelector('h3, h2.pj-h')); return h ? h.textContent : ''; }
   if (medias.length) {
     var lb = d.createElement('div'); lb.className = 'lb'; lb.hidden = true;
     lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Galería de proyectos');

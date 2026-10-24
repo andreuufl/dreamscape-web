@@ -13,7 +13,7 @@
 
 /* 1 · Tipografía: serif elegante en frases, sin mayúsculas ni condensado */
 .display, h1, h2, h3, .h1, .h2, .h3,
-.fact b, .how h3, .qlinks b, .wz-q, .g figcaption b, .wm, .ix-row h3, .dc h3, .card h3, .post h3, .pj h3, .band h2 {
+.fact b, .how h3, .qlinks b, .wz-q, .g figcaption b, .wm, .ix-row h3, .dc h3, .card h3, .post h3, .post h2, .pj h3, .pj h2.pj-h, .band h2 {
   font-family: var(--f-serif);
   font-weight: 380;
   font-variation-settings: normal;
@@ -292,3 +292,7 @@ html.pdfgate-on { overflow: hidden; }
 .reel-trust span:first-child::before{content:none}
 .reel-trust{flex-basis:auto;justify-content:flex-start!important;margin:14px 0 0!important}
 @media (max-width:1079px){.reel-btns .reel-cta{display:inline-flex!important}}
+/* títulos de tarjeta: h2 con el aspecto de antes (orden de encabezados correcto) */
+.post h2{font-size:clamp(22px,2vw,28px)}
+.pj h2.pj-h{margin-top:22px;font-size:clamp(24px,2.4vw,34px)}
+.post h2,.pj h2.pj-h{line-height:1.05;letter-spacing:0}

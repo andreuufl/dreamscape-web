@@ -7,7 +7,7 @@
    Sin dependencias. Se apaga con "reducir movimiento" y, si algo falla,
    la web se ve exactamente igual que sin este archivo.
    ===================================================================== */
-(function () {
+(window.__dsStart = function () {
   'use strict';
   var D = document, W = window, root = D.documentElement;
   if (!W.requestAnimationFrame || !W.IntersectionObserver) return;
@@ -31,6 +31,7 @@
   var actors = [], raf = 0, last = 0;
   function loop(now) {
     raf = 0;
+    if (small && now - last < 30) { raf = requestAnimationFrame(loop); return; } /* móvil: ~30 fps */
     var dt = clamp((now - last) / 1000, 0, 0.05), t = now / 1000, live = false;
     last = now;
     for (var i = 0; i < actors.length; i++) {
@@ -1045,4 +1046,13 @@
       io.observe(f);
     });
   });
+});
+
+/* Arranque diferido: la capa de luces espera a que la página esté cargada y el navegador libre. */
+(function () {
+  var D = document;
+  if (D.querySelector('.reel')) D.documentElement.classList.add('ds-home');
+  function go() { try { window.__dsStart(); } catch (e) {} }
+  function sched() { if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 2500 }); else setTimeout(go, 1500); }
+  if (D.readyState === 'complete') sched(); else window.addEventListener('load', function () { setTimeout(sched, 300); });
 })();
