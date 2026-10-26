@@ -472,3 +472,24 @@ document.querySelectorAll('.ba').forEach(function (ba) {
     lits.forEach(function (s) { lo.observe(s); });
   } else lits.forEach(function (s) { s.classList.add('lit-on'); });
 })();
+
+/* Móvil: los párrafos largos se pliegan con "Leer más" (no en artículos del blog) */
+(function () {
+  var d = document;
+  if (!window.matchMedia || !window.matchMedia('(max-width: 700px)').matches) return;
+  if (d.querySelector('figure.cover')) return;
+  var ps = d.querySelectorAll('main .prose > p, main .prose .pband > p, main .ix-row p');
+  var n = 0;
+  Array.prototype.forEach.call(ps, function (p, i) {
+    if ((p.textContent || '').length < 200 || p.classList.contains('note') || p.closest('.faq')) return;
+    if (i === 0) return;
+    var id = 'clamp-' + (++n);
+    p.id = p.id || id; p.classList.add('clamp-p');
+    var b = d.createElement('button'); b.type = 'button'; b.className = 'clamp-btn'; b.textContent = 'Leer más';
+    b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', p.id);
+    b.addEventListener('click', function () {
+      var o = p.classList.toggle('is-open'); b.setAttribute('aria-expanded', String(o)); b.textContent = o ? 'Leer menos' : 'Leer más';
+    });
+    p.parentNode.insertBefore(b, p.nextSibling);
+  });
+})();
