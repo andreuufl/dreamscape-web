@@ -484,3 +484,11 @@ main .sec:not(.cta) img:not(.logo img){filter:brightness(1.1) saturate(1.14) con
 .brn-n{margin:14px 0 0;font-size:13.5px;color:var(--mute)}
 @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @media(prefers-reduced-motion:reduce){.mq{-webkit-mask-image:none;mask-image:none;overflow:visible}.mq-t{animation:none;flex-wrap:wrap;justify-content:center;min-width:0;row-gap:10px}.mq-t[aria-hidden="true"]{display:none}}
+
+/* aviso de cookies: aceptar y solo esenciales con el mismo peso visual */
+.cookie .btn,.cookie .btn--gold{background:transparent;border:1px solid var(--gold);color:var(--paper);box-shadow:none}
+.cookie .btn:hover,.cookie .btn--gold:hover{background:rgba(201,166,107,.16);border-color:var(--gold-hi);color:var(--paper)}
+.form-legal{margin:10px 0 0;font-size:12.5px;line-height:1.5;color:var(--mute)}
+.form-legal a{text-decoration:underline}
+
+.consent--opt{margin-top:8px;opacity:.95}

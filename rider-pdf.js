@@ -166,7 +166,7 @@
     });
     doc.setFont('helvetica', 'normal'); doc.setFontSize(6.6); ink(doc, [150, 145, 135]);
     doc.text('Dreamscape Events and Complete Productions, S.L. · NIF B19859115 · Vallirana (Barcelona)', 18, 284);
-    doc.text('Ref. ' + ref + '  ·  Generado el ' + hoy + '  ·  Válido 30 días', 18, 288.5);
+    doc.text('Ref. ' + ref + '  ·  Generado el ' + hoy + '  ·  Validez según presupuesto', 18, 288.5);
     doc.setFont('helvetica', 'bold'); ink(doc, GOLD); doc.text('www.dreamscapeevents.es', 192, 288.5, { align: 'right' });
 
     /* ===== Página 2: resumen, equipo, recinto ===== */
@@ -245,7 +245,7 @@
     // condiciones
     doc.setFont('helvetica', 'bold'); doc.setFontSize(6.6); ink(doc, GOLDD); tr(doc, 'CONDICIONES', 18, y + 2, 1.4); y += 6.6;
     ['Todos los precios son «desde» y orientativos; no incluyen IVA (21 %).',
-     'El presupuesto final tiene una validez de 30 días y se confirma tras revisar el recinto.',
+     'El presupuesto final tiene una validez de 7 días naturales desde su emisión y se confirma tras revisar el recinto.',
      'En fechas de alta demanda (primavera-verano, congresos y Navidad), recomendamos reservar con semanas de antelación.']
       .forEach(function (t) {
         doc.setFont('helvetica', 'normal'); doc.setFontSize(8.2); ink(doc, MUTE);

@@ -81,6 +81,8 @@
       '<div class="field"><label for="pg-nombre">Nombre <span class="pg-opt">(opcional)</span></label><input type="text" id="pg-nombre" name="Nombre" maxlength="100" autocomplete="name" placeholder="Tu nombre y empresa"></div>' +
       '<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">' +
       '<label class="consent"><input type="checkbox" id="pg-priv" name="Acepta_Privacidad" value="Sí" required><span>He leído y acepto la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a>. Usaréis mi email para enviarme el rider y contactarme sobre mi evento.</span></label>' +
+      '<label class="consent consent--opt"><input type="checkbox" name="Acepta_Comunicaciones" value="Sí"><span>(Opcional) Quiero recibir comunicaciones comerciales de Dreamscape Events por email (novedades, ofertas y promociones). Puedo darme de baja cuando quiera.</span></label>' +
+      '<p class="form-legal">Responsable: Dreamscape Events and Complete Productions, S.L. Finalidad: enviarte el rider y gestionar tu solicitud. Derechos de acceso, rectificación, supresión y otros: info@dreamscapeevents.es. Más información en la <a href="/privacidad.html" target="_blank" rel="noopener">política de privacidad</a>.</p>' +
       '<p class="pdfgate-err" id="pg-err" role="alert" hidden></p>' +
       '<button class="btn btn--gold" type="submit" id="pg-go">Descargar mi rider (PDF)</button>' +
       '</form></div>';
