@@ -138,6 +138,7 @@
     else if (h.indexOf('mailto:') === 0) ev('click_email', { link_location: a.getAttribute('data-loc') || 'web' });
     else if (/\.pdf(\?|$)/i.test(h)) ev('descarga_pdf', { file_name: h.split('/').pop() });
     else if (/^\/(contacto|en-contact)\.html/.test(h)) ev('click_pedir_presupuesto', { link_location: a.getAttribute('data-loc') || (a.closest('.mcta') ? 'barra-movil' : a.closest('.hdr') ? 'cabecera' : 'pagina') });
+    else if (h.indexOf('g.page/r/') > -1) ev('click_resena', { link_location: a.getAttribute('data-loc') || 'web' });
     else if (h === '/simulador.html' || h === '/simulador.html#tu-evento') ev('click_simulador');
   }, true);
   (function () {
