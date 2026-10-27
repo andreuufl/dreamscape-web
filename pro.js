@@ -494,3 +494,20 @@ document.querySelectorAll('.ba').forEach(function (ba) {
     p.parentNode.insertBefore(b, p.nextSibling);
   });
 })();
+
+/* Medición: profundidad de scroll y llegada al bloque final de contacto (solo con consentimiento y gtag) */
+(function () {
+  var d = document, w = window, sent = {};
+  function ev(n, p) { try { if (typeof w.gtag === 'function') w.gtag('event', n, p || {}); } catch (e) {} }
+  function onScroll() {
+    var h = d.documentElement.scrollHeight - w.innerHeight; if (h < 200) return;
+    var p = (w.pageYOffset || d.documentElement.scrollTop) / h;
+    [50, 90].forEach(function (m) { if (p >= m / 100 && !sent[m]) { sent[m] = 1; ev('scroll_profundidad', { porcentaje: m, page: location.pathname }); } });
+  }
+  w.addEventListener('scroll', function () { w.requestAnimationFrame(onScroll); }, { passive: true });
+  var cta = d.querySelector('.sec.cta'); 
+  if (cta && 'IntersectionObserver' in w) {
+    var io = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { ev('ver_bloque_contacto', { page: location.pathname }); io.disconnect(); } }, { threshold: .4 });
+    io.observe(cta);
+  }
+})();

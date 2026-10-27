@@ -34,7 +34,7 @@
 <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/pro.css?v=20261023">
-<link rel="stylesheet" href="/elegante.css?v=32">
+<link rel="stylesheet" href="/elegante.css?v=34">
 <link rel="stylesheet" href="/ds-motion.css?v=20261016">
 <link rel="stylesheet" href="/ds-show.css?v=20261017">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ContactPage", "name": "Contacto | Dreamscape Events", "url": "https://www.dreamscapeevents.es/contacto.html", "mainEntity": {"@type": "Organization", "name": "Dreamscape Events and Complete Productions, S.L.", "email": "info@dreamscapeevents.es", "telephone": "+34613089894"}}</script>
@@ -59,6 +59,7 @@
 <div class="nav-g"><a href="/tarifas.html">Presupuesto</a><div class="nav-sub">
 <a href="/tarifas.html">Tarifas</a>
 <a href="/simulador.html">Simulador</a>
+<a href="/como-trabajamos.html">Cómo trabajamos</a>
 <a href="/preguntas-frecuentes.html">Preguntas frecuentes</a>
 <a href="/contacto.html">Contacto</a>
 </div></div>
@@ -80,6 +81,7 @@
 <li><a href="/tarifas.html">Tarifas</a></li>
 <li><a href="/para-wedding-planners-y-agencias.html">Agencias</a></li>
 <li><a href="/simulador.html">Simulador</a></li>
+<li><a href="/como-trabajamos.html">Cómo trabajamos</a></li>
 <li><a href="/filosofia.html">Nosotros</a></li>
 <li><a href="/preguntas-frecuentes.html">Preguntas frecuentes</a></li>
 <li><a href="/blog.html">Blog</a></li>
@@ -121,9 +123,18 @@
         <div class="field"><label for="telefono">Teléfono</label><input type="tel" id="telefono" name="Telefono_Contacto" required pattern="[0-9+\s\(\)\-]{9,20}" maxlength="20" autocomplete="tel" placeholder="600 000 000"></div>
       </div>
       <div class="field"><label for="email">Correo electrónico</label><input type="email" id="email" name="Email_Contacto" required maxlength="120" autocomplete="email" placeholder="tu@empresa.com"></div>
-      <div class="field"><label for="mensaje">Tu evento</label><textarea id="mensaje" name="Detalles_Proyecto" rows="6" required minlength="10" maxlength="3000" placeholder="Fecha, lugar, número de asistentes y qué necesitas (sonido, luz, escenario, pantallas…)"></textarea></div>
+      <fieldset class="chips" aria-labelledby="tipo-l"><legend id="tipo-l">¿Qué tipo de evento es? <small>(opcional)</small></legend>
+  <label><input type="radio" name="_tipo" value="Evento corporativo"><span>Empresa</span></label>
+  <label><input type="radio" name="_tipo" value="Congreso o feria"><span>Congreso o feria</span></label>
+  <label><input type="radio" name="_tipo" value="Boda o celebración"><span>Boda o celebración</span></label>
+  <label><input type="radio" name="_tipo" value="Agencia o planner"><span>Agencia o planner</span></label>
+  <label><input type="radio" name="_tipo" value="Otro"><span>Otro</span></label>
+</fieldset>
+<div class="field"><label for="fecha">Fecha aproximada <small>(opcional)</small></label><input type="date" id="fecha" name="_fecha"></div>
+<div class="field"><label for="mensaje">Tu evento</label><textarea id="mensaje" name="Detalles_Proyecto" rows="6" required minlength="10" maxlength="3000" placeholder="Fecha, lugar, número de asistentes y qué necesitas (sonido, luz, escenario, pantallas…)"></textarea></div>
       <label class="consent"><input type="checkbox" id="privacidad" name="Acepta_Privacidad" value="Sí" required><span>Acepto la <a href="/privacidad.html" target="_blank">política de privacidad</a>. Usaremos tus datos solo para responder a tu solicitud.</span></label>
       <button class="btn btn--gold" type="submit">Enviar solicitud <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 8h13M9 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></button>
+<p class="form-note">Te respondemos en menos de 24 horas, normalmente antes.</p>
     </form>
   </div>
 </div></section>
@@ -148,11 +159,11 @@
   <p data-chat-note hidden>Para abrir el asistente necesitamos tu permiso para sus cookies.</p>
   <div class="btns"><button class="btn btn--gold" type="button" data-cookie="all">Aceptar</button><button class="btn" type="button" data-cookie="essential">Solo esenciales</button></div>
 </div>
-<script src="/pro.js?v=20261028" defer></script>
+<script src="/pro.js?v=20261029" defer></script>
 <script src="/elegante.js?v=4" defer></script>
 <script src="/ds-motion.js?v=20261016" defer></script>
-<script src="/ds-show.js?v=20261025" defer></script>
+<script src="/ds-show.js?v=20261028" defer></script>
 <script src="/ds-config.js?v=3"></script>
-<script src="/formularios.js?v=4" defer></script>
+<script src="/formularios.js?v=20261027" defer></script>
 </body>
 </html>

@@ -42,6 +42,13 @@
       datos.set('ts', String(inicio));
       datos.set('pagina', location.pathname);
       datos.delete('access_key');
+      // Tipo de evento y fecha (campos opcionales): se anteponen al texto para que lleguen en el aviso
+      var tipo = datos.get('_tipo'), fecha = datos.get('_fecha');
+      datos.delete('_tipo'); datos.delete('_fecha');
+      var pre = [];
+      if (tipo) pre.push('Tipo de evento: ' + tipo);
+      if (fecha) pre.push('Fecha aproximada: ' + fecha);
+      if (pre.length && datos.has('Detalles_Proyecto')) datos.set('Detalles_Proyecto', pre.join(' · ') + '\n' + datos.get('Detalles_Proyecto'));
       var destino = (form.querySelector('input[name="redirect"]') || {}).value || '/gracias.html';
 
       var errorServidor = false;
