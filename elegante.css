@@ -492,3 +492,16 @@ main .sec:not(.cta) img:not(.logo img){filter:brightness(1.1) saturate(1.14) con
 .form-legal a{text-decoration:underline}
 
 .consent--opt{margin-top:8px;opacity:.95}
+
+.cfaq{display:grid;gap:10px;max-width:760px}
+.cfaq details{border:1px solid var(--line);border-radius:12px;padding:0 18px;background:rgba(255,255,255,.03)}
+.cfaq summary{cursor:pointer;padding:16px 0;font-weight:600;list-style:none}
+.cfaq summary::-webkit-details-marker{display:none}
+.cfaq summary::after{content:"+";float:right;color:var(--acc-hi)}
+.cfaq details[open] summary::after{content:"–"}
+.cfaq p{margin:0 0 16px;color:var(--mute)}
+.form-steps{display:flex;gap:8px;align-items:center;margin:0 0 14px;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.form-steps b{color:var(--paper)}
+.form--s1 .s2,.form--s2 .s1{display:none!important}
+.form-next{margin-top:6px}
+.form-back{background:none;border:0;color:var(--mute);text-decoration:underline;cursor:pointer;padding:6px 0;margin:0 0 10px;font:inherit;font-size:13.5px}

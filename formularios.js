@@ -15,6 +15,41 @@
     demasiados_envios: 'Has enviado varias solicitudes seguidas. Espera un rato o escríbenos por WhatsApp.',
     captcha: 'No hemos podido verificar que no eres un robot. Recarga la página e inténtalo de nuevo.'
   };
+
+  /* Formulario de contacto en dos pasos (mejora progresiva: sin JS se ve completo) */
+  (function () {
+    var form = document.getElementById('dreamscape-form');
+    if (!form) return;
+    var chips = form.querySelector('fieldset.chips');
+    var fecha = form.querySelector('#fecha');
+    if (!chips || !fecha) return;
+    var fechaField = fecha.closest('.field');
+    var first = form.querySelector('.row');
+    var s1 = [chips, fechaField];
+    var s2 = [];
+    var n = first;
+    while (n) { var nx = n.nextElementSibling; if (s1.indexOf(n) < 0 && n.tagName !== 'INPUT' && !(n.matches && n.matches('.form-steps,.form-next,.form-back'))) s2.push(n); n = nx; }
+    s1.forEach(function (e) { e.classList.add('s1'); });
+    s2.forEach(function (e) { e.classList.add('s2'); });
+    var bar = document.createElement('p'); bar.className = 'form-steps s-bar';
+    var next = document.createElement('button'); next.type = 'button'; next.className = 'btn btn--gold form-next s1'; next.textContent = 'Continuar';
+    var back = document.createElement('button'); back.type = 'button'; back.className = 'form-back s2'; back.textContent = '← Volver al paso 1';
+    form.insertBefore(bar, first);
+    fechaField.parentNode.insertBefore(next, fechaField.nextSibling);
+    var first2 = s2[0]; first2.parentNode.insertBefore(back, first2);
+    function go(n2, focus) {
+      form.classList.remove('form--s1', 'form--s2'); form.classList.add('form--s' + n2);
+      bar.innerHTML = n2 === 1 ? '<b>Paso 1 de 2</b> · Tu evento' : '<b>Paso 2 de 2</b> · Tus datos';
+      if (focus) { var t = form.querySelector(n2 === 2 ? '#nombre' : 'fieldset.chips input'); if (t) t.focus({ preventScroll: true }); form.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+    }
+    next.addEventListener('click', function () {
+      go(2, true);
+      if (typeof window.gtag === 'function') window.gtag('event', 'form_paso2');
+    });
+    back.addEventListener('click', function () { go(1, true); });
+    go(1, false);
+    form.addEventListener('invalid', function (e) { if (form.classList.contains('form--s1')) go(2, false); }, true);
+  })();
   var inicio = Date.now();
 
   Object.keys(FORMS).forEach(function (id) {

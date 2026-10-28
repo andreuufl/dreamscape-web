@@ -62,6 +62,36 @@
     try { sessionStorage.setItem('ds-sim-msg', 'Hola, me interesa presupuestar este evento configurado en el simulador:\n' + summary()); } catch (e) {}
     window.location.href = '/contacto.html#formulario';
   });
+
+  /* ---- Compartir / recuperar configuración por enlace ---- */
+  function serialize() {
+    var p = new URLSearchParams();
+    [].slice.call(f.elements).forEach(function (el) {
+      if (!el.name && !el.id) return;
+      if (el.type === 'radio') { if (el.checked) p.set(el.name, el.value); }
+      else if (el.type === 'checkbox') { if (el.checked) p.append(el.name, el.value); }
+      else if (el.id && el.value !== '') p.set('#' + el.id, el.value);
+    });
+    return p.toString();
+  }
+  function restore(q) {
+    var p = new URLSearchParams(q), seen = {};
+    [].slice.call(f.elements).forEach(function (el) {
+      if (el.type === 'radio') { el.checked = p.get(el.name) === el.value; }
+      else if (el.type === 'checkbox') { seen[el.name] = 1; el.checked = p.getAll(el.name).indexOf(el.value) > -1; }
+      else if (el.id && p.has('#' + el.id)) el.value = p.get('#' + el.id);
+    });
+    update();
+  }
+  if (location.hash.length > 3 && location.hash.indexOf('=') > -1) { try { restore(location.hash.slice(1)); } catch (e) {} }
+  var shareBtn = document.getElementById('sim-share');
+  if (shareBtn) shareBtn.addEventListener('click', function () {
+    var url = location.origin + location.pathname + '#' + serialize();
+    var ok = function () { var n = document.getElementById('sim-share-ok'); if (n) { n.hidden = false; setTimeout(function () { n.hidden = true; }, 6000); } };
+    if (typeof window.gtag === 'function') window.gtag('event', 'compartir_simulador');
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(ok, function () { window.prompt('Copia este enlace:', url); });
+    else window.prompt('Copia este enlace:', url);
+  });
   /* ---- Puerta del PDF: email válido + política obligatoria, y entonces se descarga ---- */
   var API = (window.DS_API || '').trim();
   var EMAIL_RE = /^[^\s@,;:<>()\[\]\\"]+@([a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/i;

@@ -21,6 +21,30 @@
   w.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   onScroll();
 
+
+  /* ---------- WhatsApp: mensaje prellenado según la página ---------- */
+  (function () {
+    var path = location.pathname, txt = null;
+    var map = [
+      [/bodas|wedding|boda|destination/, 'Hola Dreamscape Events, quiero información de sonido e iluminación para una boda.'],
+      [/congreso|ferias|traduccion|streaming/, 'Hola Dreamscape Events, quiero información para un congreso o feria.'],
+      [/corporativ|empresa|presentacion|gala/, 'Hola Dreamscape Events, quiero presupuesto para un evento de empresa.'],
+      [/agencias|planner/, 'Hola Dreamscape Events, somos una agencia/planner y queremos hablar de colaboración.'],
+      [/pantalla|led/, 'Hola Dreamscape Events, quiero información sobre pantallas LED.'],
+      [/iluminacion/, 'Hola Dreamscape Events, quiero información sobre iluminación para un evento.'],
+      [/sonido|sonorizacion|microfon|potencia/, 'Hola Dreamscape Events, quiero información sobre sonido para un evento.'],
+      [/escenario/, 'Hola Dreamscape Events, quiero información sobre escenarios y estructuras.'],
+      [/tarifas/, 'Hola Dreamscape Events, quiero consultar tarifas para mi evento.']
+    ];
+    var ciudad = path.match(/servicio-([a-z]+)\.html/);
+    if (ciudad) { var c = ciudad[1].charAt(0).toUpperCase() + ciudad[1].slice(1); txt = 'Hola Dreamscape Events, quiero presupuesto para un evento en ' + c + '.'; }
+    else for (var i = 0; i < map.length; i++) if (map[i][0].test(path)) { txt = map[i][1]; break; }
+    if (!txt || /simulador|^\/en/.test(path)) return;
+    d.querySelectorAll('a[href^="https://wa.me/34613089894?text=Hola%20Dreamscape%20Events%2C%20quiero%20pedir%20presupuesto"]').forEach(function (a) {
+      a.href = 'https://wa.me/34613089894?text=' + encodeURIComponent(txt);
+    });
+  })();
+
   /* ---------- Menú móvil ---------- */
   var burger = d.querySelector('.burger');
   if (burger) {
@@ -95,6 +119,8 @@
     var s = d.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA; d.head.appendChild(s);
     w.dataLayer = w.dataLayer || []; w.gtag = function () { w.dataLayer.push(arguments); };
     w.gtag('js', new Date()); w.gtag('config', GA, { anonymize_ip: true });
+    /* Microsoft Clarity (mapas de calor): solo si se define window.DS_CLARITY_ID en ds-config.js y hay consentimiento */
+    if (w.DS_CLARITY_ID && !w.clarity) { (function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(w, d, 'clarity', 'script', w.DS_CLARITY_ID); }
   }
   var chatWanted = false;
   function loadChat(openAfter) {
