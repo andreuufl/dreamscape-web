@@ -189,6 +189,6 @@ main { overflow-x: clip; }
   .ds-rig, .ds-led, .ds-burst, .ds-laser, .ds-spot, .ds-eq, .ds-showbtn { display: none !important; }
   .ds-show .reel .display em, .ds-hit, .ds-lit { animation: none !important; }
 }
-.no-js .te { display: none; }
+/* nov 2026: oculto solo si no hay JavaScript (antes provocaba un salto al cargar) */
 @media (min-width: 1000px) { .te-result { margin-top: 18px; } }
 .te-ctas[hidden] { display: none !important; }
