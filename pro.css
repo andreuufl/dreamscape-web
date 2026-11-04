@@ -964,3 +964,12 @@ body.lb-on { overflow: hidden; }
   .pj-home { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
   .pj-home li { scroll-snap-align: start; }
 }
+/* Titular portada: la coma no se separa de "vea" en pantallas estrechas */
+.nw { white-space: nowrap; }
+/* Showreel: títulos legibles sobre cualquier foto */
+.reelrow-l a::after { background: linear-gradient(180deg, transparent 35%, rgba(0,0,0,.85)) !important; }
+.reelrow-l span { z-index: 1; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+/* Ciudades: toda la etiqueta es pulsable (zona táctil cómoda) */
+.esp-chips li { padding: 0 !important; }
+.esp-chips li a { display: block; padding: 11px 13px; min-height: 40px; box-sizing: border-box; color: inherit; }
+.esp-chips li:not(:has(a)) { padding: 11px 13px !important; }

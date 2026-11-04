@@ -15,7 +15,7 @@
   '#dsl{position:fixed;inset:0;z-index:2147483000;background:#050506;overflow:hidden;color:#f4efe6;' +
   'font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;pointer-events:all;--g:#c9a66b;--a:#3d8bff}' +
   '#dsl .cur{position:absolute;top:0;bottom:0;width:50.5%;background:repeating-linear-gradient(90deg,#120a0b 0 22px,#1c0f11 22px 30px,#0d0708 30px 44px);' +
-  'box-shadow:inset 0 -120px 140px rgba(0,0,0,.7);transition:transform 1.05s cubic-bezier(.77,0,.18,1)}' +
+  'box-shadow:inset 0 -120px 140px rgba(0,0,0,.7);transition:transform .5s cubic-bezier(.77,0,.18,1)}' +
   '#dsl .cur.l{left:0;transform-origin:left}#dsl .cur.r{right:0}' +
   '#dsl .stage{position:absolute;inset:0;transition:opacity .45s}' +
   '#dsl .truss{position:absolute;left:6%;right:6%;top:9%;height:14px;border-top:2px solid #3a3a40;border-bottom:2px solid #3a3a40;' +
@@ -74,7 +74,7 @@
 
   var num = el.querySelector('.num'), fad = el.querySelector('.fad u'), fxs = el.querySelectorAll('.fx');
   var shown = 0, target = 8, done = false, t0 = Date.now();
-  var MIN = reduce ? 300 : 1500, MAX = 3200;
+  var MIN = reduce ? 200 : 700, MAX = 1600; /* nov 2026: más corta para que la web aparezca antes */
 
   function loaded() {
     var imgs = document.images, n = imgs.length, c = 0;
@@ -114,12 +114,12 @@
       setTimeout(function () {
         el.classList.add('open');
         document.documentElement.style.overflow = '';
-        setTimeout(function () { el.remove(); }, 1150);
-      }, reduce ? 50 : 650);
-    }, reduce ? 50 : 750);
+        setTimeout(function () { el.remove(); }, 600);
+      }, reduce ? 50 : 500);
+    }, reduce ? 50 : 300);
   }
   window.addEventListener('load', function () { target = 100; });
   requestAnimationFrame(tick);
-  setTimeout(function () { if (!done) { target = 100; } }, MAX + 400);
-  setTimeout(function () { if (document.getElementById('dsl')) { el.remove(); document.documentElement.style.overflow = ''; } }, 7000);
+  setTimeout(function () { if (!done) { target = 100; } }, MAX + 200);
+  setTimeout(function () { if (document.getElementById('dsl')) { el.remove(); document.documentElement.style.overflow = ''; } }, 4000);
 })();
