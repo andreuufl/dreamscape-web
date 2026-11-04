@@ -716,7 +716,8 @@
         safe(function () { ledReveal(e.target); });
       });
     }, { threshold: .18 });
-    D.querySelectorAll(sel).forEach(function (el) { if (el.querySelector('img, video')) io.observe(el); });
+    /* nov 2026: desactivado el efecto mosaico LED (daba sensación de lentitud) */
+    if (false) D.querySelectorAll(sel).forEach(function (el) { if (el.querySelector('img, video')) io.observe(el); });
   });
   function ledReveal(el) {
     var m = el.querySelector('img, video');

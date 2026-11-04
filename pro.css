@@ -945,3 +945,22 @@ body.lb-on { overflow: hidden; }
 .feat-b h2 { margin: 0; font-size: clamp(26px, 3vw, 40px); }
 .feat-b p { margin: 0; color: var(--paper-2); }
 .feat-b .link svg { width: 14px; height: 14px; }
+
+/* ===== Ajustes nov 2026 ===== */
+/* Animaciones más rápidas y suaves (que nada parezca que carga lento) */
+.rv { transform: translateY(12px); transition: opacity .45s ease, transform .5s ease; }
+.rv-d1 { transition-delay: .04s; } .rv-d2 { transition-delay: .08s; } .rv-d3 { transition-delay: .12s; }
+.words .w > i { transition: transform .45s var(--ease); transition-delay: calc(var(--i, 0) * 25ms); }
+/* Barra inferior fija: solo en móvil, sin WhatsApp */
+@media (min-width: 761px) { .mcta { display: none !important; } .float { bottom: 18px !important; } }
+.mcta a[href*="wa.me"] { display: none !important; }
+/* Proyectos en portada: 3 fotos */
+.pj-home { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.pj-home a { position: relative; display: block; overflow: hidden; border-radius: 4px; aspect-ratio: 4 / 5; background: #111; }
+.pj-home img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s var(--ease); }
+.pj-home a:hover img { transform: scale(1.04); }
+.pj-home span { position: absolute; left: 14px; bottom: 12px; color: #fff; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+@media (max-width: 760px) {
+  .pj-home { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 72%; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .pj-home li { scroll-snap-align: start; }
+}
