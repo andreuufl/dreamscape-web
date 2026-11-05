@@ -33,12 +33,9 @@
 <link rel="apple-touch-icon" href="/favicon-180.png?v=4">
 <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/pro.css?v=20261023">
-<link rel="stylesheet" href="/elegante.css?v=40">
-<link rel="stylesheet" href="/ds-motion.css?v=20261016">
-<link rel="stylesheet" href="/ds-show.css?v=20261017">
-<link rel="preload" as="image" href="/hero-sala-velas-m.webp" media="(max-width: 760px)" fetchpriority="high">
-<link rel="preload" as="image" href="/hero-sala-velas.webp" media="(min-width: 761px)" fetchpriority="high">
+<link rel="stylesheet" href="/ds.min.css?v=20261105">
+<link rel="preload" as="image" type="image/avif" href="/hero-sala-velas-m.avif" media="(max-width: 760px)" fetchpriority="high">
+<link rel="preload" as="image" type="image/avif" href="/hero-sala-velas.avif" media="(min-width: 761px)" fetchpriority="high">
 <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -148,7 +145,7 @@
 
 <section class="reel" aria-label="Presentación">
   <div class="reel-strip reel-strip--one" aria-hidden="true">
-    <figure><picture><source media="(max-width: 760px)" srcset="/hero-sala-velas-m.webp"><img src="/hero-sala-velas.webp" alt="Sala histórica con luz azul, velas y estructura de iluminación montada para un evento" width="1920" height="1080" fetchpriority="high" decoding="async"></picture></figure>
+    <figure><picture><source media="(max-width: 760px)" type="image/avif" srcset="/hero-sala-velas-m.avif"><source media="(max-width: 760px)" srcset="/hero-sala-velas-m.webp"><source type="image/avif" srcset="/hero-sala-velas.avif"><img src="/hero-sala-velas.webp" alt="Sala histórica con luz azul, velas y estructura de iluminación montada para un evento" width="1920" height="1080" fetchpriority="high" decoding="async"></picture></figure>
   </div>
   <div class="reel-top" aria-hidden="true"></div>
   <div class="reel-body">
@@ -293,10 +290,7 @@
 <script src="/disponibilidad.js?v=1"></script>
 <script src="/formularios.js?v=20261031" defer></script>
 <script src="/presupuesto-rapido.js?v=2" defer></script>
-<script src="/pro.js?v=20261031" defer></script>
-<script src="/elegante.js?v=4" defer></script>
-<script src="/ds-motion.js?v=20261016" defer></script>
-<script src="/ds-show.js?v=20261028" defer></script>
+<script src="/ds.min.js?v=20261105" defer></script>
 
 </body>
 </html>

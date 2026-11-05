@@ -60,7 +60,7 @@
   }
 
   /* ---------- Aparición de secciones ---------- */
-  var rvs = d.querySelectorAll('.rv, .light');
+  var rvs = d.querySelectorAll('.light'); /* nov 2026: .rv ya no se anima */
   if ('IntersectionObserver' in w) {
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -138,7 +138,14 @@
   function showBanner() { if (banner) banner.classList.add('is-on'); }
   function hideBanner() { if (banner) banner.classList.remove('is-on'); }
   var c = getC();
-  if (!c) showBanner(); else if (c === 'all') loadGA();
+  function loadGALater() { /* Analytics no compite con la carga: espera a la primera interacción o a 4 s tras cargar */
+    var done = false, evs = ['scroll', 'pointerdown', 'keydown', 'touchstart'];
+    function go() { if (done) return; done = true; evs.forEach(function (e) { w.removeEventListener(e, go); }); loadGA(); }
+    evs.forEach(function (e) { w.addEventListener(e, go, { passive: true, once: true }); });
+    function t() { setTimeout(function () { if ('requestIdleCallback' in w) requestIdleCallback(go, { timeout: 2000 }); else go(); }, 4000); }
+    if (d.readyState === 'complete') t(); else w.addEventListener('load', t);
+  }
+  if (!c) showBanner(); else if (c === 'all') loadGALater();
   d.querySelectorAll('[data-cookie="all"]').forEach(function (b) { b.addEventListener('click', function () { setC('all'); loadGA(); hideBanner(); if (chatWanted) loadChat(true); }); });
   d.querySelectorAll('[data-cookie="essential"]').forEach(function (b) { b.addEventListener('click', function () { setC('essential'); hideBanner(); }); });
   d.querySelectorAll('[data-cookie="settings"]').forEach(function (b) { b.addEventListener('click', function (e) { e.preventDefault(); showBanner(); }); });
@@ -475,7 +482,7 @@ document.querySelectorAll('.ba').forEach(function (ba) {
     el.classList.add('words');
   }
   var heads = [].slice.call(d.querySelectorAll('[data-words]'));
-  if (!reduce && hasIO) {
+  if (false) { /* nov 2026: titulares sin animación palabra a palabra */
     heads.forEach(function (h) {
       var label = h.textContent.replace(/\s+/g, ' ').trim();
       split(h); h.setAttribute('aria-label', label);

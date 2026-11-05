@@ -124,7 +124,7 @@ canvas.ds-stage, .phero canvas, .phero .ds-stage { opacity: .55; }
 
 /* ===== Fotos a todo el ancho entre secciones ===== */
 .pano { position: relative; margin: 0; height: clamp(340px, 62vh, 640px); overflow: hidden; background: #000; }
-.pano img { position: absolute; left: 0; top: -8%; width: 100%; height: 116%; object-fit: cover; will-change: transform; }
+.pano img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
 .pano::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,11,.35), rgba(10,10,11,0) 35%, rgba(10,10,11,.55)); pointer-events: none; }
 .pano figcaption { position: absolute; z-index: 2; left: var(--gut); right: var(--gut); bottom: clamp(24px, 5vw, 56px); max-width: var(--wrap); margin: 0 auto; }
 .pano figcaption .eyebrow { color: var(--gold-hi); }
@@ -135,8 +135,6 @@ canvas.ds-stage, .phero canvas, .phero .ds-stage { opacity: .55; }
 .btn svg, .link svg { transition: transform .35s var(--ease); }
 .btn:hover svg, .link:hover svg { transform: translateX(4px); }
 .g { overflow: hidden; }
-.rv-img { clip-path: inset(0 0 12% 0); opacity: 0; transition: clip-path 1.1s var(--ease), opacity .9s; }
-.rv-img.is-in { clip-path: inset(0); opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .rv-img { clip-path: none; opacity: 1; transition: none; } .reel-strip--one video, .pano img { transition: none; transform: none !important; } }
 .reel::after { background: linear-gradient(180deg, rgba(5,5,6,.3) 0%, rgba(5,5,6,0) 28%, rgba(5,5,6,.25) 52%, rgba(5,5,6,.68) 100%); }
 .reel-body .eyebrow { color: var(--gold-hi); text-shadow: 0 1px 14px rgba(0,0,0,.85); }

@@ -6,7 +6,6 @@
 
 @font-face { font-family: "Archivo"; font-style: normal; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; src: url("/fonts/archivo-var.woff2") format("woff2-variations"), url("/fonts/archivo-var.woff2") format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/jbmono-400.woff2") format("woff2"); }
-@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/jbmono-500.woff2") format("woff2"); }
 
 :root {
   --ink: #0a0a0b;
@@ -496,9 +495,7 @@ p { margin: 0 0 1em; }
 @media (min-width: 700px) { .cookie { left: 24px; bottom: 24px; } }
 
 /* ---------- Aparición con luz ---------- */
-.rv { opacity: 0; transform: translateY(26px); transition: opacity 1s var(--ease), transform 1.1s var(--ease); }
-.rv.in { opacity: 1; transform: none; }
-.rv-d1 { transition-delay: .08s; } .rv-d2 { transition-delay: .16s; } .rv-d3 { transition-delay: .24s; }
+/* nov 2026: sin animaciones de aparición; el contenido se ve siempre al instante */
 .light { position: relative; }
 .light { overflow: hidden; }
 .light::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 70%; background: radial-gradient(ellipse at 50% 0%, var(--gold-glow), transparent 65%); opacity: 0; transition: opacity 1.6s var(--ease); pointer-events: none; z-index: -1; }
@@ -948,9 +945,6 @@ body.lb-on { overflow: hidden; }
 
 /* ===== Ajustes nov 2026 ===== */
 /* Animaciones más rápidas y suaves (que nada parezca que carga lento) */
-.rv { transform: translateY(12px); transition: opacity .45s ease, transform .5s ease; }
-.rv-d1 { transition-delay: .04s; } .rv-d2 { transition-delay: .08s; } .rv-d3 { transition-delay: .12s; }
-.words .w > i { transition: transform .45s var(--ease); transition-delay: calc(var(--i, 0) * 25ms); }
 /* Barra inferior fija: solo en móvil, sin WhatsApp */
 @media (min-width: 761px) { .mcta { display: none !important; } .float { bottom: 18px !important; } }
 .mcta a[href*="wa.me"] { display: none !important; }
